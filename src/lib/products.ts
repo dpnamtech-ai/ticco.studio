@@ -8,6 +8,7 @@ export type Product = {
   priceFrom: number;
   unit: string;
   image?: string;
+  thumbnails?: string[];
   description: string;
   variants?: string[];
   specs?: string[];

@@ -66,6 +66,7 @@ export default async function ProductPage({
         specs={product.specs ?? []}
         note={product.note}
         image={product.image}
+        thumbnails={product.thumbnails}
         soldOut={product.soldOut}
       />
     </section>

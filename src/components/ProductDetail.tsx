@@ -14,6 +14,7 @@ interface ProductDetailProps {
   specs: string[];
   note?: string;
   image?: string;
+  thumbnails?: string[];
   soldOut?: boolean;
 }
 
@@ -27,6 +28,7 @@ export default function ProductDetail({
   specs,
   note,
   image,
+  thumbnails,
   soldOut = false,
 }: ProductDetailProps) {
   const [selected, setSelected] = useState(variants[0]);
@@ -46,8 +48,13 @@ export default function ProductDetail({
           {image && <Image src={image} alt={name} fill className="object-cover" priority sizes="(max-width: 768px) 100vw, 550px" />}
         </div>
         <div className="grid grid-cols-2 gap-4">
-          <div className="aspect-[269/337] bg-[#D9D9D9]" />
-          <div className="aspect-[269/337] bg-[#D9D9D9]" />
+          {[0, 1].map((i) => (
+            <div key={i} className="aspect-[269/337] relative overflow-hidden bg-[#D9D9D9]">
+              {thumbnails?.[i] && (
+                <Image src={thumbnails[i]} alt="" fill className="object-cover" sizes="(max-width: 768px) 50vw, 275px" />
+              )}
+            </div>
+          ))}
         </div>
       </div>
 

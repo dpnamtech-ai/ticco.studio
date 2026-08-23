@@ -18,13 +18,10 @@ export default function FeaturedProducts({ products }: { products: Product[] }) 
       </div>
 
       <div className="max-w-7xl mx-auto px-6 py-16">
-        <div className="flex items-end justify-between mb-10">
-          <h2 className="font-[family-name:var(--font-heading)] text-3xl font-bold text-[var(--color-purple)]">
-            Hàng mới về
-          </h2>
+        <div className="flex justify-end mb-10">
           <a
-            href="#danh-muc"
-            className="text-sm font-semibold text-[var(--color-purple)] hover:underline"
+            href="/san-pham"
+            className="text-sm font-semibold uppercase tracking-wide text-[var(--color-purple)] hover:underline"
           >
             Tất cả sản phẩm →
           </a>
@@ -32,7 +29,7 @@ export default function FeaturedProducts({ products }: { products: Product[] }) 
 
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
           {featured.map((product, i) => (
-            <ProductCard key={product.id} {...product} index={i} />
+            <ProductCard key={product.id} {...product} index={i} nameClassName="uppercase" />
           ))}
         </div>
       </div>

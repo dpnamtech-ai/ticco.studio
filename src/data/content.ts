@@ -34,7 +34,8 @@ export const productLines = [
     category: "Văn phòng phẩm",
     priceFrom: 255000,
     unit: "box",
-    image: "/images/so-can-ban-hero.png",
+    image: "/images/so-can-ban-main.png",
+    thumbnails: ["/images/so-can-ban-thumb-1.png", "/images/so-can-ban-thumb-2.png"],
     description:
       "Ai cũng bắt đầu từ việc viết tay. Học bài viết vở, nhật ký viết sổ, lao động ghi chú. Công nghệ khiến trải nghiệm ghi chép đơn giản và tiện lợi, nhưng cảm giác đưa bút trên giấy lại tăng sự tập trung tỉ mẩn và truyền thêm cảm hứng sáng tạo.\n\nNhư một bước để đưa bạn thực hành sự chú tâm hàng ngày, bộ sưu tập Sổ Căn Bản là tập hợp 03 cuốn sổ phục vụ cho hoạt động cần thiết trong đời sống — Sổ trống, Sổ nhật ký, Sổ lao động.",
     variants: ["Sổ trống", "Sổ nhật ký", "Sổ lao động", "Bộ 3 sổ"],
@@ -575,10 +576,6 @@ export const aboutPage = {
     "Châm ngôn là làm mọi thứ với niềm vui giản đơn và sự tò mò với đời.",
     "Tíc Cơ mong muốn lan toả lối sống phóng khoáng và tích cực, bước đi cùng bạn trong hành trình phát triển mình và khám phá cuộc sống hàng ngày theo những góc nhìn mới.",
   ],
-  statement: {
-    left: ["nghệ", "một", "cách", "đời thường"],
-    right: ["ai", "cũng", "có", "gu"],
-  },
   closing: {
     heading: "Tíc Cơ hân hoan chào bạn!",
     born: "khai sinh từ 2024",

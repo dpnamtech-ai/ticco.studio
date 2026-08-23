@@ -36,13 +36,13 @@ export default function HeroSection() {
         className="absolute flex items-start gap-1"
         style={{ left: "4.68%", top: "70.61%", width: "24.55%" }}
       >
-        <span className="font-serif leading-none shrink-0" style={{ fontSize: "clamp(24px, 5vw, 70px)" }}>
+        <span className="font-serif font-light leading-none shrink-0" style={{ fontSize: "clamp(48px, 9vw, 120px)" }}>
           (
         </span>
-        <p className="text-xs sm:text-sm leading-relaxed pt-2">
+        <p className="text-xs sm:text-sm font-bold uppercase tracking-wide leading-relaxed pt-2" style={{ textAlign: "justify" }}>
           Chúng tôi có bán sản phẩm để bạn tìm thấy niềm vui trong mọi điều đời thường!
         </p>
-        <span className="font-serif leading-none shrink-0" style={{ fontSize: "clamp(24px, 5vw, 70px)" }}>
+        <span className="font-serif font-light leading-none shrink-0" style={{ fontSize: "clamp(48px, 9vw, 120px)" }}>
           )
         </span>
       </motion.div>

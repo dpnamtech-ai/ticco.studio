@@ -8,9 +8,10 @@ interface ProductCardProps {
   priceFrom: number;
   index?: number;
   soldOut?: boolean;
+  nameClassName?: string;
 }
 
-export default function ProductCard({ id, name, priceFrom, index = 0, soldOut = false }: ProductCardProps) {
+export default function ProductCard({ id, name, priceFrom, index = 0, soldOut = false, nameClassName = "" }: ProductCardProps) {
   return (
     <motion.a
       href={`/san-pham/${id}`}
@@ -28,7 +29,7 @@ export default function ProductCard({ id, name, priceFrom, index = 0, soldOut = 
         )}
       </div>
       <div className="text-center">
-        <h3 className="font-semibold text-[var(--color-ink)]">{name}</h3>
+        <h3 className={`font-semibold text-[var(--color-ink)] ${nameClassName}`}>{name}</h3>
         <p className="text-sm text-[var(--color-ink)]/50 mt-1">
           {priceFrom > 0 ? `${priceFrom.toLocaleString("vi-VN")} VNĐ` : "Liên hệ"}
         </p>

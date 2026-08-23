@@ -61,13 +61,16 @@ trúc nhưng chưa đo pixel-exact · `❌ Known gap` = biết rõ đang thiếu
 | `/` | Hero (headline, ảnh, subtext ngoặc kép) | ✅ Verified | Đo tỷ lệ 43.7/56.3, font-size, text chính xác từ Figma |
 | `/` | Featured Products (4 sản phẩm) | ✅ Verified | Đúng 4 item + thứ tự theo Figma |
 | `/` | Brand section (mission, 3 pillar, meet-Đần) | ✅ Verified | Absolute-position theo % đo từ Figma; ảnh meet-Đần đã export đúng ảnh gốc |
+| `/` | Featured Products: nhãn viết hoa đầy đủ + không có heading "Hàng mới về" thừa | ✅ Verified | Figma trang-chu KHÔNG có heading này (chỉ san-pham page mới có) — đã xoá; nhãn sản phẩm chuyển uppercase khớp Figma |
+| `/` | Hero: ngoặc kép "(...)" trang trí | ✅ Verified | Sửa lại IN HOA + BOLD + justify + ngoặc to/đậm hơn, khớp ảnh Figma export |
 | `/` | Category grid, Collections, Gift Guide, UGC | ❌ Known gap | Figma **không có thiết kế** cho phần này (frame trống dưới Y2522) — nội dung hiện tại là tự soạn, không có gì để đối chiếu |
 | `/san-pham` | Product grid, category tabs | ✅ Verified | Tỷ lệ card, màu, cấu trúc khớp |
 | `/san-pham/[slug]` | Chi tiết sản phẩm | ✅ Verified | Tỷ lệ ảnh 4:5 đã sửa đúng theo Figma (550×689 / 269×337) |
+| `/san-pham/[slug]` | 2 ảnh thumbnail dưới ảnh chính | ✅ Verified | Trước là ô xám giả — đã export đúng 2 ảnh thật từ Figma (giống hệt nhau, đúng như thiết kế gốc) |
 | `/kham-pha` | 3 nhóm project card | ✅ Verified | Text thật từ sheet (khác placeholder lặp lại của Figma — cố ý, vì Figma dùng lorem); ảnh chỉ hiện cho project có ảnh thật |
 | `/ve-tic-co` | Intro + mission | ✅ Verified | Text đúng 100% |
-| `/ve-tic-co` | Statement section (chữ rải "nghệ một cách...") | ⚠️ Approximate | Đúng nội dung, chưa đo vị trí rải chữ pixel-exact như Figma (chữ to 100px rải theo toạ độ riêng từng chữ) |
-| `/ve-tic-co` | Bong bóng tím trang trí sau đoạn text | ❌ Known gap | Chưa dựng — Figma có shape tím phía sau các đoạn text intro, code hiện chưa có |
+| `/ve-tic-co` | Statement section (chữ "nghệ một cách..." trên ảnh) | ✅ Verified | Chữ đã có sẵn (baked-in) trong file ảnh export — ban đầu tôi thêm chữ HTML đè lên gây nhân đôi, đã phát hiện và bỏ overlay thừa |
+| `/ve-tic-co` | Bong bóng tím trang trí sau đoạn text | ✅ Verified | Dựng bằng absolute-position + border-radius blob theo đúng toạ độ Rectangle/Ellipse trong Figma |
 | `/mascot-dan` | 3 hàng mô tả + ribbon | ✅ Verified | Composition absolute-position đo pixel-exact, đã qua 3 vòng sửa mới đúng |
 | `/mascot-dan` | Card "cống hiến và sống chiến" (3 card) | ❌ Known gap | Figma chính nó cũng chỉ điền 1/3 ảnh (thiết kế dở dang) — giữ nguyên theo đúng Figma |
 
