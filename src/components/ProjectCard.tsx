@@ -24,7 +24,7 @@ export default function ProjectCard({ title, productHref, articleHref, index = 0
       transition={{ delay: index * 0.06, duration: 0.5 }}
     >
       <div className="aspect-square relative overflow-hidden mb-4">
-        <Image src="/images/collab-freezedom.png" alt={title} fill className="object-cover" />
+        <Image src="/images/collab-freezedom.png" alt={title} fill className="object-cover" sizes="(max-width: 1024px) 50vw, 25vw" />
       </div>
       <h3 className={`font-semibold mb-2 leading-snug ${onOrange ? "text-white" : "text-[var(--color-ink)]"}`}>
         {title}

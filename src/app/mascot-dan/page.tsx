@@ -22,6 +22,7 @@ export default function MascotDanPage() {
             width={240}
             height={228}
             className="mx-auto"
+            priority
           />
           <p className="absolute -left-32 top-4 w-28 text-sm text-[var(--color-ink)]/70 text-right hidden md:block">
             {mascotPage.quote[0]}
@@ -48,7 +49,7 @@ export default function MascotDanPage() {
             <div key={i}>
               <p className="text-[var(--color-purple)] font-semibold mb-6">{mascotPage.traitCaption}</p>
               {i === 0 && (
-                <Image src="/images/dan-laptop.png" alt="" width={160} height={152} />
+                <Image src="/images/dan-laptop.png" alt="" width={160} height={152} priority />
               )}
             </div>
           ))}
@@ -102,7 +103,7 @@ export default function MascotDanPage() {
               <div key={i}>
                 <div className="absolute bg-[var(--color-purple)] rounded-sm" style={pct(box.ribbon)} />
                 <div className="absolute" style={pct(box.image)}>
-                  <Image src={row.image} alt="" fill className="object-contain" />
+                  <Image src={row.image} alt="" fill className="object-contain" priority sizes="(max-width: 1024px) 30vw, 300px" />
                 </div>
                 <p
                   className="absolute text-[var(--color-purple)] font-medium text-xs sm:text-sm md:text-base leading-snug"

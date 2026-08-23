@@ -43,7 +43,7 @@ export default function ProductDetail({
     <div className="grid md:grid-cols-2 gap-12">
       <div>
         <div className="aspect-[550/689] relative overflow-hidden mb-4 bg-[#D9D9D9]">
-          {image && <Image src={image} alt={name} fill className="object-cover" />}
+          {image && <Image src={image} alt={name} fill className="object-cover" priority sizes="(max-width: 768px) 100vw, 550px" />}
         </div>
         <div className="grid grid-cols-2 gap-4">
           <div className="aspect-[269/337] bg-[#D9D9D9]" />
