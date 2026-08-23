@@ -1,17 +1,18 @@
 "use client";
 
 import { useState } from "react";
-import { productLines, productCategories } from "@/data/content";
+import { productCategories } from "@/data/content";
+import type { Product } from "@/lib/products";
 import ProductCard from "./ProductCard";
 
 const categories = ["Tất cả sản phẩm", ...productCategories];
 
-export default function ProductCategoryGrid() {
+export default function ProductCategoryGrid({ products }: { products: Product[] }) {
   const [active, setActive] = useState(categories[0]);
   const visible =
     active === categories[0]
-      ? productLines
-      : productLines.filter((p) => p.category === active);
+      ? products
+      : products.filter((p) => p.category === active);
 
   return (
     <section id="danh-muc">

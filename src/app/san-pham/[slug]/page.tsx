@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { productLines } from "@/data/content";
+import { getProducts, getProduct } from "@/lib/products";
 import ProductDetail from "@/components/ProductDetail";
 
-export function generateStaticParams() {
-  return productLines.map((p) => ({ slug: p.id }));
+export async function generateStaticParams() {
+  const products = await getProducts();
+  return products.map((p) => ({ slug: p.id }));
 }
 
 export async function generateMetadata({
@@ -13,7 +14,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const product = productLines.find((p) => p.id === slug);
+  const product = await getProduct(slug);
   if (!product) return {};
   return {
     title: `${product.name} — Tíc Cơ`,
@@ -27,7 +28,7 @@ export default async function ProductPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const product = productLines.find((p) => p.id === slug);
+  const product = await getProduct(slug);
   if (!product) notFound();
 
   return (

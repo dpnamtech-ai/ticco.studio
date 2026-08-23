@@ -5,14 +5,16 @@ import ProductCategoryGrid from "@/components/ProductCategoryGrid";
 import CollectionsSection from "@/components/CollectionsSection";
 import GiftGuide from "@/components/GiftGuide";
 import UGCSection from "@/components/UGCSection";
+import { getProducts } from "@/lib/products";
 
-export default function Home() {
+export default async function Home() {
+  const products = await getProducts();
   return (
     <>
       <HeroSection />
-      <FeaturedProducts />
+      <FeaturedProducts products={products} />
       <BrandSection />
-      <ProductCategoryGrid />
+      <ProductCategoryGrid products={products} />
       <CollectionsSection />
       <GiftGuide />
       <UGCSection />

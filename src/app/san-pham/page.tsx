@@ -1,15 +1,16 @@
 import type { Metadata } from "next";
-import { productLines } from "@/data/content";
 import ProductCard from "@/components/ProductCard";
 import ProductCategoryGrid from "@/components/ProductCategoryGrid";
+import { getProducts } from "@/lib/products";
 
 export const metadata: Metadata = {
   title: "Sản phẩm — Tíc Cơ",
   description: "Toàn bộ sản phẩm Tíc Cơ: văn phòng phẩm, in ấn, túi xách, thời trang, phụ kiện đời sống.",
 };
 
-export default function SanPhamPage() {
-  const newArrivals = productLines.slice(0, 4);
+export default async function SanPhamPage() {
+  const products = await getProducts();
+  const newArrivals = products.slice(0, 4);
 
   return (
     <>
@@ -24,7 +25,7 @@ export default function SanPhamPage() {
         </div>
       </section>
 
-      <ProductCategoryGrid />
+      <ProductCategoryGrid products={products} />
     </>
   );
 }

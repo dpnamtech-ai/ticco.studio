@@ -1,13 +1,13 @@
 "use client";
 
-import { productLines } from "@/data/content";
+import type { Product } from "@/lib/products";
 import ProductCard from "./ProductCard";
 
 // Exact 4 items + order shown in the Figma "trang-chu" frame's featured-products row.
 const FEATURED_IDS = ["bst-dan-sinh-ton", "tui-song-cu-khoi", "so-can-ban", "gile-yen-tam"];
 
-export default function FeaturedProducts() {
-  const featured = FEATURED_IDS.map((id) => productLines.find((p) => p.id === id)).filter(
+export default function FeaturedProducts({ products }: { products: Product[] }) {
+  const featured = FEATURED_IDS.map((id) => products.find((p) => p.id === id)).filter(
     (p): p is NonNullable<typeof p> => Boolean(p)
   );
 
