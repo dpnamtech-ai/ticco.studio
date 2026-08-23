@@ -24,18 +24,21 @@ export default function VeTicCoPage() {
           <div key={i} className="absolute rounded-[15%] bg-[#35165a]" style={b} />
         ))}
 
-        <div className="relative max-w-7xl mx-auto grid md:grid-cols-[1fr_1fr_auto] gap-10 md:gap-16">
+        <div className="relative max-w-7xl mx-auto grid md:grid-cols-3 gap-10 md:gap-16">
+          <p className="text-lg md:text-xl leading-relaxed">{aboutPage.intro[0]}</p>
+
           <div className="space-y-8 leading-relaxed">
-            {aboutPage.intro.map((p, i) => (
-              <p key={i} className={i === 0 ? "text-lg md:text-xl" : "text-white/90"}>
-                {p}
-              </p>
-            ))}
+            <p className="text-white/90">{aboutPage.intro[1]}</p>
+            <p className="text-white/90">{aboutPage.intro[2]}</p>
           </div>
 
           <div className="space-y-8">
-            <h1 className="font-[family-name:var(--font-heading)] text-5xl md:text-6xl font-extrabold leading-none md:hidden">
-              Về Tíc Cơ
+            <h1 className="font-[family-name:var(--font-heading)] text-5xl md:text-6xl font-extrabold uppercase leading-none border-b-2 border-white pb-4 text-right w-fit md:ml-auto">
+              Về
+              <br />
+              Tíc
+              <br />
+              Cơ
             </h1>
             {aboutPage.mission.map((p, i) => (
               <p key={i} className="text-white/90 leading-relaxed">
@@ -43,14 +46,6 @@ export default function VeTicCoPage() {
               </p>
             ))}
           </div>
-
-          <h1 className="hidden md:block font-[family-name:var(--font-heading)] text-6xl font-extrabold leading-none border-b-2 border-white pb-4 self-start">
-            Về
-            <br />
-            Tíc
-            <br />
-            Cơ
-          </h1>
         </div>
       </section>
 
@@ -61,32 +56,34 @@ export default function VeTicCoPage() {
       </section>
 
       <section className="bg-[var(--color-orange)] text-white px-6 py-16">
-        <div className="max-w-7xl mx-auto grid md:grid-cols-3 gap-10">
-          <h2 className="font-[family-name:var(--font-heading)] text-3xl md:text-4xl font-extrabold leading-tight">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="font-[family-name:var(--font-heading)] text-3xl md:text-4xl font-extrabold leading-tight mb-10">
             {aboutPage.closing.heading}
           </h2>
-          <div className="text-sm text-white/90 space-y-1">
-            <p>Liên hệ trao đổi công việc:</p>
-            <p>{brand.email}</p>
-          </div>
-          <div className="text-sm text-white/90 space-y-1">
-            <p>@ Tíc Cơ Studios</p>
-            <p>{aboutPage.closing.born}</p>
-          </div>
-          <div className="text-sm text-white/90 space-y-1">
-            <p>Gặp Tíc Cơ nhiều hơn tại:</p>
-            <a href={brand.facebook} target="_blank" rel="noopener noreferrer" className="block hover:underline">
-              Facebook: Tíc Cơ Studios
-            </a>
-            <a href={brand.instagram} target="_blank" rel="noopener noreferrer" className="block hover:underline">
-              Instagram: ticco.studios
-            </a>
-            <a href={brand.threads} target="_blank" rel="noopener noreferrer" className="block hover:underline">
-              Threads: ticco.studios
-            </a>
-            <a href={brand.tiktok} target="_blank" rel="noopener noreferrer" className="block hover:underline">
-              TikTok: Tíc Cơ trong đời
-            </a>
+          <div className="grid md:grid-cols-3 gap-10">
+            <div className="text-sm text-white/90 space-y-1">
+              <p>Liên hệ trao đổi công việc:</p>
+              <p>{brand.email}</p>
+            </div>
+            <div className="text-sm text-white/90 space-y-1">
+              <p>@ Tíc Cơ Studios</p>
+              <p>{aboutPage.closing.born}</p>
+            </div>
+            <div className="text-sm text-white/90 space-y-1">
+              <p>Gặp Tíc Cơ nhiều hơn tại:</p>
+              <a href={brand.facebook} target="_blank" rel="noopener noreferrer" className="block hover:underline">
+                Facebook: Tíc Cơ Studios
+              </a>
+              <a href={brand.instagram} target="_blank" rel="noopener noreferrer" className="block hover:underline">
+                Instagram: ticco.studios
+              </a>
+              <a href={brand.threads} target="_blank" rel="noopener noreferrer" className="block hover:underline">
+                Threads: ticco.studios
+              </a>
+              <a href={brand.tiktok} target="_blank" rel="noopener noreferrer" className="block hover:underline">
+                TikTok: Tíc Cơ trong đời
+              </a>
+            </div>
           </div>
         </div>
       </section>
