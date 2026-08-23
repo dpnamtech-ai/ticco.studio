@@ -58,7 +58,7 @@ export default function BrandSection() {
         style={{ left: "40.53%", top: "53.9%", width: "19.25%", height: "33.54%" }}
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/images/mascot-dan.png" alt="Mascot Đần" className="w-full h-full object-contain p-4" />
+        <img src="/images/meet-dan-photo.png" alt="Mascot Đần" className="w-full h-full object-cover" />
       </div>
       <p
         className="absolute font-[family-name:var(--font-heading)] font-bold leading-tight text-[1.6vw] md:text-xl"

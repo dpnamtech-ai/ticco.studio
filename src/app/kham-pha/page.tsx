@@ -20,7 +20,7 @@ export default function KhamPhaPage() {
         </h1>
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
           {hopTac.map((p, i) => (
-            <ProjectCard key={p.id} title={p.title} productHref={p.productHref} articleHref={p.articleHref} index={i} />
+            <ProjectCard key={p.id} title={p.title} productHref={p.productHref} articleHref={p.articleHref} image={p.image} index={i} />
           ))}
         </div>
       </section>
@@ -32,7 +32,7 @@ export default function KhamPhaPage() {
           </h2>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
             {event.map((p, i) => (
-              <ProjectCard key={p.id} title={p.title} productHref={p.productHref} articleHref={p.articleHref} index={i} onOrange />
+              <ProjectCard key={p.id} title={p.title} productHref={p.productHref} articleHref={p.articleHref} image={p.image} index={i} onOrange />
             ))}
           </div>
         </div>
@@ -44,7 +44,7 @@ export default function KhamPhaPage() {
         </h2>
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
           {rieng.map((p, i) => (
-            <ProjectCard key={p.id} title={p.title} productHref={p.productHref} articleHref={p.articleHref} index={i} />
+            <ProjectCard key={p.id} title={p.title} productHref={p.productHref} articleHref={p.articleHref} image={p.image} index={i} />
           ))}
         </div>
       </section>

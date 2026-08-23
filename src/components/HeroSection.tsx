@@ -17,6 +17,14 @@ export default function HeroSection() {
         <img src="/images/hero-basket.jpg" alt="Giỏ đồ Tíc Cơ" className="w-full h-full object-cover" />
       </div>
 
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src="/images/hero-floating-illustration.png"
+        alt=""
+        className="absolute object-contain pointer-events-none"
+        style={{ left: "77.79%", top: "64.02%", width: "20.73%", height: "37.33%" }}
+      />
+
       <motion.h1
         initial={{ opacity: 0, x: -30 }}
         animate={{ opacity: 1, x: 0 }}

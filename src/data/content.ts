@@ -510,6 +510,7 @@ export const projects = [
     id: "freezedom-thu-roi-nghi-di",
     group: "hop-tac",
     title: "Tíc Cơ x Freezedom: Thu rồi nghỉ đi",
+    image: "/images/collab-freezedom.png",
     productHref: "/san-pham",
     articleHref: "#",
   },
