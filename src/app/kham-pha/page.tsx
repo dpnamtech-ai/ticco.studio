@@ -18,7 +18,7 @@ export default function KhamPhaPage() {
         <h1 className="font-[family-name:var(--font-heading)] text-3xl font-bold text-[var(--color-purple)] uppercase mb-10">
           Dự án chung tay hợp tác
         </h1>
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {hopTac.map((p, i) => (
             <ProjectCard key={p.id} title={p.title} productHref={p.productHref} articleHref={p.articleHref} image={p.image} index={i} />
           ))}
@@ -30,7 +30,7 @@ export default function KhamPhaPage() {
           <h2 className="font-[family-name:var(--font-heading)] text-3xl font-bold text-white uppercase mb-10">
             Event
           </h2>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {event.map((p, i) => (
               <ProjectCard key={p.id} title={p.title} productHref={p.productHref} articleHref={p.articleHref} image={p.image} index={i} onOrange />
             ))}
@@ -42,7 +42,7 @@ export default function KhamPhaPage() {
         <h2 className="font-[family-name:var(--font-heading)] text-3xl font-bold text-[var(--color-purple)] uppercase mb-10">
           Dự án riêng
         </h2>
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {rieng.map((p, i) => (
             <ProjectCard key={p.id} title={p.title} productHref={p.productHref} articleHref={p.articleHref} image={p.image} index={i} />
           ))}
