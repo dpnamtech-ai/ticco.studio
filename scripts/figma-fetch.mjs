@@ -4,7 +4,7 @@
 // Usage:
 //   node scripts/figma-fetch.mjs                 -> dumps full file tree to .figma-cache/file.json
 //   node scripts/figma-fetch.mjs --node 171:28    -> dumps just that node (and children) to .figma-cache/node-171-28.json
-//   node scripts/figma-fetch.mjs --images 171:28,183:52 -> resolves PNG export URLs for those node ids
+//   node scripts/figma-fetch.mjs --images 171:28,183:52 [--scale 4] -> resolves PNG export URLs for those node ids (default scale 2)
 //
 // Requires FIGMA_TOKEN and FIGMA_FILE_KEY in .env.local (see .env.local.example).
 
@@ -47,10 +47,11 @@ async function figmaGet(pathname) {
 const args = process.argv.slice(2);
 const nodeArg = args.includes("--node") ? args[args.indexOf("--node") + 1] : null;
 const imagesArg = args.includes("--images") ? args[args.indexOf("--images") + 1] : null;
+const scaleArg = args.includes("--scale") ? args[args.indexOf("--scale") + 1] : "2";
 
 if (imagesArg) {
   const ids = imagesArg.split(",").join(",");
-  const data = await figmaGet(`/images/${FILE_KEY}?ids=${encodeURIComponent(ids)}&format=png&scale=2`);
+  const data = await figmaGet(`/images/${FILE_KEY}?ids=${encodeURIComponent(ids)}&format=png&scale=${scaleArg}`);
   console.log(JSON.stringify(data.images, null, 2));
 } else if (nodeArg) {
   const data = await figmaGet(`/files/${FILE_KEY}/nodes?ids=${encodeURIComponent(nodeArg)}`);
