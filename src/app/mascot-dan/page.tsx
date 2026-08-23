@@ -71,7 +71,7 @@ export default function MascotDanPage() {
           is copied 1:1 (as % of the 1280×607 bounding area, origin at frame X0/Y1757) from
           Dev Mode on the mascot-Dan frame:
             row0 (dan-cheer):  image X657 Y1757 W180 H223 · ribbon X-57 Y1844 W747 H38 · text X843 Y1828 W344 H131
-            row1 (dan-lift):   image X350 Y1920 W316 H228 · ribbon X571 Y2040 W781 H38 · text X101 Y2004 W298 H85
+            row1 (dan-lift):   image X666 Y1920 W316 H228 · ribbon X571 Y2040 W781 H38 · text X101 Y2004 W298 H85
             row2 (dan-phone):  image X420 Y2148 W223 H216 · ribbon X603 Y2274 W764 H38 · text X101 Y2185 W334 H131
         */}
         <div className="relative w-full max-w-5xl mx-auto aspect-[1280/607] overflow-hidden">
@@ -83,7 +83,7 @@ export default function MascotDanPage() {
                 text: { x: 65.86, y: 11.7, w: 26.88, h: 21.58 },
               },
               {
-                image: { x: 27.34, y: 26.85, w: 24.69, h: 37.56 },
+                image: { x: 52.03, y: 26.85, w: 24.69, h: 37.56 },
                 ribbon: { x: 44.61, y: 46.62, w: 61.02, h: 6.26 },
                 text: { x: 7.89, y: 40.69, w: 23.28, h: 14.0 },
               },
