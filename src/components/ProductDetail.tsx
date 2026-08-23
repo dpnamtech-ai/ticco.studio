@@ -42,12 +42,12 @@ export default function ProductDetail({
   return (
     <div className="grid md:grid-cols-2 gap-12">
       <div>
-        <div className="aspect-square relative overflow-hidden mb-4 bg-[#D9D9D9]">
+        <div className="aspect-[550/689] relative overflow-hidden mb-4 bg-[#D9D9D9]">
           {image && <Image src={image} alt={name} fill className="object-cover" />}
         </div>
         <div className="grid grid-cols-2 gap-4">
-          <div className="aspect-square bg-[#D9D9D9]" />
-          <div className="aspect-square bg-[#D9D9D9]" />
+          <div className="aspect-[269/337] bg-[#D9D9D9]" />
+          <div className="aspect-[269/337] bg-[#D9D9D9]" />
         </div>
       </div>
 
@@ -61,7 +61,7 @@ export default function ProductDetail({
           )}
         </h1>
         <p className="text-2xl font-semibold text-[var(--color-purple)] mb-6">
-          {priceFrom.toLocaleString("vi-VN")} VNĐ/ {unit}
+          {priceFrom > 0 ? `${priceFrom.toLocaleString("vi-VN")} VNĐ/ ${unit}` : "Liên hệ để biết giá"}
         </p>
 
         <p

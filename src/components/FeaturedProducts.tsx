@@ -3,7 +3,14 @@
 import { productLines } from "@/data/content";
 import ProductCard from "./ProductCard";
 
+// Exact 4 items + order shown in the Figma "trang-chu" frame's featured-products row.
+const FEATURED_IDS = ["bst-dan-sinh-ton", "tui-song-cu-khoi", "so-can-ban", "gile-yen-tam"];
+
 export default function FeaturedProducts() {
+  const featured = FEATURED_IDS.map((id) => productLines.find((p) => p.id === id)).filter(
+    (p): p is NonNullable<typeof p> => Boolean(p)
+  );
+
   return (
     <section id="products">
       <div className="bg-[var(--color-purple)] text-white py-3 px-6 text-center text-sm font-bold tracking-wide uppercase">
@@ -24,7 +31,7 @@ export default function FeaturedProducts() {
         </div>
 
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
-          {productLines.map((product, i) => (
+          {featured.map((product, i) => (
             <ProductCard key={product.id} {...product} index={i} />
           ))}
         </div>

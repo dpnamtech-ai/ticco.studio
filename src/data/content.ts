@@ -301,6 +301,16 @@ export const productLines = [
     specs: ["Chất liệu: lụa vân xước", "Kích thước: 70 x 70cm"],
   },
   {
+    id: "tui-song-cu-khoi",
+    name: "Túi Sống Cừ Khôi",
+    category: "Túi xách",
+    priceFrom: 0,
+    unit: "túi",
+    description:
+      "Sản phẩm nằm trong bộ sưu tập Túi Sống Cừ Khôi — chưa có mô tả/giá chính thức từ đội ngũ Tíc Cơ, cần bổ sung.",
+    specs: [],
+  },
+  {
     id: "tote-xoi-loi-voi-doi",
     name: "Tote Bag Xởi Lởi Với Đời",
     category: "Túi xách",

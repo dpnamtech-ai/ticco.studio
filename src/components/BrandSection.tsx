@@ -3,98 +3,82 @@
 import { motion } from "framer-motion";
 import { brand } from "@/data/content";
 
+/*
+  One absolute-position composition matching the "trang-chu" Figma frame's
+  orange brand section 1:1 (X-3 Y1168 W1283 H820 on the 1280-wide frame).
+  Percentages below are each element's box relative to that section's own
+  origin — pulled from the Figma file JSON (scripts/figma-fetch.mjs), not
+  eyeballed.
+*/
 export default function BrandSection() {
   return (
-    <section id="brand" className="py-24 px-6 bg-[var(--color-ink)] text-[var(--color-cream)] overflow-hidden">
-      <div className="max-w-7xl mx-auto">
-        <div className="grid md:grid-cols-2 gap-16 items-center">
-          {/* Text */}
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          >
-            <p className="text-sm font-semibold tracking-widest uppercase text-[var(--color-orange)] mb-4">
-              Đây là brand nào?
-            </p>
-            <h2 className="font-[family-name:var(--font-heading)] text-5xl md:text-6xl font-bold mb-8 leading-tight">
-              Chúng mình là{" "}
-              <span className="text-[var(--color-orange)]">Tíc Cơ.</span>
-            </h2>
-            <p
-              className="text-[var(--color-cream)]/75 text-lg leading-relaxed mb-8"
-              style={{ whiteSpace: "pre-line" }}
-            >
-              {brand.mission}
-            </p>
+    <section className="relative w-full bg-[var(--color-orange)] text-white aspect-[1283/820] overflow-hidden">
+      <motion.p
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+        className="absolute leading-relaxed text-[1.6vw] md:text-[1.3vw] lg:text-lg"
+        style={{ left: "17.69%", top: "11.22%", width: "64.77%", whiteSpace: "pre-line" }}
+      >
+        {brand.mission}
+      </motion.p>
 
-            {/* Values */}
-            <div className="grid grid-cols-3 gap-4 mb-10">
-              {[
-                { icon: "💪", label: "Chăm chỉ với đời" },
-                { icon: "✨", label: "Niềm vui giản đơn" },
-                { icon: "🌊", label: "Phóng khoáng" },
-              ].map((v) => (
-                <div key={v.label} className="bg-[var(--color-cream)]/8 rounded-2xl p-4">
-                  <span className="text-2xl">{v.icon}</span>
-                  <p className="font-semibold mt-2 text-sm">{v.label}</p>
-                </div>
-              ))}
-            </div>
+      <a
+        href="/ve-tic-co"
+        className="absolute font-bold uppercase tracking-wide text-[1.4vw] md:text-base hover:underline flex items-center"
+        style={{ left: "41.47%", top: "46.34%", width: "17.07%", height: "2.8%" }}
+      >
+        &gt; Hiểu hơn về Tíc Cơ!
+      </a>
 
-            <a
-              href="/ve-tic-co"
-              className="inline-flex items-center gap-2 border border-[var(--color-cream)]/30 text-[var(--color-cream)] px-6 py-3 rounded-full text-sm font-semibold hover:bg-[var(--color-cream)]/10 transition-colors"
-            >
-              Hiểu hơn về Tíc Cơ →
-            </a>
-          </motion.div>
-
-          {/* Dan illustration */}
-          <motion.div
-            id="dan"
-            initial={{ opacity: 0, scale: 0.85 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            className="relative flex flex-col items-center"
-          >
-            <div className="bg-[var(--color-orange)] rounded-[40px] p-12 w-full max-w-sm mx-auto relative overflow-hidden">
-              <motion.div
-                animate={{ rotate: [0, 2, -2, 0] }}
-                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-                className="w-56 h-56 mx-auto"
-              >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/images/mascot-dan.png" alt="Mascot Đần" className="w-full h-full object-contain" />
-              </motion.div>
-
-              {/* Label */}
-              <div className="text-center mt-4">
-                <p className="font-[family-name:var(--font-heading)] text-2xl font-bold text-[var(--color-ink)]">Mascot Đần</p>
-                <p className="text-[var(--color-ink)]/70 text-sm mt-1">Hay ngủ gật, nhưng rất dễ thương.</p>
-              </div>
-
-              {/* Easter egg hint */}
-              <motion.div
-                className="absolute bottom-4 right-4 text-xs text-[var(--color-ink)]/40 font-medium"
-                animate={{ opacity: [0.4, 0.8, 0.4] }}
-                transition={{ duration: 3, repeat: Infinity }}
-              >
-                psst... có ẩn gì đó 👀
-              </motion.div>
-            </div>
-
-            <a
-              href="/mascot-dan"
-              className="mt-6 inline-flex items-center gap-2 text-[var(--color-orange)] font-semibold hover:underline"
-            >
-              Làm quen với Đần! →
-            </a>
-          </motion.div>
-        </div>
+      {/* Stagger-stacked pillar badges — widest/lowest at back, narrowest/highest in front */}
+      <div
+        className="absolute bg-[var(--color-yellow)] rounded-full flex items-center justify-center px-4"
+        style={{ left: "75.6%", top: "63.17%", width: "26.58%", height: "3.78%" }}
+      >
+        <span className="text-[var(--color-ink)] font-bold uppercase text-[1.2vw] md:text-sm">Niềm vui giản đơn</span>
       </div>
+      <div
+        className="absolute bg-[var(--color-yellow)] rounded-full flex items-center justify-center px-4"
+        style={{ left: "78.64%", top: "58.29%", width: "22.76%", height: "3.54%" }}
+      >
+        <span className="text-[var(--color-ink)] font-bold uppercase text-[1.2vw] md:text-sm">Chăm chú với đời</span>
+      </div>
+      <div
+        className="absolute bg-[var(--color-yellow)] rounded-full flex items-center justify-center px-4"
+        style={{ left: "82.31%", top: "53.41%", width: "21.98%", height: "3.41%" }}
+      >
+        <span className="text-[var(--color-ink)] font-bold uppercase text-[1.2vw] md:text-sm">Phóng khoáng</span>
+      </div>
+
+      {/* Meet-Đần block */}
+      <div
+        className="absolute rounded-full bg-[var(--color-yellow)] overflow-hidden"
+        style={{ left: "40.53%", top: "53.9%", width: "19.25%", height: "33.54%" }}
+      >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/images/mascot-dan.png" alt="Mascot Đần" className="w-full h-full object-contain p-4" />
+      </div>
+      <p
+        className="absolute font-[family-name:var(--font-heading)] font-bold leading-tight text-[1.6vw] md:text-xl"
+        style={{ left: "30.16%", top: "60.49%", width: "9.98%" }}
+      >
+        sống đời sống cùng Đần
+      </p>
+      <p
+        className="absolute font-[family-name:var(--font-heading)] font-bold leading-tight text-[1.6vw] md:text-xl"
+        style={{ left: "30.16%", top: "72.56%", width: "9.98%" }}
+      >
+        chủ nhà tiếp quản Tíc Cơ
+      </p>
+      <a
+        href="/mascot-dan"
+        className="absolute font-bold uppercase tracking-wide text-[1.4vw] md:text-base hover:underline flex items-center"
+        style={{ left: "41.47%", top: "91.22%", width: "17.07%", height: "2.8%" }}
+      >
+        &gt; Làm quen với Đần!
+      </a>
     </section>
   );
 }

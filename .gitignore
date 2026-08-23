@@ -40,3 +40,7 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 dev.log
+
+# figma sync cache
+.figma-cache/
+!.env.local.example

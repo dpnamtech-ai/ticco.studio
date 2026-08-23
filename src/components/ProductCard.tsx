@@ -30,7 +30,7 @@ export default function ProductCard({ id, name, priceFrom, index = 0, soldOut = 
       <div className="text-center">
         <h3 className="font-semibold text-[var(--color-ink)]">{name}</h3>
         <p className="text-sm text-[var(--color-ink)]/50 mt-1">
-          {priceFrom.toLocaleString("vi-VN")} VNĐ
+          {priceFrom > 0 ? `${priceFrom.toLocaleString("vi-VN")} VNĐ` : "Liên hệ"}
         </p>
       </div>
     </motion.a>
