@@ -74,7 +74,7 @@ export default function MascotDanPage() {
             row1 (dan-lift):   image X666 Y1920 W316 H228 · ribbon X571 Y2040 W781 H38 · text X101 Y2004 W298 H85
             row2 (dan-phone):  image X420 Y2148 W223 H216 · ribbon X603 Y2274 W764 H38 · text X101 Y2185 W334 H131
         */}
-        <div className="relative w-full max-w-5xl mx-auto aspect-[1280/607] overflow-hidden">
+        <div className="relative w-full max-w-7xl mx-auto aspect-[1280/607] overflow-hidden">
           {mascotPage.bio.map((row, i) => {
             const box = [
               {
