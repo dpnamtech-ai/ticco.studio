@@ -24,6 +24,24 @@
 - Khám phá & Về Ticco (kham-pha.png, e-Tic-Co.png).
 
 ### Phase 3: Xử lý Logic & Thanh toán
-- Quản lý State giỏ hàng (Cart).
-- Đấu nối logic thanh toán PayOS.
+- Quản lý State giỏ hàng (Cart). ✅ Xong (React Context + localStorage).
+- Đấu nối logic thanh toán PayOS. ⏳ Chưa bắt đầu — cần API key PayOS thật + Figma chưa có
+  design cho Cart/Checkout (Page 2 trong file Figma vẫn trống).
+
+### Phase 4: Pixel-fidelity với Figma thật (2026-08-23)
+- Dựng tool đọc Figma trực tiếp qua REST API (`scripts/figma-fetch.mjs` +
+  `figma-summarize.mjs`) thay vì đối chiếu ảnh export tĩnh — nhanh và chính xác hơn.
+- Rà soát 2 vòng (JSON toạ độ + so trực quan ảnh export full-res) toàn bộ 6 trang, sửa
+  hàng loạt lỗi lệch Figma thật (Hero, BrandSection, mascot-Dan composition, ảnh sản phẩm,
+  bong bóng trang trí `/ve-tic-co`...). Chi tiết đầy đủ xem
+  `D:\agent\checkpoints\2026-08-23T1700_claude_ticco-studio-figma-fidelity-qa-admin.md`.
+- Catalog sản phẩm chuyển từ data bịa sang **28 sản phẩm thật** lấy từ Google Sheet checklist
+  của team (không phải Figma — Figma nhiều phần chỉ là placeholder lorem).
+
+### Phase 5: QA đo được + Admin panel
+- `qa/testcases.md` + `scripts/qa-check.mjs`: bộ test Functional/SEO/GEO/Figma-match, chạy lại
+  được sau mỗi lần fix, in ra % pass (hiện tại 100% phần tự động hoá).
+- Admin panel (`/admin`, Supabase Auth + CRUD sản phẩm): **code đã xong, chưa hoạt động** — cần
+  dodoh tạo Supabase project (free) và cung cấp 3 key (xem `.env.local.example`).
+- Deploy: production tại https://ticcostudio.vercel.app, auto-deploy từ GitHub mỗi lần push.
 
