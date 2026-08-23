@@ -7,11 +7,10 @@ const footerLinks = [
   {
     title: "Khám phá",
     links: [
-      { label: "Sản phẩm", href: "#products" },
-      { label: "Danh mục sản phẩm", href: "#danh-muc" },
-      { label: "Bộ sưu tập", href: "#collections" },
-      { label: "Mascot Đần", href: "#dan" },
-      { label: "Brand Story", href: "#brand" },
+      { label: "Sản phẩm", href: "/san-pham" },
+      { label: "Danh mục sản phẩm", href: "/san-pham#danh-muc" },
+      { label: "Mascot Đần", href: "/mascot-dan" },
+      { label: "Brand Story", href: "/ve-tic-co" },
     ],
   },
   {
