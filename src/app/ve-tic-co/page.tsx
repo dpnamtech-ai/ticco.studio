@@ -4,7 +4,7 @@ import { aboutPage, brand } from "@/data/content";
 
 export const metadata: Metadata = {
   title: "Về Tíc Cơ",
-  description: brand.mission,
+  description: "Tíc Cơ là thương hiệu Việt với các sản phẩm tiêu dùng sáng tạo, lấy cảm hứng từ chất liệu đời thường, do người trẻ Việt thiết kế.",
 };
 
 export default function VeTicCoPage() {

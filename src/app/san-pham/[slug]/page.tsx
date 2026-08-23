@@ -31,8 +31,28 @@ export default async function ProductPage({
   const product = await getProduct(slug);
   if (!product) notFound();
 
+  const productJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: product.name,
+    description: product.description,
+    image: product.image ? `https://ticcostudio.vercel.app${product.image}` : undefined,
+    offers: {
+      "@type": "Offer",
+      priceCurrency: "VND",
+      price: product.priceFrom || undefined,
+      availability: product.soldOut
+        ? "https://schema.org/OutOfStock"
+        : "https://schema.org/InStock",
+    },
+  };
+
   return (
     <section className="max-w-7xl mx-auto px-6 py-12">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd) }}
+      />
       <ProductDetail
         id={product.id}
         name={product.name}
