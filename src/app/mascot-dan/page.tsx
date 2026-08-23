@@ -48,9 +48,8 @@ export default function MascotDanPage() {
           {[0, 1, 2].map((i) => (
             <div key={i}>
               <p className="text-[var(--color-purple)] font-semibold mb-6">{mascotPage.traitCaption}</p>
-              {i === 0 && (
-                <Image src="/images/dan-laptop.png" alt="" width={160} height={152} priority />
-              )}
+              <Image src="/images/dan-laptop.png" alt="" width={160} height={152} priority />
+
             </div>
           ))}
         </div>
@@ -63,57 +62,45 @@ export default function MascotDanPage() {
       </section>
 
       <section className="px-6 py-16">
-        {/*
-          The whole block is one absolute-position composition, not a stacked list of rows:
-          in Figma the 3 rows overlap vertically (row1 image bottom Y1980 overlaps row2 image
-          top Y1920) and the ribbons bleed to the frame's own edges (clipped there by the
-          frame's "Clip content"), so a flex/space-y stack can't reproduce it. Every box below
-          is copied 1:1 (as % of the 1280×607 bounding area, origin at frame X0/Y1757) from
-          Dev Mode on the mascot-Dan frame:
-            row0 (dan-cheer):  image X657 Y1757 W180 H223 · ribbon X-57 Y1844 W747 H38 · text X843 Y1828 W344 H131
-            row1 (dan-lift):   image X666 Y1920 W316 H228 · ribbon X571 Y2040 W781 H38 · text X101 Y2004 W298 H85
-            row2 (dan-phone):  image X420 Y2148 W223 H216 · ribbon X603 Y2274 W764 H38 · text X101 Y2185 W334 H131
-        */}
-        <div className="relative w-full max-w-7xl mx-auto aspect-[1280/607] overflow-hidden">
-          {mascotPage.bio.map((row, i) => {
-            const box = [
-              {
-                image: { x: 51.33, y: 0, w: 14.06, h: 36.74 },
-                ribbon: { x: -4.45, y: 14.33, w: 58.36, h: 6.26 },
-                text: { x: 65.86, y: 11.7, w: 26.88, h: 21.58 },
-              },
-              {
-                image: { x: 52.03, y: 26.85, w: 24.69, h: 37.56 },
-                ribbon: { x: 44.61, y: 46.62, w: 61.02, h: 6.26 },
-                text: { x: 7.89, y: 40.69, w: 23.28, h: 14.0 },
-              },
-              {
-                image: { x: 32.81, y: 64.42, w: 17.42, h: 35.58 },
-                ribbon: { x: 47.11, y: 85.17, w: 59.69, h: 6.26 },
-                text: { x: 7.89, y: 70.51, w: 26.09, h: 21.58 },
-              },
-            ][i];
-            const pct = (b: { x: number; y: number; w: number; h: number }) => ({
-              left: `${b.x}%`,
-              top: `${b.y}%`,
-              width: `${b.w}%`,
-              height: `${b.h}%`,
-            });
-            return (
-              <div key={i}>
-                <div className="absolute bg-[var(--color-purple)] rounded-sm" style={pct(box.ribbon)} />
-                <div className="absolute" style={pct(box.image)}>
-                  <Image src={row.image} alt="" fill className="object-contain" priority sizes="(max-width: 1024px) 30vw, 300px" />
-                </div>
-                <p
-                  className="absolute text-[var(--color-purple)] font-medium text-xs sm:text-sm md:text-base leading-snug"
-                  style={{ ...pct(box.text), whiteSpace: "pre-line" }}
-                >
-                  {row.text}
-                </p>
+        <div className="w-full overflow-hidden pb-20 space-y-16 md:space-y-10">
+          {/* Row 1: Mascot Cheer (Bar from Left) */}
+          <div className="relative flex items-center min-h-[220px]">
+            <div className="absolute left-0 top-1/2 -translate-y-1/2 w-[60%] md:w-[55%] h-8 md:h-10 bg-[var(--color-purple)] -z-10" />
+            <div className="w-full max-w-5xl mx-auto px-6 flex flex-col md:flex-row items-center md:items-start justify-center md:justify-start gap-6 md:gap-16">
+              <div className="relative w-[150px] md:w-[200px] aspect-square flex-shrink-0 md:ml-[35%]">
+                <Image src={mascotPage.bio[0].image} alt="" fill className="object-contain" />
               </div>
-            );
-          })}
+              <p className="text-[var(--color-purple)] font-medium text-sm md:text-base leading-snug max-w-xs whitespace-pre-line text-center md:text-left">
+                {mascotPage.bio[0].text}
+              </p>
+            </div>
+          </div>
+
+          {/* Row 2: Mascot Lift (Bar from Right) */}
+          <div className="relative flex items-center min-h-[220px]">
+            <div className="absolute right-0 top-1/2 -translate-y-1/2 w-[70%] md:w-[60%] h-8 md:h-10 bg-[var(--color-purple)] -z-10" />
+            <div className="w-full max-w-5xl mx-auto px-6 flex flex-col-reverse md:flex-row items-center md:items-start justify-center md:justify-end gap-6 md:gap-16">
+              <p className="text-[var(--color-purple)] font-medium text-sm md:text-base leading-snug max-w-xs whitespace-pre-line text-center md:text-left">
+                {mascotPage.bio[1].text}
+              </p>
+              <div className="relative w-[220px] md:w-[316px] aspect-[316/228] flex-shrink-0 md:mr-[15%]">
+                <Image src={mascotPage.bio[1].image} alt="" fill className="object-contain" />
+              </div>
+            </div>
+          </div>
+
+          {/* Row 3: Mascot Phone (Bar from Right) */}
+          <div className="relative flex items-center min-h-[220px]">
+            <div className="absolute right-0 top-1/2 -translate-y-1/2 w-[70%] md:w-[55%] h-8 md:h-10 bg-[var(--color-purple)] -z-10" />
+            <div className="w-full max-w-5xl mx-auto px-6 flex flex-col-reverse md:flex-row items-center md:items-start justify-center md:justify-end gap-6 md:gap-16">
+              <p className="text-[var(--color-purple)] font-medium text-sm md:text-base leading-snug max-w-xs whitespace-pre-line text-center md:text-left">
+                {mascotPage.bio[2].text}
+              </p>
+              <div className="relative w-[180px] md:w-[223px] aspect-square flex-shrink-0 md:mr-[30%]">
+                <Image src={mascotPage.bio[2].image} alt="" fill className="object-contain" />
+              </div>
+            </div>
+          </div>
         </div>
 
         <p className="font-[family-name:var(--font-heading)] text-xl md:text-2xl font-bold text-[var(--color-purple)] text-center mt-10 uppercase">
