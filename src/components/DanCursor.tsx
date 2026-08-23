@@ -32,25 +32,8 @@ export default function DanCursor() {
       }}
       transition={{ type: "spring", stiffness: 500, damping: 28, mass: 0.5 }}
     >
-      {/* Đần face cursor */}
-      <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-        <circle cx="16" cy="16" r="15" fill="#F5A623" stroke="#1A1208" strokeWidth="1.5" />
-        {/* eyes */}
-        <circle cx="11" cy="14" r="2.5" fill="#1A1208" />
-        <circle cx="21" cy="14" r="2.5" fill="#1A1208" />
-        {/* shine */}
-        <circle cx="12" cy="13" r="0.8" fill="white" />
-        <circle cx="22" cy="13" r="0.8" fill="white" />
-        {/* mouth — changes when hover */}
-        {isHover ? (
-          <path d="M11 20 Q16 25 21 20" stroke="#1A1208" strokeWidth="1.5" strokeLinecap="round" fill="none" />
-        ) : (
-          <path d="M11 20 Q16 23 21 20" stroke="#1A1208" strokeWidth="1.5" strokeLinecap="round" fill="none" />
-        )}
-        {/* blush */}
-        <circle cx="9" cy="18" r="2" fill="#FF5C35" opacity="0.4" />
-        <circle cx="23" cy="18" r="2" fill="#FF5C35" opacity="0.4" />
-      </svg>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src="/images/mascot-dan.png" alt="" width={36} height={36} className="w-9 h-9 object-contain" />
     </motion.div>
   );
 }

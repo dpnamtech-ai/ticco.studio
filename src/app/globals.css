@@ -1,14 +1,13 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-cream: #FFF8F0;
-  --color-ink: #1A1208;
-  --color-amber: #F5A623;
-  --color-blush: #F7C5A0;
-  --color-sage: #B8D4B0;
-  --color-sky: #C5DFF8;
-  --color-pop: #FF5C35;
-  --color-pop-dark: #E04420;
+  --color-cream: #F2F1F1;
+  --color-ink: #2A2828;
+  --color-orange: #E66107;
+  --color-purple: #53129E;
+  --color-yellow: #E5FF00;
+  --font-body: var(--font-be-vietnam);
+  --font-heading: var(--font-be-vietnam);
   --font-sans: var(--font-body);
   --font-display: var(--font-heading);
 }
@@ -18,14 +17,14 @@ html {
 }
 
 body {
-  background-color: #FFF8F0;
-  color: #1A1208;
+  background-color: #F2F1F1;
+  color: #2A2828;
   overflow-x: hidden;
 }
 
 ::selection {
-  background: #F5A623;
-  color: #1A1208;
+  background: #E5FF00;
+  color: #2A2828;
 }
 
 /* Marquee animation */
@@ -64,7 +63,7 @@ body {
   left: 0;
   width: 0;
   height: 2px;
-  background: #1A1208;
+  background: currentColor;
   transition: width 0.3s ease;
 }
 .hover-underline:hover::after {

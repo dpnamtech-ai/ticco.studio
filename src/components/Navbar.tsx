@@ -1,81 +1,84 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { Search, ShoppingCart, ChevronDown, Menu, X } from "lucide-react";
 import { navLinks, brand } from "@/data/content";
+import { useCart } from "@/context/CartContext";
 
 export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40);
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  const { totalItems } = useCart();
+  const left = navLinks.slice(0, 2);
+  const right = navLinks.slice(2);
 
   return (
     <>
-      <motion.nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          scrolled
-            ? "bg-[#FFF8F0]/95 backdrop-blur-sm shadow-[0_1px_0_#1A1208]"
-            : "bg-transparent"
-        }`}
-        initial={{ y: -64 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.4, ease: "easeOut" }}
-      >
-        <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-          {/* Logo */}
-          <a href="#" className="font-[family-name:var(--font-heading)] font-bold text-xl text-[#1A1208] tracking-tight">
-            Ticco<span className="text-[#FF5C35]">-</span>Vibe
-          </a>
-
-          {/* Desktop nav */}
-          <ul className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => (
+      <nav className="sticky top-0 z-50 bg-[var(--color-orange)] text-white">
+        <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between gap-6">
+          {/* Desktop nav — left */}
+          <ul className="hidden md:flex items-center gap-8 text-sm font-semibold uppercase tracking-wide">
+            {left.map((link) => (
               <li key={link.href}>
-                <a
-                  href={link.href}
-                  className="text-sm font-medium text-[#1A1208] hover-underline transition-opacity hover:opacity-70"
-                >
+                <a href={link.href} className="hover-underline flex items-center gap-1 hover:opacity-80 transition-opacity">
                   {link.label}
+                  {link.dropdown && <ChevronDown size={14} />}
                 </a>
               </li>
             ))}
           </ul>
 
-          {/* CTA */}
-          <div className="hidden md:flex items-center gap-4">
-            <a
-              href={brand.instagram}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sm font-semibold bg-[#1A1208] text-[#FFF8F0] px-5 py-2 rounded-full hover:bg-[#FF5C35] transition-colors"
-            >
-              Mua tại Instagram →
+          {/* Wordmark */}
+          <a
+            href="#"
+            className="font-[family-name:var(--font-heading)] text-2xl font-bold lowercase shrink-0"
+          >
+            {brand.shortName}
+          </a>
+
+          {/* Desktop nav — right */}
+          <ul className="hidden md:flex items-center gap-8 text-sm font-semibold uppercase tracking-wide">
+            {right.map((link) => (
+              <li key={link.href}>
+                <a href={link.href} className="hover-underline flex items-center gap-1 hover:opacity-80 transition-opacity">
+                  {link.label}
+                  {link.dropdown && <ChevronDown size={14} />}
+                </a>
+              </li>
+            ))}
+          </ul>
+
+          {/* Icons */}
+          <div className="hidden md:flex items-center gap-5 ml-auto">
+            <button aria-label="Tìm kiếm" className="hover:opacity-80 transition-opacity">
+              <Search size={20} />
+            </button>
+            <a href="/gio-hang" aria-label="Giỏ hàng" className="relative hover:opacity-80 transition-opacity">
+              <ShoppingCart size={20} />
+              {totalItems > 0 && (
+                <span className="absolute -top-2 -right-2 bg-[var(--color-yellow)] text-[var(--color-ink)] text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
+                  {totalItems}
+                </span>
+              )}
             </a>
           </div>
 
           {/* Mobile burger */}
           <button
-            className="md:hidden flex flex-col gap-1.5 p-2"
+            className="md:hidden ml-auto"
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label="Menu"
           >
-            <span className={`block h-0.5 w-6 bg-[#1A1208] transition-transform ${menuOpen ? "rotate-45 translate-y-2" : ""}`} />
-            <span className={`block h-0.5 w-6 bg-[#1A1208] transition-opacity ${menuOpen ? "opacity-0" : ""}`} />
-            <span className={`block h-0.5 w-6 bg-[#1A1208] transition-transform ${menuOpen ? "-rotate-45 -translate-y-2" : ""}`} />
+            {menuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
-      </motion.nav>
+      </nav>
 
       {/* Mobile menu */}
       <AnimatePresence>
         {menuOpen && (
           <motion.div
-            className="fixed inset-0 z-40 bg-[#FFF8F0] flex flex-col pt-20 px-8"
+            className="fixed inset-0 z-40 bg-[var(--color-orange)] text-white flex flex-col pt-20 px-8"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
@@ -86,7 +89,7 @@ export default function Navbar() {
                   <a
                     href={link.href}
                     onClick={() => setMenuOpen(false)}
-                    className="font-[family-name:var(--font-heading)] text-3xl font-bold text-[#1A1208]"
+                    className="font-[family-name:var(--font-heading)] text-3xl font-bold"
                   >
                     {link.label}
                   </a>
@@ -94,12 +97,11 @@ export default function Navbar() {
               ))}
             </ul>
             <a
-              href={brand.instagram}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-auto mb-12 text-center text-sm font-semibold bg-[#1A1208] text-[#FFF8F0] px-5 py-4 rounded-full"
+              href="/gio-hang"
+              onClick={() => setMenuOpen(false)}
+              className="mt-auto mb-12 inline-flex items-center justify-center gap-2 text-center text-sm font-semibold bg-white text-[var(--color-orange)] px-5 py-4 rounded-full"
             >
-              Mua tại Instagram →
+              <ShoppingCart size={18} /> Giỏ hàng {totalItems > 0 && `(${totalItems})`}
             </a>
           </motion.div>
         )}
