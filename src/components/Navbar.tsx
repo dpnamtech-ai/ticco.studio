@@ -30,7 +30,7 @@ export default function Navbar() {
 
           {/* Wordmark */}
           <a
-            href="#"
+            href="/"
             className="font-[family-name:var(--font-heading)] text-2xl font-bold lowercase shrink-0"
           >
             {brand.shortName}

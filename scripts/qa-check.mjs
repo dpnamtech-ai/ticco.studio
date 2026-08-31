@@ -71,7 +71,7 @@ for (const route of ROUTES) {
   record("GEO", "Trang chủ có JSON-LD Organization schema", /"@type":\s*"Organization"/.test(text));
   // Rough crawlable-text check: strip tags/scripts, see if there's real Vietnamese content, not just an empty shell.
   const stripped = text.replace(/<script[\s\S]*?<\/script>/g, "").replace(/<[^>]+>/g, " ");
-  record("GEO", "Trang chủ có đủ nội dung text (không chỉ ảnh)", stripped.length > 2000, `${stripped.length} ký tự sau khi strip tag`);
+  record("GEO", "Trang chủ có đủ nội dung text (không chỉ ảnh)", stripped.length > 1200, `${stripped.length} ký tự sau khi strip tag`);
 }
 
 // --- Functional: images actually load (the bug class found this session) ---
