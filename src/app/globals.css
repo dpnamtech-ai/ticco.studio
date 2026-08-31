@@ -27,18 +27,6 @@ body {
   color: #2A2828;
 }
 
-/* Marquee animation */
-.marquee-track {
-  display: flex;
-  width: max-content;
-  animation: marquee 22s linear infinite;
-}
-
-@keyframes marquee {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
-}
-
 /* Grain texture overlay */
 .grain::after {
   content: '';
