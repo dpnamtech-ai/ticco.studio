@@ -85,8 +85,8 @@ export default function ProductDetail({
               onClick={() => setSelected(v)}
               className={
                 selected === v
-                  ? "bg-[var(--color-purple)] text-white px-5 py-2.5 rounded-full text-sm font-semibold"
-                  : "bg-[var(--color-purple)]/10 text-[var(--color-purple)] px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-[var(--color-purple)]/20 transition-colors"
+                  ? "bg-[var(--color-purple)] text-white px-5 py-2.5 rounded-md text-sm font-semibold"
+                  : "bg-[var(--color-purple)]/10 text-[var(--color-purple)] px-5 py-2.5 rounded-md text-sm font-semibold hover:bg-[var(--color-purple)]/20 transition-colors"
               }
             >
               {v}
