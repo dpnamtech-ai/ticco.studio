@@ -129,6 +129,7 @@ export const productLines = [
     category: "In ấn",
     priceFrom: 65000,
     unit: "set",
+    image: "/images/products/sticker-05-ban-lam-duoc-ma.png",
     description:
       "Chuyện khó thì làm từ từ, chuyện dễ thì làm cẩn thận, chuyện gì rồi cũng sẽ thành. Dán sticker Bạn làm được mà và nhẩm kỹ khẩu hiệu này mỗi ngày mỗi tháng!",
     specs: [
@@ -159,6 +160,7 @@ export const productLines = [
     category: "In ấn",
     priceFrom: 65000,
     unit: "set",
+    image: "/images/products/sticker-07-dan-noi.png",
     description:
       "Vô tri nhưng không vô nghĩa, đấy là cách mà Đần chơi với đời. Một set sticker thấm nhuần tinh thần và lối sống Đần — đời dễ ợt nên sống dễ chịu với chính mình thôi!",
     specs: [
@@ -214,6 +216,7 @@ export const productLines = [
     category: "In ấn",
     priceFrom: 30000,
     unit: "tấm",
+    image: "/images/products/bst-postcard-triet-ly-song-dan.png",
     description:
       "Đần là quản gia của Tíc Cơ, Đần yêu tự do, yêu lao động, thích trải nghiệm ưa tận hưởng, sống đời vô tri nhưng không vô nghĩa. Vì có lẽ đến cuối cùng mình chỉ muốn sống 'đần' và không phải lo nghĩ gì nhiều, 'Triết lý sống Đần' bởi thế mà ra đời, dành để tặng mình tặng người tặng nhau!",
     variants: [
@@ -232,6 +235,7 @@ export const productLines = [
     category: "In ấn",
     priceFrom: 200000,
     unit: "box set",
+    image: "/images/products/box-set-tim-kiem-dieu-ky-dieu.png",
     description:
       "Đời thực kỳ diệu khi mình dành thời gian chú tâm ngó nhìn. Hơn cả một-cái-hộp, box set 'TÌM KIẾM ĐIỀU KỲ DIỆU' dẫn bạn đi vào khu phố Tíc Cơ, quan sát đời sống trên mặt phẳng, chúng tôi mong được làm bạn bất giác mỉm cười khi khám phá ra những điều giấu kín trong bản đồ ấy.\n\nMột sản phẩm để bạn thấy hàng ngày chẳng phải bình thường, một sản phẩm để bạn mở ra ngắm nhìn, một sản phẩm để tặng nhau chẳng nhân dịp gì!",
     specs: [
@@ -273,6 +277,7 @@ export const productLines = [
     category: "Thời trang",
     priceFrom: 540000,
     unit: "chiếc",
+    image: "/images/products/gile-yen-tam.png",
     description:
       "Thuộc BST 'Chúc Tết Nhau Thật Sự' — đầu năm yên tâm, một năm yên tâm, cả đời yên tâm. Mọi điều an lành khi bạn yên ở tâm. Tíc Cơ gọi đây là một chiếc gile đơn giản, sẵn sàng để bạn khoác lên mình sự yên tâm và khởi đầu cho một năm thật trơn tru.",
     variants: ["Size M", "Size L", "Size XL"],
@@ -296,6 +301,7 @@ export const productLines = [
     category: "Thời trang",
     priceFrom: 140000,
     unit: "chiếc",
+    image: "/images/products/khan-bandana-van-su-tuy-minh.png",
     description:
       "Đời của mình, đời do mình, vì bàn tay ta làm nên tất cả, mọi điều đến và đi là do cách mình đón nhận và hành động. Một chiếc khăn để Đần đưa bạn vào miền tự do. Năng nổ, màu sắc, phóng khoáng, chủ động, sống như là Đần, vạn sự là tuỳ vào bản thân mình!",
     variants: ["Xanh lá", "Tím"],
@@ -305,10 +311,20 @@ export const productLines = [
     id: "tui-song-cu-khoi",
     name: "Túi Sống Cừ Khôi",
     category: "Túi xách",
-    priceFrom: 0,
+    priceFrom: 355000,
     unit: "túi",
-    description:
-      "Sản phẩm nằm trong bộ sưu tập Túi Sống Cừ Khôi — chưa có mô tả/giá chính thức từ đội ngũ Tíc Cơ, cần bổ sung.",
+    image: "/images/products/tui-song-cu-khoi.png",
+    description: "Sản phẩm nằm trong bộ sưu tập Túi Sống Cừ Khôi.",
+    specs: [],
+  },
+  {
+    id: "tui-vung-vang",
+    name: "Túi Vững Vàng",
+    category: "Túi xách",
+    priceFrom: 265000,
+    unit: "túi",
+    image: "/images/products/tui-vung-vang.png",
+    description: "Túi Vững Vàng — chưa có mô tả chi tiết từ đội ngũ Tíc Cơ, cần bổ sung.",
     specs: [],
   },
   {
@@ -317,6 +333,7 @@ export const productLines = [
     category: "Túi xách",
     priceFrom: 320000,
     unit: "túi",
+    image: "/images/products/tote-xoi-loi-voi-doi.png",
     description:
       "Nhắc mình xởi lởi, chuyện gì rồi cũng sẽ qua. Một chiếc túi đồng hành cùng bạn trong đời, đeo Xởi lởi với đời trên vai để nhắc mình hân hoan mỗi ngày!",
     specs: [
@@ -366,6 +383,7 @@ export const productLines = [
     category: "Phụ kiện đời sống",
     priceFrom: 165000,
     unit: "set",
+    image: "/images/products/bst-dan-sinh-ton.png",
     description:
       "Đần đồng hành cùng bạn qua mọi cung bậc cảm xúc và mọi giai đoạn trong đời. Bộ sưu tập bao gồm 03 móc khoá Đần tạo thành một vòng lặp sinh tồn, sẵn sàng cùng bạn sống một đời vui khoẻ và có ích!",
     variants: [
@@ -385,6 +403,7 @@ export const productLines = [
     category: "Phụ kiện đời sống",
     priceFrom: 85000,
     unit: "cái",
+    image: "/images/products/lot-coc-ra-khoi.png",
     description:
       "Mọi cuộc hải trình đều bắt đầu từ việc ra khơi. Đưa tinh thần ấy vào đời sống hàng ngày, Tíc Cơ ra mắt sản phẩm lót cốc Ra Khơi, lót bước đệm cho mọi bước đi bạn dám xông pha!",
     specs: [
