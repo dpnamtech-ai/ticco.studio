@@ -4,6 +4,17 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { supabaseAdmin, supabaseServer } from "@/lib/supabase/server";
 
+// Server Actions are public HTTP endpoints — Next can invoke them from ANY
+// route, so the /admin middleware matcher does not protect them. Every action
+// that touches the service-role client must check the session itself.
+async function requireAdmin() {
+  const supabase = await supabaseServer();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) throw new Error("Unauthorized");
+}
+
 function parseProductForm(formData: FormData) {
   const variants = String(formData.get("variants") || "")
     .split("\n")
@@ -30,6 +41,7 @@ function parseProductForm(formData: FormData) {
 }
 
 export async function createProduct(formData: FormData) {
+  await requireAdmin();
   const product = parseProductForm(formData);
   const { error } = await supabaseAdmin().from("products").insert(product);
   if (error) throw new Error(error.message);
@@ -40,6 +52,7 @@ export async function createProduct(formData: FormData) {
 }
 
 export async function updateProduct(originalId: string, formData: FormData) {
+  await requireAdmin();
   const product = parseProductForm(formData);
   const { error } = await supabaseAdmin().from("products").update(product).eq("id", originalId);
   if (error) throw new Error(error.message);
@@ -51,6 +64,7 @@ export async function updateProduct(originalId: string, formData: FormData) {
 }
 
 export async function deleteProduct(id: string) {
+  await requireAdmin();
   const { error } = await supabaseAdmin().from("products").delete().eq("id", id);
   if (error) throw new Error(error.message);
   revalidatePath("/admin");
