@@ -1,28 +1,25 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { brand } from "@/data/content";
 
 /*
   One absolute-position composition matching the "trang-chu" Figma frame's
   orange brand section 1:1 (X-3 Y1168 W1283 H820 on the 1280-wide frame).
   Percentages below are each element's box relative to that section's own
-  origin — pulled from the Figma file JSON (scripts/figma-fetch.mjs), not
-  eyeballed.
+  origin, from the Figma file JSON. The mission paragraph and the 3 pillar
+  badges render the user's own Figma-exported PNGs (baked-in layout/
+  typography) instead of hand-typed text, per their own design.
 */
 export default function BrandSection() {
   return (
     <section className="relative w-full bg-[var(--color-orange)] text-white aspect-[1283/820] overflow-hidden">
-      <motion.p
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6 }}
-        className="absolute leading-relaxed text-[1.6vw] md:text-[1.3vw] lg:text-lg"
-        style={{ left: "17.69%", top: "11.22%", width: "64.77%", whiteSpace: "pre-line" }}
-      >
-        {brand.mission}
-      </motion.p>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src="/images/brand/mission-text.png"
+        alt={brand.mission}
+        className="absolute w-full"
+        style={{ left: "17.69%", top: "11.22%", width: "64.77%" }}
+      />
 
       <a
         href="/ve-tic-co"
@@ -32,25 +29,30 @@ export default function BrandSection() {
         &gt; Hiểu hơn về Tíc Cơ!
       </a>
 
-      {/* Stagger-stacked pillar badges — widest/lowest at back, narrowest/highest in front */}
-      <div
-        className="absolute bg-[var(--color-yellow)] rounded-full flex items-center justify-center px-4"
-        style={{ left: "75.6%", top: "63.17%", width: "26.58%", height: "3.78%" }}
-      >
-        <span className="text-[var(--color-ink)] font-bold uppercase text-[1.2vw] md:text-sm">Niềm vui giản đơn</span>
-      </div>
-      <div
-        className="absolute bg-[var(--color-yellow)] rounded-full flex items-center justify-center px-4"
-        style={{ left: "78.64%", top: "58.29%", width: "22.76%", height: "3.54%" }}
-      >
-        <span className="text-[var(--color-ink)] font-bold uppercase text-[1.2vw] md:text-sm">Chăm chú với đời</span>
-      </div>
-      <div
-        className="absolute bg-[var(--color-yellow)] rounded-full flex items-center justify-center px-4"
-        style={{ left: "82.31%", top: "53.41%", width: "21.98%", height: "3.41%" }}
-      >
-        <span className="text-[var(--color-ink)] font-bold uppercase text-[1.2vw] md:text-sm">Phóng khoáng</span>
-      </div>
+      {/* Stagger-stacked pillar badges — widest/lowest at back, narrowest/highest in front. Real
+          Figma exports (pill+text baked in), sized/positioned to each badge's exact Group node
+          box (% of this 1283x820 section) — corrected from the earlier hand-drawn div heights. */}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src="/images/brand/badge-niem-vui-gian-don.png"
+        alt="Niềm vui giản đơn"
+        className="absolute w-full"
+        style={{ left: "74.83%", top: "63.17%", width: "27.39%" }}
+      />
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src="/images/brand/badge-cham-chu-voi-doi.png"
+        alt="Chăm chú với đời"
+        className="absolute w-full"
+        style={{ left: "78.64%", top: "58.29%", width: "22.76%" }}
+      />
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src="/images/brand/badge-phong-khoang.png"
+        alt="Phóng khoáng"
+        className="absolute w-full"
+        style={{ left: "82.31%", top: "53.54%", width: "21.95%" }}
+      />
 
       {/* Meet-Đần block */}
       <div
