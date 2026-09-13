@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Be_Vietnam_Pro } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import DanCursor from "@/components/DanCursor";
 import PromoBar from "@/components/PromoBar";
@@ -7,10 +7,26 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { CartProvider } from "@/context/CartContext";
 
-const beVietnamPro = Be_Vietnam_Pro({
+// Figma specifies "Be Vietnam" (the original family), not "Be Vietnam Pro" —
+// different letterforms/metrics, not a version alias. Not in next/font/google's
+// bundled list (deprecated upstream), so self-hosted here from Google Fonts' own
+// files (latin + vietnamese subsets, weights 300-800 per the design).
+const beVietnam = localFont({
   variable: "--font-be-vietnam",
-  subsets: ["latin", "vietnamese"],
-  weight: ["300", "400", "500", "600", "700", "800"],
+  src: [
+    { path: "../fonts/be-vietnam/be-vietnam-latin-300.woff2", weight: "300", style: "normal" },
+    { path: "../fonts/be-vietnam/be-vietnam-vietnamese-300.woff2", weight: "300", style: "normal" },
+    { path: "../fonts/be-vietnam/be-vietnam-latin-400.woff2", weight: "400", style: "normal" },
+    { path: "../fonts/be-vietnam/be-vietnam-vietnamese-400.woff2", weight: "400", style: "normal" },
+    { path: "../fonts/be-vietnam/be-vietnam-latin-500.woff2", weight: "500", style: "normal" },
+    { path: "../fonts/be-vietnam/be-vietnam-vietnamese-500.woff2", weight: "500", style: "normal" },
+    { path: "../fonts/be-vietnam/be-vietnam-latin-600.woff2", weight: "600", style: "normal" },
+    { path: "../fonts/be-vietnam/be-vietnam-vietnamese-600.woff2", weight: "600", style: "normal" },
+    { path: "../fonts/be-vietnam/be-vietnam-latin-700.woff2", weight: "700", style: "normal" },
+    { path: "../fonts/be-vietnam/be-vietnam-vietnamese-700.woff2", weight: "700", style: "normal" },
+    { path: "../fonts/be-vietnam/be-vietnam-latin-800.woff2", weight: "800", style: "normal" },
+    { path: "../fonts/be-vietnam/be-vietnam-vietnamese-800.woff2", weight: "800", style: "normal" },
+  ],
 });
 
 export const metadata: Metadata = {
@@ -45,7 +61,7 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="vi" className={beVietnamPro.variable}>
+    <html lang="vi" className={beVietnam.variable}>
       <body className="grain">
         <script
           type="application/ld+json"

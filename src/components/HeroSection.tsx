@@ -21,7 +21,7 @@ export default function HeroSection() {
         initial={{ opacity: 0, x: -30 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-        className="absolute font-[family-name:var(--font-heading)] font-extrabold uppercase leading-[1.05]"
+        className="absolute font-[family-name:var(--font-heading)] font-bold uppercase leading-[1.05] tracking-[-0.04em]"
         style={{ left: "4.68%", top: "22.13%", width: "33.12%", fontSize: "clamp(28px, 6vw, 85px)" }}
       >
         Đời dễ ợt
@@ -39,7 +39,7 @@ export default function HeroSection() {
         <span className="font-serif font-light leading-none shrink-0" style={{ fontSize: "clamp(48px, 9vw, 120px)" }}>
           (
         </span>
-        <p className="text-xs sm:text-sm font-bold uppercase tracking-wide leading-relaxed pt-2" style={{ textAlign: "justify" }}>
+        <p className="text-xs sm:text-sm font-medium uppercase tracking-[-0.06em] leading-relaxed pt-2" style={{ textAlign: "justify" }}>
           Chúng tôi có bán sản phẩm để bạn tìm thấy niềm vui trong mọi điều đời thường!
         </p>
         <span className="font-serif font-light leading-none shrink-0" style={{ fontSize: "clamp(48px, 9vw, 120px)" }}>
