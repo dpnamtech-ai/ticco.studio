@@ -15,13 +15,15 @@ export default function VeTicCoPage() {
           {/* Cột 1 */}
           <div className="relative z-10 pt-10">
             <div className="absolute -z-10 rounded-[15%] bg-[#35165a] w-[140%] h-[140%] -top-10 -left-10" />
-            <p className="text-lg md:text-xl leading-relaxed relative z-10 text-left">{aboutPage.intro[0]}</p>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/images/ve-tic-co/intro-0.png" alt={aboutPage.intro[0]} className="relative z-10 w-full h-auto" />
           </div>
 
           {/* Cột 2: Phải có mt-20 để thụt xuống */}
           <div className="relative z-10 mt-20 space-y-6">
             <div className="absolute -z-10 rounded-[15%] bg-[#35165a] w-[120%] h-[140%] -top-10 -left-10" />
-            <p className="text-white/90 relative z-10 text-left">{aboutPage.intro[1]}</p>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/images/ve-tic-co/intro-1.png" alt={aboutPage.intro[1]} className="relative z-10 w-full h-auto" />
             <p className="text-white/90 relative z-10 text-left">{aboutPage.intro[2]}</p>
           </div>
 
@@ -34,11 +36,12 @@ export default function VeTicCoPage() {
             </div>
             <div className="relative z-10 space-y-6">
               <div className="absolute -z-10 rounded-[15%] bg-[#35165a] w-[140%] h-[140%] -top-10 -left-4" />
-              {aboutPage.mission.map((p, i) => (
-                <p key={i} className="text-white/90 leading-relaxed relative z-10 text-left">
-                  {p}
-                </p>
-              ))}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/images/ve-tic-co/mission.png"
+                alt={aboutPage.mission.join(" ")}
+                className="relative z-10 w-full h-auto"
+              />
             </div>
           </div>
         </div>

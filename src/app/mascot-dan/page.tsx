@@ -55,10 +55,9 @@ export default function MascotDanPage() {
         </div>
       </section>
 
-      <section className="bg-[var(--color-orange)] text-white px-6 py-10">
-        <p className="max-w-3xl mx-auto text-center text-lg md:text-xl font-semibold leading-relaxed">
-          {mascotPage.introBanner}
-        </p>
+      <section>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/images/mascot-dan/intro-banner.png" alt={mascotPage.introBanner} className="w-full h-auto" />
       </section>
 
       <section className="px-6 py-16">
@@ -108,13 +107,9 @@ export default function MascotDanPage() {
         </p>
       </section>
 
-      <section className="bg-[var(--color-purple)] text-white px-6 py-10">
-        <p
-          className="max-w-2xl mx-auto text-center text-lg md:text-xl font-semibold leading-relaxed"
-          style={{ whiteSpace: "pre-line" }}
-        >
-          {mascotPage.closingBanner}
-        </p>
+      <section>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/images/mascot-dan/closing-banner.png" alt={mascotPage.closingBanner} className="w-full h-auto" />
       </section>
     </>
   );
