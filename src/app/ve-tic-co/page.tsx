@@ -49,7 +49,7 @@ export default function VeTicCoPage() {
 
       <section className="relative text-white">
         <div className="relative aspect-[1280/902]">
-          <Image src="/images/ve-tic-co-statement.png" alt="Nghệ một cách đời thường, ai cũng có gu" fill className="object-cover" priority />
+          <Image src="/images/ve-tic-co-statement.png" alt="Nghệ một cách đời thường, ai cũng có gu" fill quality={90} sizes="100vw" className="object-cover" priority />
         </div>
       </section>
 

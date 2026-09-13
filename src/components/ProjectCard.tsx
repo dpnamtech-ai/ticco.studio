@@ -35,7 +35,7 @@ export default function ProjectCard({
       transition={{ delay: index * 0.06, duration: 0.5 }}
     >
       <div className={`${compact ? "aspect-[309/448]" : "aspect-[436/486]"} relative overflow-hidden mb-4 bg-[#D9D9D9]`}>
-        {image && <Image src={image} alt={title} fill className="object-cover" sizes="(max-width: 768px) 100vw, 50vw" />}
+        {image && <Image src={image} alt={title} fill quality={90} className="object-cover" sizes="(max-width: 768px) 100vw, 50vw" />}
       </div>
       <h3 className={`font-semibold mb-2 leading-snug ${onOrange ? "text-white" : "text-[var(--color-ink)]"}`}>
         {title}

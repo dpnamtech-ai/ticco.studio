@@ -13,7 +13,7 @@ export default function CollabSection() {
 
   return (
     <section>
-      <div className="bg-[var(--color-purple)] text-white py-3 px-6 text-center text-sm font-bold tracking-wide uppercase">
+      <div className="bg-[var(--color-purple)] text-white py-3 px-6 text-left text-sm font-bold tracking-wide uppercase">
         Dự án chung tay hợp tác
       </div>
 

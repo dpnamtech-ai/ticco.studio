@@ -16,8 +16,8 @@ export default function ProductCategoryGrid({ products }: { products: Product[] 
 
   return (
     <section id="danh-muc">
-      <div className="bg-[var(--color-purple)] text-white py-3 px-6 text-center text-sm font-bold tracking-wide uppercase">
-        Danh mục sản phẩm
+      <div className="bg-[var(--color-purple)] text-white py-3 px-6 text-left text-sm font-bold tracking-wide uppercase">
+        Danh mục sản phẩm:
       </div>
 
       <div className="max-w-7xl mx-auto px-6 py-16">

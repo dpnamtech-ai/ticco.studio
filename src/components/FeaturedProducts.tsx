@@ -13,9 +13,8 @@ export default function FeaturedProducts({ products }: { products: Product[] }) 
 
   return (
     <section id="products">
-      <div className="bg-[var(--color-purple)] text-white py-3 px-6 text-center text-sm font-bold tracking-wide uppercase">
-        Chú ý! Sản phẩm đáng chú ý!
-      </div>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src="/images/brand/headline-featured.png" alt="Chú ý! Sản phẩm đáng chú ý!" className="w-full h-auto" />
 
       <div className="max-w-7xl mx-auto px-6 py-16">
         <div className="flex justify-end mb-10">

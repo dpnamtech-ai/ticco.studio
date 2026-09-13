@@ -34,9 +34,8 @@ export default async function Home() {
       <BrandSection />
 
       <section id="danh-muc">
-        <div className="bg-[var(--color-purple)] text-white py-3 px-6 text-center text-sm font-bold tracking-wide uppercase">
-          Danh mục sản phẩm
-        </div>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/images/brand/headline-danh-muc.png" alt="Danh mục sản phẩm:" className="w-full h-auto" />
 
         <div className="max-w-7xl mx-auto px-6 py-16">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 mb-10">

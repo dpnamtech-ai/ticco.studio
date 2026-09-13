@@ -23,10 +23,11 @@ export default function BrandSection() {
 
       <a
         href="/ve-tic-co"
-        className="absolute font-bold uppercase tracking-wide text-[1.4vw] md:text-base hover:underline flex items-center"
+        className="absolute flex items-center"
         style={{ left: "41.47%", top: "46.34%", width: "17.07%", height: "2.8%" }}
       >
-        &gt; Hiểu hơn về Tíc Cơ!
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/images/brand/link-hieu-hon.png" alt="Hiểu hơn về Tíc Cơ!" className="w-full h-auto" />
       </a>
 
       {/* Stagger-stacked pillar badges — widest/lowest at back, narrowest/highest in front. Real
@@ -62,24 +63,27 @@ export default function BrandSection() {
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src="/images/meet-dan-photo.png" alt="Mascot Đần" className="w-full h-full object-cover" />
       </div>
-      <p
-        className="absolute font-[family-name:var(--font-heading)] font-bold leading-tight text-[1.6vw] md:text-xl"
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src="/images/brand/caption-dan.png"
+        alt="sống đời sống cùng Đần"
+        className="absolute w-full"
         style={{ left: "30.16%", top: "60.49%", width: "9.98%" }}
-      >
-        sống đời sống cùng Đần
-      </p>
-      <p
-        className="absolute font-[family-name:var(--font-heading)] font-bold leading-tight text-[1.6vw] md:text-xl"
+      />
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src="/images/brand/caption-tic-co.png"
+        alt="chủ nhà tiếp quản Tíc Cơ"
+        className="absolute w-full"
         style={{ left: "30.16%", top: "72.56%", width: "9.98%" }}
-      >
-        chủ nhà tiếp quản Tíc Cơ
-      </p>
+      />
       <a
         href="/mascot-dan"
-        className="absolute font-bold uppercase tracking-wide text-[1.4vw] md:text-base hover:underline flex items-center"
+        className="absolute flex items-center"
         style={{ left: "41.47%", top: "91.22%", width: "17.07%", height: "2.8%" }}
       >
-        &gt; Làm quen với Đần!
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/images/brand/link-lam-quen.png" alt="Làm quen với Đần!" className="w-full h-auto" />
       </a>
     </section>
   );
