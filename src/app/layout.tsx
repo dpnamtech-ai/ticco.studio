@@ -42,7 +42,7 @@ export const metadata: Metadata = {
     title: "Tíc Cơ — Đời dễ ợt, vợt Tíc Cơ",
     description: "Sổ tay, túi, in ấn và những món đồ nhỏ đầy cá tính.",
     type: "website",
-    images: ["/images/hero-basket.jpg"],
+    images: ["/images/hero-basket.png"],
   },
 };
 

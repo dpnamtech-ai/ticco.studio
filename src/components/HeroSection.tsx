@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 /*
   Matches the "trang-chu" Figma frame's hero-section (X0 Y51 W1283 H592):
@@ -13,8 +14,15 @@ export default function HeroSection() {
   return (
     <section className="relative w-full bg-[var(--color-orange)] text-white aspect-[1283/592] overflow-hidden">
       <div className="absolute inset-y-0 right-0" style={{ width: "56.27%" }}>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/images/hero-basket.jpg" alt="Giỏ đồ Tíc Cơ" className="w-full h-full object-cover" />
+        <Image
+          src="/images/hero-basket.png"
+          alt="Giỏ đồ Tíc Cơ"
+          fill
+          priority
+          quality={90}
+          sizes="(max-width: 768px) 100vw, 56vw"
+          className="object-cover"
+        />
       </div>
 
       <motion.h1
@@ -36,13 +44,19 @@ export default function HeroSection() {
         className="absolute flex items-start gap-1"
         style={{ left: "4.68%", top: "70.61%", width: "24.55%" }}
       >
-        <span className="font-serif font-light leading-none shrink-0" style={{ fontSize: "clamp(48px, 9vw, 120px)" }}>
+        <span
+          className="font-light leading-none shrink-0"
+          style={{ fontSize: "clamp(48px, 9vw, 120px)", fontFamily: "'Big Caslon', Georgia, 'Times New Roman', serif" }}
+        >
           (
         </span>
         <p className="text-xs sm:text-sm font-medium uppercase tracking-[-0.06em] leading-relaxed pt-2" style={{ textAlign: "justify" }}>
           Chúng tôi có bán sản phẩm để bạn tìm thấy niềm vui trong mọi điều đời thường!
         </p>
-        <span className="font-serif font-light leading-none shrink-0" style={{ fontSize: "clamp(48px, 9vw, 120px)" }}>
+        <span
+          className="font-light leading-none shrink-0"
+          style={{ fontSize: "clamp(48px, 9vw, 120px)", fontFamily: "'Big Caslon', Georgia, 'Times New Roman', serif" }}
+        >
           )
         </span>
       </motion.div>

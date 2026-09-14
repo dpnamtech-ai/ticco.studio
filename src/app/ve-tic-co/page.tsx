@@ -10,21 +10,20 @@ export const metadata: Metadata = {
 export default function VeTicCoPage() {
   return (
     <>
-      <section className="relative bg-[var(--color-orange)] text-white px-6 py-16 md:py-24 overflow-hidden">
+      <section className="relative bg-gradient-to-b from-[#e66107] to-[#803604] text-white px-6 py-16 md:py-24 overflow-hidden">
         <div className="relative max-w-7xl mx-auto grid md:grid-cols-3 gap-10 md:gap-16">
           {/* Cột 1 */}
           <div className="relative z-10 pt-10">
-            <div className="absolute -z-10 rounded-[15%] bg-[#35165a] w-[140%] h-[140%] -top-10 -left-10" />
+            <div className="absolute -z-10 rounded-[15%] bg-gradient-to-b from-[#6625b1] to-[#1f0938] w-[140%] h-[140%] -top-10 -left-10" />
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/images/ve-tic-co/intro-0.png" alt={aboutPage.intro[0]} className="relative z-10 w-full h-auto" />
           </div>
 
           {/* Cột 2: Phải có mt-20 để thụt xuống */}
           <div className="relative z-10 mt-20 space-y-6">
-            <div className="absolute -z-10 rounded-[15%] bg-[#35165a] w-[120%] h-[140%] -top-10 -left-10" />
+            <div className="absolute -z-10 rounded-[15%] bg-gradient-to-b from-[#6625b1] to-[#1f0938] w-[120%] h-[140%] -top-10 -left-10" />
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/images/ve-tic-co/intro-1.png" alt={aboutPage.intro[1]} className="relative z-10 w-full h-auto" />
-            <p className="text-white/90 relative z-10 text-left">{aboutPage.intro[2]}</p>
           </div>
 
           {/* Cột 3 */}
@@ -35,7 +34,7 @@ export default function VeTicCoPage() {
               </h1>
             </div>
             <div className="relative z-10 space-y-6">
-              <div className="absolute -z-10 rounded-[15%] bg-[#35165a] w-[140%] h-[140%] -top-10 -left-4" />
+              <div className="absolute -z-10 rounded-[15%] bg-gradient-to-b from-[#6625b1] to-[#1f0938] w-[140%] h-[140%] -top-10 -left-4" />
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/images/ve-tic-co/mission.png"

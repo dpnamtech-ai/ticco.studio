@@ -48,7 +48,7 @@ export default function MascotDanPage() {
           {[0, 1, 2].map((i) => (
             <div key={i}>
               <p className="text-[var(--color-purple)] font-semibold mb-6">{mascotPage.traitCaption}</p>
-              <Image src="/images/dan-laptop.png" alt="" width={160} height={152} priority />
+              <Image src="/images/dan-laptop.png" alt="Mascot Dần" width={160} height={152} priority />
 
             </div>
           ))}
@@ -67,7 +67,7 @@ export default function MascotDanPage() {
             <div className="absolute left-0 top-1/2 -translate-y-1/2 w-[60%] md:w-[55%] h-8 md:h-10 bg-[var(--color-purple)] -z-10" />
             <div className="w-full max-w-5xl mx-auto px-6 flex flex-col md:flex-row items-center md:items-start justify-center md:justify-start gap-6 md:gap-16">
               <div className="relative w-[150px] md:w-[200px] aspect-square flex-shrink-0 md:ml-[35%]">
-                <Image src={mascotPage.bio[0].image} alt="" fill quality={90} sizes="200px" className="object-contain" />
+                <Image src={mascotPage.bio[0].image} alt="Mascot Dần ăn mừng" fill quality={90} sizes="200px" className="object-contain" />
               </div>
               <p className="text-[var(--color-purple)] font-medium text-sm md:text-base leading-snug max-w-xs whitespace-pre-line text-center md:text-left">
                 {mascotPage.bio[0].text}
@@ -83,7 +83,7 @@ export default function MascotDanPage() {
                 {mascotPage.bio[1].text}
               </p>
               <div className="relative w-[220px] md:w-[316px] aspect-[316/228] flex-shrink-0 md:mr-[15%]">
-                <Image src={mascotPage.bio[1].image} alt="" fill quality={90} sizes="316px" className="object-contain" />
+                <Image src={mascotPage.bio[1].image} alt="Mascot Dần nâng tạ" fill quality={90} sizes="316px" className="object-contain" />
               </div>
             </div>
           </div>
@@ -96,7 +96,7 @@ export default function MascotDanPage() {
                 {mascotPage.bio[2].text}
               </p>
               <div className="relative w-[180px] md:w-[223px] aspect-square flex-shrink-0 md:mr-[30%]">
-                <Image src={mascotPage.bio[2].image} alt="" fill quality={90} sizes="223px" className="object-contain" />
+                <Image src={mascotPage.bio[2].image} alt="Mascot Dần cầm điện thoại" fill quality={90} sizes="223px" className="object-contain" />
               </div>
             </div>
           </div>
