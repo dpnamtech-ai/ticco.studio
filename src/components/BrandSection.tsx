@@ -31,28 +31,30 @@ export default function BrandSection() {
       </a>
 
       {/* Stagger-stacked pillar badges — widest/lowest at back, narrowest/highest in front. Real
-          Figma exports (pill+text baked in), sized/positioned to each badge's exact Group node
-          box (% of this 1283x820 section) — corrected from the earlier hand-drawn div heights. */}
+          Figma exports (pill+text baked in), sized/positioned from each badge group's
+          absoluteRenderBounds (NOT absoluteBoundingBox — Figma's bbox for these pill rectangles
+          includes extra invisible geometry ~15-19% wider than what's actually painted, which was
+          pushing badge-phong-khoang past the section's right edge and clipping the final "G"). */}
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src="/images/brand/badge-niem-vui-gian-don.png"
         alt="Niềm vui giản đơn"
         className="absolute w-full"
-        style={{ left: "74.83%", top: "63.17%", width: "27.39%" }}
+        style={{ left: "74.77%", top: "63.14%", width: "25.23%" }}
       />
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src="/images/brand/badge-cham-chu-voi-doi.png"
         alt="Chăm chú với đời"
         className="absolute w-full"
-        style={{ left: "78.64%", top: "58.29%", width: "22.76%" }}
+        style={{ left: "78.59%", top: "58.29%", width: "21.41%" }}
       />
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src="/images/brand/badge-phong-khoang.png"
         alt="Phóng khoáng"
         className="absolute w-full"
-        style={{ left: "82.31%", top: "53.54%", width: "21.95%" }}
+        style={{ left: "82.27%", top: "53.41%", width: "17.73%" }}
       />
 
       {/* Meet-Đần block */}

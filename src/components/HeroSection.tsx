@@ -50,7 +50,10 @@ export default function HeroSection() {
         >
           (
         </span>
-        <p className="text-xs sm:text-sm font-medium uppercase tracking-[-0.06em] leading-relaxed pt-2" style={{ textAlign: "justify" }}>
+        <p
+          className="font-medium uppercase tracking-[-0.06em] leading-relaxed pt-2"
+          style={{ textAlign: "justify", fontSize: "clamp(11px, 1.17vw, 16px)" }}
+        >
           Chúng tôi có bán sản phẩm để bạn tìm thấy niềm vui trong mọi điều đời thường!
         </p>
         <span
