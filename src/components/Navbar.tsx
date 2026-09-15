@@ -8,7 +8,7 @@ import { useCart } from "@/context/CartContext";
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const { totalItems } = useCart();
+  const { totalItems, openDrawer } = useCart();
   const left = navLinks.slice(0, 2);
   const right = navLinks.slice(2);
 
@@ -53,14 +53,23 @@ export default function Navbar() {
             <button aria-label="Tìm kiếm" className="hover:opacity-80 transition-opacity">
               <Search size={20} />
             </button>
-            <a href="/gio-hang" aria-label="Giỏ hàng" className="relative hover:opacity-80 transition-opacity">
+            <button onClick={openDrawer} aria-label="Giỏ hàng" className="relative hover:opacity-80 transition-opacity">
               <ShoppingCart size={20} />
-              {totalItems > 0 && (
-                <span className="absolute -top-2 -right-2 bg-[var(--color-yellow)] text-[var(--color-ink)] text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
-                  {totalItems}
-                </span>
-              )}
-            </a>
+              <AnimatePresence>
+                {totalItems > 0 && (
+                  <motion.span
+                    key={totalItems}
+                    initial={{ scale: 0.4 }}
+                    animate={{ scale: 1 }}
+                    exit={{ scale: 0 }}
+                    transition={{ type: "spring", stiffness: 500, damping: 15 }}
+                    className="absolute -top-2 -right-2 bg-[var(--color-yellow)] text-[var(--color-ink)] text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center"
+                  >
+                    {totalItems}
+                  </motion.span>
+                )}
+              </AnimatePresence>
+            </button>
           </div>
 
           {/* Mobile burger */}
@@ -96,13 +105,15 @@ export default function Navbar() {
                 </li>
               ))}
             </ul>
-            <a
-              href="/gio-hang"
-              onClick={() => setMenuOpen(false)}
+            <button
+              onClick={() => {
+                setMenuOpen(false);
+                openDrawer();
+              }}
               className="mt-auto mb-12 inline-flex items-center justify-center gap-2 text-center text-sm font-semibold bg-white text-[var(--color-orange)] px-5 py-4 rounded-full"
             >
               <ShoppingCart size={18} /> Giỏ hàng {totalItems > 0 && `(${totalItems})`}
-            </a>
+            </button>
           </motion.div>
         )}
       </AnimatePresence>

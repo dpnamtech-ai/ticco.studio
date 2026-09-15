@@ -5,6 +5,8 @@ import DanCursor from "@/components/DanCursor";
 import PromoBar from "@/components/PromoBar";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import CartDrawer from "@/components/CartDrawer";
+import PageTransition from "@/components/PageTransition";
 import { CartProvider } from "@/context/CartContext";
 
 // Figma specifies "Be Vietnam" (the original family), not "Be Vietnam Pro" —
@@ -71,8 +73,11 @@ export default function RootLayout({
           <DanCursor />
           <PromoBar />
           <Navbar />
-          <main>{children}</main>
+          <main>
+            <PageTransition>{children}</PageTransition>
+          </main>
           <Footer />
+          <CartDrawer />
         </CartProvider>
       </body>
     </html>

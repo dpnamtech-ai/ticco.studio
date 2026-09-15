@@ -1,5 +1,6 @@
 "use client";
 
+import { motion } from "framer-motion";
 import { brand } from "@/data/content";
 
 /*
@@ -57,14 +58,16 @@ export default function BrandSection() {
         style={{ left: "82.27%", top: "53.41%", width: "17.73%" }}
       />
 
-      {/* Meet-Đần block */}
-      <div
+      {/* Meet-Đần block — gentle idle bob to give the mascot a bit of life */}
+      <motion.div
         className="absolute rounded-full bg-[var(--color-yellow)] overflow-hidden"
         style={{ left: "40.53%", top: "53.9%", width: "19.25%", height: "33.54%" }}
+        animate={{ y: [0, -10, 0] }}
+        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src="/images/meet-dan-photo.png" alt="Mascot Đần" className="w-full h-full object-cover" />
-      </div>
+      </motion.div>
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src="/images/brand/caption-dan.png"

@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import { motion, AnimatePresence } from "framer-motion";
+import { Check } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 import MagnifierImage from "./MagnifierImage";
 
@@ -102,13 +104,32 @@ export default function ProductDetail({
           ))}
         </div>
 
-        <button
+        <motion.button
           onClick={handleAdd}
           disabled={soldOut}
-          className="w-full bg-[#D9D9D9] hover:bg-[var(--color-ink)] hover:text-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-[#D9D9D9] disabled:hover:text-[var(--color-ink)] text-[var(--color-ink)] font-semibold py-4 rounded-lg uppercase text-sm tracking-wide mb-8"
+          whileTap={{ scale: 0.96 }}
+          animate={added ? { backgroundColor: "var(--color-purple)" } : { backgroundColor: "#D9D9D9" }}
+          className="w-full hover:bg-[var(--color-ink)] transition-colors disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-[#D9D9D9] text-[var(--color-ink)] data-[added=true]:text-white font-semibold py-4 rounded-lg uppercase text-sm tracking-wide mb-8 flex items-center justify-center gap-2"
+          data-added={added}
         >
-          {soldOut ? "Hết hàng" : added ? "Đã thêm ✓" : "Thêm vào giỏ hàng"}
-        </button>
+          <AnimatePresence mode="wait">
+            {added ? (
+              <motion.span
+                key="added"
+                initial={{ opacity: 0, scale: 0.5 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.5 }}
+                className="flex items-center gap-2 text-white"
+              >
+                <Check size={18} /> Đã thêm
+              </motion.span>
+            ) : (
+              <motion.span key="idle" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+                {soldOut ? "Hết hàng" : "Thêm vào giỏ hàng"}
+              </motion.span>
+            )}
+          </AnimatePresence>
+        </motion.button>
 
         <div className="border-t border-[var(--color-ink)]/15 pt-6 space-y-1.5 text-sm text-[var(--color-ink)]/75">
           {specs.map((s) => (

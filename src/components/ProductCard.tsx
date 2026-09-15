@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 
@@ -14,6 +15,8 @@ interface ProductCardProps {
 }
 
 export default function ProductCard({ id, name, priceFrom, image, index = 0, soldOut = false, nameClassName = "" }: ProductCardProps) {
+  const [loaded, setLoaded] = useState(false);
+
   return (
     <motion.a
       href={`/san-pham/${id}`}
@@ -24,12 +27,14 @@ export default function ProductCard({ id, name, priceFrom, image, index = 0, sol
       className="group block"
     >
       <div className="relative aspect-[4/5] bg-[#D9D9D9] mb-4 overflow-hidden border-2 border-transparent group-hover:border-[var(--color-ink)] transition-colors duration-300">
+        {image && !loaded && <div className="shimmer absolute inset-0 overflow-hidden" />}
         {image && (
           <Image
             src={image}
             alt={name}
             fill
             quality={90}
+            onLoad={() => setLoaded(true)}
             className="object-cover transition-transform duration-300 group-hover:scale-110"
             sizes="(max-width: 768px) 50vw, 25vw"
           />

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { mascotPage } from "@/data/content";
 import ProductCard from "@/components/ProductCard";
+import FloatingMascot from "@/components/FloatingMascot";
 import { getProducts } from "@/lib/products";
 
 // Same 8 items (first 2 rows) as the homepage's "danh-muc-san-pham" preview grid —
@@ -37,7 +38,7 @@ export default async function MascotDanPage() {
         </h1>
 
         <div className="relative w-fit mx-auto">
-          <Image
+          <FloatingMascot
             src="/images/dan-laptop.png"
             alt="Mascot Dần"
             width={240}

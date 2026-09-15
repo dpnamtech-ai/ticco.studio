@@ -17,6 +17,9 @@ interface CartContextValue {
   removeItem: (id: string, variant: string) => void;
   totalItems: number;
   subtotal: number;
+  isDrawerOpen: boolean;
+  openDrawer: () => void;
+  closeDrawer: () => void;
 }
 
 const CartContext = createContext<CartContextValue | null>(null);
@@ -26,6 +29,7 @@ const STORAGE_KEY = "ticco-cart";
 export function CartProvider({ children }: { children: ReactNode }) {
   const [items, setItems] = useState<CartItem[]>([]);
   const [hydrated, setHydrated] = useState(false);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   useEffect(() => {
     try {
@@ -52,6 +56,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
       }
       return [...prev, { ...item, qty }];
     });
+    setIsDrawerOpen(true);
   };
 
   const updateQty: CartContextValue["updateQty"] = (id, variant, qty) => {
@@ -70,7 +75,19 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const subtotal = items.reduce((sum, i) => sum + i.qty * i.price, 0);
 
   return (
-    <CartContext.Provider value={{ items, addItem, updateQty, removeItem, totalItems, subtotal }}>
+    <CartContext.Provider
+      value={{
+        items,
+        addItem,
+        updateQty,
+        removeItem,
+        totalItems,
+        subtotal,
+        isDrawerOpen,
+        openDrawer: () => setIsDrawerOpen(true),
+        closeDrawer: () => setIsDrawerOpen(false),
+      }}
+    >
       {children}
     </CartContext.Provider>
   );
