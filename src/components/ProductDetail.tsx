@@ -44,14 +44,31 @@ export default function ProductDetail({
   return (
     <div className="grid md:grid-cols-2 gap-12">
       <div>
-        <div className="aspect-[550/689] relative overflow-hidden mb-4 bg-[#D9D9D9]">
-          {image && <Image src={image} alt={name} fill quality={90} className="object-cover" priority sizes="(max-width: 768px) 100vw, 550px" />}
+        <div className="group aspect-[550/689] relative overflow-hidden mb-4 bg-[#D9D9D9]">
+          {image && (
+            <Image
+              src={image}
+              alt={name}
+              fill
+              quality={90}
+              className="object-cover transition-transform duration-300 group-hover:scale-110"
+              priority
+              sizes="(max-width: 768px) 100vw, 550px"
+            />
+          )}
         </div>
         <div className="grid grid-cols-2 gap-4">
           {[0, 1].map((i) => (
-            <div key={i} className="aspect-[269/337] relative overflow-hidden bg-[#D9D9D9]">
+            <div key={i} className="group aspect-[269/337] relative overflow-hidden bg-[#D9D9D9]">
               {thumbnails?.[i] && (
-                <Image src={thumbnails[i]} alt="" fill quality={90} className="object-cover" sizes="(max-width: 768px) 50vw, 275px" />
+                <Image
+                  src={thumbnails[i]}
+                  alt=""
+                  fill
+                  quality={90}
+                  className="object-cover transition-transform duration-300 group-hover:scale-110"
+                  sizes="(max-width: 768px) 50vw, 275px"
+                />
               )}
             </div>
           ))}
