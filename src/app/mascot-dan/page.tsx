@@ -1,13 +1,34 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { mascotPage } from "@/data/content";
+import ProductCard from "@/components/ProductCard";
+import { getProducts } from "@/lib/products";
+
+// Same 8 items (first 2 rows) as the homepage's "danh-muc-san-pham" preview grid —
+// the Figma "mascot-Dan" frame's own "LAN TOẢ LỐI SỐNG ĐẦN..." grid repeats the same
+// 4 placeholder products across both rows, so we reuse the real catalog subset instead.
+const PRODUCT_GRID_IDS = [
+  "bst-dan-sinh-ton",
+  "tui-song-cu-khoi",
+  "so-can-ban",
+  "gile-yen-tam",
+  "sticker-07-dan-noi",
+  "tui-vung-vang",
+  "sticker-05-ban-lam-duoc-ma",
+  "khan-bandana-van-su-tuy-minh",
+];
 
 export const metadata: Metadata = {
   title: "Mascot Dần — Tíc Cơ",
   description: mascotPage.tagline,
 };
 
-export default function MascotDanPage() {
+export default async function MascotDanPage() {
+  const products = await getProducts();
+  const productGrid = PRODUCT_GRID_IDS.map((id) => products.find((p) => p.id === id)).filter(
+    (p): p is NonNullable<typeof p> => Boolean(p)
+  );
+
   return (
     <>
       <section className="max-w-4xl mx-auto px-6 pt-16 pb-10 text-center">
@@ -110,6 +131,24 @@ export default function MascotDanPage() {
       <section>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src="/images/mascot-dan/closing-banner.png" alt={mascotPage.closingBanner} className="w-full h-auto" />
+      </section>
+
+      <section className="bg-[#f2f1f1] px-6 py-16">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 mb-10">
+            {productGrid.map((product, i) => (
+              <ProductCard key={product.id} {...product} index={i} />
+            ))}
+          </div>
+          <div className="text-center">
+            <a
+              href="/san-pham"
+              className="inline-block bg-[var(--color-orange)] text-white font-semibold uppercase tracking-wide px-8 py-4 rounded-full hover:opacity-90 transition-opacity"
+            >
+              Xem tất cả sản phẩm →
+            </a>
+          </div>
+        </div>
       </section>
     </>
   );
