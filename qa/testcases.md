@@ -72,7 +72,10 @@ trúc nhưng chưa đo pixel-exact · `❌ Known gap` = biết rõ đang thiếu
 | `/ve-tic-co` | Statement section (chữ "nghệ một cách..." trên ảnh) | ✅ Verified | Chữ đã có sẵn (baked-in) trong file ảnh export — ban đầu tôi thêm chữ HTML đè lên gây nhân đôi, đã phát hiện và bỏ overlay thừa |
 | `/ve-tic-co` | Bong bóng tím trang trí sau đoạn text | ✅ Verified | Dựng bằng absolute-position + border-radius blob theo đúng toạ độ Rectangle/Ellipse trong Figma |
 | `/mascot-dan` | 3 hàng mô tả + ribbon | ✅ Verified | Composition absolute-position đo pixel-exact, đã qua 3 vòng sửa mới đúng |
-| `/mascot-dan` | Card "cống hiến và sống chiến" (3 card) | ❌ Known gap | Figma chính nó cũng chỉ điền 1/3 ảnh (thiết kế dở dang) — giữ nguyên theo đúng Figma |
+| `/mascot-dan` | Banner intro/closing | ✅ Fixed (2026-09-15) | 2 file ảnh `intro-banner.png`/`closing-banner.png` bị tráo ngược nội dung — đã swap file, giờ đúng vị trí |
+| `/mascot-dan` | Grid sản phẩm cuối trang ("Lan toả lối sống Đần...") | ✅ Fixed (2026-09-15) | Figma có hẳn 1 section grid 8 sản phẩm + nút "TẤT CẢ SẢN PHẨM" ở cuối frame (Y2679-3897) mà code không có — đã thêm |
+| `/mascot-dan` | Card "cống hiến và sống chiến" (3 card, section nền `#E5E5E5` đầu trang) | ❌ Known gap — cần soát lại | Đối chiếu lại với `figma-summarize.mjs "mascot-Dan"` thì section Figma thật (`tinh-than-Dan`, Y703-1385) có 4 câu chữ khác nhau ("không quan tâm không nghe không biết" / "vui khoẻ vô tư đê" / "nguyện sống một đời cringe" / "sống vô tri khi đời vô thường") + 6 ảnh khác nhau, KHÔNG phải 3 card lặp lại cùng 1 câu "cống hiến và sống chiến" + cùng 1 ảnh như code hiện tại. Chưa sửa vì cần export đúng 6 ảnh thật từ Figma (đang bị Figma MCP rate-limit Starter plan chặn) — nếu user thấy phần này "không ổn", đây là nghi vấn hàng đầu. |
+| Trang chủ `/` | "Dự án chung tay hợp tác" (CollabSection cuối trang) | ✅ Fixed (2026-09-15) | Figma Rectangle 24 nền cam (#e66107) đằng sau khối 3 project card — code thiếu nền cam, chữ tối màu trên nền sáng mặc định. Component `ProjectCard` đã có sẵn prop `onOrange` (dùng đúng ở `/kham-pha`) nhưng `CollabSection.tsx` quên truyền — đã sửa. |
 
 ---
 
