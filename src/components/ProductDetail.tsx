@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { useCart } from "@/context/CartContext";
+import MagnifierImage from "./MagnifierImage";
 
 interface ProductDetailProps {
   id: string;
@@ -44,18 +45,8 @@ export default function ProductDetail({
   return (
     <div className="grid md:grid-cols-2 gap-12">
       <div>
-        <div className="group aspect-[550/689] relative overflow-hidden mb-4 bg-[#D9D9D9]">
-          {image && (
-            <Image
-              src={image}
-              alt={name}
-              fill
-              quality={90}
-              className="object-cover transition-transform duration-300 group-hover:scale-110"
-              priority
-              sizes="(max-width: 768px) 100vw, 550px"
-            />
-          )}
+        <div className="aspect-[550/689] relative mb-4 bg-[#D9D9D9]">
+          {image && <MagnifierImage src={image} alt={name} priority sizes="(max-width: 768px) 100vw, 550px" />}
         </div>
         <div className="grid grid-cols-2 gap-4">
           {[0, 1].map((i) => (
