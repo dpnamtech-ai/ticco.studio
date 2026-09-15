@@ -12,7 +12,7 @@ export default function CollabSection() {
   );
 
   return (
-    <section>
+    <section className="bg-[var(--color-orange)]">
       <div className="bg-[var(--color-purple)] text-white py-3 px-6 text-left text-sm font-bold tracking-wide uppercase">
         Dự án chung tay hợp tác
       </div>
@@ -21,7 +21,7 @@ export default function CollabSection() {
         <div className="flex justify-end mb-10">
           <a
             href="/kham-pha"
-            className="text-sm font-semibold uppercase tracking-wide text-[var(--color-purple)] hover:underline"
+            className="text-sm font-semibold uppercase tracking-wide text-white/90 hover:text-white hover:underline"
           >
             Xem chi tiết →
           </a>
@@ -29,7 +29,7 @@ export default function CollabSection() {
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
           {featured.map((project, i) => (
-            <ProjectCard key={project.id} title={project.title} image={project.image} index={i} compact />
+            <ProjectCard key={project.id} title={project.title} image={project.image} index={i} compact onOrange />
           ))}
         </div>
       </div>
