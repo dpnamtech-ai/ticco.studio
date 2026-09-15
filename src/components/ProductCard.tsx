@@ -23,9 +23,16 @@ export default function ProductCard({ id, name, priceFrom, image, index = 0, sol
       transition={{ delay: index * 0.06, duration: 0.5 }}
       className="group block"
     >
-      <div className="relative aspect-[4/5] bg-[#D9D9D9] mb-4 border-2 border-transparent group-hover:border-[var(--color-ink)] transition-colors duration-300">
+      <div className="relative aspect-[4/5] bg-[#D9D9D9] mb-4 overflow-hidden border-2 border-transparent group-hover:border-[var(--color-ink)] transition-colors duration-300">
         {image && (
-          <Image src={image} alt={name} fill quality={90} className="object-cover" sizes="(max-width: 768px) 50vw, 25vw" />
+          <Image
+            src={image}
+            alt={name}
+            fill
+            quality={90}
+            className="object-cover transition-transform duration-300 group-hover:scale-110"
+            sizes="(max-width: 768px) 50vw, 25vw"
+          />
         )}
         {soldOut && (
           <span className="absolute top-2 left-2 bg-[var(--color-ink)] text-white text-[10px] font-bold uppercase tracking-wide px-2 py-1 rounded">
