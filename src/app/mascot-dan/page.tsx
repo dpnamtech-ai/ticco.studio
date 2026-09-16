@@ -65,15 +65,35 @@ export default async function MascotDanPage() {
         </p>
       </section>
 
-      <section className="bg-[#E5E5E5] px-6 py-16">
-        <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10">
-          {[0, 1, 2].map((i) => (
-            <div key={i}>
-              <p className="text-[var(--color-purple)] font-semibold mb-6">{mascotPage.traitCaption}</p>
-              <Image src="/images/dan-laptop.png" alt="Mascot Dần" width={160} height={152} priority />
+      <section className="bg-[#E5E5E5] px-6 py-16 overflow-hidden">
+        <div className="max-w-5xl mx-auto">
+          <div className="flex flex-wrap items-end justify-center gap-x-4 gap-y-6 mb-10">
+            <p className="w-28 text-center whitespace-pre-line text-[var(--color-purple)] font-semibold">
+              {mascotPage.traits.captions[0]}
+            </p>
+            <Image src="/images/mascot-dan/traits/char-1-dance.png" alt="Mascot Dần" width={140} height={190} />
+            <p className="w-28 text-center whitespace-pre-line text-[var(--color-purple)] font-semibold">
+              {mascotPage.traits.captions[1]}
+            </p>
+            <Image src="/images/mascot-dan/traits/char-2-dance.png" alt="Mascot Dần" width={193} height={179} />
+            <p className="w-28 text-center whitespace-pre-line text-[var(--color-purple)] font-semibold">
+              {mascotPage.traits.captions[2]}
+            </p>
+            <Image src="/images/mascot-dan/traits/char-3-laptop.png" alt="Mascot Dần" width={173} height={166} />
+            <p className="w-28 text-center whitespace-pre-line text-[var(--color-purple)] font-semibold">
+              {mascotPage.traits.captions[3]}
+            </p>
+          </div>
 
-            </div>
-          ))}
+          <div className="flex justify-center -space-x-3 mb-8">
+            <Image src="/images/mascot-dan/traits/chain-left.png" alt="" width={191} height={112} />
+            <Image src="/images/mascot-dan/traits/chain-mid.png" alt="" width={223} height={102} className="self-end" />
+            <Image src="/images/mascot-dan/traits/chain-right.png" alt="" width={191} height={112} />
+          </div>
+
+          <p className="text-center text-lg md:text-xl font-bold text-[var(--color-purple)]">
+            {mascotPage.traits.tagline}
+          </p>
         </div>
       </section>
 

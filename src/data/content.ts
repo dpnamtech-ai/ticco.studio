@@ -611,7 +611,15 @@ export const mascotPage = {
     "chẳng lo nghĩ gì nhiều và cười ngốc nghếch thôi sao?",
   ],
   tagline: "Vô tri nhưng không vô nghĩa, Đần là Đần thôi!",
-  traitCaption: "cống hiến và sống chiến",
+  traits: {
+    captions: [
+      "không quan tâm\nkhông nghe\nkhông biết",
+      "vui, khoẻ,\nvô tư đê",
+      "nguyện sống\nmột đời cringe",
+      "sống vô tri khi\nđời vô thường",
+    ],
+    tagline: "kệ đời ngả nghiêng, quyết không nghiêng ngả!",
+  },
   introBanner:
     "Đần là quản gia của Tíc Cơ, đại diện thay mặt chúng tôi truyền tải thông tin đến bạn!",
   bio: [
