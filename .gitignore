@@ -44,3 +44,6 @@ dev.log
 # figma sync cache
 .figma-cache/
 !.env.local.example
+
+# raw Figma asset export staging (review + copy chosen files into public/images/ manually)
+/public/figma-export/
