@@ -53,6 +53,7 @@ export const productLines = [
     category: "Văn phòng phẩm",
     priceFrom: 150000,
     unit: "sổ",
+    image: "/images/products/so-nghi-di.png",
     description:
       "Tíc Cơ có một cuốn sổ để nhắc bạn Nghỉ đi! Làm nhiều thì dễ mệt, mệt nhiều thì nghỉ đi. Sổ Nghỉ đi nằm trong hộp quà Nghỉ Đi, hợp tác bởi Tíc Cơ và Freezedom trong chiến dịch 'Thu Rồi Nghỉ Đi'!",
     specs: [
@@ -176,6 +177,7 @@ export const productLines = [
     category: "In ấn",
     priceFrom: 65000,
     unit: "set",
+    image: "/images/products/sticker-08-dan-lao-dong.png",
     description:
       "Sống và cống hiến, làm và sống chiến, không ngừng lao động. Đần tiếp nối tinh thần lao động của người đồng bào mình và đưa tinh thần ấy vào một set sticker!",
     specs: [
@@ -191,6 +193,7 @@ export const productLines = [
     category: "In ấn",
     priceFrom: 65000,
     unit: "set",
+    image: "/images/products/sticker-09-chuc-nhau-that-su.png",
     description:
       "Thuộc BST 'Chúc Tết Nhau Thật Sự' — thay cho lời chúc bằng lời, một set sticker nhỏ để bạn gửi gián tiếp những lời chúc thành thật, chúc sức khoẻ, chúc bình an, chúc vững bền, chúc mọi điều. Hơn cả một lời nói ngắn, dán câu chúc bên cạnh để nhắc mình nhớ, nhắc ai đừng quên, nhắc nhau cho mọi ngày!",
     specs: [
