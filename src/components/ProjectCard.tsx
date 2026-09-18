@@ -45,9 +45,11 @@ export default function ProjectCard({
           <a href={productHref} className={linkClass}>
             › Xem sản phẩm
           </a>
-          <a href={articleHref} className={linkClass}>
-            › Đọc thêm về dự án
-          </a>
+          {articleHref && articleHref !== "#" && (
+            <a href={articleHref} className={linkClass}>
+              › Đọc thêm về dự án
+            </a>
+          )}
         </div>
       )}
     </motion.div>

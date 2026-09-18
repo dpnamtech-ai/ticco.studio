@@ -16,7 +16,6 @@ const footerLinks = [
   {
     title: "Hỗ trợ",
     links: [
-      { label: "Chính sách mua hàng", href: "/chinh-sach" },
       { label: "Liên hệ", href: `mailto:${brand.email}` },
       { label: "Combo quà tuỳ chỉnh", href: brand.instagram },
     ],
@@ -103,12 +102,6 @@ export default function Footer() {
               className="text-xs text-white/50 hover:text-[var(--color-yellow)] transition-colors font-medium"
             >
               Instagram
-            </a>
-            <a
-              href="/chinh-sach"
-              className="text-xs text-white/50 hover:text-[var(--color-yellow)] transition-colors"
-            >
-              Chính sách
             </a>
           </div>
         </div>
