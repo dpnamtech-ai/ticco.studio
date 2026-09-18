@@ -47,3 +47,8 @@ dev.log
 
 # raw Figma asset export staging (review + copy chosen files into public/images/ manually)
 /public/figma-export/
+
+# organized raw Figma exports per page (reference only, not served — 60MB+ of PNGs,
+# don't want to bloat git history; review + copy the ones actually needed into
+# public/images/ manually, same as figma-export/ above)
+/design/figma-assets/
