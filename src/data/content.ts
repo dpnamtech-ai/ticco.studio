@@ -558,7 +558,7 @@ export const projects = [
     group: "rieng",
     title: "Người Việt Vận Động",
     productHref: "/san-pham",
-    articleHref: "#",
+    articleHref: "/kham-pha/nguoi-viet-van-dong",
   },
   {
     id: "chuc-tet-nhau-that-su",
