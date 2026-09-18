@@ -12,35 +12,39 @@ export default function VeTicCoPage() {
     <>
       <section className="relative bg-gradient-to-b from-[#e66107] to-[#803604] text-white px-6 py-16 md:py-24 overflow-hidden">
         <div className="relative max-w-7xl mx-auto grid md:grid-cols-3 gap-10 md:gap-16">
-          {/* Cột 1 */}
+          {/* Cột 1 — blob dựng đúng 2 lớp như Figma gốc: Ellipse (oval đặc #53129e) chồng lên
+              Rectangle (gradient), không phải 1 shape bo góc ước lượng. Tỷ lệ % đo từ Figma:
+              ellipse cao 22.46% container, rectangle bắt đầu ở 11.30% (che nửa dưới ellipse). */}
           <div className="relative z-10 pt-10">
-            <div
-              className="absolute -z-10 bg-gradient-to-b from-[#6625b1] to-[#1f0938] w-[140%] h-[140%] -bottom-10 -left-10"
-              style={{ borderRadius: "50% 50% 0 0 / 13% 13% 0 0" }}
-            />
+            <div className="absolute -z-10 w-[140%] h-[140%] -bottom-10 -left-10">
+              <div className="absolute inset-x-0 top-0 bg-[#53129e] rounded-[50%]" style={{ height: "22.46%" }} />
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-b from-[#6625b1] to-[#1f0938]" style={{ top: "11.30%" }} />
+            </div>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/images/ve-tic-co/intro-0.png" alt={aboutPage.intro[0]} className="relative z-10 w-full h-auto" />
           </div>
 
           {/* Cột 2: Phải có mt-20 để thụt xuống. Không dùng space-y-* ở đây — nó áp margin-bottom
-              lên cả blob absolute (dù blob không tham gia flow), đẩy lệch đáy blob khỏi cột 1/3. */}
+              lên cả blob absolute (dù blob không tham gia flow), đẩy lệch đáy blob khỏi cột 1/3.
+              Tỷ lệ Figma: ellipse cao 34.66%, rectangle bắt đầu 17.66%. */}
           <div className="relative z-10 mt-20">
-            <div
-              className="absolute -z-10 bg-gradient-to-b from-[#6625b1] to-[#1f0938] w-[120%] h-[140%] -bottom-10 -left-10"
-              style={{ borderRadius: "50% 50% 0 0 / 21% 21% 0 0" }}
-            />
+            <div className="absolute -z-10 w-[120%] h-[140%] -bottom-10 -left-10">
+              <div className="absolute inset-x-0 top-0 bg-[#53129e] rounded-[50%]" style={{ height: "34.66%" }} />
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-b from-[#6625b1] to-[#1f0938]" style={{ top: "17.66%" }} />
+            </div>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/images/ve-tic-co/intro-1.png" alt={aboutPage.intro[1]} className="relative z-10 w-full h-auto" />
           </div>
 
           {/* Cột 3 — blob neo trực tiếp vào grid-item (không lồng trong div con) để đáy thẳng
               hàng với cột 1/2 (cả 3 blob trong Figma đều kết thúc chung 1 đường đáy). Giãn cách
-              giữa heading và text dùng mt-10 trực tiếp thay vì space-y-10 (lý do: xem cột 2). */}
+              giữa heading và text dùng mt-10 trực tiếp thay vì space-y-10 (lý do: xem cột 2).
+              Tỷ lệ Figma: ellipse cao 50%, rectangle bắt đầu 24.20%. */}
           <div className="relative z-10 flex flex-col">
-            <div
-              className="absolute -z-10 bg-gradient-to-b from-[#6625b1] to-[#1f0938] w-[140%] h-[140%] -bottom-10 -left-4"
-              style={{ borderRadius: "50% 50% 0 0 / 33% 33% 0 0" }}
-            />
+            <div className="absolute -z-10 w-[140%] h-[140%] -bottom-10 -left-4">
+              <div className="absolute inset-x-0 top-0 bg-[#53129e] rounded-[50%]" style={{ height: "50%" }} />
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-b from-[#6625b1] to-[#1f0938]" style={{ top: "24.2%" }} />
+            </div>
             <div className="text-right border-b-2 border-white pb-4 self-end">
               <h1 className="font-[family-name:var(--font-heading)] text-6xl font-extrabold leading-none uppercase">
                 Về<br />Tíc<br />Cơ
