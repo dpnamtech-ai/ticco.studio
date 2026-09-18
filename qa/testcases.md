@@ -12,6 +12,7 @@ node scripts/qa-check.mjs https://ticcostudio.vercel.app  # check production
 # Phần Figma-match (bảng dưới) — cần soát bằng tay + Figma JSON:
 node scripts/figma-fetch.mjs                            # cập nhật cache mới nhất từ Figma
 node scripts/figma-summarize.mjs "<tên-frame>"           # in toạ độ/màu/text 1 frame để đối chiếu
+node scripts/figma-content-check.mjs                    # mọi text Figma phải có trong trang thật (text/alt), in số thiếu/route
 ```
 
 Mỗi lần fix xong: chạy lại `qa-check.mjs`, cập nhật % ở đầu file này, cập nhật cột Status trong

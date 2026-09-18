@@ -21,9 +21,9 @@ export default function CollabSection() {
         <div className="flex justify-end mb-10">
           <a
             href="/kham-pha"
-            className="text-sm font-semibold uppercase tracking-wide text-white/90 hover:text-white hover:underline"
+            className="text-[20px] font-semibold uppercase text-white/90 hover:text-white hover:underline"
           >
-            Xem chi tiết →
+            Xem chi tiết &gt;
           </a>
         </div>
 

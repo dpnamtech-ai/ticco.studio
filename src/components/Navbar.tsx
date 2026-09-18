@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Search, ShoppingCart, ChevronDown, Menu, X } from "lucide-react";
@@ -15,41 +16,41 @@ export default function Navbar() {
   return (
     <>
       <nav className="sticky top-0 z-50 bg-[var(--color-orange)] text-white">
-        <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between gap-6">
+        <div className="relative max-w-[1280px] mx-auto px-6 h-16 md:h-[27px] flex items-center justify-between md:justify-center gap-6 md:gap-8">
           {/* Desktop nav — left */}
-          <ul className="hidden md:flex items-center gap-8 text-sm font-semibold uppercase tracking-wide">
+          <ul className="hidden md:flex items-center gap-8 text-sm md:text-[13px] font-semibold uppercase tracking-wide">
             {left.map((link) => (
               <li key={link.href}>
-                <a href={link.href} className="hover-underline flex items-center gap-1 hover:opacity-80 transition-opacity">
+                <Link href={link.href} className="hover-underline flex items-center gap-1 hover:opacity-80 transition-opacity">
                   {link.label}
                   {link.dropdown && <ChevronDown size={14} />}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>
 
           {/* Wordmark */}
-          <a
+          <Link
             href="/"
             className="font-[family-name:var(--font-heading)] text-2xl font-bold lowercase shrink-0"
           >
             {brand.shortName}
-          </a>
+          </Link>
 
           {/* Desktop nav — right */}
-          <ul className="hidden md:flex items-center gap-8 text-sm font-semibold uppercase tracking-wide">
+          <ul className="hidden md:flex items-center gap-8 text-sm md:text-[13px] font-semibold uppercase tracking-wide">
             {right.map((link) => (
               <li key={link.href}>
-                <a href={link.href} className="hover-underline flex items-center gap-1 hover:opacity-80 transition-opacity">
+                <Link href={link.href} className="hover-underline flex items-center gap-1 hover:opacity-80 transition-opacity">
                   {link.label}
                   {link.dropdown && <ChevronDown size={14} />}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>
 
           {/* Icons */}
-          <div className="hidden md:flex items-center gap-5 ml-auto">
+          <div className="hidden md:flex items-center gap-[10px] md:absolute md:right-[61px]">
             <button aria-label="Tìm kiếm" className="hover:opacity-80 transition-opacity">
               <Search size={20} />
             </button>
@@ -95,13 +96,13 @@ export default function Navbar() {
             <ul className="flex flex-col gap-6 mt-8">
               {navLinks.map((link) => (
                 <li key={link.href}>
-                  <a
+                  <Link
                     href={link.href}
                     onClick={() => setMenuOpen(false)}
                     className="font-[family-name:var(--font-heading)] text-3xl font-bold"
                   >
                     {link.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import type { Metadata } from "next";
 import Image from "next/image";
 import { mascotPage } from "@/data/content";
@@ -20,7 +21,7 @@ const PRODUCT_GRID_IDS = [
 ];
 
 export const metadata: Metadata = {
-  title: "Mascot Dần — Tíc Cơ",
+  title: "Mascot Đần — Tíc Cơ",
   description: mascotPage.tagline,
 };
 
@@ -40,7 +41,7 @@ export default async function MascotDanPage() {
         <div className="relative w-fit mx-auto">
           <FloatingMascot
             src="/images/dan-laptop.png"
-            alt="Mascot Dần"
+            alt="Mascot Đần"
             width={240}
             height={228}
             className="mx-auto"
@@ -71,15 +72,15 @@ export default async function MascotDanPage() {
             <p className="w-28 text-center whitespace-pre-line text-[var(--color-purple)] font-semibold">
               {mascotPage.traits.captions[0]}
             </p>
-            <Image src="/images/mascot-dan/traits/char-1-dance.png" alt="Mascot Dần" width={140} height={190} />
+            <Image src="/images/mascot-dan/traits/char-1-dance.png" alt="Mascot Đần" width={140} height={190} />
             <p className="w-28 text-center whitespace-pre-line text-[var(--color-purple)] font-semibold">
               {mascotPage.traits.captions[1]}
             </p>
-            <Image src="/images/mascot-dan/traits/char-2-dance.png" alt="Mascot Dần" width={193} height={179} />
+            <Image src="/images/mascot-dan/traits/char-2-dance.png" alt="Mascot Đần" width={193} height={179} />
             <p className="w-28 text-center whitespace-pre-line text-[var(--color-purple)] font-semibold">
               {mascotPage.traits.captions[2]}
             </p>
-            <Image src="/images/mascot-dan/traits/char-3-laptop.png" alt="Mascot Dần" width={173} height={166} />
+            <Image src="/images/mascot-dan/traits/char-3-laptop.png" alt="Mascot Đần" width={173} height={166} />
             <p className="w-28 text-center whitespace-pre-line text-[var(--color-purple)] font-semibold">
               {mascotPage.traits.captions[3]}
             </p>
@@ -109,7 +110,7 @@ export default async function MascotDanPage() {
             <div className="absolute left-0 top-1/2 -translate-y-1/2 w-[60%] md:w-[55%] h-8 md:h-10 bg-[var(--color-purple)] -z-10" />
             <div className="w-full max-w-5xl mx-auto px-6 flex flex-col md:flex-row items-center md:items-start justify-center md:justify-start gap-6 md:gap-16">
               <div className="relative w-[150px] md:w-[200px] aspect-square flex-shrink-0 md:ml-[35%]">
-                <Image src={mascotPage.bio[0].image} alt="Mascot Dần ăn mừng" fill quality={90} sizes="200px" className="object-contain" />
+                <Image src={mascotPage.bio[0].image} alt="Mascot Đần ăn mừng" fill quality={90} sizes="200px" className="object-contain" />
               </div>
               <p className="text-[var(--color-purple)] font-medium text-sm md:text-base leading-snug max-w-xs whitespace-pre-line text-center md:text-left">
                 {mascotPage.bio[0].text}
@@ -125,7 +126,7 @@ export default async function MascotDanPage() {
                 {mascotPage.bio[1].text}
               </p>
               <div className="relative w-[220px] md:w-[316px] aspect-[316/228] flex-shrink-0 md:mr-[15%]">
-                <Image src={mascotPage.bio[1].image} alt="Mascot Dần nâng tạ" fill quality={90} sizes="316px" className="object-contain" />
+                <Image src={mascotPage.bio[1].image} alt="Mascot Đần nâng tạ" fill quality={90} sizes="316px" className="object-contain" />
               </div>
             </div>
           </div>
@@ -138,7 +139,7 @@ export default async function MascotDanPage() {
                 {mascotPage.bio[2].text}
               </p>
               <div className="relative w-[180px] md:w-[223px] aspect-square flex-shrink-0 md:mr-[30%]">
-                <Image src={mascotPage.bio[2].image} alt="Mascot Dần cầm điện thoại" fill quality={90} sizes="223px" className="object-contain" />
+                <Image src={mascotPage.bio[2].image} alt="Mascot Đần cầm điện thoại" fill quality={90} sizes="223px" className="object-contain" />
               </div>
             </div>
           </div>
@@ -155,19 +156,23 @@ export default async function MascotDanPage() {
       </section>
 
       <section className="bg-[#f2f1f1] px-6 py-16">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 mb-10">
+        <div>
+          <div className="max-w-[1086px] mx-auto grid grid-cols-2 lg:grid-cols-4 gap-x-6 lg:gap-x-[82px] gap-y-[22px] mb-10">
             {productGrid.map((product, i) => (
-              <ProductCard key={product.id} {...product} index={i} />
+              <ProductCard key={product.id} {...product} index={i} compact />
             ))}
           </div>
           <div className="text-center">
-            <a
+            <Link
               href="/san-pham"
-              className="inline-block bg-[var(--color-orange)] text-white font-semibold uppercase tracking-wide px-8 py-4 rounded-full hover:opacity-90 transition-opacity"
+              className="text-[20px] font-semibold uppercase text-[var(--color-purple)] hover:underline"
             >
-              Xem tất cả sản phẩm →
-            </a>
+              Xem thêm sản phẩm Tíc Cơ! &gt;
+            </Link>
+            <br />
+            <Link href="/san-pham" className="text-[20px] font-semibold uppercase text-[var(--color-purple)] hover:underline">
+              Tất cả sản phẩm &gt;
+            </Link>
           </div>
         </div>
       </section>

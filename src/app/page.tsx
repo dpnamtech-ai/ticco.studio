@@ -1,3 +1,4 @@
+import Link from "next/link";
 import HeroSection from "@/components/HeroSection";
 import FeaturedProducts from "@/components/FeaturedProducts";
 import BrandSection from "@/components/BrandSection";
@@ -34,23 +35,28 @@ export default async function Home() {
       <BrandSection />
 
       <section id="danh-muc">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/images/brand/headline-danh-muc.png" alt="Danh mục sản phẩm:" className="w-full h-auto" />
+        <div className="relative">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/images/brand/headline-danh-muc.png" alt="Danh mục sản phẩm:" className="w-full h-auto" />
+          <Link href="/san-pham" className="hidden lg:block absolute right-[89px] top-[110px] text-[20px] font-semibold uppercase text-[var(--color-purple)] hover:underline">
+            Tất cả sản phẩm &gt;
+          </Link>
+        </div>
 
-        <div className="max-w-7xl mx-auto px-6 py-16">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 mb-10">
+        <div className="px-6 pt-10 lg:pt-[109px] pb-12 lg:pb-[48px] bg-[#f2f1f1]">
+          <div className="max-w-[1086px] mx-auto grid grid-cols-2 lg:grid-cols-4 gap-x-6 lg:gap-x-[82px] gap-y-[22px]">
             {categoryPreview.map((product, i) => (
-              <ProductCard key={product.id} {...product} index={i} />
+              <ProductCard key={product.id} {...product} index={i} compact />
             ))}
           </div>
 
-          <div className="text-center">
-            <a
+          <div className="text-center mt-8 lg:mt-0">
+            <Link
               href="/san-pham"
-              className="inline-block bg-[var(--color-orange)] text-white font-semibold uppercase tracking-wide px-8 py-4 rounded-full hover:opacity-90 transition-opacity"
+              className="text-[30px] font-medium uppercase text-[var(--color-purple)] hover:underline"
             >
-              Xem tất cả sản phẩm →
-            </a>
+              Tất cả sản phẩm
+            </Link>
           </div>
         </div>
       </section>

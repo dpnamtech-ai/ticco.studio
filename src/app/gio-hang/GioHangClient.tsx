@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useCart } from "@/context/CartContext";
 
 export default function GioHangClient() {
@@ -11,9 +12,9 @@ export default function GioHangClient() {
         <h1 className="font-[family-name:var(--font-heading)] text-3xl font-bold text-[var(--color-purple)] mb-4">
           Giỏ hàng trống
         </h1>
-        <a href="/san-pham" className="text-[var(--color-orange)] font-semibold hover:underline">
+        <Link href="/san-pham" className="text-[var(--color-orange)] font-semibold hover:underline">
           Xem sản phẩm →
-        </a>
+        </Link>
       </section>
     );
   }
@@ -70,12 +71,12 @@ export default function GioHangClient() {
         </p>
       </div>
 
-      <a
+      <Link
         href="/checkout"
         className="block text-center w-full bg-[var(--color-purple)] text-white font-semibold py-4 rounded-lg uppercase text-sm tracking-wide mt-6 hover:bg-[var(--color-ink)] transition-colors"
       >
         Thanh toán
-      </a>
+      </Link>
     </section>
   );
 }

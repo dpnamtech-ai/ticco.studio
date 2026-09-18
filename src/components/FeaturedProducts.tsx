@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import type { Product } from "@/lib/products";
 import ProductCard from "./ProductCard";
 
@@ -13,22 +14,21 @@ export default function FeaturedProducts({ products }: { products: Product[] }) 
 
   return (
     <section id="products">
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src="/images/brand/headline-featured.png" alt="Chú ý! Sản phẩm đáng chú ý!" className="w-full h-auto" />
+      <div className="relative">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/images/brand/headline-featured.png" alt="Chú ý! Sản phẩm đáng chú ý!" className="w-full h-auto" />
+        <Link
+          href="/san-pham"
+          className="hidden lg:block absolute right-[97px] top-[85px] text-[20px] font-semibold uppercase text-[var(--color-purple)] hover:underline"
+        >
+          Tất cả sản phẩm &gt;
+        </Link>
+      </div>
 
-      <div className="max-w-7xl mx-auto px-6 py-16">
-        <div className="flex justify-end mb-10">
-          <a
-            href="/san-pham"
-            className="text-sm font-semibold uppercase tracking-wide text-[var(--color-purple)] hover:underline"
-          >
-            Tất cả sản phẩm →
-          </a>
-        </div>
-
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+      <div className="px-6 pt-10 lg:pt-[65px] pb-12 lg:pb-[46px]">
+        <div className="max-w-[1086px] mx-auto grid grid-cols-2 lg:grid-cols-4 gap-x-6 lg:gap-x-[82px] gap-y-[22px]">
           {featured.map((product, i) => (
-            <ProductCard key={product.id} {...product} index={i} nameClassName="uppercase" />
+            <ProductCard key={product.id} {...product} index={i} nameClassName="uppercase" compact />
           ))}
         </div>
       </div>

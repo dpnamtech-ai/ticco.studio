@@ -12,9 +12,11 @@ interface ProductCardProps {
   index?: number;
   soldOut?: boolean;
   nameClassName?: string;
+  /** Figma home/mascot card: 210x277 image, 15px name, 12px price. */
+  compact?: boolean;
 }
 
-export default function ProductCard({ id, name, priceFrom, image, index = 0, soldOut = false, nameClassName = "" }: ProductCardProps) {
+export default function ProductCard({ id, name, priceFrom, image, index = 0, soldOut = false, nameClassName = "", compact = false }: ProductCardProps) {
   const [loaded, setLoaded] = useState(false);
 
   return (
@@ -26,7 +28,7 @@ export default function ProductCard({ id, name, priceFrom, image, index = 0, sol
       transition={{ delay: index * 0.06, duration: 0.5 }}
       className="group block"
     >
-      <div className="relative aspect-[4/5] bg-[#D9D9D9] mb-4 overflow-hidden border-2 border-transparent group-hover:border-[var(--color-ink)] transition-colors duration-300">
+      <div className={`relative ${compact ? "aspect-[210/277] mb-[10px]" : "aspect-[4/5] mb-4"} bg-[#D9D9D9] overflow-hidden border-2 border-transparent group-hover:border-[var(--color-ink)] transition-colors duration-300`}>
         {image && !loaded && <div className="shimmer absolute inset-0 overflow-hidden" />}
         {image && (
           <Image
@@ -46,8 +48,8 @@ export default function ProductCard({ id, name, priceFrom, image, index = 0, sol
         )}
       </div>
       <div className="text-center">
-        <h3 className={`font-semibold text-[var(--color-ink)] ${nameClassName}`}>{name}</h3>
-        <p className="text-sm text-[var(--color-ink)]/50 mt-1">
+        <h3 className={`font-semibold text-[var(--color-ink)] ${compact ? "text-[15px] leading-[22px] min-h-[45px]" : ""} ${nameClassName}`}>{name}</h3>
+        <p className={`text-[var(--color-ink)]/50 ${compact ? "text-xs mt-[5px]" : "text-sm mt-1"}`}>
           {priceFrom > 0 ? `${priceFrom.toLocaleString("vi-VN")} VNĐ` : "Liên hệ"}
         </p>
       </div>

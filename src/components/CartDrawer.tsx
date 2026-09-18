@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { X } from "lucide-react";
 import { useCart } from "@/context/CartContext";
@@ -38,13 +39,13 @@ export default function CartDrawer() {
             {items.length === 0 ? (
               <div className="flex-1 flex flex-col items-center justify-center px-6 text-center">
                 <p className="text-[var(--color-ink)]/60 mb-4">Giỏ hàng đang trống</p>
-                <a
+                <Link
                   href="/san-pham"
                   onClick={closeDrawer}
                   className="text-[var(--color-orange)] font-semibold hover:underline"
                 >
                   Xem sản phẩm →
-                </a>
+                </Link>
               </div>
             ) : (
               <>
@@ -109,13 +110,13 @@ export default function CartDrawer() {
                       {subtotal.toLocaleString("vi-VN")} VNĐ
                     </motion.p>
                   </div>
-                  <a
+                  <Link
                     href="/gio-hang"
                     onClick={closeDrawer}
                     className="block text-center w-full bg-[var(--color-purple)] text-white font-semibold py-3.5 rounded-lg uppercase text-sm tracking-wide hover:bg-[var(--color-ink)] transition-colors"
                   >
                     Xem giỏ hàng đầy đủ
-                  </a>
+                  </Link>
                 </div>
               </>
             )}

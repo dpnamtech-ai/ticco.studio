@@ -16,7 +16,7 @@ export const navLinks = [
   { label: "Về Tíc Cơ", href: "/ve-tic-co" },
   { label: "Sản phẩm", href: "/san-pham", dropdown: true },
   { label: "Khám phá", href: "/kham-pha", dropdown: true },
-  { label: "Mascot Dần", href: "/mascot-dan" },
+  { label: "Mascot Đần", href: "/mascot-dan" },
 ];
 
 export const productCategories = [
@@ -498,7 +498,7 @@ export const giftGuides = [
     occasion: "Sinh nhật",
     emoji: "🎂",
     tagline: "Không cần đắt, chỉ cần đúng ý.",
-    picks: ["BST Sổ Căn Bản", "Móc Khoá Dần", "Combo tự chọn"],
+    picks: ["BST Sổ Căn Bản", "Móc Khoá Đần", "Combo tự chọn"],
     color: "#F9D9BC",
     seoTag: "quà tặng sinh nhật",
   },
@@ -506,7 +506,7 @@ export const giftGuides = [
     occasion: "Valentine",
     emoji: "🌸",
     tagline: "Nhỏ thôi, nhưng ngọt lắm.",
-    picks: ["Postcard Dần", "Combo sổ tay + móc khoá"],
+    picks: ["Postcard Đần", "Combo sổ tay + móc khoá"],
     color: "#E5FF00",
     seoTag: "quà valentine ý nghĩa",
   },
@@ -594,7 +594,7 @@ export const aboutPage = {
   intro: [
     "Bắt đầu từ việc quan sát đời sống theo những góc nhìn mới, Tíc Cơ ra đời với ý tưởng về một thương hiệu Việt với các sản phẩm tiêu dùng sáng tạo do người trẻ Việt thiết kế.",
     "Lấy cảm hứng từ chất liệu đời thường, chú tâm vào tinh thần và lối sống người Việt: câu chữ mẹ đẻ, tinh thần hào sảng, thái độ xởi lởi, lao động hăng say,..",
-    "Những điều bình thường và chân thật được ghi lại với một thái độ khác — vui, nghệ, gần gũi.",
+    "Những điều bình thường và chân thật được ghi lại với một thái độ khác - vui, nghệ, gần gũi.",
   ],
   mission: [
     "Châm ngôn là làm mọi thứ với niềm vui giản đơn và sự tò mò với đời.",
@@ -632,11 +632,11 @@ export const mascotPage = {
     },
     {
       image: "/images/dan-lift.png",
-      text: "Hướng tới cuộc sống tự do, vô tri nhưng không vô nghĩa, yêu lao động, vui thì làm mà không vui thì vui",
+      text: "Hướng tới cuộc sống tự do,\nyêu lao động, vui thì làm\nmà không vui thì vui",
     },
     {
       image: "/images/dan-phone.png",
-      text: "Nhảy híp hóp, cười khà khà, thích làm thơ con cóc và kể chuyện này chuyện kia\nHành vi phương tiện: Online 24/7, gọi là có, đến là đón",
+      text: "Nhảy híp hóp, cười khà khà, làm thơ con cóc và kể chuyện này kia\n\nHành vi phương tiện:\nOnline 24/7, gọi là có, đến là đón",
     },
   ],
   closingHeading: "Mấy thứ ngố ngố làm bạn sống vui vui!",
@@ -646,7 +646,7 @@ export const mascotPage = {
 export const ugcPhotos = [
   { id: 1, caption: "@user1 • sổ căn bản trên bàn làm việc 📓", color: "#E3D3F5" },
   { id: 2, caption: "@user2 • mang tote đi cafe ☕", color: "#F9D9BC" },
-  { id: 3, caption: "@user3 • móc khoá Dần mới 🔑", color: "#E5FF00" },
+  { id: 3, caption: "@user3 • móc khoá Đần mới 🔑", color: "#E5FF00" },
   { id: 4, caption: "@user4 • postcard dán tường phòng trọ 🖼️", color: "#F9D9BC" },
   { id: 5, caption: "@user5 • combo quà sinh nhật 🎂", color: "#E3D3F5" },
   { id: 6, caption: "@user6 • lịch bàn Tíc Cơ 🗓️", color: "#E5FF00" },
