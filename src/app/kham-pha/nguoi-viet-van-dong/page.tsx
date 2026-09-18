@@ -12,11 +12,9 @@ export default function NguoiVietVanDongPage() {
     <>
       <section className="bg-[var(--color-orange)] text-white px-6 pt-16 pb-10 md:pt-24">
         <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-4 items-end">
-          <h1 className="font-[family-name:var(--font-heading)] text-5xl md:text-6xl font-extrabold uppercase leading-none">
-            Người Việt
-            <br />
-            Vận Động
-          </h1>
+          <div className="relative w-full max-w-md aspect-[2325/1098]">
+            <Image src="/images/collab/nguoi-viet-van-dong/heading-hero.png" alt="Người Việt Vận Động" fill quality={90} sizes="(max-width: 768px) 100vw, 500px" className="object-contain object-left" priority />
+          </div>
           <p className="md:text-right text-lg">
             Dự án chung vui
             <br />
@@ -39,9 +37,9 @@ export default function NguoiVietVanDongPage() {
 
       <section className="bg-[var(--color-orange)] text-white px-6 py-16">
         <div className="max-w-3xl mx-auto text-center space-y-6">
-          <h2 className="font-[family-name:var(--font-heading)] text-2xl md:text-3xl font-bold uppercase">
-            Vận động không ngừng là vươn lên không dừng!
-          </h2>
+          <div className="relative w-full max-w-md mx-auto aspect-[737/153]">
+            <Image src="/images/collab/nguoi-viet-van-dong/heading-mo-ta.png" alt="Vận động không ngừng là vươn lên không dừng!" fill quality={90} sizes="(max-width: 768px) 100vw, 400px" className="object-contain" />
+          </div>
           <p className="leading-relaxed">
             Sự sống là nhờ vận động, phát triển là nhờ vận động, người Việt vận động để đất nước không ngừng vươn
             lên! Bởi vận động là chuyện cả đời, người Việt vận động từ lịch sử tới hiện tại, từ thời cha chú đến
@@ -81,12 +79,9 @@ export default function NguoiVietVanDongPage() {
       <section className="bg-[#2c5242] text-white px-6 py-16">
         <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-10 items-center">
           <div>
-            <h2 className="font-[family-name:var(--font-heading)] text-2xl md:text-3xl font-bold uppercase mb-4">
-              Merchandise đặc biệt
-              <br />
-              Lễ Quốc khánh 2025
-              <br />- Quạt Người Việt Vận Động
-            </h2>
+            <div className="relative w-full max-w-sm aspect-[441/116] mb-4">
+              <Image src="/images/collab/nguoi-viet-van-dong/heading-merchandise.png" alt="Merchandise đặc biệt Lễ Quốc khánh 2025 - Quạt Người Việt Vận Động" fill quality={90} sizes="(max-width: 768px) 100vw, 400px" className="object-contain object-left" />
+            </div>
             <p className="leading-relaxed opacity-90">
               Hai mặt quạt một tinh thần bởi vì quạt không dừng là vận động không ngừng, người Việt vận động không
               ngừng là đất nước vươn lên không dừng!
@@ -118,11 +113,9 @@ export default function NguoiVietVanDongPage() {
             />
           </div>
           <div className="order-1 md:order-2">
-            <h2 className="font-[family-name:var(--font-heading)] text-2xl md:text-3xl font-bold uppercase mb-4">
-              Gian hàng trải nghiệm
-              <br />
-              Tíc Cơ tại Lễ hội Độc lập
-            </h2>
+            <div className="relative w-full max-w-sm aspect-[384/78] mb-4">
+              <Image src="/images/collab/nguoi-viet-van-dong/heading-event.png" alt="Gian hàng trải nghiệm Tíc Cơ tại Lễ hội Độc lập" fill quality={90} sizes="(max-width: 768px) 100vw, 400px" className="object-contain object-left" />
+            </div>
             <p className="leading-relaxed opacity-90">
               &ldquo;Lễ Hội Độc Lập - 80 Năm Tự Hào Việt Nam&rdquo; là sự kiện văn hóa, nghệ thuật do UBND TP Hà Nội,
               Sở Văn hóa - Thể thao phối hợp cùng Trung ương Hội Sinh viên Việt Nam tổ chức, nhân dịp kỷ niệm 80 năm
