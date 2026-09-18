@@ -24,7 +24,7 @@ const footerLinks = [
 
 export default function Footer() {
   return (
-    <footer id="contact" className="bg-[var(--color-ink)] text-[var(--color-cream)] pt-20 pb-10 px-6">
+    <footer id="contact" className="bg-[var(--color-orange)] text-[var(--color-cream)] pt-20 pb-10 px-6">
       <div className="max-w-7xl mx-auto">
         {/* Top CTA */}
         <motion.div

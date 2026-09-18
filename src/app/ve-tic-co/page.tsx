@@ -15,35 +15,38 @@ export default function VeTicCoPage() {
           {/* Cột 1 */}
           <div className="relative z-10 pt-10">
             <div
-              className="absolute -z-10 bg-gradient-to-b from-[#6625b1] to-[#1f0938] w-[140%] h-[140%] -top-10 -left-10"
+              className="absolute -z-10 bg-gradient-to-b from-[#6625b1] to-[#1f0938] w-[140%] h-[140%] -bottom-10 -left-10"
               style={{ borderRadius: "50% 50% 0 0 / 13% 13% 0 0" }}
             />
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/images/ve-tic-co/intro-0.png" alt={aboutPage.intro[0]} className="relative z-10 w-full h-auto" />
           </div>
 
-          {/* Cột 2: Phải có mt-20 để thụt xuống */}
-          <div className="relative z-10 mt-20 space-y-6">
+          {/* Cột 2: Phải có mt-20 để thụt xuống. Không dùng space-y-* ở đây — nó áp margin-bottom
+              lên cả blob absolute (dù blob không tham gia flow), đẩy lệch đáy blob khỏi cột 1/3. */}
+          <div className="relative z-10 mt-20">
             <div
-              className="absolute -z-10 bg-gradient-to-b from-[#6625b1] to-[#1f0938] w-[120%] h-[140%] -top-10 -left-10"
+              className="absolute -z-10 bg-gradient-to-b from-[#6625b1] to-[#1f0938] w-[120%] h-[140%] -bottom-10 -left-10"
               style={{ borderRadius: "50% 50% 0 0 / 21% 21% 0 0" }}
             />
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/images/ve-tic-co/intro-1.png" alt={aboutPage.intro[1]} className="relative z-10 w-full h-auto" />
           </div>
 
-          {/* Cột 3 */}
-          <div className="flex flex-col space-y-10">
+          {/* Cột 3 — blob neo trực tiếp vào grid-item (không lồng trong div con) để đáy thẳng
+              hàng với cột 1/2 (cả 3 blob trong Figma đều kết thúc chung 1 đường đáy). Giãn cách
+              giữa heading và text dùng mt-10 trực tiếp thay vì space-y-10 (lý do: xem cột 2). */}
+          <div className="relative z-10 flex flex-col">
+            <div
+              className="absolute -z-10 bg-gradient-to-b from-[#6625b1] to-[#1f0938] w-[140%] h-[140%] -bottom-10 -left-4"
+              style={{ borderRadius: "50% 50% 0 0 / 33% 33% 0 0" }}
+            />
             <div className="text-right border-b-2 border-white pb-4 self-end">
               <h1 className="font-[family-name:var(--font-heading)] text-6xl font-extrabold leading-none uppercase">
                 Về<br />Tíc<br />Cơ
               </h1>
             </div>
-            <div className="relative z-10 space-y-6">
-              <div
-                className="absolute -z-10 bg-gradient-to-b from-[#6625b1] to-[#1f0938] w-[140%] h-[140%] -top-10 -left-4"
-                style={{ borderRadius: "50% 50% 0 0 / 33% 33% 0 0" }}
-              />
+            <div className="relative z-10 mt-10">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/images/ve-tic-co/mission.png"
