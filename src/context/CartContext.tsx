@@ -15,6 +15,7 @@ interface CartContextValue {
   addItem: (item: Omit<CartItem, "qty">, qty?: number) => void;
   updateQty: (id: string, variant: string, qty: number) => void;
   removeItem: (id: string, variant: string) => void;
+  clearCart: () => void;
   totalItems: number;
   subtotal: number;
   isDrawerOpen: boolean;
@@ -73,6 +74,8 @@ export function CartProvider({ children }: { children: ReactNode }) {
     setItems((prev) => prev.filter((i) => !(i.id === id && i.variant === variant)));
   };
 
+  const clearCart = () => setItems([]);
+
   const totalItems = items.reduce((sum, i) => sum + i.qty, 0);
   const subtotal = items.reduce((sum, i) => sum + i.qty * i.price, 0);
 
@@ -83,6 +86,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
         addItem,
         updateQty,
         removeItem,
+        clearCart,
         totalItems,
         subtotal,
         isDrawerOpen,

@@ -39,3 +39,21 @@ create trigger products_set_updated_at
   before update on products
   for each row
   execute function set_updated_at();
+
+
+-- ---------------------------------------------------------------------------
+-- Orders placed from /checkout (POST /api/orders). Written with the service role key only:
+-- RLS is on with NO public policy, so the anon key can neither read nor write orders.
+create table if not exists orders (
+  code text primary key,                 -- also the bank-transfer note, e.g. TC0A1B2XYZ
+  created_at timestamptz not null default now(),
+  customer jsonb not null,               -- name, phone, email, province, district, ward, address, note
+  items jsonb not null,                  -- [{ id, name, variant, qty, price }] priced server-side
+  subtotal integer not null,
+  shipping integer not null default 0,
+  total integer not null,
+  status text not null default 'pending_payment',  -- pending_payment | paid | shipped | done | cancelled
+  ghn_order_code text                    -- filled once the Giao Hang Nhanh API is wired in
+);
+
+alter table orders enable row level security;

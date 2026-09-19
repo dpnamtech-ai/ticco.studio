@@ -52,3 +52,8 @@ dev.log
 # don't want to bloat git history; review + copy the ones actually needed into
 # public/images/ manually, same as figma-export/ above)
 /design/figma-assets/
+
+# raw per-layer Figma exports (318MB, re-creatable from Figma) and local dev logs
+design/layers/
+dev.log
+dev.err
