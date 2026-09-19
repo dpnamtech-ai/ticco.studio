@@ -3,7 +3,6 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { mascotPage } from "@/data/content";
 import ProductCard from "@/components/ProductCard";
-import FloatingMascot from "@/components/FloatingMascot";
 import { getProducts } from "@/lib/products";
 
 // Same 8 items (first 2 rows) as the homepage's "danh-muc-san-pham" preview grid —
@@ -33,69 +32,42 @@ export default async function MascotDanPage() {
 
   return (
     <>
-      <section className="max-w-4xl mx-auto px-6 pt-16 pb-10 text-center">
-        <h1 className="font-[family-name:var(--font-heading)] text-4xl md:text-6xl font-bold text-[var(--color-purple)] mb-10">
-          {mascotPage.headline}
-        </h1>
-
-        <div className="relative w-fit mx-auto">
-          <FloatingMascot
-            src="/images/dan-laptop.png"
-            alt="Mascot Đần"
-            width={240}
-            height={228}
-            className="mx-auto"
-            priority
-          />
-          <p className="absolute -left-32 top-4 w-28 text-sm text-[var(--color-ink)]/70 text-right hidden md:block">
-            {mascotPage.quote[0]}
-          </p>
-          <p className="absolute -right-36 top-10 w-32 text-sm text-[var(--color-ink)]/70 hidden md:block">
-            {mascotPage.quote[1]}
-          </p>
-          <p className="absolute -left-32 bottom-0 w-28 text-sm text-[var(--color-ink)]/70 text-right hidden md:block">
-            {mascotPage.quote[2]}
-          </p>
-        </div>
-        <p className="md:hidden text-sm text-[var(--color-ink)]/70 mt-4">
-          {mascotPage.quote.join(" ")}
-        </p>
-
-        <p className="font-[family-name:var(--font-heading)] text-xl md:text-2xl font-bold text-[var(--color-purple)] mt-10 uppercase">
-          {mascotPage.tagline}
-        </p>
+      <section className="bg-[#f2f1f1]">
+        <h1 className="sr-only">{mascotPage.headline}</h1>
+        <Image
+          src="/images/mascot-dan/hero-art.png"
+          alt={`${mascotPage.headline} ${mascotPage.quote.join(" ")}`}
+          width={2160}
+          height={920}
+          priority
+          quality={90}
+          sizes="100vw"
+          className="w-full h-auto"
+        />
       </section>
 
-      <section className="bg-[#E5E5E5] px-6 py-16 overflow-hidden">
-        <div className="max-w-5xl mx-auto">
-          <div className="flex flex-wrap items-end justify-center gap-x-4 gap-y-6 mb-10">
-            <p className="w-28 text-center whitespace-pre-line text-[var(--color-purple)] font-semibold">
-              {mascotPage.traits.captions[0]}
-            </p>
-            <Image src="/images/mascot-dan/traits/char-1-dance.png" alt="Mascot Đần" width={140} height={190} />
-            <p className="w-28 text-center whitespace-pre-line text-[var(--color-purple)] font-semibold">
-              {mascotPage.traits.captions[1]}
-            </p>
-            <Image src="/images/mascot-dan/traits/char-2-dance.png" alt="Mascot Đần" width={193} height={179} />
-            <p className="w-28 text-center whitespace-pre-line text-[var(--color-purple)] font-semibold">
-              {mascotPage.traits.captions[2]}
-            </p>
-            <Image src="/images/mascot-dan/traits/char-3-laptop.png" alt="Mascot Đần" width={173} height={166} />
-            <p className="w-28 text-center whitespace-pre-line text-[var(--color-purple)] font-semibold">
-              {mascotPage.traits.captions[3]}
-            </p>
-          </div>
+      <section>
+        <Image
+          src="/images/mascot-dan/tagline-bar.png"
+          alt={mascotPage.tagline}
+          width={2560}
+          height={240}
+          quality={90}
+          sizes="100vw"
+          className="w-full h-auto"
+        />
+      </section>
 
-          <div className="flex justify-center -space-x-3 mb-8">
-            <Image src="/images/mascot-dan/traits/chain-left.png" alt="" width={191} height={112} />
-            <Image src="/images/mascot-dan/traits/chain-mid.png" alt="" width={223} height={102} className="self-end" />
-            <Image src="/images/mascot-dan/traits/chain-right.png" alt="" width={191} height={112} />
-          </div>
-
-          <p className="text-center text-lg md:text-xl font-bold text-[var(--color-purple)]">
-            {mascotPage.traits.tagline}
-          </p>
-        </div>
+      <section>
+        <Image
+          src="/images/mascot-dan/tinh-than.png"
+          alt={`${mascotPage.traits.captions.join(" ").replaceAll("\n", " ")} ${mascotPage.traits.tagline}`}
+          width={2560}
+          height={1328}
+          quality={90}
+          sizes="100vw"
+          className="w-full h-auto"
+        />
       </section>
 
       <section>

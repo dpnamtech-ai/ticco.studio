@@ -25,6 +25,15 @@ export default function HeroSection() {
         />
       </div>
 
+      <Image
+        src="/images/hero-caption.png"
+        alt="Nghề một cách đời thường"
+        width={684}
+        height={546}
+        className="absolute"
+        style={{ left: "88.15%", top: "74.05%", width: "19.4%", transform: "translate(-50%, -50%) rotate(5.22deg)" }}
+      />
+
       <motion.h1
         initial={{ opacity: 0, x: -30 }}
         animate={{ opacity: 1, x: 0 }}
@@ -42,11 +51,11 @@ export default function HeroSection() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
         className="absolute flex items-start gap-1"
-        style={{ left: "4.68%", top: "70.61%", width: "24.55%" }}
+        style={{ left: "4.68%", top: "61.99%", width: "24.55%" }}
       >
         <span
           className="font-light leading-none shrink-0"
-          style={{ fontSize: "clamp(48px, 9vw, 120px)", fontFamily: "'Big Caslon', Georgia, 'Times New Roman', serif" }}
+          style={{ fontSize: "clamp(40px, 7.8vw, 100px)", fontFamily: "'Big Caslon', Georgia, 'Times New Roman', serif" }}
         >
           (
         </span>
@@ -58,7 +67,7 @@ export default function HeroSection() {
         </p>
         <span
           className="font-light leading-none shrink-0"
-          style={{ fontSize: "clamp(48px, 9vw, 120px)", fontFamily: "'Big Caslon', Georgia, 'Times New Roman', serif" }}
+          style={{ fontSize: "clamp(40px, 7.8vw, 100px)", fontFamily: "'Big Caslon', Georgia, 'Times New Roman', serif" }}
         >
           )
         </span>
