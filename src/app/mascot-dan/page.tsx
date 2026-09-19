@@ -32,7 +32,8 @@ export default async function MascotDanPage() {
 
   return (
     <>
-      <section className="bg-[#f2f1f1]">
+      {/* Figma hero (1280x532): art is 1080x460 at (100, 44) inside the frame */}
+      <section className="relative w-full bg-[#f2f1f1] aspect-[1280/532] overflow-hidden">
         <h1 className="sr-only">{mascotPage.headline}</h1>
         <Image
           src="/images/mascot-dan/hero-art.png"
@@ -41,8 +42,9 @@ export default async function MascotDanPage() {
           height={920}
           priority
           quality={90}
-          sizes="100vw"
-          className="w-full h-auto"
+          sizes="85vw"
+          className="absolute h-auto"
+          style={{ left: "7.8125%", top: "8.27%", width: "84.375%" }}
         />
       </section>
 
@@ -75,51 +77,20 @@ export default async function MascotDanPage() {
         <img src="/images/mascot-dan/intro-banner.png" alt={mascotPage.introBanner} className="w-full h-auto" />
       </section>
 
-      <section className="px-6 py-16">
-        <div className="w-full overflow-hidden pb-20 space-y-16 md:space-y-10">
-          {/* Row 1: Mascot Cheer (Bar from Left) */}
-          <div className="relative flex items-center min-h-[220px]">
-            <div className="absolute left-0 top-1/2 -translate-y-1/2 w-[60%] md:w-[55%] h-8 md:h-10 bg-[var(--color-purple)] -z-10" />
-            <div className="w-full max-w-5xl mx-auto px-6 flex flex-col md:flex-row items-center md:items-start justify-center md:justify-start gap-6 md:gap-16">
-              <div className="relative w-[150px] md:w-[200px] aspect-square flex-shrink-0 md:ml-[35%]">
-                <Image src={mascotPage.bio[0].image} alt="Mascot Đần ăn mừng" fill quality={90} sizes="200px" className="object-contain" />
-              </div>
-              <p className="text-[var(--color-purple)] font-medium text-sm md:text-base leading-snug max-w-xs whitespace-pre-line text-center md:text-left">
-                {mascotPage.bio[0].text}
-              </p>
-            </div>
-          </div>
+      {/* Figma "gioi-thieu-Dan" (1280x782): positions in % of the frame; text is the exported art */}
+      <section className="relative w-full bg-[#f2f1f1] aspect-[1280/782] overflow-hidden">
+        <div className="absolute bg-[var(--color-purple)]" style={{ left: 0, top: "13.68%", width: "53.83%", height: "4.86%" }} />
+        <div className="absolute bg-[var(--color-purple)]" style={{ left: "44.53%", right: 0, top: "38.75%", height: "4.86%" }} />
+        <div className="absolute bg-[var(--color-purple)]" style={{ left: "47.03%", right: 0, top: "68.67%", height: "4.86%" }} />
 
-          {/* Row 2: Mascot Lift (Bar from Right) */}
-          <div className="relative flex items-center min-h-[220px]">
-            <div className="absolute right-0 top-1/2 -translate-y-1/2 w-[70%] md:w-[60%] h-8 md:h-10 bg-[var(--color-purple)] -z-10" />
-            <div className="w-full max-w-5xl mx-auto px-6 flex flex-col-reverse md:flex-row items-center md:items-start justify-center md:justify-end gap-6 md:gap-16">
-              <p className="text-[var(--color-purple)] font-medium text-sm md:text-base leading-snug max-w-xs whitespace-pre-line text-center md:text-left">
-                {mascotPage.bio[1].text}
-              </p>
-              <div className="relative w-[220px] md:w-[316px] aspect-[316/228] flex-shrink-0 md:mr-[15%]">
-                <Image src={mascotPage.bio[1].image} alt="Mascot Đần nâng tạ" fill quality={90} sizes="316px" className="object-contain" />
-              </div>
-            </div>
-          </div>
+        <Image src="/images/mascot-dan/bio/dan-1.png" alt="Mascot Đần nhảy" width={682} height={845} quality={90} sizes="15vw" className="absolute h-auto" style={{ left: "51.25%", top: "2.56%", width: "14.06%" }} />
+        <Image src="/images/mascot-dan/bio/dan-2.png" alt="Mascot Đần nâng tạ" width={1391} height={1002} quality={90} sizes="25vw" className="absolute h-auto" style={{ left: "27.27%", top: "23.4%", width: "24.69%" }} />
+        <Image src="/images/mascot-dan/bio/dan-3.png" alt="Mascot Đần cầm laptop" width={730} height={708} quality={90} sizes="18vw" className="absolute h-auto" style={{ left: "32.73%", top: "52.56%", width: "17.42%" }} />
 
-          {/* Row 3: Mascot Phone (Bar from Right) */}
-          <div className="relative flex items-center min-h-[220px]">
-            <div className="absolute right-0 top-1/2 -translate-y-1/2 w-[70%] md:w-[55%] h-8 md:h-10 bg-[var(--color-purple)] -z-10" />
-            <div className="w-full max-w-5xl mx-auto px-6 flex flex-col-reverse md:flex-row items-center md:items-start justify-center md:justify-end gap-6 md:gap-16">
-              <p className="text-[var(--color-purple)] font-medium text-sm md:text-base leading-snug max-w-xs whitespace-pre-line text-center md:text-left">
-                {mascotPage.bio[2].text}
-              </p>
-              <div className="relative w-[180px] md:w-[223px] aspect-square flex-shrink-0 md:mr-[30%]">
-                <Image src={mascotPage.bio[2].image} alt="Mascot Đần cầm điện thoại" fill quality={90} sizes="223px" className="object-contain" />
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <p className="font-[family-name:var(--font-heading)] text-xl md:text-2xl font-bold text-[var(--color-purple)] text-center mt-10 uppercase">
-          {mascotPage.closingHeading}
-        </p>
+        <Image src="/images/mascot-dan/bio/text-1.png" alt={mascotPage.bio[0].text} width={1269} height={403} sizes="25vw" className="absolute h-auto" style={{ left: "65.78%", top: "11.64%", width: "24.77%" }} />
+        <Image src="/images/mascot-dan/bio/text-2.png" alt={mascotPage.bio[1].text} width={1001} height={306} sizes="20vw" className="absolute h-auto" style={{ left: "7.81%", top: "34.14%", width: "19.55%" }} />
+        <Image src="/images/mascot-dan/bio/text-3.png" alt={mascotPage.bio[2].text} width={1233} height={505} sizes="25vw" className="absolute h-auto" style={{ left: "7.81%", top: "57.29%", width: "24.08%" }} />
+        <Image src="/images/mascot-dan/bio/heading.png" alt={mascotPage.closingHeading} width={2215} height={157} sizes="80vw" className="absolute h-auto" style={{ left: "11.09%", top: "89.13%", width: "77.97%" }} />
       </section>
 
       <section>
