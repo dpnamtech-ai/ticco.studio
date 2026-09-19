@@ -2,6 +2,7 @@
 
 import { motion, MotionConfig, useInView, type Transition } from "framer-motion";
 import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
+import { useIsSmall } from "@/lib/useIsSmall";
 
 /*
   Scroll-reveal helper with a few distinct entrances (used on /kham-pha):
@@ -11,8 +12,10 @@ import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from 
   wipe  - left-to-right clip wipe (labels)
   mask  - text rising out from behind a mask line (headings)
   line  - rule drawing itself from the left
-  blur  - fades in out of a soft blur (body copy)
-  curtain - image unveiled bottom-to-top while settling from a slight zoom
+  blur  - soft fade + rise (body copy)
+  curtain - image fades up while settling from a slight zoom
+  Only opacity/transform (plus a small clip for wipe) are animated so it stays smooth on phones; on small
+  screens it plays sooner and ~40% faster.
   Plays once when the element reaches the middle of the screen (at="edge": as soon as it shows at the
   bottom edge, used by the footer). If it stays on screen for ~1.4s without reaching the middle (short pages,
   content right above the footer) it plays anyway, so nothing is left hidden. Plays once; MotionConfig reducedMotion="user" drops the movement for people
@@ -30,8 +33,8 @@ const VARIANTS = {
   wipe: { hidden: { clipPath: "inset(0 100% 0 0)" }, show: { clipPath: "inset(0 0% 0 0)" } },
   mask: { hidden: { y: "105%" }, show: { y: "0%" } },
   line: { hidden: { scaleX: 0 }, show: { scaleX: 1 } },
-  blur: { hidden: { opacity: 0, y: 24, filter: "blur(14px)" }, show: { opacity: 1, y: 0, filter: "blur(0px)" } },
-  curtain: { hidden: { clipPath: "inset(100% 0 0 0)", scale: 1.15 }, show: { clipPath: "inset(0% 0 0 0)", scale: 1 } },
+  blur: { hidden: { opacity: 0, y: 28 }, show: { opacity: 1, y: 0 } },
+  curtain: { hidden: { opacity: 0, y: 48, scale: 1.05 }, show: { opacity: 1, y: 0, scale: 1 } },
 } as const;
 
 export default function Reveal({
@@ -60,14 +63,15 @@ export default function Reveal({
   // element is clipped / collapsed (mask, wipe, line). The inner element carries the motion; its hidden
   // state is set directly (not via a parent variant) so the server already renders it hidden - no flash.
   const ref = useRef<HTMLDivElement>(null);
-  const mid = useInView(ref, { once: true, margin: "0px 0px -50% 0px" });
+  const small = useIsSmall();
+  const mid = useInView(ref, { once: true, margin: small ? "0px 0px -12% 0px" : "0px 0px -50% 0px" });
   const edge = useInView(ref, { once: true, margin: "0px 0px -8% 0px" });
   const [late, setLate] = useState(false);
   useEffect(() => {
     if (!edge || at === "edge") return;
-    const t = setTimeout(() => setLate(true), 1400);
+    const t = setTimeout(() => setLate(true), small ? 400 : 1400);
     return () => clearTimeout(t);
-  }, [edge, at]);
+  }, [edge, at, small]);
   const inView = at === "edge" ? edge : mid || late;
   const v = VARIANTS[variant];
   const outer = variant === "mask" ? `overflow-hidden py-2 -my-2 ${className}` : variant === "line" ? "" : className;
@@ -81,7 +85,7 @@ export default function Reveal({
           className={inner}
           initial={v.hidden}
           animate={inView ? v.show : v.hidden}
-          transition={{ duration, delay, ease }}
+          transition={{ duration: small ? duration * 0.6 : duration, delay: small ? Math.min(delay * 0.4, 0.2) : delay, ease }}
         >
           {children}
         </motion.div>

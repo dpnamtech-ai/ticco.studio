@@ -14,7 +14,8 @@ import Reveal from "@/components/Reveal";
 */
 export default function BrandSection() {
   return (
-    <section className="relative w-full bg-[var(--color-orange)] text-white aspect-[1283/820] overflow-hidden">
+    <>
+    <section className="max-md:hidden relative w-full bg-[var(--color-orange)] text-white aspect-[1283/820] overflow-hidden">
       <Reveal variant="mask" duration={1.2} className="absolute" style={{ left: "17.69%", top: "11.22%", width: "64.77%" }}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src="/images/brand/mission-text.png" alt={brand.mission} className="w-full h-auto" />
@@ -82,5 +83,53 @@ export default function BrandSection() {
         </Reveal>
       </a>
     </section>
+
+    {/* Phones: the same content stacked, at readable sizes (the absolute composition above is desktop only) */}
+    <section className="md:hidden bg-[var(--color-orange)] text-white px-5 py-12 flex flex-col items-center gap-9 overflow-hidden">
+      <Reveal variant="blur" className="w-full">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/images/brand/mission-text.png" alt={brand.mission} className="w-full h-auto" />
+      </Reveal>
+      <a href="/ve-tic-co" className="w-[62%]">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/images/brand/link-hieu-hon.png" alt="Hiểu hơn về Tíc Cơ!" className="w-full h-auto" />
+      </a>
+
+      <div className="w-full flex flex-col items-end gap-2 -mr-5">
+        {[
+          ["badge-phong-khoang", "Phóng khoáng", "w-[72%]"],
+          ["badge-cham-chu-voi-doi", "Chăm chú với đời", "w-[84%]"],
+          ["badge-niem-vui-gian-don", "Niềm vui giản đơn", "w-[98%]"],
+        ].map(([n, alt, w], i) => (
+          <Reveal key={n} variant="right" delay={i * 0.1} className={w}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={`/images/brand/${n}.png`} alt={alt} className="w-full h-auto" />
+          </Reveal>
+        ))}
+      </div>
+
+      <div className="w-full flex items-center justify-center gap-4">
+        <div className="w-[34%] flex flex-col gap-3">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/images/brand/caption-dan.png" alt="sống đời sống cùng Đần" className="w-full h-auto" />
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/images/brand/caption-tic-co.png" alt="chủ nhà tiếp quản Tíc Cơ" className="w-full h-auto" />
+        </div>
+        <div className="relative w-[52%] aspect-[247/275] rounded-[50%] bg-[var(--color-yellow)]">
+          <motion.img
+            src="/images/meet-dan-photo.png"
+            alt="Mascot Đần"
+            className="absolute inset-[4%] w-[92%] h-[92%] object-contain"
+            animate={{ rotate: 360 }}
+            transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+          />
+        </div>
+      </div>
+      <a href="/mascot-dan" className="w-[58%]">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/images/brand/link-lam-quen.png" alt="Làm quen với Đần!" className="w-full h-auto" />
+      </a>
+    </section>
+    </>
   );
 }

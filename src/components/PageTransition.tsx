@@ -3,6 +3,7 @@
 import { motion, MotionConfig } from "framer-motion";
 import { usePathname } from "next/navigation";
 import { ReactNode, useState } from "react";
+import { useIsSmall } from "@/lib/useIsSmall";
 
 const EASE = [0.76, 0, 0.24, 1] as const;
 
@@ -14,11 +15,12 @@ const EASE = [0.76, 0, 0.24, 1] as const;
 export default function PageTransition({ children }: { children: ReactNode }) {
   const pathname = usePathname();
   const [firstPath] = useState(pathname);
+  const small = useIsSmall();
   const changed = pathname !== firstPath;
 
   return (
     <MotionConfig reducedMotion="user">
-      {changed && (
+      {changed && !small && (
         <>
           <motion.div
             key={`o-${pathname}`}
@@ -40,9 +42,9 @@ export default function PageTransition({ children }: { children: ReactNode }) {
       )}
       <motion.div
         key={pathname}
-        initial={changed ? { opacity: 0, y: 24 } : false}
+        initial={changed ? { opacity: 0, y: small ? 8 : 24 } : false}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: changed ? 0.35 : 0 }}
+        transition={{ duration: small ? 0.3 : 0.7, ease: [0.16, 1, 0.3, 1], delay: changed && !small ? 0.35 : 0 }}
       >
         {children}
       </motion.div>

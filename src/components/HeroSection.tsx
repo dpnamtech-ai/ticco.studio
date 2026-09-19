@@ -12,7 +12,7 @@ import Image from "next/image";
 */
 export default function HeroSection() {
   return (
-    <section className="relative w-full bg-[var(--color-orange)] text-white aspect-[1283/592] overflow-hidden">
+    <section className="relative w-full bg-[var(--color-orange)] text-white aspect-[1283/592] overflow-hidden [container-type:inline-size]">
       <div className="absolute inset-y-0 right-0" style={{ width: "56.27%" }}>
         <Image
           src="/images/hero-basket.png"
@@ -38,8 +38,8 @@ export default function HeroSection() {
         initial={{ opacity: 0, x: -30 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-        className="absolute font-[family-name:var(--font-heading)] font-bold uppercase leading-[1.05] tracking-[-0.04em]"
-        style={{ left: "4.68%", top: "22.13%", width: "33.12%", fontSize: "clamp(28px, 6vw, 85px)" }}
+        className="absolute font-[family-name:var(--font-heading)] font-bold uppercase leading-[1.05] tracking-[-0.04em] whitespace-nowrap"
+        style={{ left: "4.68%", top: "22.13%", width: "33.12%", fontSize: "max(26px, 6.625cqw)" }}
       >
         Đời dễ ợt
         <br />

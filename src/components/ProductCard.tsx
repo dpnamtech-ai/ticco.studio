@@ -53,9 +53,9 @@ export default function ProductCard({ id, name, priceFrom, image, index = 0, sol
         {image && (
           <motion.div
             className="absolute inset-0"
-            initial={{ scale: 1.18 }}
-            animate={{ scale: seen ? 1 : 1.18 }}
-            transition={{ duration: 1.3, ease: [0.16, 1, 0.3, 1] }}
+            initial={{ scale: 1.08 }}
+            animate={{ scale: seen ? 1 : 1.08 }}
+            transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
           >
             <Image
               src={image}

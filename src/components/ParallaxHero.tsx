@@ -1,13 +1,15 @@
 "use client";
 
 import { useRef } from "react";
+import { useIsSmall } from "@/lib/useIsSmall";
 import { motion, MotionConfig, useScroll, useTransform } from "framer-motion";
 
 /* Hero photo: slow zoom-out on load + gentle parallax while scrolling past. */
 export default function ParallaxHero({ src, alt, className = "" }: { src: string; alt: string; className?: string }) {
   const ref = useRef<HTMLDivElement>(null);
+  const small = useIsSmall();
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
-  const y = useTransform(scrollYProgress, [0, 1], ["0%", "14%"]);
+  const y = useTransform(scrollYProgress, [0, 1], ["0%", small ? "0%" : "14%"]);
 
   return (
     <MotionConfig reducedMotion="user">
