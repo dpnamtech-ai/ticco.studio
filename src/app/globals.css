@@ -22,9 +22,10 @@ body {
   overflow-x: hidden;
 }
 
+/* Text selection: brand purple with white text */
 ::selection {
-  background: #E5FF00;
-  color: #2A2828;
+  background: var(--color-purple);
+  color: #fff;
 }
 
 /* Grain texture overlay */
@@ -38,6 +39,16 @@ body {
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   background-repeat: repeat;
   background-size: 128px 128px;
+}
+
+/* Promo ticker: the track holds two identical groups and travels one group width, left -> right. */
+@keyframes marquee-ltr {
+  from { transform: translateX(-50%); }
+  to { transform: translateX(0); }
+}
+.marquee-ltr { animation: marquee-ltr 45s linear infinite; }
+@media (prefers-reduced-motion: reduce) {
+  .marquee-ltr { animation: none; transform: none; }
 }
 
 /* Underline animation */
@@ -54,7 +65,8 @@ body {
   background: currentColor;
   transition: width 0.3s ease;
 }
-.hover-underline:hover::after {
+.hover-underline:hover::after,
+.hover-underline.is-active::after {
   width: 100%;
 }
 
@@ -70,4 +82,19 @@ body {
   transform: translateX(-100%);
   background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
   animation: shimmer 1.4s infinite;
+}
+
+/* Marching Đần (mascot-dan): each group flips between the two drawn walking poses (A = leg kicked out,
+   B = knee raised) on the beat, side groups opposite to the middle one, with a small bounce per step. */
+@keyframes step-a { 0% { opacity: 1; } 50% { opacity: 0; } 100% { opacity: 1; } }
+@keyframes step-b { 0% { opacity: 0; } 50% { opacity: 1; } 100% { opacity: 0; } }
+@keyframes bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-0.35vw); } }
+.step-a, .step-b { animation-duration: 0.8s; animation-iteration-count: infinite; animation-timing-function: steps(1, end); }
+.step-a { animation-name: step-a; }
+.step-b { opacity: 0; animation-name: step-b; }
+.step-alt { animation-delay: -0.4s; }
+.bob { animation: bob 0.4s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) {
+  .step-a, .step-b, .bob { animation: none; }
+  .step-b { opacity: 0; }
 }

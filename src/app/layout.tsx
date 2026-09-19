@@ -7,6 +7,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CartDrawer from "@/components/CartDrawer";
 import PageTransition from "@/components/PageTransition";
+import ScrollProgress from "@/components/ScrollProgress";
 import { CartProvider } from "@/context/CartContext";
 
 // Figma specifies "Be Vietnam" (the original family), not "Be Vietnam Pro" —
@@ -70,6 +71,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
         />
         <CartProvider>
+          <ScrollProgress />
           <DanCursor />
           <PromoBar />
           <Navbar />

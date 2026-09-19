@@ -1,4 +1,5 @@
 "use client";
+import Reveal from "@/components/Reveal";
 
 import Link from "next/link";
 import type { Product } from "@/lib/products";
@@ -13,22 +14,24 @@ export default function FeaturedProducts({ products }: { products: Product[] }) 
   );
 
   return (
-    <section id="products">
-      <div className="relative">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/images/brand/headline-featured.png" alt="Chú ý! Sản phẩm đáng chú ý!" className="w-full h-auto" />
+    <section id="products" className="[container-type:inline-size]">
+      <div className="relative lg:-mt-[1.0156cqw]">
+        <Reveal variant="wipe" duration={1}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/images/brand/headline-featured.png" alt="Chú ý! Sản phẩm đáng chú ý!" className="w-full h-auto" />
+        </Reveal>
         <Link
           href="/san-pham"
-          className="hidden lg:block absolute right-[97px] top-[85px] text-[20px] font-semibold uppercase text-[var(--color-purple)] hover:underline"
+          className="hidden lg:block absolute lg:right-[7.578cqw] lg:top-[6.641cqw] lg:text-[1.5625cqw] font-semibold uppercase text-[var(--color-purple)] hover:underline"
         >
           Tất cả sản phẩm &gt;
         </Link>
       </div>
 
-      <div className="px-6 pt-10 lg:pt-[65px] pb-12 lg:pb-[46px]">
-        <div className="max-w-[1086px] mx-auto grid grid-cols-2 lg:grid-cols-4 gap-x-6 lg:gap-x-[82px] gap-y-[22px]">
+      <div className="px-6 pt-10 lg:pt-[5.078cqw] pb-12 lg:pb-[3.594cqw]">
+        <div className="lg:w-[84.844cqw] mx-auto grid grid-cols-2 lg:grid-cols-4 gap-x-6 lg:gap-x-[6.406cqw] gap-y-[22px] lg:gap-y-[1.719cqw]">
           {featured.map((product, i) => (
-            <ProductCard key={product.id} {...product} index={i} nameClassName="uppercase" compact />
+            <ProductCard key={product.id} {...product} index={i} displayName={product.id === "so-can-ban" ? "BỘ SƯU TẬP SỔ CĂN BẢN" : undefined} compact />
           ))}
         </div>
       </div>

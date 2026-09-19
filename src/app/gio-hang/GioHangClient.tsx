@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useCart } from "@/context/CartContext";
+import Reveal from "@/components/Reveal";
 
 export default function GioHangClient() {
   const { items, updateQty, removeItem, subtotal } = useCart();
@@ -9,9 +10,11 @@ export default function GioHangClient() {
   if (items.length === 0) {
     return (
       <section className="max-w-3xl mx-auto px-6 py-24 text-center">
-        <h1 className="font-[family-name:var(--font-heading)] text-3xl font-bold text-[var(--color-purple)] mb-4">
-          Giỏ hàng trống
-        </h1>
+        <Reveal variant="blur" duration={1.1}>
+          <h1 className="font-[family-name:var(--font-heading)] text-3xl font-bold text-[var(--color-purple)] mb-4">
+            Giỏ hàng trống
+          </h1>
+        </Reveal>
         <Link href="/san-pham" className="text-[var(--color-orange)] font-semibold hover:underline">
           Xem sản phẩm →
         </Link>
@@ -21,9 +24,9 @@ export default function GioHangClient() {
 
   return (
     <section className="max-w-3xl mx-auto px-6 py-12">
-      <h1 className="font-[family-name:var(--font-heading)] text-3xl font-bold text-[var(--color-purple)] mb-8">
-        Giỏ hàng
-      </h1>
+      <Reveal variant="mask" className="mb-8">
+        <h1 className="font-[family-name:var(--font-heading)] text-3xl font-bold text-[var(--color-purple)]">Giỏ hàng</h1>
+      </Reveal>
 
       <div className="divide-y divide-[var(--color-ink)]/10">
         {items.map((item) => (

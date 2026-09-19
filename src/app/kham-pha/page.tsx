@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Reveal from "@/components/Reveal";
+import ParallaxHero from "@/components/ParallaxHero";
 
 export const metadata: Metadata = {
   title: "Khám phá — Tíc Cơ",
@@ -39,6 +41,12 @@ const bands: Band[] = [
   },
 ];
 
+// Anchor ids used by the "Khám phá" sub-menu in the navbar (/kham-pha#...).
+const SECTION_IDS: Record<string, string> = { rieng: "du-an-rieng", "hop-tac": "du-an-hop-tac", "su-kien": "su-kien" };
+
+// Khám phá plays slower and softer than the rest of the site (ease-in-out, ~1.7s).
+const SLOW = [0.4, 0, 0.2, 1] as const;
+
 const img = (name: string, [w, h]: [number, number], alt: string) => (
   // eslint-disable-next-line @next/next/no-img-element
   <img src={`/images/kham-pha/${name}.png`} alt={alt} width={w / 4} height={h / 4} className="max-w-full h-auto" />
@@ -49,29 +57,43 @@ export default function KhamPhaPage() {
     <>
       <h1 className="sr-only">Dự án vui — về những dự án làm vì niềm vui, làm với niềm vui của Tíc Cơ!</h1>
       {/* Figma: hero photo 1280x514, the bands below overlap its last 47px */}
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src="/images/kham-pha/hero.jpg" alt="Dự án vui — về những dự án làm vì niềm vui, làm với niềm vui của Tíc Cơ!" className="w-full h-[280px] md:h-auto md:aspect-[1280/467] object-cover object-left-top" />
+      <ParallaxHero
+        src="/images/kham-pha/hero.jpg"
+        alt="Dự án vui — về những dự án làm vì niềm vui, làm với niềm vui của Tíc Cơ!"
+        className="w-full h-[280px] md:h-auto md:aspect-[1280/467]"
+      />
 
       {bands.map((b) => (
-        <section key={b.key} style={{ background: b.bg, ["--mh" as string]: `${b.minH}px` }} className="md:min-h-[var(--mh)] text-white px-6 pt-10 pb-12 md:pt-[47px] md:px-0" >
+        <section key={b.key} id={SECTION_IDS[b.key]} style={{ background: b.bg, ["--mh" as string]: `${b.minH}px` }} className="scroll-mt-[27px] md:min-h-[var(--mh)] text-white px-6 pt-10 pb-12 md:pt-[47px] md:px-0" >
           <div className="mx-auto max-w-[1160px]">
             <div className="flex justify-center mb-8 md:mb-[35px]">
-              <span className="bg-[var(--color-yellow)] h-8 flex items-center justify-center px-3 md:px-0" style={{ minWidth: b.hBox }}>
-                {img(b.h, b.hSize, b.hAlt)}
-              </span>
+              <Reveal variant="wipe" duration={1.6} ease={SLOW}>
+                <span className="bg-[var(--color-yellow)] h-8 flex items-center justify-center px-3 md:px-0" style={{ minWidth: b.hBox }}>
+                  {img(b.h, b.hSize, b.hAlt)}
+                </span>
+              </Reveal>
             </div>
             {b.rows.map((r, i) => {
               const inner = (
                 <>
-                  {img(r.t, r.tSize, r.alt)}
-                  <span className="md:text-right md:shrink-0 md:max-w-[496px]">{img(r.d, r.dSize, r.descAlt)}</span>
+                  <Reveal variant="mask" delay={0.1} duration={1.8} ease={SLOW} className="transition-transform duration-500 ease-out group-hover:translate-x-3">
+                    {img(r.t, r.tSize, r.alt)}
+                  </Reveal>
+                  <Reveal variant="right" delay={0.6} duration={1.8} ease={SLOW} className="md:text-right md:shrink-0 md:max-w-[496px]">
+                    {img(r.d, r.dSize, r.descAlt)}
+                  </Reveal>
                 </>
               );
-              const cls = `flex flex-col md:flex-row md:items-center md:justify-between gap-4 py-6 md:py-[27px] ${i > 0 ? "border-t border-white/50" : ""}`;
-              return r.href ? (
-                <Link key={r.t} href={r.href} className={`${cls} hover:opacity-80 transition-opacity`}>{inner}</Link>
-              ) : (
-                <div key={r.t} className={cls}>{inner}</div>
+              const cls = "group flex flex-col md:flex-row md:items-center md:justify-between gap-4 py-6 md:py-[27px]";
+              return (
+                <div key={r.t}>
+                  {i > 0 && <Reveal variant="line" duration={2} ease={SLOW} className="h-px bg-white/50" />}
+                  {r.href ? (
+                    <Link href={r.href} className={`${cls} hover:opacity-90 transition-opacity`}>{inner}</Link>
+                  ) : (
+                    <div className={cls}>{inner}</div>
+                  )}
+                </div>
               );
             })}
           </div>

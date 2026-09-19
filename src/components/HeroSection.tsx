@@ -46,31 +46,23 @@ export default function HeroSection() {
         Vợt Tíc Cơ
       </motion.h1>
 
+      {/* Figma "Frame 6": bracketed subtext incl. Big Caslon ( ), exported as art */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-        className="absolute flex items-start gap-1"
-        style={{ left: "4.68%", top: "61.99%", width: "24.55%" }}
+        className="absolute"
+        style={{ left: "4.365%", top: "60.98%", width: "25.25%" }}
       >
-        <span
-          className="font-light leading-none shrink-0"
-          style={{ fontSize: "clamp(40px, 7.8vw, 100px)", fontFamily: "'Big Caslon', Georgia, 'Times New Roman', serif" }}
-        >
-          (
-        </span>
-        <p
-          className="font-medium uppercase tracking-[-0.06em] leading-relaxed pt-2"
-          style={{ textAlign: "justify", fontSize: "clamp(11px, 1.17vw, 16px)" }}
-        >
-          Chúng tôi có bán sản phẩm để bạn tìm thấy niềm vui trong mọi điều đời thường!
-        </p>
-        <span
-          className="font-light leading-none shrink-0"
-          style={{ fontSize: "clamp(40px, 7.8vw, 100px)", fontFamily: "'Big Caslon', Georgia, 'Times New Roman', serif" }}
-        >
-          )
-        </span>
+        <Image
+          src="/images/hero-subtext.png"
+          alt="Chúng tôi có bán sản phẩm để bạn tìm thấy niềm vui trong mọi điều đời thường!"
+          width={2592}
+          height={816}
+          quality={90}
+          sizes="26vw"
+          className="w-full h-auto"
+        />
       </motion.div>
     </section>
   );

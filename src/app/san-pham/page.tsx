@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import ProductCard from "@/components/ProductCard";
 import ProductCategoryGrid from "@/components/ProductCategoryGrid";
 import { getProducts } from "@/lib/products";
+import Reveal from "@/components/Reveal";
 
 export const metadata: Metadata = {
   title: "Sản phẩm — Tíc Cơ",
@@ -15,9 +16,11 @@ export default async function SanPhamPage() {
   return (
     <>
       <section className="max-w-7xl mx-auto px-6 pt-12 pb-4">
-        <h1 className="font-[family-name:var(--font-heading)] text-4xl font-bold text-[var(--color-purple)] mb-10">
-          Hàng mới về
-        </h1>
+        <Reveal variant="mask" duration={1.1} className="mb-10">
+          <h1 className="font-[family-name:var(--font-heading)] text-4xl font-bold text-[var(--color-purple)]">
+            Hàng mới về
+          </h1>
+        </Reveal>
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
           {newArrivals.map((product, i) => (
             <ProductCard key={product.id} {...product} index={i} />

@@ -5,7 +5,7 @@ export const brand = {
   instagram: "https://www.instagram.com/ticco.studios",
   facebook: "https://www.facebook.com/ticco.studios",
   threads: "https://www.threads.net/@ticco.studios",
-  tiktok: "https://www.tiktok.com/@ticco.trongdoi",
+  tiktok: "https://www.tiktok.com/@ticco.studios",
   email: "ticcoo.studio@gmail.com",
   address: "Nhận ký gửi tại TP. Hồ Chí Minh",
   mission:
@@ -15,7 +15,16 @@ export const brand = {
 export const navLinks = [
   { label: "Về Tíc Cơ", href: "/ve-tic-co" },
   { label: "Sản phẩm", href: "/san-pham", dropdown: true },
-  { label: "Khám phá", href: "/kham-pha", dropdown: true },
+  {
+    label: "Khám phá",
+    href: "/kham-pha",
+    dropdown: true,
+    children: [
+      { label: "Dự án riêng", href: "/kham-pha#du-an-rieng" },
+      { label: "Dự án chung tay hợp tác", href: "/kham-pha#du-an-hop-tac" },
+      { label: "Sự kiện", href: "/kham-pha#su-kien" },
+    ],
+  },
   { label: "Mascot Đần", href: "/mascot-dan" },
 ];
 

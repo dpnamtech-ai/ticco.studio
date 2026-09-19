@@ -2,6 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import { brand } from "@/data/content";
+import Reveal from "@/components/Reveal";
 
 const social = [
   ["Facebook", "Tíc Cơ Studios", brand.facebook],
@@ -76,16 +77,24 @@ export default function Footer() {
       {/* md+: Figma layout, scaled with width */}
       <div className="hidden md:block [container-type:inline-size]">
         <div className="relative" style={{ height: cq(v.h), fontSize: cq(16), lineHeight: cq(19) }}>
-          <p className="font-medium uppercase" style={{ ...abs(v.title), fontSize: cq(35), lineHeight: cq(35) }}>
-            Tíc Cơ
-            <br />
-            hân hoan
-            <br />
-            chào bạn!
-          </p>
-          <p style={abs(v.contact)}>{contact}</p>
-          <p style={abs(v.since)}>{since}</p>
-          <div style={{ ...abs(v.social, true), textAlign: "right" }}>{links}</div>
+          <Reveal at="edge" variant="mask" duration={1.1} style={abs(v.title)}>
+            <p className="font-medium uppercase" style={{ fontSize: cq(35), lineHeight: cq(35) }}>
+              Tíc Cơ
+              <br />
+              hân hoan
+              <br />
+              chào bạn!
+            </p>
+          </Reveal>
+          <Reveal at="edge" variant="blur" delay={0.2} style={abs(v.contact)}>
+            <p>{contact}</p>
+          </Reveal>
+          <Reveal at="edge" variant="blur" delay={0.3} style={abs(v.since)}>
+            <p>{since}</p>
+          </Reveal>
+          <Reveal at="edge" variant="up" delay={0.4} style={{ ...abs(v.social, true), textAlign: "right" }}>
+            {links}
+          </Reveal>
         </div>
       </div>
     </footer>

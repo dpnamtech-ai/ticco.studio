@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Check } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 import MagnifierImage from "./MagnifierImage";
+import Reveal from "@/components/Reveal";
 
 interface ProductDetailProps {
   id: string;
@@ -46,6 +47,7 @@ export default function ProductDetail({
 
   return (
     <div className="grid md:grid-cols-2 gap-12">
+      <Reveal variant="curtain" duration={1.3}>
       <div>
         <div className="aspect-[550/689] relative mb-4 bg-[#D9D9D9]">
           {image && <MagnifierImage src={image} alt={name} priority sizes="(max-width: 768px) 100vw, 550px" />}
@@ -67,8 +69,10 @@ export default function ProductDetail({
           ))}
         </div>
       </div>
+      </Reveal>
 
       <div>
+        <Reveal variant="mask" duration={1.1}>
         <h1 className="font-[family-name:var(--font-heading)] text-3xl font-bold text-[var(--color-purple)] uppercase mb-2">
           {name}
           {soldOut && (
@@ -77,17 +81,23 @@ export default function ProductDetail({
             </span>
           )}
         </h1>
+        </Reveal>
+        <Reveal variant="up" delay={0.15}>
         <p className="text-2xl font-semibold text-[var(--color-purple)] mb-6">
           {priceFrom > 0 ? `${priceFrom.toLocaleString("vi-VN")} VNĐ/ ${unit}` : "Liên hệ để biết giá"}
         </p>
+        </Reveal>
 
+        <Reveal variant="blur" delay={0.25} duration={1.1}>
         <p
           className="text-[var(--color-ink)]/80 leading-relaxed mb-8"
           style={{ whiteSpace: "pre-line" }}
         >
           {description}
         </p>
+        </Reveal>
 
+        <Reveal variant="up" delay={0.3}>
         <div className="flex flex-wrap gap-3 mb-6">
           {variants.map((v) => (
             <button
@@ -103,7 +113,9 @@ export default function ProductDetail({
             </button>
           ))}
         </div>
+        </Reveal>
 
+        <Reveal variant="up" delay={0.4}>
         <motion.button
           onClick={handleAdd}
           disabled={soldOut}
@@ -130,12 +142,15 @@ export default function ProductDetail({
             )}
           </AnimatePresence>
         </motion.button>
+        </Reveal>
 
+        <Reveal variant="up" delay={0.5}>
         <div className="border-t border-[var(--color-ink)]/15 pt-6 space-y-1.5 text-sm text-[var(--color-ink)]/75">
           {specs.map((s) => (
             <p key={s}>{s}</p>
           ))}
         </div>
+        </Reveal>
 
         {note && (
           <div className="mt-6 text-sm text-[var(--color-ink)]/60">

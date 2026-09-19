@@ -5,6 +5,7 @@ import BrandSection from "@/components/BrandSection";
 import CollabSection from "@/components/CollabSection";
 import ProductCard from "@/components/ProductCard";
 import { getProducts } from "@/lib/products";
+import Reveal from "@/components/Reveal";
 
 // Exact 12 items + order shown in the Figma "trang-chu" frame's "danh-muc-san-pham" preview grid.
 const CATEGORY_PREVIEW_IDS = [
@@ -34,17 +35,19 @@ export default async function Home() {
       <FeaturedProducts products={products} />
       <BrandSection />
 
-      <section id="danh-muc">
-        <div className="relative">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/images/brand/headline-danh-muc.png" alt="Danh mục sản phẩm:" className="w-full h-auto" />
-          <Link href="/san-pham" className="hidden lg:block absolute right-[89px] top-[110px] text-[20px] font-semibold uppercase text-[var(--color-purple)] hover:underline">
+      <section id="danh-muc" className="[container-type:inline-size]">
+        <div className="relative lg:-mt-[0.234cqw]">
+          <Reveal variant="wipe" duration={1}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/images/brand/headline-danh-muc.png" alt="Danh mục sản phẩm:" className="w-full h-auto" />
+          </Reveal>
+          <Link href="/san-pham" className="hidden lg:block absolute lg:right-[6.953cqw] lg:top-[8.594cqw] lg:text-[1.5625cqw] font-semibold uppercase text-[var(--color-purple)] hover:underline">
             Tất cả sản phẩm &gt;
           </Link>
         </div>
 
-        <div className="px-6 pt-10 lg:pt-[109px] pb-12 lg:pb-[48px] bg-[#f2f1f1]">
-          <div className="max-w-[1086px] mx-auto grid grid-cols-2 lg:grid-cols-4 gap-x-6 lg:gap-x-[82px] gap-y-[22px]">
+        <div className="px-6 pt-10 lg:pt-[8.516cqw] pb-12 lg:pb-[3.75cqw] bg-[#f2f1f1]">
+          <div className="lg:w-[84.844cqw] mx-auto grid grid-cols-2 lg:grid-cols-4 gap-x-6 lg:gap-x-[6.406cqw] gap-y-[22px] lg:gap-y-[1.719cqw]">
             {categoryPreview.map((product, i) => (
               <ProductCard key={product.id} {...product} index={i} compact />
             ))}
@@ -53,7 +56,7 @@ export default async function Home() {
           <div className="text-center mt-8 lg:mt-0">
             <Link
               href="/san-pham"
-              className="text-[30px] font-medium uppercase text-[var(--color-purple)] hover:underline"
+              className="lg:text-[2.344cqw] text-[30px] font-medium uppercase text-[var(--color-purple)] hover:underline"
             >
               Tất cả sản phẩm
             </Link>
