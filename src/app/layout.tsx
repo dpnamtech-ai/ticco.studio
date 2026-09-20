@@ -8,7 +8,6 @@ import Footer from "@/components/Footer";
 import CartDrawer from "@/components/CartDrawer";
 import PageTransition from "@/components/PageTransition";
 import ScrollProgress from "@/components/ScrollProgress";
-import DesignScale from "@/components/DesignScale";
 import { CartProvider } from "@/context/CartContext";
 
 // Figma specifies "Be Vietnam" (the original family), not "Be Vietnam Pro" —
@@ -67,7 +66,6 @@ export default function RootLayout({
   return (
     <html lang="vi" className={beVietnam.variable} suppressHydrationWarning>
       <body className="grain">
-        <DesignScale />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}

@@ -35,8 +35,8 @@ export default async function Home() {
       <FeaturedProducts products={products} />
       <BrandSection />
 
-      <section id="danh-muc" className="[container-type:inline-size]">
-        <div className="relative lg:-mt-[0.234cqw]">
+      <section id="danh-muc">
+        <div className="relative [container-type:inline-size] lg:-mt-[0.234cqw]">
           <Reveal variant="wipe" duration={1}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/images/brand/headline-danh-muc.png" alt="Danh mục sản phẩm:" className="w-full h-auto" />
@@ -46,7 +46,8 @@ export default async function Home() {
           </Link>
         </div>
 
-        <div className="px-6 pt-10 lg:pt-[8.516cqw] pb-12 lg:pb-[3.75cqw] bg-[#f2f1f1]">
+        <div className="bg-[#f2f1f1]">
+        <div className="max-w-[1280px] mx-auto [container-type:inline-size] px-6 pt-10 lg:pt-[8.516cqw] pb-12 lg:pb-[3.75cqw]">
           <div className="lg:w-[84.844cqw] mx-auto grid grid-cols-2 lg:grid-cols-4 gap-x-6 lg:gap-x-[6.406cqw] gap-y-[22px] lg:gap-y-[1.719cqw]">
             {categoryPreview.map((product, i) => (
               <ProductCard key={product.id} {...product} index={i} compact />
@@ -61,6 +62,7 @@ export default async function Home() {
               Tất cả sản phẩm
             </Link>
           </div>
+        </div>
         </div>
       </section>
 

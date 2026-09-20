@@ -89,7 +89,7 @@ export default function Navbar() {
                     animate={{ scale: 1 }}
                     exit={{ scale: 0 }}
                     transition={{ type: "spring", stiffness: 500, damping: 15 }}
-                    className="absolute -top-2 -right-2 bg-[var(--color-purple)] text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center"
+                    className="absolute -top-1 -right-2 bg-[var(--color-purple)] text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center"
                   >
                     {totalItems}
                   </motion.span>

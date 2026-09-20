@@ -37,14 +37,14 @@ interface ProductCardProps {
 export default function ProductCard({ id, name, priceFrom, image, index = 0, soldOut = false, nameClassName = "", displayName, compact = false }: ProductCardProps) {
   const [loaded, setLoaded] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
-  const seen = useInView(ref, { once: true, margin: "0px 0px -35% 0px" });
+  const seen = useInView(ref, { once: true, margin: "0px 0px -10% 0px" });
 
   return (
     <motion.a
       href={`/san-pham/${id}`}
       initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "0px 0px -35% 0px" }}
+      viewport={{ once: true, margin: "0px 0px -10% 0px" }}
       transition={{ delay: index * 0.06, duration: 0.5 }}
       className="group block"
     >

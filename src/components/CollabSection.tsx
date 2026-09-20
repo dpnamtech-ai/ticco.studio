@@ -25,6 +25,7 @@ export default function CollabSection() {
         <Reveal variant="mask" duration={0.9}>Dự án chung tay hợp tác</Reveal>
       </div>
 
+      <div className="max-w-[1280px] mx-auto [container-type:inline-size]">
       <div className="lg:w-[84.844cqw] mx-auto px-6 lg:px-0 pt-[26px] lg:pt-[2.031cqw] pb-[108px] lg:pb-[8.438cqw]">
         <div className="flex justify-end mb-[10px]">
           <a
@@ -40,6 +41,7 @@ export default function CollabSection() {
             <ProjectCard key={project.id} title={FIGMA_TITLES[project.id] ?? project.title} image={project.id === "freezedom-thu-roi-nghi-di" ? "/images/collab/freezedom-thu-roi-nghi-di.jpg" : project.image} index={i} compact onOrange />
           ))}
         </div>
+      </div>
       </div>
     </section>
   );

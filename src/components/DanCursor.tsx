@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { pageZoom } from "@/lib/pageZoom";
 
 export default function DanCursor() {
   const [pos, setPos] = useState({ x: -100, y: -100 });
@@ -10,8 +9,7 @@ export default function DanCursor() {
 
   useEffect(() => {
     const move = (e: MouseEvent) => {
-      const z = pageZoom();
-      setPos({ x: e.clientX / z, y: e.clientY / z });
+      setPos({ x: e.clientX, y: e.clientY });
     };
     const over = (e: MouseEvent) => {
       const t = e.target as HTMLElement;

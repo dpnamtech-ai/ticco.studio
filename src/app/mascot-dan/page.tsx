@@ -35,7 +35,8 @@ export default async function MascotDanPage() {
   return (
     <>
       {/* Figma hero (1280x532): art is 1080x460 at (100, 44) inside the frame */}
-      <section className="relative w-full bg-[#f2f1f1] aspect-[1280/532] overflow-hidden">
+      <section className="relative w-full bg-[#f2f1f1]">
+      <div className="relative max-w-[1280px] mx-auto aspect-[1280/532] overflow-hidden">
         <h1 className="sr-only">{mascotPage.headline}</h1>
         <Image
           src="/images/mascot-dan/hero-art.png"
@@ -48,6 +49,7 @@ export default async function MascotDanPage() {
           className="absolute h-auto"
           style={{ left: "7.8125%", top: "8.27%", width: "84.375%" }}
         />
+      </div>
       </section>
 
       <section>
@@ -80,7 +82,8 @@ export default async function MascotDanPage() {
       </section>
 
       {/* Figma "gioi-thieu-Dan" (1280x782): positions in % of the frame; text is the exported art */}
-      <section className="relative w-full bg-[#f2f1f1] aspect-[1280/782] overflow-hidden">
+      <section className="relative w-full bg-[#f2f1f1]">
+      <div className="relative max-w-[1280px] mx-auto aspect-[1280/782] overflow-hidden">
         <div className="absolute bg-[var(--color-purple)]" style={{ left: 0, top: "13.68%", width: "53.83%", height: "4.86%" }} />
         <div className="absolute bg-[var(--color-purple)]" style={{ left: "44.53%", right: 0, top: "38.75%", height: "4.86%" }} />
         <div className="absolute bg-[var(--color-purple)]" style={{ left: "47.03%", right: 0, top: "68.67%", height: "4.86%" }} />
@@ -107,6 +110,7 @@ export default async function MascotDanPage() {
         <Reveal variant="scale" delay={0.1} className="absolute" style={{ left: "11.09%", top: "89.13%", width: "77.97%" }}>
           <Image src="/images/mascot-dan/bio/heading.png" alt={mascotPage.closingHeading} width={2215} height={157} sizes="80vw" className="w-full h-auto" />
         </Reveal>
+      </div>
       </section>
 
       <section>

@@ -15,7 +15,8 @@ import Reveal from "@/components/Reveal";
 export default function BrandSection() {
   return (
     <>
-    <section className="max-md:hidden relative w-full bg-[var(--color-orange)] text-white aspect-[1283/820] overflow-hidden">
+    <section className="max-md:hidden relative w-full bg-[var(--color-orange)] text-white">
+    <div className="relative max-w-[1280px] mx-auto aspect-[1283/820] overflow-hidden">
       <Reveal variant="mask" duration={1.2} className="absolute" style={{ left: "17.69%", top: "11.22%", width: "64.77%" }}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src="/images/brand/mission-text.png" alt={brand.mission} className="w-full h-auto" />
@@ -82,6 +83,7 @@ export default function BrandSection() {
           <img src="/images/brand/link-lam-quen.png" alt="Làm quen với Đần!" className="w-full h-auto" />
         </Reveal>
       </a>
+    </div>
     </section>
 
     {/* Phones: the same content stacked, at readable sizes (the absolute composition above is desktop only) */}
