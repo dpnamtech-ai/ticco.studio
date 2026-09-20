@@ -12,6 +12,8 @@ type Product = {
   specs: string[];
   note: string | null;
   sold_out: boolean;
+  stock: number;
+  bundle_items: { id: string; qty: number }[] | null;
 };
 
 export default function ProductForm({
@@ -66,6 +68,16 @@ export default function ProductForm({
         />
       </div>
       <div>
+        <label className="block text-sm font-medium mb-1">Tồn kho</label>
+        <input
+          type="number"
+          name="stock"
+          min={0}
+          defaultValue={product?.stock ?? 0}
+          className="w-full border border-black/15 rounded-lg px-3 py-2"
+        />
+      </div>
+      <div>
         <label className="block text-sm font-medium mb-1">Ảnh (đường dẫn trong /public, vd /images/ten-anh.png)</label>
         <input name="image" defaultValue={product?.image ?? ""} className="w-full border border-black/15 rounded-lg px-3 py-2" />
       </div>
@@ -93,6 +105,18 @@ export default function ProductForm({
           name="specs"
           rows={4}
           defaultValue={product?.specs?.join("\n")}
+          className="w-full border border-black/15 rounded-lg px-3 py-2"
+        />
+      </div>
+      <div>
+        <label className="block text-sm font-medium mb-1">
+          Bộ sản phẩm (combo — không bắt buộc). Mỗi dòng 1 sản phẩm con theo ID, vd <code>so-trong</code> hoặc{" "}
+          <code>so-trong 2</code> nếu bộ gồm 2 quyển. Để trống nếu đây là sản phẩm bán lẻ bình thường.
+        </label>
+        <textarea
+          name="bundle_items"
+          rows={3}
+          defaultValue={product?.bundle_items?.map((b) => (b.qty > 1 ? `${b.id} ${b.qty}` : b.id)).join("\n")}
           className="w-full border border-black/15 rounded-lg px-3 py-2"
         />
       </div>

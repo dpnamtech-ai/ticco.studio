@@ -14,6 +14,9 @@ export type Product = {
   specs?: string[];
   note?: string;
   soldOut?: boolean;
+  stock?: number;
+  /** Set when this product is a combo/bundle: ids of the standalone products it's made of. */
+  bundleItems?: { id: string; qty: number }[];
 };
 
 function fromStatic(): Product[] {
@@ -47,6 +50,8 @@ export async function getProducts(): Promise<Product[]> {
       specs: p.specs ?? undefined,
       note: p.note ?? undefined,
       soldOut: p.sold_out,
+      stock: p.stock ?? 0,
+      bundleItems: p.bundle_items ?? undefined,
     }));
   } catch {
     return fromStatic();

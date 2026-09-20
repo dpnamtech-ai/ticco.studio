@@ -39,6 +39,7 @@ export default async function AdminDashboard() {
                 <th className="px-4 py-3">Tên</th>
                 <th className="px-4 py-3">Danh mục</th>
                 <th className="px-4 py-3">Giá</th>
+                <th className="px-4 py-3">Tồn kho</th>
                 <th className="px-4 py-3">Hết hàng</th>
                 <th className="px-4 py-3"></th>
               </tr>
@@ -50,6 +51,9 @@ export default async function AdminDashboard() {
                   <td className="px-4 py-3 text-black/60">{p.category}</td>
                   <td className="px-4 py-3">
                     {p.price_from > 0 ? `${p.price_from.toLocaleString("vi-VN")} đ` : "Liên hệ"}
+                  </td>
+                  <td className="px-4 py-3">
+                    {p.bundle_items?.length ? <span className="text-black/40">Combo</span> : p.stock}
                   </td>
                   <td className="px-4 py-3">{p.sold_out ? "Có" : ""}</td>
                   <td className="px-4 py-3 text-right space-x-3">
@@ -64,7 +68,7 @@ export default async function AdminDashboard() {
               ))}
               {products && products.length === 0 && (
                 <tr>
-                  <td colSpan={5} className="px-4 py-8 text-center text-black/40">
+                  <td colSpan={6} className="px-4 py-8 text-center text-black/40">
                     Chưa có sản phẩm nào. Bấm &quot;+ Thêm sản phẩm&quot; để bắt đầu.
                   </td>
                 </tr>

@@ -20,6 +20,8 @@ interface ProductDetailProps {
   image?: string;
   thumbnails?: string[];
   soldOut?: boolean;
+  /** When this product is a combo: the standalone products it's made of, each still buyable on its own page. */
+  bundleItems?: { id: string; name: string; image?: string; priceFrom: number; qty: number }[];
 }
 
 export default function ProductDetail({
@@ -34,6 +36,7 @@ export default function ProductDetail({
   image,
   thumbnails,
   soldOut = false,
+  bundleItems,
 }: ProductDetailProps) {
   const [selected, setSelected] = useState(variants[0]);
   const [added, setAdded] = useState(false);
@@ -96,6 +99,38 @@ export default function ProductDetail({
           {description}
         </p>
         </Reveal>
+
+        {bundleItems && bundleItems.length > 0 && (
+          <Reveal variant="up" delay={0.28}>
+          <div className="mb-8">
+            <p className="text-sm font-semibold text-[var(--color-ink)]/70 mb-3">Bộ này gồm (bấm để xem/mua riêng):</p>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+              {bundleItems.map((item) => (
+                <a
+                  key={item.id}
+                  href={`/san-pham/${item.id}`}
+                  className="group block border border-[var(--color-ink)]/10 rounded-lg overflow-hidden hover:border-[var(--color-purple)] transition-colors"
+                >
+                  <div className="relative aspect-square bg-[#D9D9D9]">
+                    {item.image && (
+                      <Image src={item.image} alt={item.name} fill quality={80} className="object-cover" sizes="150px" />
+                    )}
+                  </div>
+                  <div className="p-2">
+                    <p className="text-xs font-medium text-[var(--color-ink)] line-clamp-2">
+                      {item.qty > 1 ? `${item.qty}x ` : ""}
+                      {item.name}
+                    </p>
+                    <p className="text-xs text-[var(--color-ink)]/50">
+                      {item.priceFrom > 0 ? `${item.priceFrom.toLocaleString("vi-VN")} VNĐ` : "Liên hệ"}
+                    </p>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
+          </Reveal>
+        )}
 
         <Reveal variant="up" delay={0.3}>
         <div className="flex flex-wrap gap-3 mb-6">

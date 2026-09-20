@@ -24,6 +24,15 @@ function parseProductForm(formData: FormData) {
     .split("\n")
     .map((s) => s.trim())
     .filter(Boolean);
+  // "Bộ sản phẩm (combo)" textarea: one child product per line, "id" or "id qty" (qty defaults to 1).
+  const bundleItems = String(formData.get("bundle_items") || "")
+    .split("\n")
+    .map((line) => line.trim())
+    .filter(Boolean)
+    .map((line) => {
+      const [id, qty] = line.split(/\s+/);
+      return { id, qty: Math.max(1, Number(qty) || 1) };
+    });
 
   return {
     id: String(formData.get("id") || "").trim(),
@@ -37,7 +46,20 @@ function parseProductForm(formData: FormData) {
     specs,
     note: String(formData.get("note") || "").trim() || null,
     sold_out: formData.get("sold_out") === "on",
+    stock: Math.max(0, Number(formData.get("stock") || 0)),
+    bundle_items: bundleItems.length ? bundleItems : null,
   };
+}
+
+// A combo's page renders its children's live name/price/image at request time from the DB, but the
+// page itself is statically cached — editing/deleting a child must also revalidate every combo that
+// lists it, or those combos keep showing the old data until the combo's own page is next touched.
+async function revalidateBundleParents(childId: string) {
+  const { data } = await supabaseAdmin().from("products").select("id, bundle_items").not("bundle_items", "is", null);
+  for (const row of data ?? []) {
+    const items = row.bundle_items as { id: string }[] | null;
+    if (items?.some((b) => b.id === childId)) revalidatePath(`/san-pham/${row.id}`);
+  }
 }
 
 export async function createProduct(formData: FormData) {
@@ -60,6 +82,7 @@ export async function updateProduct(originalId: string, formData: FormData) {
   revalidatePath("/san-pham");
   revalidatePath(`/san-pham/${originalId}`);
   revalidatePath("/");
+  await revalidateBundleParents(originalId);
   redirect("/admin");
 }
 
@@ -70,6 +93,7 @@ export async function deleteProduct(id: string) {
   revalidatePath("/admin");
   revalidatePath("/san-pham");
   revalidatePath("/");
+  await revalidateBundleParents(id);
 }
 
 export async function signOut() {

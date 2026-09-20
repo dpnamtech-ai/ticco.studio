@@ -28,8 +28,16 @@ export default async function ProductPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const product = await getProduct(slug);
+  const products = await getProducts();
+  const product = products.find((p) => p.id === slug);
   if (!product) notFound();
+
+  const bundleItems = product.bundleItems
+    ?.map((b) => {
+      const item = products.find((p) => p.id === b.id);
+      return item && { id: item.id, name: item.name, image: item.image, priceFrom: item.priceFrom, qty: b.qty };
+    })
+    .filter((b): b is NonNullable<typeof b> => Boolean(b));
 
   const productJsonLd = {
     "@context": "https://schema.org",
@@ -68,6 +76,7 @@ export default async function ProductPage({
         image={product.image}
         thumbnails={product.thumbnails}
         soldOut={product.soldOut}
+        bundleItems={bundleItems}
       />
     </section>
   );
