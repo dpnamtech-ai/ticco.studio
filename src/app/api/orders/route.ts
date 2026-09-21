@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { getProduct } from "@/lib/products";
+import { getProducts } from "@/lib/products";
 import { supabaseAdmin } from "@/lib/supabase/server";
 import { makeOrderCode, shippingFor, validateOrder, type OrderInput } from "@/lib/checkout";
 
@@ -108,11 +108,16 @@ export async function POST(req: Request) {
   const order = parsed.value;
 
   // Re-price every line from the catalog.
+  const catalog = new Map((await getProducts()).map((p) => [p.id, p]));
   const lines: PricedLine[] = [];
   for (const it of order.items) {
-    const p = await getProduct(it.id);
+    const p = catalog.get(it.id);
     if (!p) return NextResponse.json({ error: `Sản phẩm không tồn tại: ${it.id}` }, { status: 422 });
     if (p.soldOut) return NextResponse.json({ error: `"${p.name}" đã hết hàng` }, { status: 422 });
+    // stock 0 = "not tracked" (the column defaults to 0), so only enforce it once an admin has entered a count.
+    if (!p.bundleItems?.length && (p.stock ?? 0) > 0 && it.qty > p.stock!) {
+      return NextResponse.json({ error: `"${p.name}" chỉ còn ${p.stock} sản phẩm` }, { status: 422 });
+    }
     lines.push({ id: p.id, name: p.name, variant: it.variant, qty: it.qty, price: p.priceFrom });
   }
 

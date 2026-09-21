@@ -18,6 +18,9 @@ export default async function AdminDashboard() {
             Quản lý sản phẩm
           </h1>
           <div className="flex gap-3">
+            <Link href="/admin/orders" className="border border-black/20 px-5 py-2.5 rounded-lg font-semibold">
+              Đơn hàng
+            </Link>
             <Link
               href="/admin/products/new"
               className="bg-[var(--color-purple)] text-white font-semibold px-5 py-2.5 rounded-lg"

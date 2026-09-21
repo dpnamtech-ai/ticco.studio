@@ -3,6 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { supabaseAdmin, supabaseServer } from "@/lib/supabase/server";
+import { isAdmin } from "@/lib/supabase/admin-check";
 
 // Server Actions are public HTTP endpoints — Next can invoke them from ANY
 // route, so the /admin middleware matcher does not protect them. Every action
@@ -12,7 +13,7 @@ async function requireAdmin() {
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  if (!user) throw new Error("Unauthorized");
+  if (!isAdmin(user)) throw new Error("Unauthorized");
 }
 
 function parseProductForm(formData: FormData) {
@@ -100,4 +101,59 @@ export async function signOut() {
   const supabase = await supabaseServer();
   await supabase.auth.signOut();
   redirect("/admin/login");
+}
+
+const ORDER_STATUSES = ["pending_payment", "paid", "shipped", "done", "cancelled"];
+// Stock leaves the shelf once the customer has paid, and returns if the order is cancelled / reverted.
+const HOLDS_STOCK = ["paid", "shipped", "done"];
+
+type OrderLine = { id: string; qty: number };
+
+// Adds `sign * qty` to every product's stock; a combo moves its children's stock, not its own.
+// ponytail: read-modify-write, not atomic — fine for one admin clicking, use an SQL rpc if that changes.
+async function moveStock(lines: OrderLine[], sign: 1 | -1) {
+  const db = supabaseAdmin();
+  const { data: products, error } = await db.from("products").select("id, stock, bundle_items");
+  if (error) throw new Error(error.message);
+  const byId = new Map((products ?? []).map((p) => [p.id, p]));
+  const delta = new Map<string, number>();
+  const add = (id: string, n: number) => delta.set(id, (delta.get(id) ?? 0) + n);
+  for (const l of lines) {
+    const bundle = byId.get(l.id)?.bundle_items as { id: string; qty: number }[] | null;
+    if (bundle?.length) bundle.forEach((b) => add(b.id, b.qty * l.qty));
+    else add(l.id, l.qty);
+  }
+  for (const [id, n] of delta) {
+    const p = byId.get(id);
+    if (!p) continue;
+    const stock = Math.max(0, p.stock + sign * n);
+    // Only touch sold_out at the edges, so a hand-set "Hết hàng" on untracked products is left alone.
+    const patch: { stock: number; sold_out?: boolean } = { stock };
+    if (sign < 0 && stock === 0) patch.sold_out = true;
+    if (sign > 0 && stock > 0) patch.sold_out = false;
+    const { error: e } = await db.from("products").update(patch).eq("id", id);
+    if (e) throw new Error(e.message);
+    revalidatePath(`/san-pham/${id}`);
+  }
+  revalidatePath("/san-pham");
+  revalidatePath("/");
+  revalidatePath("/admin");
+}
+
+export async function updateOrderStatus(code: string, formData: FormData) {
+  await requireAdmin();
+  const status = String(formData.get("status"));
+  if (!ORDER_STATUSES.includes(status)) throw new Error("Invalid status");
+  const tracking = String(formData.get("tracking") || "").trim() || null;
+
+  const db = supabaseAdmin();
+  const { data: order, error: readErr } = await db.from("orders").select("items, stock_deducted").eq("code", code).single();
+  if (readErr) throw new Error(readErr.message);
+
+  const shouldHold = HOLDS_STOCK.includes(status);
+  if (shouldHold !== order.stock_deducted) await moveStock(order.items as OrderLine[], shouldHold ? -1 : 1);
+
+  const { error } = await db.from("orders").update({ status, ghn_order_code: tracking, stock_deducted: shouldHold }).eq("code", code);
+  if (error) throw new Error(error.message);
+  revalidatePath("/admin/orders");
 }

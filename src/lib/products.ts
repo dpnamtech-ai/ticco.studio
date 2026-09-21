@@ -44,7 +44,8 @@ export async function getProducts(): Promise<Product[]> {
       category: p.category,
       priceFrom: p.price_from,
       unit: p.unit,
-      image: p.image ?? undefined,
+      // next/image throws (500s the whole page) on a src that isn't "/path" or a URL; admin input is free text.
+      image: /^(\/|https?:\/\/)/.test(p.image ?? "") ? p.image : undefined,
       description: p.description,
       variants: p.variants ?? undefined,
       specs: p.specs ?? undefined,

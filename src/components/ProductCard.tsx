@@ -27,6 +27,8 @@ interface ProductCardProps {
   image?: string;
   index?: number;
   soldOut?: boolean;
+  /** Present on combo products; only used to show the "Combo" badge. */
+  bundleItems?: unknown[];
   nameClassName?: string;
   /** Overrides the Figma name (e.g. the featured row shows the Sổ Căn Bản name on one line). */
   displayName?: string;
@@ -34,7 +36,7 @@ interface ProductCardProps {
   compact?: boolean;
 }
 
-export default function ProductCard({ id, name, priceFrom, image, index = 0, soldOut = false, nameClassName = "", displayName, compact = false }: ProductCardProps) {
+export default function ProductCard({ id, name, priceFrom, image, index = 0, soldOut = false, bundleItems, nameClassName = "", displayName, compact = false }: ProductCardProps) {
   const [loaded, setLoaded] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
   const seen = useInView(ref, { once: true, margin: "0px 0px -10% 0px" });
@@ -68,6 +70,11 @@ export default function ProductCard({ id, name, priceFrom, image, index = 0, sol
             />
           </motion.div>
         )}
+        {bundleItems?.length ? (
+          <span className="absolute top-2 right-2 bg-[var(--color-purple)] text-white text-[10px] font-bold uppercase tracking-wide px-2 py-1 rounded">
+            Combo
+          </span>
+        ) : null}
         {soldOut && (
           <span className="absolute top-2 left-2 bg-[var(--color-ink)] text-white text-[10px] font-bold uppercase tracking-wide px-2 py-1 rounded">
             Hết hàng

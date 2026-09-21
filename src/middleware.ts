@@ -1,5 +1,6 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
+import { isAdmin } from "@/lib/supabase/admin-check";
 
 // Gate every /admin/* route except /admin/login behind a signed-in Supabase
 // session. Also refreshes the auth cookie on each request (required by
@@ -27,12 +28,12 @@ export async function middleware(request: NextRequest) {
   } = await supabase.auth.getUser();
 
   const isLoginPage = request.nextUrl.pathname === "/admin/login";
-  if (!user && !isLoginPage) {
+  if (!isAdmin(user) && !isLoginPage) {
     const url = request.nextUrl.clone();
     url.pathname = "/admin/login";
     return NextResponse.redirect(url);
   }
-  if (user && isLoginPage) {
+  if (isAdmin(user) && isLoginPage) {
     const url = request.nextUrl.clone();
     url.pathname = "/admin";
     return NextResponse.redirect(url);
