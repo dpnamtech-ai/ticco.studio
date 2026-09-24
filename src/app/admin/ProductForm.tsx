@@ -1,5 +1,7 @@
 "use client";
 
+import Image from "next/image";
+
 type Product = {
   id: string;
   name: string;
@@ -78,8 +80,24 @@ export default function ProductForm({
         />
       </div>
       <div>
-        <label className="block text-sm font-medium mb-1">Ảnh (đường dẫn trong /public, vd /images/ten-anh.png)</label>
-        <input name="image" defaultValue={product?.image ?? ""} className="w-full border border-black/15 rounded-lg px-3 py-2" />
+        <label className="block text-sm font-medium mb-1">Ảnh sản phẩm</label>
+        {product?.image && (
+          <Image
+            src={product.image}
+            alt=""
+            width={96}
+            height={96}
+            className="w-24 h-24 object-cover rounded-lg mb-2 border border-black/10"
+          />
+        )}
+        <input type="file" name="image_file" accept="image/*" className="w-full border border-black/15 rounded-lg px-3 py-2 mb-2" />
+        <input
+          name="image"
+          defaultValue={product?.image ?? ""}
+          placeholder="hoặc dán URL/đường dẫn ảnh có sẵn"
+          className="w-full border border-black/15 rounded-lg px-3 py-2 text-sm text-black/50"
+        />
+        <p className="text-xs text-black/40 mt-1">Chọn ảnh để tải lên (ưu tiên) hoặc dán URL nếu ảnh đã có sẵn ở nơi khác.</p>
       </div>
       <div>
         <label className="block text-sm font-medium mb-1">Mô tả</label>
