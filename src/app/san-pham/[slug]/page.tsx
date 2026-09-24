@@ -59,7 +59,8 @@ export default async function ProductPage({
     <section className="max-w-7xl mx-auto px-6 py-12">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd) }}
+        // product.name/description are admin-entered free text — escape "<" so they can't break out of the script tag (stored XSS)
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd).replace(/</g, "\\u003c") }}
       />
       <ProductDetail
         id={product.id}

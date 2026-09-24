@@ -5,7 +5,7 @@ import { isAdmin } from "@/lib/supabase/admin-check";
 // Gate every /admin/* route except /admin/login behind a signed-in Supabase
 // session. Also refreshes the auth cookie on each request (required by
 // @supabase/ssr in the App Router).
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   let response = NextResponse.next({ request });
 
   const supabase = createServerClient(
