@@ -46,6 +46,7 @@ export async function getProducts(): Promise<Product[]> {
       unit: p.unit,
       // next/image throws (500s the whole page) on a src that isn't "/path" or a URL; admin input is free text.
       image: /^(\/|https?:\/\/)/.test(p.image ?? "") ? p.image : undefined,
+      thumbnails: p.thumbnails?.length ? p.thumbnails : undefined,
       description: p.description,
       variants: p.variants ?? undefined,
       specs: p.specs ?? undefined,

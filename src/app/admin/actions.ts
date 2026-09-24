@@ -65,17 +65,9 @@ async function revalidateBundleParents(childId: string) {
 
 const MAX_IMAGE_BYTES = 5 * 1024 * 1024;
 
-// Uploads the "image_file" input (if the admin picked one) to Supabase Storage and returns its
-// public URL; otherwise falls back to whatever the "image" text field holds (manual URL, or the
-// existing value on edit). File wins over text when both are given.
-// ponytail: old objects are never deleted on replace/delete — bucket is small (product photos
-// only), clean up by hand in Storage if it ever matters.
-async function uploadImageIfProvided(formData: FormData, fallback: string | null): Promise<string | null> {
-  const file = formData.get("image_file");
-  if (!(file instanceof File) || file.size === 0) return fallback;
+async function uploadImage(file: File): Promise<string> {
   if (file.size > MAX_IMAGE_BYTES) throw new Error("Ảnh quá lớn (tối đa 5MB)");
   if (!file.type.startsWith("image/")) throw new Error("File phải là ảnh");
-
   const ext = file.name.split(".").pop()?.toLowerCase().replace(/[^a-z0-9]/g, "").slice(0, 8) || "jpg";
   const path = `${crypto.randomUUID()}.${ext}`;
   const { error } = await supabaseAdmin().storage.from("product-images").upload(path, file, { contentType: file.type });
@@ -83,11 +75,37 @@ async function uploadImageIfProvided(formData: FormData, fallback: string | null
   return supabaseAdmin().storage.from("product-images").getPublicUrl(path).data.publicUrl;
 }
 
+// Uploads the "<field>_file" input (if the admin picked one) to Supabase Storage and returns its
+// public URL; otherwise falls back to the "<field>" text field (manual URL) or `fallback` (existing
+// value on edit). File wins over text when both are given.
+// ponytail: old objects are never deleted on replace/delete — bucket is small (product photos
+// only), clean up by hand in Storage if it ever matters.
+async function resolveImageField(formData: FormData, field: string, fallback: string | null): Promise<string | null> {
+  const file = formData.get(`${field}_file`);
+  if (file instanceof File && file.size > 0) return uploadImage(file);
+  return String(formData.get(field) || "").trim() || fallback;
+}
+
+// Called from the description rich-text editor's "insert image" toolbar button (a client
+// component, not a form submission) — same auth check and bucket as product images.
+export async function uploadEditorImage(formData: FormData): Promise<string> {
+  await requireAdmin();
+  const file = formData.get("file");
+  if (!(file instanceof File) || file.size === 0) throw new Error("Chưa chọn ảnh");
+  return uploadImage(file);
+}
+
 export async function createProduct(formData: FormData) {
   await requireAdmin();
   const product = parseProductForm(formData);
-  product.image = await uploadImageIfProvided(formData, product.image);
-  const { error } = await supabaseAdmin().from("products").insert(product);
+  product.image = await resolveImageField(formData, "image", product.image);
+  const thumbnails = (
+    await Promise.all([
+      resolveImageField(formData, "thumb_0", null),
+      resolveImageField(formData, "thumb_1", null),
+    ])
+  ).filter((t): t is string => Boolean(t));
+  const { error } = await supabaseAdmin().from("products").insert({ ...product, thumbnails });
   if (error) throw new Error(error.message);
   revalidatePath("/admin");
   revalidatePath("/san-pham");
@@ -98,8 +116,14 @@ export async function createProduct(formData: FormData) {
 export async function updateProduct(originalId: string, formData: FormData) {
   await requireAdmin();
   const product = parseProductForm(formData);
-  product.image = await uploadImageIfProvided(formData, product.image);
-  const { error } = await supabaseAdmin().from("products").update(product).eq("id", originalId);
+  product.image = await resolveImageField(formData, "image", product.image);
+  const thumbnails = (
+    await Promise.all([
+      resolveImageField(formData, "thumb_0", null),
+      resolveImageField(formData, "thumb_1", null),
+    ])
+  ).filter((t): t is string => Boolean(t));
+  const { error } = await supabaseAdmin().from("products").update({ ...product, thumbnails }).eq("id", originalId);
   if (error) throw new Error(error.message);
   revalidatePath("/admin");
   revalidatePath("/san-pham");

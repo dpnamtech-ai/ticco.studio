@@ -92,12 +92,8 @@ export default function ProductDetail({
         </Reveal>
 
         <Reveal variant="blur" delay={0.25} duration={1.1}>
-        <p
-          className="text-[var(--color-ink)]/80 leading-relaxed mb-8"
-          style={{ whiteSpace: "pre-line" }}
-        >
-          {description}
-        </p>
+        {/* description is admin-authored rich text (Tiptap HTML), gated behind /admin auth — see requireAdmin() in admin/actions.ts */}
+        <div className="rich-content text-[var(--color-ink)]/80 leading-relaxed mb-8" dangerouslySetInnerHTML={{ __html: description }} />
         </Reveal>
 
         {bundleItems && bundleItems.length > 0 && (
