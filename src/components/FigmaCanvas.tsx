@@ -1,7 +1,8 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Fragment, type CSSProperties } from "react";
 import Reveal from "@/components/Reveal";
-import { cropStyle, type ImageTransform } from "@/lib/figmaCrop";
+import { cropFillStyle, type ImageTransform } from "@/lib/figmaCrop";
 
 /*
   Renders a Figma frame laid out by src/data/project-pages.ts (generated from the DEMO file).
@@ -77,14 +78,14 @@ function Text({ t, o, hover }: { t: FigText; o: number; hover?: boolean }) {
 
 function Img({ i, o, inCard }: { i: FigImg; o: number; inCard?: boolean }) {
   const img = (
-    // eslint-disable-next-line @next/next/no-img-element
-    <img
+    // next/image serves a resized copy per screen width instead of the full Figma export
+    <Image
       src={i.src}
       alt={i.alt}
+      fill
       loading={i.y < 700 ? "eager" : "lazy"}
-      decoding="async"
-      className={i.crop ? "" : "absolute inset-0 w-full h-full object-cover"}
-      style={i.crop && cropStyle(i.crop)}
+      sizes={`(max-width: 1023px) ${i.w <= 320 ? 50 : 100}vw, ${Math.ceil((i.w / 1280) * 100)}vw`}
+      style={i.crop ? { objectFit: "fill", ...cropFillStyle(i.crop) } : { objectFit: "cover" }}
     />
   );
   return (
