@@ -34,7 +34,7 @@ export default async function Home() {
         </div>
 
         <div className="bg-[#f2f1f1]">
-        <div className="max-w-[1280px] mx-auto [container-type:inline-size] px-6 lg:px-0 pt-10 lg:pt-[8.516cqw] pb-12 lg:pb-[3.36cqw]">
+        <div className="max-w-[1920px] mx-auto [container-type:inline-size] px-6 lg:px-0 pt-10 lg:pt-[8.516cqw] pb-12 lg:pb-[3.36cqw]">
           <div className="lg:w-[84.844cqw] mx-auto lg:ml-[7.266cqw] grid grid-cols-2 lg:grid-cols-4 gap-x-6 lg:gap-x-[6.406cqw] gap-y-[22px] lg:gap-y-[1.719cqw]">
             {/* Figma rows at y2184 / 2551 / 2935: 22px after row 1, 39px after row 2 */}
             {HOME_CATEGORY.map((card, i) => (

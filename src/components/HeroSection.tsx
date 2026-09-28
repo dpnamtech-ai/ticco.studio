@@ -13,7 +13,7 @@ import Image from "next/image";
 export default function HeroSection() {
   return (
     <section className="relative w-full bg-[var(--color-orange)] text-white">
-      <div className="relative max-w-[1280px] mx-auto aspect-[1283/592] overflow-hidden [container-type:inline-size]">
+      <div className="relative max-w-[1920px] mx-auto aspect-[1283/592] overflow-hidden [container-type:inline-size]">
         <div className="absolute inset-y-0 right-0" style={{ width: "56.27%" }}>
           <Image
             src="/images/hero-basket.png"

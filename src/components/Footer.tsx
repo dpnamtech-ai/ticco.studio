@@ -65,7 +65,7 @@ export default function Footer() {
       </div>
 
       {/* md+: Figma layout, scaled with width */}
-      <div className="hidden md:block max-w-[1280px] mx-auto [container-type:inline-size]">
+      <div className="hidden md:block max-w-[1920px] mx-auto [container-type:inline-size]">
         <div className="relative" style={{ height: cq(v.h), fontSize: cq(16), lineHeight: cq(19), letterSpacing: cq(-0.8) }}>
           <Reveal at="edge" variant="mask" duration={1.1} style={abs(v.title)}>
             <p className="font-medium uppercase" style={{ fontSize: cq(35), lineHeight: cq(35), letterSpacing: cq(-1.8) }}>

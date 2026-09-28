@@ -20,7 +20,7 @@ export default async function MascotDanPage() {
     <>
       {/* Figma "hero section" (visible 1280x532 from Y51), rebuilt from its layers; Figma px -> cqw */}
       <section className="relative w-full bg-[#f2f1f1]">
-      <div className="relative max-w-[1280px] mx-auto aspect-[1280/532] overflow-hidden [container-type:inline-size]">
+      <div className="relative max-w-[1920px] mx-auto aspect-[1280/532] overflow-hidden [container-type:inline-size]">
         <h1
           className="absolute text-center font-semibold whitespace-pre text-[var(--color-purple)]"
           style={{ left: cq(140), top: cq(112), width: cq(1001), fontSize: cq(125), lineHeight: cq(19), letterSpacing: cq(-13.75) }}
@@ -84,7 +84,7 @@ export default async function MascotDanPage() {
 
       {/* Figma "gioi-thieu-Dan" (1280x782): bars/Đần in % of the frame, copy as live text in cqw */}
       <section className="relative w-full bg-[#f2f1f1]">
-      <div className="relative max-w-[1280px] mx-auto aspect-[1280/782] overflow-hidden [container-type:inline-size]">
+      <div className="relative max-w-[1920px] mx-auto aspect-[1280/782] overflow-hidden [container-type:inline-size]">
         <div className="absolute bg-[var(--color-purple)]" style={{ left: 0, top: "13.68%", width: "53.83%", height: "4.86%" }} />
         <div className="absolute bg-[var(--color-purple)]" style={{ left: "44.53%", right: 0, top: "38.75%", height: "4.86%" }} />
         <div className="absolute bg-[var(--color-purple)]" style={{ left: "47.03%", right: 0, top: "68.67%", height: "4.86%" }} />
