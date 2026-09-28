@@ -40,7 +40,7 @@ export default async function MascotDanPage() {
             alt="Mascot Đần"
             fill
             priority
-            quality={90}
+           
             sizes="45vw"
             style={cropFillStyle([[0.357902, 0, 0.321581], [0, 0.390978, 0.359367]])}
           />
@@ -90,13 +90,13 @@ export default async function MascotDanPage() {
         <div className="absolute bg-[var(--color-purple)]" style={{ left: "47.03%", right: 0, top: "68.67%", height: "4.86%" }} />
 
         <Reveal variant="left" delay={0} className="absolute" style={{ left: "51.25%", top: "2.56%", width: "14.06%" }}>
-          <Image src="/images/mascot-dan/bio/dan-1.png" alt="Mascot Đần nhảy" width={682} height={845} quality={90} sizes="15vw" className="w-full h-auto" />
+          <Image src="/images/mascot-dan/bio/dan-1.png" alt="Mascot Đần nhảy" width={682} height={845} sizes="15vw" className="w-full h-auto" />
         </Reveal>
         <Reveal variant="right" delay={0.1} className="absolute" style={{ left: "27.27%", top: "23.4%", width: "24.69%" }}>
-          <Image src="/images/mascot-dan/bio/dan-2.png" alt="Mascot Đần nâng tạ" width={1391} height={1002} quality={90} sizes="25vw" className="w-full h-auto" />
+          <Image src="/images/mascot-dan/bio/dan-2.png" alt="Mascot Đần nâng tạ" width={1391} height={1002} sizes="25vw" className="w-full h-auto" />
         </Reveal>
         <Reveal variant="left" delay={0.2} className="absolute" style={{ left: "32.73%", top: "52.56%", width: "17.42%" }}>
-          <Image src="/images/mascot-dan/bio/dan-3.png" alt="Mascot Đần cầm laptop" width={730} height={708} quality={90} sizes="18vw" className="w-full h-auto" />
+          <Image src="/images/mascot-dan/bio/dan-3.png" alt="Mascot Đần cầm laptop" width={730} height={708} sizes="18vw" className="w-full h-auto" />
         </Reveal>
 
         {/* bio copy: live text, Be Vietnam 400 22/26 ls -1.1 purple (Figma px -> cqw, relative to Y1652) */}

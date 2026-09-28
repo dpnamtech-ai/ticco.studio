@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { cropFillStyle, type ImageTransform } from "@/lib/figmaCrop";
+import { cropFillStyle, zoomSizes, type ImageTransform } from "@/lib/figmaCrop";
 
 interface ProjectCardProps {
   title: string;
@@ -39,7 +39,7 @@ export default function ProjectCard({
       transition={{ delay: index * 0.06, duration: 0.5 }}
     >
       <div className={`${compact ? "aspect-[309/448]" : "aspect-[436/486]"} relative overflow-hidden bg-[#D9D9D9] ${compact ? "" : "mb-4"}`}>
-        {image && <Image src={image} alt={title} fill quality={90} className={crop ? "" : "object-cover"} style={crop && cropFillStyle(crop)} sizes="(max-width: 768px) 100vw, 50vw" />}
+        {image && <Image src={image} alt={title} fill className={crop ? "" : "object-cover"} style={crop && cropFillStyle(crop)} sizes={zoomSizes("(max-width: 768px) 100vw, 50vw", crop)} />}
       </div>
       <h3
         className={

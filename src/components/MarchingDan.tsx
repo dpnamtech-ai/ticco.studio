@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { mascotPage } from "@/data/content";
-import { cropFillStyle, type ImageTransform } from "@/lib/figmaCrop";
+import { cropFillStyle, zoomSizes, type ImageTransform } from "@/lib/figmaCrop";
 
 /*
   Figma DEMO "tinh-than-Dan" (671:218 frame, 1280x664 visible from y=703), rebuilt from its layers:
@@ -72,7 +72,7 @@ export default function MarchingDan({ alt }: { alt: string }) {
             className="absolute overflow-hidden"
             style={{ left: cq(d.x), top: cq(d.y), width: cq(d.w), height: cq(d.h), transform: d.mirror ? "scaleX(-1)" : undefined }}
           >
-            <Image src={`/images/figma/${d.src}.webp`} alt="" fill quality={90} sizes="40vw" style={cropFillStyle(d.crop)} />
+            <Image src={`/images/figma/${d.src}.webp`} alt="" fill sizes={zoomSizes("40vw", d.crop)} style={cropFillStyle(d.crop)} />
           </div>
         ))}
 

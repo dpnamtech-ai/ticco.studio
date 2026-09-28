@@ -14,7 +14,7 @@ type NavLink = (typeof navLinks)[number];
 // Desktop item; "Khám phá" opens a sub-menu on hover/focus that jumps to a section of /kham-pha.
 function NavItem({ link, active }: { link: NavLink; active: boolean }) {
   return (
-    <li className="relative group md:h-[27px] flex items-center">
+    <li className="relative group md:h-[calc(27*var(--u))] flex items-center">
       <Link
         href={link.href}
         aria-current={active ? "page" : undefined}
@@ -23,7 +23,7 @@ function NavItem({ link, active }: { link: NavLink; active: boolean }) {
         {link.label}
         {/* Figma "Subtract": 7x6 down chevron in #ffd9c6 (gap 4px after SẢN PHẨM, 1px after KHÁM PHÁ) */}
         {link.dropdown && (
-          <svg width="7" height="6" viewBox="0 0 7 6" aria-hidden className="shrink-0">
+          <svg width="7" height="6" viewBox="0 0 7 6" aria-hidden className="shrink-0 md:w-[calc(7*var(--u))] md:h-[calc(6*var(--u))]">
             <path d="M0.4 0.6 3.5 5.2 6.6 0.6" fill="none" stroke="#ffd9c6" strokeWidth="1.3" />
           </svg>
         )}
@@ -60,9 +60,9 @@ export default function Navbar() {
       <nav className="sticky top-0 z-50 bg-[var(--color-orange)] text-white">
         {/* md+: Figma "thanh-chon" — logo centred (X615-664), left group ends 31px before it, right group starts
             30px after it; item gaps 38px (left) / 33px (right); Be Vietnam 600 13/19, no letter-spacing. */}
-        <div className="relative max-w-[1280px] mx-auto px-6 h-16 md:h-[27px] flex items-center justify-between gap-6 md:grid md:grid-cols-[1fr_auto_1fr] md:gap-0">
+        <div className="relative max-w-[1280px] md:max-w-[calc(1280*var(--u))] mx-auto px-6 h-16 md:h-[calc(27*var(--u))] flex items-center justify-between gap-6 md:grid md:grid-cols-[1fr_auto_1fr] md:gap-0">
           {/* Desktop nav — left */}
-          <ul className="hidden md:flex justify-end items-center gap-[38px] mr-[31px] text-[13px] leading-[19px] font-semibold uppercase">
+          <ul className="hidden md:flex justify-end items-center gap-[calc(38*var(--u))] mr-[calc(31*var(--u))] text-[calc(13*var(--u))] leading-[calc(19*var(--u))] font-semibold uppercase">
             {left.map((link) => (
               <NavItem key={link.href} link={link} active={isActive(link.href)} />
             ))}
@@ -71,11 +71,11 @@ export default function Navbar() {
           {/* Wordmark */}
           <Link href="/" aria-label={brand.shortName} className="shrink-0">
             {/* Figma logo layer "1 1" (49x15), real lettering */}
-            <Image src="/images/logo-tic-co.png" alt={brand.shortName} width={2731} height={837} sizes="(min-width: 768px) 49px, 72px" priority className="w-[72px] md:w-[49px] h-auto" />
+            <Image src="/images/logo-tic-co.png" alt={brand.shortName} width={2731} height={837} sizes="(min-width: 768px) 74px, 72px" priority className="w-[72px] md:w-[calc(49*var(--u))] h-auto" />
           </Link>
 
           {/* Desktop nav — right */}
-          <ul className="hidden md:flex items-center gap-[33px] ml-[30px] text-[13px] leading-[19px] font-semibold uppercase">
+          <ul className="hidden md:flex items-center gap-[calc(33*var(--u))] ml-[calc(30*var(--u))] text-[calc(13*var(--u))] leading-[calc(19*var(--u))] font-semibold uppercase">
             {right.map((link) => (
               <NavItem key={link.href} link={link} active={isActive(link.href)} />
             ))}
@@ -83,12 +83,12 @@ export default function Navbar() {
 
           {/* Icons */}
           {/* Figma "Frame 5" X1153-1219: search 21px (#fef7ff) + cart art 36x36, gap 9 */}
-          <div className="hidden md:flex items-center gap-[9px] md:absolute md:right-[61px] md:top-1/2 md:-translate-y-1/2">
+          <div className="hidden md:flex items-center gap-[calc(9*var(--u))] md:absolute md:right-[calc(61*var(--u))] md:top-1/2 md:-translate-y-1/2">
             <button aria-label="Tìm kiếm" className="text-[#fef7ff] hover:opacity-80 transition-opacity">
-              <Search size={21} />
+              <Search size={21} className="size-[calc(21*var(--u))]" />
             </button>
             <button onClick={openDrawer} aria-label="Giỏ hàng" className="relative hover:opacity-80 transition-opacity">
-              <Image src="/images/figma/f7cee81a817a7fd43fa1390005911ca6d22bbadf.webp" alt="" width={36} height={36} className="size-9" />
+              <Image src="/images/figma/f7cee81a817a7fd43fa1390005911ca6d22bbadf.webp" alt="" width={108} height={108} className="size-[calc(36*var(--u))]" />
               <AnimatePresence>
                 {totalItems > 0 && (
                   <motion.span

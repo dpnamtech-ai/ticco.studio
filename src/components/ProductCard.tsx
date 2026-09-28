@@ -4,7 +4,7 @@ import { useRef, useState } from "react";
 import Image from "next/image";
 import { motion, useInView } from "framer-motion";
 import type { Crop } from "@/lib/shop";
-import { fillStyle } from "@/lib/figmaCrop";
+import { fillStyle, zoomSizes } from "@/lib/figmaCrop";
 
 // Figma product-name copy (uppercase, with the design's own line breaks) for the compact cards.
 const FIGMA_NAMES: Record<string, string> = {
@@ -70,10 +70,10 @@ export default function ProductCard({ id, name, priceFrom, image, index = 0, sol
                 src={image}
                 alt={name}
                 fill
-                quality={90}
+               
                 onLoad={() => setLoaded(true)}
                 style={fillStyle(crop)}
-                sizes={compact ? "(max-width: 768px) 50vw, 25vw" : "(max-width: 1024px) 50vw, 25vw"}
+                sizes={zoomSizes(compact ? "(max-width: 768px) 50vw, 25vw" : "(max-width: 1024px) 50vw, 25vw", crop?.m, compact ? 1.1 : 1.05)}
               />
             </div>
           </motion.div>

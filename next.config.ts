@@ -10,15 +10,12 @@ const securityHeaders = [
 
 const nextConfig: NextConfig = {
   async headers() {
-    return [
-      { source: "/:path*", headers: securityHeaders },
-      // Filenames are Figma content hashes: a changed image gets a new name, so cache forever.
-      { source: "/images/figma/:file*", headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }] },
-    ];
+    return [{ source: "/:path*", headers: securityHeaders }];
   },
   allowedDevOrigins: ["192.168.31.150"],
   images: {
-    qualities: [75, 90],
+    // Client wants the sharpest images possible (slower loads accepted): every quality prop is coerced to 100.
+    qualities: [100],
     remotePatterns: [
       {
         protocol: "https",

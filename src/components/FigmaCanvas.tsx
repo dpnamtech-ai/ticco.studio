@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Fragment, type CSSProperties } from "react";
 import Reveal from "@/components/Reveal";
-import { cropFillStyle, type ImageTransform } from "@/lib/figmaCrop";
+import { cropFillStyle, zoomSizes, type ImageTransform } from "@/lib/figmaCrop";
 
 /*
   Renders a Figma frame laid out by src/data/project-pages.ts (generated from the DEMO file).
@@ -84,7 +84,7 @@ function Img({ i, o, inCard }: { i: FigImg; o: number; inCard?: boolean }) {
       alt={i.alt}
       fill
       loading={i.y < 700 ? "eager" : "lazy"}
-      sizes={`(max-width: 1023px) ${i.w <= 320 ? 50 : 100}vw, ${Math.ceil((i.w / 1280) * 100)}vw`}
+      sizes={zoomSizes(`(max-width: 1023px) ${i.w <= 320 ? 50 : 100}vw, ${Math.ceil((i.w / 1280) * 100)}vw`, i.crop)}
       style={i.crop ? { objectFit: "fill", ...cropFillStyle(i.crop) } : { objectFit: "cover" }}
     />
   );

@@ -42,3 +42,16 @@ export function fillStyle(f?: { m?: ImageTransform; ar?: number; fit?: string })
   if (f?.m) return { objectFit: "fill", ...cropFillStyle(f.m, f.ar) };
   return { objectFit: (f?.fit as CSSProperties["objectFit"]) ?? "cover" };
 }
+
+/**
+ * A cropped image is drawn larger than its box (zoom = 1/scale of the visible window), so the browser must
+ * download a wider file than the box's `sizes` says or the photo is upscaled (soft). Scales every vw/px length
+ * in a `sizes` string by that zoom (and an extra factor, e.g. a hover scale).
+ */
+export function zoomSizes(sizes: string, crop?: { m?: ImageTransform } | ImageTransform, extra = 1): string {
+  const m = Array.isArray(crop) ? (crop as ImageTransform) : (crop as { m?: ImageTransform } | undefined)?.m;
+  const z = (m ? Math.max(1 / Math.abs(m[0][0]), 1 / Math.abs(m[1][1])) : 1) * extra;
+  if (z === 1) return sizes;
+  // only the width after each media condition, never the breakpoint inside "(max-width: …)"
+  return sizes.replace(/(^|\)|,)(\s*)(\d+(?:\.\d+)?)(vw|px)/g, (_, pre: string, sp: string, n: string, u: string) => `${pre}${sp}${Math.ceil(+n * z)}${u}`);
+}

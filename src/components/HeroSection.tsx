@@ -20,7 +20,7 @@ export default function HeroSection() {
             alt="Giỏ đồ Tíc Cơ"
             fill
             priority
-            quality={90}
+           
             sizes="(max-width: 768px) 100vw, 56vw"
             className="object-cover"
           />
@@ -60,7 +60,7 @@ export default function HeroSection() {
             alt="Chúng tôi có bán sản phẩm để bạn tìm thấy niềm vui trong mọi điều đời thường!"
             width={2592}
             height={816}
-            quality={90}
+           
             sizes="26vw"
             className="w-full h-auto"
           />

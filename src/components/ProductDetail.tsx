@@ -6,10 +6,9 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { Check } from "lucide-react";
 import { useCart } from "@/context/CartContext";
-import MagnifierImage from "./MagnifierImage";
 import Reveal from "@/components/Reveal";
 import type { Crop } from "@/lib/shop";
-import { fillStyle } from "@/lib/figmaCrop";
+import { fillStyle, zoomSizes } from "@/lib/figmaCrop";
 import { layoutBottom, type Box, type FigmaLayout } from "@/lib/shopFigma";
 
 interface ProductDetailProps {
@@ -93,7 +92,7 @@ export default function ProductDetail({
     >
       <Reveal variant="curtain" duration={1.3} className={`order-1 ${L ? abs : "lg:order-none lg:col-start-1 lg:row-start-1"}`} style={at(L?.gallery[0])}>
         <div className="relative aspect-[550/689] bg-[#d9d9d9] overflow-hidden" style={L && box(L.gallery[0])}>
-          {main && <MagnifierImage src={main.src} alt={name} priority sizes="(max-width: 1024px) 100vw, 43vw" imgStyle={fillStyle(main)} />}
+          {main && <Image src={main.src} alt={name} fill priority sizes={zoomSizes("(max-width: 1024px) 100vw, 43vw", main)} style={fillStyle(main)} />}
         </div>
       </Reveal>
 
@@ -110,7 +109,7 @@ export default function ProductDetail({
               style={L && { ...at(L.gallery[i + 1]), ...box(L.gallery[i + 1]) }}
             >
               <div className="absolute inset-0 transition-transform duration-500 group-hover:scale-105">
-                <Image src={img.src} alt="" fill quality={90} style={fillStyle(img)} sizes="(max-width: 1024px) 50vw, 22vw" />
+                <Image src={img.src} alt="" fill style={fillStyle(img)} sizes={zoomSizes("(max-width: 1024px) 50vw, 22vw", img)} />
               </div>
             </Reveal>
           ))}
@@ -144,7 +143,7 @@ export default function ProductDetail({
               {bundleItems.map((item) => (
                 <Link key={item.id} href={`/san-pham/${item.id}`} className="group block border border-black/10 rounded-lg overflow-hidden hover:border-[#53129e] transition-colors">
                   <div className="relative aspect-square bg-[#d9d9d9]">
-                    {item.image && <Image src={item.image} alt={item.name} fill quality={80} className="object-cover" sizes="150px" />}
+                    {item.image && <Image src={item.image} alt={item.name} fill className="object-cover" sizes="150px" />}
                   </div>
                   <div className="p-2">
                     <p className="text-xs font-medium line-clamp-2">
@@ -227,7 +226,7 @@ export default function ProductDetail({
             </Reveal>
             <Reveal variant="up" delay={0.3} className={`mt-4 ${flow("lg:mt-[1.953cqw]")} ${abs}`} style={at(L?.extraImg)}>
               <div className="relative w-full max-w-[394px] lg:max-w-none lg:w-[30.781cqw] overflow-hidden" style={{ aspectRatio: `${extra.w} / ${extra.h}` }}>
-                <Image src={extra.src} alt={`${name} — ${extra.label}`} fill quality={90} style={fillStyle(extra)} sizes="(max-width: 1024px) 100vw, 31vw" />
+                <Image src={extra.src} alt={`${name} — ${extra.label}`} fill style={fillStyle(extra)} sizes={zoomSizes("(max-width: 1024px) 100vw, 31vw", extra)} />
               </div>
             </Reveal>
           </>

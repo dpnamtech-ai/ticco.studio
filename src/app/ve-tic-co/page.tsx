@@ -92,7 +92,7 @@ export default function VeTicCoPage() {
             src="/images/figma/d140ef85b2f46e31deb3dbfc61f9e592a510b83b.webp"
             alt=""
             fill
-            quality={90}
+           
             sizes="120vw"
             style={cropFillStyle([[0.999348, 0, 0.015726], [0, 0.810594, 0.143101]])}
           />
