@@ -52,7 +52,7 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-          className="absolute"
+          className="absolute max-lg:!w-[39%] max-lg:!top-[50%]"
           style={{ left: "4.365%", top: "60.98%", width: "25.25%" }}
         >
           <Image
@@ -60,10 +60,15 @@ export default function HeroSection() {
             alt="Chúng tôi có bán sản phẩm để bạn tìm thấy niềm vui trong mọi điều đời thường!"
             width={2592}
             height={816}
-           
             sizes="26vw"
-            className="w-full h-auto"
+            className="w-full h-auto max-lg:hidden"
           />
+          {/* phones: the art's lettering would be ~4px tall, so the same line as live text in ( ) */}
+          <p className="lg:hidden flex items-center gap-1 text-[11px] leading-[1.3] font-medium uppercase">
+            <span aria-hidden className="font-[family-name:Georgia,serif] text-[46px] font-thin leading-none opacity-90">(</span>
+            <span>Chúng tôi có bán sản phẩm để bạn tìm thấy niềm vui trong mọi điều đời thường!</span>
+            <span aria-hidden className="font-[family-name:Georgia,serif] text-[46px] font-thin leading-none opacity-90">)</span>
+          </p>
         </motion.div>
       </div>
     </section>

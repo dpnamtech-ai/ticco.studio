@@ -76,7 +76,7 @@ export default function MarchingDan({ alt }: { alt: string }) {
           </div>
         ))}
 
-        <div aria-hidden className="font-semibold text-white" style={{ fontSize: cq(24), lineHeight: cq(30), letterSpacing: cq(-1.68) }}>
+        <div aria-hidden className="font-semibold text-white max-lg:hidden" style={{ fontSize: cq(24), lineHeight: cq(30), letterSpacing: cq(-1.68) }}>
           {CAPTIONS.map((c, i) => (
             <div key={i}>
               <div className="absolute bg-[#e85f08]" style={{ left: cq(c.box[0]), top: cq(c.box[1]), width: cq(c.box[2]), height: cq(c.box[3]) }} />
@@ -92,11 +92,18 @@ export default function MarchingDan({ alt }: { alt: string }) {
 
         <p
           aria-hidden
-          className="absolute text-center font-semibold text-[var(--color-purple)] whitespace-nowrap"
+          className="absolute text-center font-semibold text-[var(--color-purple)] whitespace-nowrap max-lg:hidden"
           style={{ left: cq(335), top: cq(553), width: cq(611), fontSize: cq(27), lineHeight: cq(30), letterSpacing: cq(-1.89) }}
         >
           {mascotPage.traits.tagline}
         </p>
+      </div>
+      {/* phones: the tags are ~7px inside the scaled scene, so list them below as readable chips */}
+      <div className="lg:hidden bg-[#e5e5e5] px-6 pb-8 -mt-px text-center">
+        <ul className="flex flex-wrap justify-center gap-2 text-[13px] font-semibold text-white">
+          {mascotPage.traits.captions.map((c) => <li key={c} className="bg-[#e85f08] px-2.5 py-1">{c.replace(/\n/g, " ")}</li>)}
+        </ul>
+        <p className="mt-4 text-[15px] font-semibold text-[var(--color-purple)]">{mascotPage.traits.tagline}</p>
       </div>
     </div>
   );

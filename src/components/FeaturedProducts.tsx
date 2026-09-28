@@ -10,12 +10,14 @@ import { HOME_FEATURED, figmaCardProps } from "@/data/figma-cards";
 export default function FeaturedProducts({ products }: { products: Product[] }) {
   return (
     <section id="products">
-      <div className="relative [container-type:inline-size] lg:-mt-[1.0156cqw]">
+      {/* -mt at every width: the bar starts 10 Figma px down, so the hero must overlap that strip or it shows as a white line */}
+      <div className="relative [container-type:inline-size] -mt-[1.0156cqw]">
         <Reveal variant="wipe" duration={1}>
-          {/* Figma "headline" 1280x95: purple bar y10 h75, 600 20/90 text at x97 y4 */}
-          <div className="relative" style={{ height: "7.422cqw" }}>
-            <div className="absolute inset-x-0 bg-[var(--color-purple)]" style={{ top: "0.781cqw", height: "5.859cqw" }} />
-            <h2 className="absolute font-semibold uppercase text-white whitespace-nowrap" style={{ left: "7.578cqw", top: "0.312cqw", fontSize: "1.5625cqw", lineHeight: "7.031cqw", letterSpacing: "-0.0625cqw" }}>
+          {/* Figma "headline" 1280x95: purple bar y10 h75, 600 20/90 text at x97 y4.
+              max(): exact Figma on desktop; on phones the bar is >=44px and the text >=15px, text stays centred in the bar */}
+          <div className="relative" style={{ height: "max(7.422cqw, calc(44px + 1.563cqw))" }}>
+            <div className="absolute inset-x-0 bg-[var(--color-purple)]" style={{ top: "0.781cqw", height: "max(5.859cqw, 44px)" }} />
+            <h2 className="absolute font-semibold uppercase text-white whitespace-nowrap" style={{ left: "7.578cqw", top: "0.312cqw", fontSize: "max(15px, 1.5625cqw)", lineHeight: "max(7.031cqw, calc(44px + 0.938cqw))", letterSpacing: "-0.0625cqw" }}>
               Chú ý! Sản phẩm đáng chú ý!
             </h2>
           </div>

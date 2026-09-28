@@ -9,6 +9,13 @@ import { getProducts } from "@/lib/products";
 import { cropFillStyle } from "@/lib/figmaCrop";
 import { MASCOT_GRID, figmaCardProps } from "@/data/figma-cards";
 
+// Figma hero callouts [x, y, w, text] (desktop positions in Figma px)
+const HERO_CALLOUTS = [
+  [367, 213, 142, "Chẳng phải\nđến cuối cùng"],
+  [372, 407, 312, "Chẳng lo nghĩ\ngì nhiều và cười\nngốc nghếch thôi sao?"],
+  [848, 261, 112, "Mình cũng chỉ muốn sống vui khoẻ"],
+] as const;
+
 export const metadata: Metadata = {
   title: "Mascot Đần — Tíc Cơ",
   description: mascotPage.tagline,
@@ -30,7 +37,7 @@ export default async function MascotDanPage() {
         {[512, 803].map((x) => (
           <div key={x} className="absolute bg-[var(--color-purple)]" style={{ left: cq(x), top: cq(137), width: cq(45), height: cq(6) }} />
         ))}
-        <svg className="absolute inset-0 size-full" viewBox="0 0 1280 532" aria-hidden>
+        <svg className="absolute inset-0 size-full max-lg:hidden" viewBox="0 0 1280 532" aria-hidden>
           <line x1="484" y1="236" x2="843" y2="309" stroke="#000" />
         </svg>
         <div className="absolute bg-[#d9d9d9]" style={{ left: cq(535), top: cq(219), width: cq(235), height: cq(235) }} />
@@ -45,18 +52,18 @@ export default async function MascotDanPage() {
             style={cropFillStyle([[0.357902, 0, 0.321581], [0, 0.390978, 0.359367]])}
           />
         </div>
-        {([
-          [367, 213, 142, "Chẳng phải\nđến cuối cùng"],
-          [372, 407, 312, "Chẳng lo nghĩ\ngì nhiều và cười\nngốc nghếch thôi sao?"],
-          [848, 261, 112, "Mình cũng chỉ muốn sống vui khoẻ"],
-        ] as const).map(([x, y, w, t]) => (
-          <p key={x} className="absolute whitespace-pre-line text-black" style={{ left: cq(x), top: cq(y), width: cq(w), fontSize: cq(22), lineHeight: cq(25), letterSpacing: cq(-1.1) }}>
+        {HERO_CALLOUTS.map(([x, y, w, t]) => (
+          <p key={x} className="absolute whitespace-pre-line text-black max-lg:hidden" style={{ left: cq(x), top: cq(y), width: cq(w), fontSize: cq(22), lineHeight: cq(25), letterSpacing: cq(-1.1) }}>
             {t}
           </p>
         ))}
-        <svg className="absolute inset-0 size-full" viewBox="0 0 1280 532" aria-hidden>
+        <svg className="absolute inset-0 size-full max-lg:hidden" viewBox="0 0 1280 532" aria-hidden>
           <line x1="843" y1="309" x2="592" y2="469" stroke="#000" />
         </svg>
+      </div>
+      {/* phones: the callouts shrink to ~7px inside the scaled art, so show them as plain text instead */}
+      <div className="lg:hidden px-6 pb-8 text-center text-[15px] leading-snug text-black">
+        {HERO_CALLOUTS.map(([x, , , t]) => <p key={x}>{t.replace(/\n/g, " ")}</p>)}
       </div>
       </section>
 
@@ -101,17 +108,22 @@ export default async function MascotDanPage() {
 
         {/* bio copy: live text, Be Vietnam 400 22/26 ls -1.1 purple (Figma px -> cqw, relative to Y1652) */}
         {([[842, 91, 344], [100, 267, 298], [100, 448, 334]] as const).map(([x, y, w], i) => (
-          <Reveal key={i} variant="mask" delay={0.2 + i * 0.1} className="absolute" style={{ left: cq(x), top: cq(y), width: cq(w) }}>
+          <Reveal key={i} variant="mask" delay={0.2 + i * 0.1} className="absolute max-lg:hidden" style={{ left: cq(x), top: cq(y), width: cq(w) }}>
             <p className="whitespace-pre-line text-[var(--color-purple)]" style={{ fontSize: cq(22), lineHeight: cq(26), letterSpacing: cq(-1.1) }}>
               {mascotPage.bio[i].text}
             </p>
           </Reveal>
         ))}
-        <Reveal variant="scale" delay={0.1} className="absolute" style={{ left: cq(142), top: cq(697), width: cq(998) }}>
+        <Reveal variant="scale" delay={0.1} className="absolute max-lg:hidden" style={{ left: cq(142), top: cq(697), width: cq(998) }}>
           <h2 className="text-center font-medium uppercase text-[var(--color-purple)]" style={{ fontSize: cq(30), lineHeight: cq(56), letterSpacing: cq(-1.5) }}>
             {mascotPage.closingHeading}
           </h2>
         </Reveal>
+      </div>
+      {/* phones: bio copy + closing line as plain readable text under the art (they are ~7px inside the scaled layout) */}
+      <div className="lg:hidden px-6 pb-10 space-y-4 text-[14px] leading-snug text-[var(--color-purple)]">
+        {mascotPage.bio.map((b, i) => <p key={i} className="whitespace-pre-line">{b.text}</p>)}
+        <h2 className="pt-2 text-center text-[16px] font-medium uppercase">{mascotPage.closingHeading}</h2>
       </div>
       </section>
 

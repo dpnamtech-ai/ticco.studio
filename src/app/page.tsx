@@ -18,12 +18,14 @@ export default async function Home() {
       <BrandSection />
 
       <section id="danh-muc">
-        <div className="relative [container-type:inline-size] lg:-mt-[0.234cqw]">
+        {/* -mt at every width so the section above covers the 3 Figma px strip above the bar (else a white line on phones) */}
+        <div className="relative [container-type:inline-size] -mt-[0.234cqw]">
           <Reveal variant="wipe" duration={1}>
-            {/* Figma "headline - danh muc san pham" 1280x90: purple bar y3 h80, text at x78 y0 */}
-            <div className="relative" style={{ height: "7.031cqw" }}>
-            <div className="absolute inset-x-0 bg-[var(--color-purple)]" style={{ top: "0.234cqw", height: "6.250cqw" }} />
-            <h2 className="absolute font-semibold uppercase text-white whitespace-nowrap" style={{ left: "6.094cqw", top: "0.000cqw", fontSize: "1.5625cqw", lineHeight: "7.031cqw", letterSpacing: "-0.0625cqw" }}>
+            {/* Figma "headline - danh muc san pham" 1280x90: purple bar y3 h80, text at x78 y0.
+                max(): exact Figma on desktop; phones get a >=44px bar and >=15px text, centred */}
+            <div className="relative" style={{ height: "max(7.031cqw, calc(44px + 0.468cqw))" }}>
+            <div className="absolute inset-x-0 bg-[var(--color-purple)]" style={{ top: "0.234cqw", height: "max(6.250cqw, 44px)" }} />
+            <h2 className="absolute font-semibold uppercase text-white whitespace-nowrap" style={{ left: "6.094cqw", top: "0.000cqw", fontSize: "max(15px, 1.5625cqw)", lineHeight: "max(7.031cqw, calc(44px + 0.468cqw))", letterSpacing: "-0.0625cqw" }}>
               Danh mục sản phẩm:
             </h2>
           </div>
