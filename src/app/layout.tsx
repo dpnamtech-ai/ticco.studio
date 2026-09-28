@@ -75,8 +75,7 @@ export default function RootLayout({
           <DanCursor />
           <PromoBar />
           <Navbar />
-          {/* ponytail: pages scale with the viewport (Figma 1280 frame = 100cqw) up to 1920px, then center; color bands stop there too */}
-          <main className="max-w-[1920px] mx-auto">
+          <main>
             <PageTransition>{children}</PageTransition>
           </main>
           <Footer />

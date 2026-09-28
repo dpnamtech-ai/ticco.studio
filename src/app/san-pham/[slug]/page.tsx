@@ -83,7 +83,7 @@ export default async function ProductPage({
         // product.name/description are admin-entered free text — escape "<" so they can't break out of the script tag (stored XSS)
         dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd).replace(/</g, "\\u003c") }}
       />
-      <div className="max-w-[1920px] mx-auto [container-type:inline-size]">
+      <div className=" [container-type:inline-size]">
       <div className={`px-4 lg:px-0 pt-6 pb-12 ${L ? "lg:pt-0 lg:pb-(--pb)" : "lg:pl-[7.031cqw] lg:pt-[4.375cqw] lg:pb-[5.781cqw]"}`} style={vars}>
         <ProductDetail
           id={product.id}

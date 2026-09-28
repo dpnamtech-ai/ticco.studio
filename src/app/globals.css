@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 /* Figma px -> screen px for the fixed-size chrome (promo bar, navbar): 1px up to a 1280 viewport, then grows with the
-   page (content scales as cqw of its ≤1920px container) and stops at 1.5px. */
-:root { --u: clamp(1px, calc(100vw / 1280), 1.5px); }
+   page like the content (cqw of the full-width page), so nothing is capped and color bands always reach both edges. */
+:root { --u: max(1px, calc(100vw / 1280)); }
 
 @theme inline {
   --color-cream: #F2F1F1;

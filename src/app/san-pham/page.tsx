@@ -55,7 +55,7 @@ export default async function SanPhamPage({ searchParams }: { searchParams: Sear
 
   return (
     <section className="bg-[#f5f5f5]">
-      <div className="max-w-[1920px] mx-auto [container-type:inline-size]">
+      <div className=" [container-type:inline-size]">
       <div className={`px-4 lg:px-0 lg:pl-[4.766cqw] pt-8 lg:pt-[3.516cqw] pb-12 ${FL ? "lg:pb-(--pb)" : "lg:pb-[4.609cqw]"}`} style={vars}>
         {/* Figma: 36px text on a 19px line box (glyphs overflow it), so no clipping "mask" reveal here */}
         <Reveal variant="up" duration={1.1}>

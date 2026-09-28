@@ -28,7 +28,7 @@ export default function FeaturedProducts({ products }: { products: Product[] }) 
         </Link>
       </div>
 
-      <div className="max-w-[1920px] mx-auto [container-type:inline-size] px-6 lg:px-0 pt-10 lg:pt-[5.078cqw] pb-12 lg:pb-[2.578cqw]">
+      <div className=" [container-type:inline-size] px-6 lg:px-0 pt-10 lg:pt-[5.078cqw] pb-12 lg:pb-[2.578cqw]">
         <div className="lg:w-[84.844cqw] mx-auto grid grid-cols-2 lg:grid-cols-4 gap-x-6 lg:gap-x-[6.406cqw] gap-y-[22px] lg:gap-y-[1.719cqw]">
           {HOME_FEATURED.map((card, i) => (
             <ProductCard key={card.id} {...figmaCardProps(card, products)} index={i} compact />
