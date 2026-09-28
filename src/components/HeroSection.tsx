@@ -39,8 +39,8 @@ export default function HeroSection() {
           initial={{ opacity: 0, x: -30 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          className="absolute font-[family-name:var(--font-heading)] font-bold uppercase leading-[1.05] tracking-[-0.04em] whitespace-nowrap"
-          style={{ left: "4.68%", top: "22.13%", width: "33.12%", fontSize: "max(26px, 6.625cqw)" }}
+          className="absolute font-[family-name:var(--font-heading)] font-bold uppercase leading-[1.0588] tracking-[-0.04em] whitespace-nowrap"
+          style={{ left: "4.68%", top: "13.51%", width: "33.12%", fontSize: "max(26px, 6.625cqw)" }}
         >
           Đời dễ ợt
           <br />

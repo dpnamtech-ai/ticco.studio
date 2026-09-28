@@ -1,0 +1,7489 @@
+{
+ "frames": {
+  "san-pham-set-sticker-01": "sticker-01-doi-de-ot",
+  "san-pham-set-sticker-02": "sticker-02-nguoi-viet-yeu-nuoc",
+  "san-pham-set-sticker-03": "sticker-03-hay-ho",
+  "san-pham-set-sticker-04": "sticker-04-ca-hoa",
+  "san-pham-set-sticker-05": "sticker-05-ban-lam-duoc-ma",
+  "san-pham-set-sticker-06": "sticker-06-doi-moi",
+  "san-pham-set-sticker-07": "sticker-07-dan-noi",
+  "san-pham-set-sticker-08": "sticker-08-dan-lao-dong",
+  "san-pham-set-sticker-09": "sticker-09-chuc-nhau-that-su",
+  "san-pham-postcard-nguoi-Viet": "postcard-nguoi-viet-yeu-nuoc",
+  "san-pham-postcard-gai-dep": "postcard-gai-dep",
+  "san-pham-postcard-ban-hoi-doi": "postcard-ban-hoi-toi-y-nghia-cuoc-doi",
+  "san-pham-postcard-triet-ly-song-Dan": "bst-postcard-triet-ly-song-dan",
+  "san-pham-boxset-tim-kiem-dieu-ky-dieu": "box-set-tim-kiem-dieu-ky-dieu",
+  "san-pham-li-xi-2026": "li-xi-2026",
+  "san-pham-than-chu-nam-moi-2026": "than-chu-nam-moi-2026",
+  "san-pham-bst-so-can-ban": "so-can-ban",
+  "san-pham-so-trong": "so-trong",
+  "san-pham-so-nhat-ky": "so-nhat-ky",
+  "san-pham-so-lao-dong": "so-lao-dong",
+  "san-pham-so-nghi-di": "so-nghi-di",
+  "san-pham-con-dau-go-han-hoan": "con-dau-go-han-hoan",
+  "san-pham-bst-dan-sinh-ton": "bst-dan-sinh-ton",
+  "san-pham-dan-sinh-ton-01": "dan-sinh-ton-01",
+  "san-pham-dan-sinh-ton-02": "dan-sinh-ton-02",
+  "san-pham-dan-sinh-ton-03": "dan-sinh-ton-03",
+  "san-pham-lot-coc-ra-khoi": "lot-coc-ra-khoi",
+  "san-pham-keychain-nguoi-Viet-yeu-nuoc": "keychain-nguoi-viet-yeu-nuoc",
+  "san-pham-keychain-uoc-duoc-lam-con-cho": "keychain-uoc-duoc-lam-con-cho",
+  "san-pham-keychain-khong-so-cuoc-doi": "keychain-khong-so-cuoc-doi",
+  "san-pham-mu-ha-ha": "mu-tai-beo-ha-ha",
+  "san-pham-mu-cha-sao": "mu-luoi-trai-cha-sao",
+  "san-pham-gile-yen-tam": "gile-yen-tam",
+  "san-pham-ao-thoai-mai": "ao-phong-thoai-mai",
+  "san-pham-bandana-van-su-tuy-minh": "khan-bandana-van-su-tuy-minh",
+  "san-pham-tui-song-cu-khoi": "tui-song-cu-khoi",
+  "san-pham-tui-vung-vang": "tui-vung-vang",
+  "san-pham-tui-xoi-loi-voi-doi": "tote-xoi-loi-voi-doi",
+  "san-pham-tui-ngu-gu": "tui-ngu-du",
+  "san-pham-tui-thuyen": "tui-thuyen"
+ },
+ "listings": {
+  "tat-ca:1": {
+   "ids": [
+    "tui-vung-vang",
+    "khan-bandana-van-su-tuy-minh",
+    "gile-yen-tam",
+    "tui-song-cu-khoi",
+    "tote-xoi-loi-voi-doi",
+    "bst-dan-sinh-ton",
+    "lot-coc-ra-khoi",
+    "con-dau-go-han-hoan",
+    "box-set-tim-kiem-dieu-ky-dieu",
+    "so-can-ban",
+    "bst-postcard-triet-ly-song-dan",
+    "sticker-01-doi-de-ot"
+   ],
+   "cards": [
+    [
+     58,
+     231
+    ],
+    [
+     357,
+     230
+    ],
+    [
+     655,
+     230
+    ],
+    [
+     955,
+     230
+    ],
+    [
+     58,
+     671
+    ],
+    [
+     357,
+     670
+    ],
+    [
+     655,
+     670
+    ],
+    [
+     955,
+     670
+    ],
+    [
+     58,
+     1113
+    ],
+    [
+     357,
+     1112
+    ],
+    [
+     656,
+     1113
+    ],
+    [
+     955,
+     1113
+    ]
+   ],
+   "pager": 1555,
+   "tabColor": null,
+   "frameH": 1975
+  },
+  "tat-ca:2": {
+   "ids": [
+    "sticker-02-nguoi-viet-yeu-nuoc",
+    "sticker-03-hay-ho",
+    "sticker-04-ca-hoa",
+    "sticker-05-ban-lam-duoc-ma",
+    "sticker-06-doi-moi",
+    "sticker-07-dan-noi",
+    "sticker-08-dan-lao-dong",
+    "sticker-09-chuc-nhau-that-su",
+    "postcard-nguoi-viet-yeu-nuoc",
+    "postcard-gai-dep",
+    "postcard-ban-hoi-toi-y-nghia-cuoc-doi",
+    "tui-ngu-du"
+   ],
+   "cards": [
+    [
+     61,
+     231
+    ],
+    [
+     360,
+     230
+    ],
+    [
+     658,
+     231
+    ],
+    [
+     958,
+     230
+    ],
+    [
+     61,
+     671
+    ],
+    [
+     360,
+     670
+    ],
+    [
+     658,
+     670
+    ],
+    [
+     958,
+     670
+    ],
+    [
+     61,
+     1113
+    ],
+    [
+     361,
+     1112
+    ],
+    [
+     660,
+     1113
+    ],
+    [
+     958,
+     1113
+    ]
+   ],
+   "pager": 1555,
+   "tabColor": null,
+   "frameH": 1975
+  },
+  "tat-ca:3": {
+   "ids": [
+    "tui-thuyen",
+    "li-xi-2026",
+    "than-chu-nam-moi-2026",
+    "so-nghi-di",
+    "ao-phong-thoai-mai",
+    "mu-tai-beo-ha-ha",
+    "mu-luoi-trai-cha-sao",
+    "keychain-nguoi-viet-yeu-nuoc",
+    "keychain-uoc-duoc-lam-con-cho",
+    "keychain-khong-so-cuoc-doi"
+   ],
+   "cards": [
+    [
+     60,
+     231
+    ],
+    [
+     361,
+     230
+    ],
+    [
+     658,
+     231
+    ],
+    [
+     959,
+     230
+    ],
+    [
+     61,
+     670
+    ],
+    [
+     360,
+     670
+    ],
+    [
+     658,
+     670
+    ],
+    [
+     958,
+     670
+    ],
+    [
+     64,
+     1113
+    ],
+    [
+     361,
+     1113
+    ]
+   ],
+   "pager": 1555,
+   "tabColor": null,
+   "frameH": 1975
+  },
+  "van-phong-pham:1": {
+   "ids": [
+    "so-can-ban",
+    "so-nghi-di",
+    "con-dau-go-han-hoan"
+   ],
+   "cards": [
+    [
+     60,
+     230
+    ],
+    [
+     358,
+     230
+    ],
+    [
+     657,
+     231
+    ]
+   ],
+   "pager": null,
+   "tabColor": "#55149f",
+   "frameH": 1023
+  },
+  "in-an:1": {
+   "ids": [
+    "sticker-01-doi-de-ot",
+    "sticker-02-nguoi-viet-yeu-nuoc",
+    "sticker-03-hay-ho",
+    "sticker-04-ca-hoa",
+    "sticker-05-ban-lam-duoc-ma",
+    "sticker-06-doi-moi",
+    "sticker-07-dan-noi",
+    "sticker-08-dan-lao-dong",
+    "sticker-09-chuc-nhau-that-su",
+    "bst-postcard-triet-ly-song-dan",
+    "box-set-tim-kiem-dieu-ky-dieu",
+    "postcard-nguoi-viet-yeu-nuoc"
+   ],
+   "cards": [
+    [
+     60,
+     231
+    ],
+    [
+     360,
+     232
+    ],
+    [
+     659,
+     231
+    ],
+    [
+     957,
+     232
+    ],
+    [
+     60,
+     671
+    ],
+    [
+     360,
+     672
+    ],
+    [
+     659,
+     671
+    ],
+    [
+     957,
+     671
+    ],
+    [
+     60,
+     1113
+    ],
+    [
+     360,
+     1113
+    ],
+    [
+     660,
+     1113
+    ],
+    [
+     958,
+     1113
+    ]
+   ],
+   "pager": 1555,
+   "tabColor": "#6625b1",
+   "frameH": 1975
+  },
+  "in-an:2": {
+   "ids": [
+    "postcard-gai-dep",
+    "postcard-ban-hoi-toi-y-nghia-cuoc-doi",
+    "li-xi-2026",
+    "than-chu-nam-moi-2026"
+   ],
+   "cards": [
+    [
+     61,
+     232
+    ],
+    [
+     360,
+     233
+    ],
+    [
+     666,
+     233
+    ],
+    [
+     963,
+     234
+    ]
+   ],
+   "pager": 674,
+   "tabColor": "#53129e",
+   "frameH": 1093
+  },
+  "tui-xach:1": {
+   "ids": [
+    "tui-song-cu-khoi",
+    "tui-vung-vang",
+    "tote-xoi-loi-voi-doi",
+    "tui-ngu-du",
+    "tui-thuyen"
+   ],
+   "cards": [
+    [
+     61,
+     232
+    ],
+    [
+     359,
+     232
+    ],
+    [
+     658,
+     233
+    ],
+    [
+     958,
+     234
+    ],
+    [
+     60,
+     670
+    ]
+   ],
+   "pager": null,
+   "tabColor": "#53129e",
+   "frameH": 1447
+  },
+  "thoi-trang:1": {
+   "ids": [
+    "gile-yen-tam",
+    "ao-phong-thoai-mai",
+    "khan-bandana-van-su-tuy-minh",
+    "mu-tai-beo-ha-ha",
+    "mu-luoi-trai-cha-sao"
+   ],
+   "cards": [
+    [
+     61,
+     234
+    ],
+    [
+     364,
+     233
+    ],
+    [
+     665,
+     233
+    ],
+    [
+     967,
+     234
+    ],
+    [
+     61,
+     652
+    ]
+   ],
+   "pager": null,
+   "tabColor": "#53129e",
+   "frameH": 1447
+  },
+  "phu-kien-doi-song:1": {
+   "ids": [
+    "bst-dan-sinh-ton",
+    "lot-coc-ra-khoi",
+    "keychain-nguoi-viet-yeu-nuoc",
+    "keychain-uoc-duoc-lam-con-cho",
+    "keychain-khong-so-cuoc-doi"
+   ],
+   "cards": [
+    [
+     60,
+     234
+    ],
+    [
+     358,
+     234
+    ],
+    [
+     657,
+     234
+    ],
+    [
+     954,
+     235
+    ],
+    [
+     59,
+     670
+    ]
+   ],
+   "pager": null,
+   "tabColor": "#53129e",
+   "frameH": 1447
+  }
+ },
+ "products": {
+  "tui-vung-vang": {
+   "name": "Túi Vững Vàng",
+   "priceFrom": 265000,
+   "title": "TÚI VỮNG VÀNG",
+   "detailPrice": "265.000 VNĐ",
+   "cardPrice": "265.000 VNĐ",
+   "card": {
+    "src": "/images/figma/4b9813af3b98a31255145a5e41ce9782b2efa0e9.webp",
+    "m": [
+     [
+      0.90165,
+      0.04739,
+      0.02915
+     ],
+     [
+      -0.02525,
+      0.75122,
+      0.20823
+     ]
+    ],
+    "ar": 0.8
+   },
+   "gallery": [
+    {
+     "src": "/images/figma/4b9813af3b98a31255145a5e41ce9782b2efa0e9.webp",
+     "m": [
+      [
+       0.90165,
+       0.04739,
+       0.02915
+      ],
+      [
+       -0.02525,
+       0.75122,
+       0.20823
+      ]
+     ],
+     "ar": 0.79971
+    },
+    {
+     "src": "/images/figma/e8d0e4521fb2b59bcc22db33966ec48820ba1314.webp",
+     "m": [
+      [
+       1,
+       0,
+       -0.00194
+      ],
+      [
+       0,
+       0.83282,
+       0.10183
+      ]
+     ],
+     "ar": 0.8006
+    },
+    {
+     "src": "/images/figma/8f7fccc2f282fea48e8a76b1b55c759f03a28aca.webp",
+     "m": [
+      [
+       0.90197,
+       0.04896,
+       0.00998
+      ],
+      [
+       -0.02613,
+       0.75117,
+       0.10221
+      ]
+     ],
+     "ar": 0.8006
+    },
+    {
+     "src": "/images/figma/5c3f3364bce2c426f4773b6e0d6aee39a17d51f3.webp",
+     "m": [
+      [
+       0.88977,
+       0,
+       0.09267
+      ],
+      [
+       0,
+       0.74074,
+       0.1303
+      ]
+     ],
+     "ar": 0.8006
+    },
+    {
+     "src": "/images/figma/1709ae5b045917daa88b71947ade71e44eaf44a8.webp",
+     "m": [
+      [
+       0.85768,
+       0,
+       0.07017
+      ],
+      [
+       0,
+       0.71429,
+       0.1874
+      ]
+     ],
+     "ar": 0.8006
+    }
+   ],
+   "layout": {
+    "sig": "[\"Túi Vững Vàng\",265000,\"Từ khoá quan trọng bạn cần có lẽ là vững-vàng.\\n\\nCông việc ngổn ngang, tương lai mơ hồ, tình cảm trục trặc, đời sống chẳng khi nào như cách mình mong muốn. Thế nên nếu không thể xoay chuyển càn khôn thì cần giữ tinh thần vững vàng dám đón nhận mọi điều.\\n\\nSáng màu, tối giản, đậm nét, một chiếc túi vững vàng để bạn vững vàng đeo hàng ngày!\",[],[\"Vải kaki canvas 100% cotton\",\"Kỹ thuật in lụa\",\"Chiều cao thân túi: 38.5cm\",\"Chiều rộng thân túi: 40cm\",\"Tổng độ dài quai: 60cm\"],null,false,\"/images/figma/4b9813af3b98a31255145a5e41ce9782b2efa0e9.webp\",[\"/images/figma/e8d0e4521fb2b59bcc22db33966ec48820ba1314.webp\",\"/images/figma/8f7fccc2f282fea48e8a76b1b55c759f03a28aca.webp\",\"/images/figma/5c3f3364bce2c426f4773b6e0d6aee39a17d51f3.webp\",\"/images/figma/1709ae5b045917daa88b71947ade71e44eaf44a8.webp\"]]",
+    "frameH": 2454,
+    "gallery": [
+     [
+      90,
+      107,
+      551,
+      689
+     ],
+     [
+      90,
+      853,
+      269,
+      336
+     ],
+     [
+      372,
+      853,
+      269,
+      336
+     ],
+     [
+      90,
+      1200,
+      269,
+      336
+     ],
+     [
+      372,
+      1200,
+      269,
+      336
+     ]
+    ],
+    "title": [
+     731,
+     98,
+     458,
+     93,
+     45
+    ],
+    "price": [
+     731,
+     155,
+     420,
+     21,
+     19
+    ],
+    "desc": [
+     731,
+     246,
+     458,
+     160,
+     20
+    ],
+    "cta": [
+     731,
+     475,
+     451,
+     40
+    ],
+    "line": [
+     731,
+     566,
+     452,
+     1
+    ],
+    "specs": [
+     731,
+     573,
+     458,
+     100,
+     20
+    ],
+    "suggest": [
+     87,
+     1593,
+     307,
+     89,
+     90
+    ],
+    "cards": [
+     87,
+     1674
+    ]
+   }
+  },
+  "khan-bandana-van-su-tuy-minh": {
+   "name": "Bandana Vạn Sự Tuỳ Mình",
+   "priceFrom": 140000,
+   "title": "BANDANA\nVẠN SỰ TUỲ MÌNH",
+   "detailPrice": "140.000 VNĐ",
+   "cardPrice": "140.000 VNĐ",
+   "card": {
+    "src": "/images/figma/b02ab0f314e5bcf9fa14e5833302b9ac612d5089.webp",
+    "m": [
+     [
+      0.68983,
+      0,
+      0.15453
+     ],
+     [
+      0,
+      0.57304,
+      0.22554
+     ]
+    ],
+    "ar": 0.79758
+   },
+   "gallery": [
+    {
+     "src": "/images/figma/b02ab0f314e5bcf9fa14e5833302b9ac612d5089.webp",
+     "m": [
+      [
+       0.68983,
+       0,
+       0.15453
+      ],
+      [
+       0,
+       0.57304,
+       0.22554
+      ]
+     ],
+     "ar": 0.80321
+    },
+    {
+     "src": "/images/figma/8f4aeb957cd3457bf7ced840994302423451bed4.webp",
+     "m": [
+      [
+       0.9974,
+       0,
+       0.0013
+      ],
+      [
+       0,
+       0.83127,
+       0.16873
+      ]
+     ],
+     "ar": 0.8
+    },
+    {
+     "src": "/images/figma/a818503a6987cbd3d8d463eced5aa7a5057b5487.webp",
+     "m": [
+      [
+       0.99988,
+       0,
+       0.00006
+      ],
+      [
+       0,
+       0.83333,
+       0.16667
+      ]
+     ],
+     "ar": 0.8
+    },
+    {
+     "src": "/images/figma/e1ec588d839e0bd2ae8e31653878336330700c6f.webp",
+     "m": [
+      [
+       0.97561,
+       0,
+       0.02506
+      ],
+      [
+       0,
+       0.81796,
+       0.0118
+      ]
+     ],
+     "ar": 0.79525
+    },
+    {
+     "src": "/images/figma/942ff2c862f7049d1367b487d9d1cdfd7ca65813.webp",
+     "m": [
+      [
+       0.61481,
+       0,
+       0.15356
+      ],
+      [
+       0,
+       0.51546,
+       0.28082
+      ]
+     ],
+     "ar": 0.79525
+    }
+   ],
+   "layout": {
+    "sig": "[\"Bandana Vạn Sự Tuỳ Mình\",140000,\"Đời của mình, đời do mình, vì bàn tay ta làm nên tất cả, mọi điều đến và đi là do cách mình đón nhận và hành động. Một chiếc khăn để Đần đưa bạn vào miền tự do. Năng nổ, màu sắc, phóng khoáng, chủ động, sống như là Đần, vạn sự là tuỳ vào bản thân mình!\",[\"Xanh lá\",\"Tím\"],[\"Chất liệu: lụa vân xước\",\"Kích thước: 70x70cm\",\"Màu sắc: xanh lá, tím\"],null,false,\"/images/figma/b02ab0f314e5bcf9fa14e5833302b9ac612d5089.webp\",[\"/images/figma/8f4aeb957cd3457bf7ced840994302423451bed4.webp\",\"/images/figma/a818503a6987cbd3d8d463eced5aa7a5057b5487.webp\",\"/images/figma/e1ec588d839e0bd2ae8e31653878336330700c6f.webp\",\"/images/figma/942ff2c862f7049d1367b487d9d1cdfd7ca65813.webp\"]]",
+    "frameH": 2454,
+    "gallery": [
+     [
+      90,
+      107,
+      551,
+      686
+     ],
+     [
+      91,
+      853,
+      268,
+      335
+     ],
+     [
+      372,
+      853,
+      268,
+      335
+     ],
+     [
+      91,
+      1203,
+      268,
+      337
+     ],
+     [
+      372,
+      1203,
+      268,
+      337
+     ]
+    ],
+    "title": [
+     731,
+     107,
+     458,
+     94,
+     38
+    ],
+    "price": [
+     731,
+     196,
+     420,
+     21,
+     19
+    ],
+    "desc": [
+     731,
+     294,
+     458,
+     100,
+     20
+    ],
+    "options": {
+     "box": [
+      731,
+      482,
+      451,
+      32
+     ],
+     "buttons": [
+      [
+       731,
+       482,
+       216,
+       32,
+       776,
+       487,
+       124,
+       21
+      ],
+      [
+       969,
+       482,
+       213,
+       32,
+       1003,
+       487,
+       143,
+       21
+      ]
+     ]
+    },
+    "cta": [
+     731,
+     535,
+     451,
+     40
+    ],
+    "line": [
+     731,
+     626,
+     452,
+     1
+    ],
+    "specs": [
+     731,
+     633,
+     458,
+     60,
+     20
+    ],
+    "suggest": [
+     87,
+     1593,
+     307,
+     89,
+     90
+    ],
+    "cards": [
+     87,
+     1674
+    ]
+   }
+  },
+  "gile-yen-tam": {
+   "name": "Gile Yên Tâm",
+   "priceFrom": 540000,
+   "title": "GILE YÊN TÂM",
+   "detailPrice": "540.000 VNĐ",
+   "cardPrice": "540.000 VNĐ",
+   "card": {
+    "src": "/images/figma/e3bb3efef65e3164986172913836d0c9834070d4.webp",
+    "m": [
+     [
+      0.83399,
+      0,
+      0.05453
+     ],
+     [
+      0,
+      0.8335,
+      0.14729
+     ]
+    ],
+    "ar": 0.8006
+   },
+   "gallery": [
+    {
+     "src": "/images/figma/e3bb3efef65e3164986172913836d0c9834070d4.webp",
+     "m": [
+      [
+       0.83399,
+       0,
+       0.05453
+      ],
+      [
+       0,
+       0.8335,
+       0.14729
+      ]
+     ],
+     "ar": 0.80029
+    },
+    {
+     "src": "/images/figma/16fda81ca50e272583bd276c6e0cf99e6f5609ce.webp",
+     "m": [
+      [
+       0.9984,
+       0,
+       0.0008
+      ],
+      [
+       0,
+       0.99112,
+       0
+      ]
+     ],
+     "ar": 0.80597
+    },
+    {
+     "src": "/images/figma/46697727376ef50b532473dc20a375e2c9d92b4c.webp",
+     "m": [
+      [
+       1,
+       0,
+       0
+      ],
+      [
+       0,
+       0.99628,
+       0.00037
+      ]
+     ],
+     "ar": 0.80299
+    },
+    {
+     "src": "/images/figma/c20d421ded6be34d64262808f1d25ba3af4f3948.webp",
+     "fit": "cover"
+    },
+    {
+     "src": "/images/figma/4ba7b0e46d14120eadb6f9c6ce2a0fd5b74da2dc.webp",
+     "m": [
+      [
+       0.93604,
+       0,
+       0.05426
+      ],
+      [
+       0,
+       0.93458,
+       0.02697
+      ]
+     ],
+     "ar": 0.80119
+    }
+   ],
+   "extra": {
+    "label": "THÔNG SỐ TỪNG SIZE:",
+    "w": 394,
+    "h": 493,
+    "src": "/images/figma/46aece563ff90fbbe5ee691e036c5018281384be.webp",
+    "fit": "cover"
+   },
+   "layout": {
+    "sig": "[\"Gile Yên Tâm\",540000,\"Thuộc BST \\\"Chúc Tết Nhau Thật Sự\\\"\\n\\nĐầu năm yên tâm, một năm yên tâm, cả đời yên tâm. Mọi điều an lành khi bạn yên ở tâm. Tíc Cơ gọi đây là một chiếc gile đơn giản, sẵn sàng để bạn khoác lên mình sự yên tâm và khởi đầu cho một năm thật trơn tru.\",[\"Size M\",\"Size L\",\"Size XL\"],[\"Chất liệu: kaki thô\",\"Màu sắc: xanh rêu\",\"Form suông, chữ thêu\",\"Size: M/L/XL\"],null,false,\"/images/figma/e3bb3efef65e3164986172913836d0c9834070d4.webp\",[\"/images/figma/16fda81ca50e272583bd276c6e0cf99e6f5609ce.webp\",\"/images/figma/46697727376ef50b532473dc20a375e2c9d92b4c.webp\",\"/images/figma/c20d421ded6be34d64262808f1d25ba3af4f3948.webp\",\"/images/figma/4ba7b0e46d14120eadb6f9c6ce2a0fd5b74da2dc.webp\"]]",
+    "frameH": 2454,
+    "gallery": [
+     [
+      90,
+      107,
+      549,
+      686
+     ],
+     [
+      90,
+      853,
+      270,
+      335
+     ],
+     [
+      371,
+      853,
+      269,
+      335
+     ],
+     [
+      91,
+      1203,
+      270,
+      337
+     ],
+     [
+      371,
+      1203,
+      270,
+      337
+     ]
+    ],
+    "title": [
+     731,
+     107,
+     458,
+     21,
+     19
+    ],
+    "price": [
+     731,
+     149,
+     420,
+     21,
+     19
+    ],
+    "desc": [
+     731,
+     237,
+     458,
+     140,
+     20
+    ],
+    "options": {
+     "box": [
+      731,
+      425,
+      451,
+      32
+     ],
+     "buttons": [
+      [
+       731,
+       425,
+       130,
+       32,
+       758,
+       430,
+       75,
+       21
+      ],
+      [
+       892,
+       425,
+       130,
+       32,
+       913,
+       430,
+       87,
+       21
+      ],
+      [
+       1052,
+       425,
+       130,
+       32,
+       1074,
+       430,
+       97,
+       21
+      ]
+     ]
+    },
+    "cta": [
+     731,
+     478,
+     451,
+     40
+    ],
+    "line": [
+     731,
+     569,
+     452,
+     1
+    ],
+    "specs": [
+     731,
+     576,
+     458,
+     80,
+     20
+    ],
+    "extraLabel": [
+     731,
+     749,
+     212,
+     19,
+     19
+    ],
+    "extraImg": [
+     731,
+     793,
+     394,
+     493
+    ],
+    "suggest": [
+     87,
+     1593,
+     307,
+     89,
+     90
+    ],
+    "cards": [
+     87,
+     1674
+    ]
+   }
+  },
+  "tui-song-cu-khoi": {
+   "name": "Túi Sống Cừ Khôi",
+   "priceFrom": 355000,
+   "title": "TÚI SỐNG CỪ KHÔI",
+   "detailPrice": "355.000 VNĐ",
+   "cardPrice": "355.000 VNĐ",
+   "card": {
+    "src": "/images/figma/49ed335455d55ceb3c5617fba6bbb556634841e3.webp",
+    "m": [
+     [
+      0.89854,
+      0,
+      0.04945
+     ],
+     [
+      0,
+      0.75188,
+      0.17038
+     ]
+    ],
+    "ar": 0.79758
+   },
+   "gallery": [
+    {
+     "src": "/images/figma/49ed335455d55ceb3c5617fba6bbb556634841e3.webp",
+     "m": [
+      [
+       0.89854,
+       0,
+       0.04945
+      ],
+      [
+       0,
+       0.75188,
+       0.17038
+      ]
+     ],
+     "ar": 0.79681
+    },
+    {
+     "src": "/images/figma/673cbb53e3ca2dad0d5f7a9ffff936b872663924.webp",
+     "m": [
+      [
+       0.82243,
+       0,
+       0.1228
+      ],
+      [
+       0,
+       0.68493,
+       0.18515
+      ]
+     ],
+     "ar": 0.8006
+    },
+    {
+     "src": "/images/figma/f198dc24a10b50aba91ee812d5d6e7ef11d2ba12.webp",
+     "m": [
+      [
+       0.83695,
+       0,
+       0.11666
+      ],
+      [
+       0,
+       0.69444,
+       0.09139
+      ]
+     ],
+     "ar": 0.80357
+    },
+    {
+     "src": "/images/figma/6716280f777aaa7145a0fb5bda98963a75e9a1d2.webp",
+     "m": [
+      [
+       0.99617,
+       0,
+       0.00006
+      ],
+      [
+       0,
+       0.82963,
+       0
+      ]
+     ],
+     "ar": 0.8006
+    },
+    {
+     "src": "/images/figma/0ce81e9b51a0ddd7a0d6a9680e8ce16c3e4f0563.webp",
+     "m": [
+      [
+       1,
+       0,
+       0
+      ],
+      [
+       0,
+       0.83282,
+       0.16663
+      ]
+     ],
+     "ar": 0.8006
+    }
+   ],
+   "layout": {
+    "sig": "[\"Túi Sống Cừ Khôi\",355000,\"Ai cũng có thể sống cừ khôi với chính cuộc đời mình!\\n\\nLàm thì làm cho nó tới, bắt đầu thì sẽ đi đến cuối, trọn vẹn và tâm huyết với những điều mình có, sống cho thật oách và khiến mình nể chính cuộc đời mình.\\n\\nKhẩu hiệu ngắn gọn và đơn giản, đó là tất cả những gì Tíc Cơ muốn nói với bạn qua một chiếc túi rực màu! Đeo túi hàng ngày cho đời sống khoẻ và cho cuộc đời cừ khôi!\",[],[\"Vải dù gió nhăn, chữ thêu\",\"Lớp lót dày giữ form\",\"02 khoá bấm, bên trong chia ngăn\",\"Chiều rộng miệng túi: 60cm\",\"Chiều rộng đáy túi: 31x13cm\",\"Chiều cao thân túi: 28cm\",\"Tổng độ dài quai: 63cm\"],null,false,\"/images/figma/49ed335455d55ceb3c5617fba6bbb556634841e3.webp\",[\"/images/figma/673cbb53e3ca2dad0d5f7a9ffff936b872663924.webp\",\"/images/figma/f198dc24a10b50aba91ee812d5d6e7ef11d2ba12.webp\",\"/images/figma/6716280f777aaa7145a0fb5bda98963a75e9a1d2.webp\",\"/images/figma/0ce81e9b51a0ddd7a0d6a9680e8ce16c3e4f0563.webp\"]]",
+    "frameH": 2454,
+    "gallery": [
+     [
+      90,
+      107,
+      549,
+      689
+     ],
+     [
+      90,
+      853,
+      269,
+      336
+     ],
+     [
+      371,
+      853,
+      270,
+      336
+     ],
+     [
+      90,
+      1200,
+      269,
+      336
+     ],
+     [
+      372,
+      1200,
+      269,
+      336
+     ]
+    ],
+    "title": [
+     731,
+     98,
+     458,
+     93,
+     45
+    ],
+    "price": [
+     731,
+     155,
+     420,
+     21,
+     19
+    ],
+    "desc": [
+     731,
+     246,
+     458,
+     200,
+     20
+    ],
+    "cta": [
+     731,
+     475,
+     451,
+     40
+    ],
+    "line": [
+     731,
+     566,
+     452,
+     1
+    ],
+    "specs": [
+     731,
+     573,
+     458,
+     140,
+     20
+    ],
+    "suggest": [
+     87,
+     1593,
+     307,
+     89,
+     90
+    ],
+    "cards": [
+     87,
+     1674
+    ]
+   }
+  },
+  "tote-xoi-loi-voi-doi": {
+   "name": "Túi Xởi Lởi Với Đời",
+   "priceFrom": 320000,
+   "title": "TÚI XỞI LỞI VỚI ĐỜI",
+   "detailPrice": "320.000 VNĐ",
+   "cardPrice": "320.000 VNĐ",
+   "card": {
+    "src": "/images/figma/5e314c6822b69042209605df5465620aca291bae.webp",
+    "m": [
+     [
+      0.83279,
+      0,
+      0.08294
+     ],
+     [
+      0,
+      0.78125,
+      0.03641
+     ]
+    ],
+    "ar": 0.8
+   },
+   "gallery": [
+    {
+     "src": "/images/figma/5e314c6822b69042209605df5465620aca291bae.webp",
+     "m": [
+      [
+       0.83279,
+       0,
+       0.08294
+      ],
+      [
+       0,
+       0.78125,
+       0.03641
+      ]
+     ],
+     "ar": 0.79971
+    },
+    {
+     "src": "/images/figma/119485dabffc8f5f9f99e16a6db62fe0590a2824.webp",
+     "m": [
+      [
+       0.8026,
+       0,
+       0.11934
+      ],
+      [
+       0,
+       0.75188,
+       0.05188
+      ]
+     ],
+     "ar": 0.8006
+    },
+    {
+     "src": "/images/figma/c3017a415bc25687c8488bc720f3555113964d2a.webp",
+     "m": [
+      [
+       0.76456,
+       0,
+       0.11805
+      ],
+      [
+       0,
+       0.76336,
+       0.18925
+      ]
+     ],
+     "ar": 0.80119
+    },
+    {
+     "src": "/images/figma/97a707626fa8e531230cffc566b78daefba992d8.webp",
+     "m": [
+      [
+       0.92022,
+       0,
+       0.07814
+      ],
+      [
+       0,
+       0.86207,
+       0.00124
+      ]
+     ],
+     "ar": 0.8006
+    },
+    {
+     "src": "/images/figma/2686123db9b4c193dab84e3954a25b4f6b58267b.webp",
+     "m": [
+      [
+       0.73618,
+       0,
+       0.17946
+      ],
+      [
+       0,
+       0.68966,
+       0.09588
+      ]
+     ],
+     "ar": 0.8006
+    }
+   ],
+   "layout": {
+    "sig": "[\"Túi Xởi Lởi Với Đời\",320000,\"Nhắc mình xởi lởi, chuyện gì rồi cũng sẽ qua. Một chiếc túi đồng hành cùng bạn trong đời, đeo Xởi lởi với đời trên vai để nhắc mình hân hoan mỗi ngày!\",[],[\"Có khoá bấm, ngăn nhỏ đựng đồ, móc nhỏ treo keychain\",\"Chất liệu: vải jeans sọc xanh\",\"Kích thước đáy: 38,5x15cm\",\"Chiều cao túi: 30cm\",\"Độ dài quai: 65cm\"],null,false,\"/images/figma/5e314c6822b69042209605df5465620aca291bae.webp\",[\"/images/figma/119485dabffc8f5f9f99e16a6db62fe0590a2824.webp\",\"/images/figma/c3017a415bc25687c8488bc720f3555113964d2a.webp\",\"/images/figma/97a707626fa8e531230cffc566b78daefba992d8.webp\",\"/images/figma/2686123db9b4c193dab84e3954a25b4f6b58267b.webp\"]]",
+    "frameH": 2454,
+    "gallery": [
+     [
+      90,
+      107,
+      551,
+      689
+     ],
+     [
+      90,
+      853,
+      269,
+      336
+     ],
+     [
+      371,
+      853,
+      270,
+      337
+     ],
+     [
+      90,
+      1200,
+      269,
+      336
+     ],
+     [
+      372,
+      1200,
+      269,
+      336
+     ]
+    ],
+    "title": [
+     731,
+     98,
+     458,
+     93,
+     45
+    ],
+    "price": [
+     731,
+     155,
+     420,
+     21,
+     19
+    ],
+    "desc": [
+     731,
+     246,
+     458,
+     60,
+     20
+    ],
+    "cta": [
+     731,
+     353,
+     451,
+     40
+    ],
+    "line": [
+     731,
+     444,
+     452,
+     1
+    ],
+    "specs": [
+     731,
+     451,
+     458,
+     100,
+     20
+    ],
+    "suggest": [
+     87,
+     1593,
+     307,
+     89,
+     90
+    ],
+    "cards": [
+     87,
+     1674
+    ]
+   }
+  },
+  "bst-dan-sinh-ton": {
+   "name": "BST móc khoá Đần Sinh Tồn",
+   "priceFrom": 445000,
+   "title": "BST ĐẦN SINH TỒN",
+   "detailPrice": "445.000 VNĐ/ BST 3 box",
+   "cardPrice": "165.000 VNĐ/ box",
+   "card": {
+    "src": "/images/figma/ef4ef25a6a8f4a710f9fd609c193d5f2f856275e.webp",
+    "m": [
+     [
+      0.6948,
+      0,
+      0.16929
+     ],
+     [
+      0,
+      0.58055,
+      0.25375
+     ]
+    ],
+    "ar": 0.79758
+   },
+   "gallery": [
+    {
+     "src": "/images/figma/ef4ef25a6a8f4a710f9fd609c193d5f2f856275e.webp",
+     "m": [
+      [
+       0.6948,
+       0,
+       0.16929
+      ],
+      [
+       0,
+       0.58055,
+       0.25375
+      ]
+     ],
+     "ar": 0.79826
+    },
+    {
+     "src": "/images/figma/4ce44f4330ae8bc2fef5ac4b56d607aee3dacd70.webp",
+     "m": [
+      [
+       0.76565,
+       0,
+       0.11717
+      ],
+      [
+       0,
+       0.63694,
+       0.24484
+      ]
+     ],
+     "ar": 0.80119
+    },
+    {
+     "src": "/images/figma/96469be5dfa3d01b37bde51905a0a9d58ef20ec5.webp",
+     "m": [
+      [
+       0.69604,
+       0,
+       0.15014
+      ],
+      [
+       0,
+       0.5814,
+       0.28274
+      ]
+     ],
+     "ar": 0.79822
+    },
+    {
+     "src": "/images/figma/368d07ae0a72eaabf2d8258a8251108eb7dd7bdd.webp",
+     "m": [
+      [
+       0.5464,
+       0,
+       0.2261
+      ],
+      [
+       0,
+       0.45455,
+       0.31481
+      ]
+     ],
+     "ar": 0.80119
+    },
+    {
+     "src": "/images/figma/1828f0dd902e6e171a18989b5fc3dd36ab491e35.webp",
+     "m": [
+      [
+       0.86448,
+       0,
+       0.06804
+      ],
+      [
+       0,
+       0.71942,
+       0.1664
+      ]
+     ],
+     "ar": 0.80119
+    },
+    {
+     "src": "/images/figma/3192e63386fc8f154aa17a14297f5acb41297bbc.webp",
+     "m": [
+      [
+       0.6268,
+       0,
+       0.15395
+      ],
+      [
+       0,
+       0.52356,
+       0.31462
+      ]
+     ],
+     "ar": 0.79822
+    },
+    {
+     "src": "/images/figma/c60a39c7d1c58584d602762dffa7935dad47fd86.webp",
+     "m": [
+      [
+       0.63578,
+       0,
+       0.18172
+      ],
+      [
+       0,
+       0.5291,
+       0.32692
+      ]
+     ],
+     "ar": 0.80119
+    }
+   ],
+   "layout": {
+    "sig": "[\"BST móc khoá Đần Sinh Tồn\",445000,\"Đần đồng hành cùng bạn qua mọi cung bậc cảm xúc và mọi giai đoạn trong đời. Bộ sưu tập bao gồm 03 móc khoá Đần tạo thành một vòng lặp sinh tồn, sẵn sàng cùng bạn sống một đời vui khoẻ và có ích!\",[\"01 - Đần cứ bình tình\",\"02 - Đần nuốt nước mắt vào trong\",\"03 - Đần vắt cực khô, sống cực căng\",\"BST 3 box\"],[\"Một set gồm: 1 box đựng, 1 gấu bông Đần, 1 piece mica trong suốt\",\"Kích thước: 12cm cả móc treo (có sai số nhẹ)\"],\"Mua 2 set giảm 5%, mua 3 set giảm 10%\",false,\"/images/figma/ef4ef25a6a8f4a710f9fd609c193d5f2f856275e.webp\",[\"/images/figma/4ce44f4330ae8bc2fef5ac4b56d607aee3dacd70.webp\",\"/images/figma/96469be5dfa3d01b37bde51905a0a9d58ef20ec5.webp\",\"/images/figma/368d07ae0a72eaabf2d8258a8251108eb7dd7bdd.webp\",\"/images/figma/1828f0dd902e6e171a18989b5fc3dd36ab491e35.webp\",\"/images/figma/3192e63386fc8f154aa17a14297f5acb41297bbc.webp\",\"/images/figma/c60a39c7d1c58584d602762dffa7935dad47fd86.webp\"]]",
+    "frameH": 2454,
+    "gallery": [
+     [
+      90,
+      107,
+      550,
+      689
+     ],
+     [
+      90,
+      853,
+      270,
+      337
+     ],
+     [
+      371,
+      853,
+      269,
+      337
+     ],
+     [
+      652,
+      853,
+      270,
+      337
+     ],
+     [
+      90,
+      1203,
+      270,
+      337
+     ],
+     [
+      371,
+      1203,
+      269,
+      337
+     ],
+     [
+      652,
+      1203,
+      270,
+      337
+     ]
+    ],
+    "title": [
+     731,
+     107,
+     458,
+     21,
+     19
+    ],
+    "price": [
+     731,
+     149,
+     420,
+     21,
+     19
+    ],
+    "desc": [
+     731,
+     237,
+     458,
+     60,
+     20
+    ],
+    "options": {
+     "box": [
+      731,
+      381,
+      451,
+      115
+     ],
+     "buttons": [
+      [
+       731,
+       381,
+       171,
+       32,
+       733,
+       385,
+       168,
+       21
+      ],
+      [
+       908,
+       381,
+       274,
+       32,
+       912,
+       385,
+       269,
+       21
+      ],
+      [
+       731,
+       425,
+       296,
+       32,
+       737,
+       429,
+       322,
+       21
+      ],
+      [
+       731,
+       464,
+       130,
+       32,
+       752,
+       468,
+       87,
+       21
+      ]
+     ]
+    },
+    "cta": [
+     731,
+     510,
+     451,
+     40
+    ],
+    "line": [
+     731,
+     601,
+     452,
+     1
+    ],
+    "specs": [
+     731,
+     608,
+     458,
+     100,
+     20
+    ],
+    "suggest": [
+     87,
+     1593,
+     307,
+     89,
+     90
+    ],
+    "cards": [
+     87,
+     1674
+    ]
+   }
+  },
+  "lot-coc-ra-khoi": {
+   "name": "Lót cốc Ra Khơi",
+   "priceFrom": 85000,
+   "title": "LÓT CỐC RA KHƠI",
+   "detailPrice": "85.000 VNĐ",
+   "cardPrice": "85.000 VNĐ",
+   "card": {
+    "src": "/images/figma/0c42dbdde44f81e4db9b9eaaee899d0fa8ff4524.webp",
+    "m": [
+     [
+      0.58827,
+      -0.0196,
+      0.21361
+     ],
+     [
+      0.01042,
+      0.49244,
+      0.29586
+     ]
+    ],
+    "ar": 0.7958
+   },
+   "gallery": [
+    {
+     "src": "/images/figma/0c42dbdde44f81e4db9b9eaaee899d0fa8ff4524.webp",
+     "m": [
+      [
+       0.58827,
+       -0.0196,
+       0.21361
+      ],
+      [
+       0.01042,
+       0.49244,
+       0.29586
+      ]
+     ],
+     "ar": 0.79681
+    },
+    {
+     "src": "/images/figma/68f6557185e9e714ee1244405202bb3e030c7a3f.webp",
+     "m": [
+      [
+       0.96751,
+       0,
+       0.00164
+      ],
+      [
+       0,
+       0.80576,
+       0.0981
+      ]
+     ],
+     "ar": 0.8006
+    },
+    {
+     "src": "/images/figma/01ea6ab7f6b705b3cb9ae48edb920032001dc5ab.webp",
+     "m": [
+      [
+       0.61263,
+       0,
+       0.2114
+      ],
+      [
+       0,
+       0.5102,
+       0.34796
+      ]
+     ],
+     "ar": 0.8006
+    },
+    {
+     "src": "/images/figma/e7447cb384ea6ca3ee8180b98e113766c9c6c6da.webp",
+     "m": [
+      [
+       0.6458,
+       0,
+       0.15133
+      ],
+      [
+       0,
+       0.53763,
+       0.30836
+      ]
+     ],
+     "ar": 0.8006
+    },
+    {
+     "src": "/images/figma/1ef614e96a232a1624f0e6e91a35cfb574453fd6.webp",
+     "m": [
+      [
+       0.89608,
+       0,
+       0.05196
+      ],
+      [
+       0,
+       0.74627,
+       0.15437
+      ]
+     ],
+     "ar": 0.8006
+    }
+   ],
+   "layout": {
+    "sig": "[\"Lót cốc Ra Khơi\",85000,\"Mọi cuộc hải trình đều bắt đầu từ việc ra khơi. Đưa tinh thần ấy vào đời sống hàng ngày, Tíc Cơ ra mắt sản phẩm lót cốc Ra Khơi, lót bước đệm cho mọi bước đi bạn dám xông pha!\",[\"Hoạ tiết sọc\",\"Xanh rêu\"],[\"Chất liệu: vải thô chần bông, thấm nước\",\"Màu sắc: xanh rêu, hoạ tiết sọc\",\"Kích thước: 10x10cm (có sai số nhẹ)\",\"Sản phẩm may máy thủ công, có độ hoàn thiện riêng, không tuyệt đối đồng nhất\"],null,false,\"/images/figma/0c42dbdde44f81e4db9b9eaaee899d0fa8ff4524.webp\",[\"/images/figma/68f6557185e9e714ee1244405202bb3e030c7a3f.webp\",\"/images/figma/01ea6ab7f6b705b3cb9ae48edb920032001dc5ab.webp\",\"/images/figma/e7447cb384ea6ca3ee8180b98e113766c9c6c6da.webp\",\"/images/figma/1ef614e96a232a1624f0e6e91a35cfb574453fd6.webp\"]]",
+    "frameH": 2454,
+    "gallery": [
+     [
+      90,
+      107,
+      549,
+      689
+     ],
+     [
+      90,
+      853,
+      269,
+      336
+     ],
+     [
+      372,
+      853,
+      269,
+      336
+     ],
+     [
+      90,
+      1200,
+      269,
+      336
+     ],
+     [
+      372,
+      1200,
+      269,
+      336
+     ]
+    ],
+    "title": [
+     731,
+     98,
+     458,
+     93,
+     45
+    ],
+    "price": [
+     731,
+     155,
+     420,
+     21,
+     19
+    ],
+    "desc": [
+     731,
+     246,
+     458,
+     80,
+     20
+    ],
+    "options": {
+     "box": [
+      731,
+      420,
+      451,
+      32
+     ],
+     "buttons": [
+      [
+       731,
+       420,
+       216,
+       32,
+       776,
+       425,
+       124,
+       21
+      ],
+      [
+       969,
+       420,
+       213,
+       32,
+       1003,
+       425,
+       143,
+       21
+      ]
+     ]
+    },
+    "cta": [
+     731,
+     475,
+     451,
+     40
+    ],
+    "line": [
+     731,
+     566,
+     452,
+     1
+    ],
+    "specs": [
+     731,
+     573,
+     458,
+     100,
+     20
+    ],
+    "suggest": [
+     87,
+     1593,
+     307,
+     89,
+     90
+    ],
+    "cards": [
+     87,
+     1674
+    ]
+   }
+  },
+  "con-dau-go-han-hoan": {
+   "name": "Con dấu gỗ Hân Hoan",
+   "priceFrom": 155000,
+   "title": "CON DẤU GỖ HÂN HOAN",
+   "detailPrice": "155.000 VNĐ",
+   "cardPrice": "155.000 VNĐ",
+   "card": {
+    "src": "/images/figma/13a318674676bd64965fed3edcc9ae81e46d1dcc.webp",
+    "m": [
+     [
+      0.68447,
+      0,
+      0.15446
+     ],
+     [
+      0,
+      0.68995,
+      0.18907
+     ]
+    ],
+    "ar": 0.79279
+   },
+   "gallery": [
+    {
+     "src": "/images/figma/13a318674676bd64965fed3edcc9ae81e46d1dcc.webp",
+     "m": [
+      [
+       0.68966,
+       0,
+       0.15446
+      ],
+      [
+       0,
+       0.68995,
+       0.18907
+      ]
+     ],
+     "ar": 0.79971
+    },
+    {
+     "src": "/images/figma/be071f61853f0450e7cefd81680945e3b04003b3.webp",
+     "m": [
+      [
+       0.94373,
+       0,
+       0.00007
+      ],
+      [
+       0,
+       1,
+       0
+      ]
+     ],
+     "ar": 0.8006
+    },
+    {
+     "src": "/images/figma/daa728ad6ba78797a92b35f0f68a41afb7184302.webp",
+     "m": [
+      [
+       0.96416,
+       0,
+       0.00013
+      ],
+      [
+       0,
+       0.80297,
+       0.07314
+      ]
+     ],
+     "ar": 0.8006
+    },
+    {
+     "src": "/images/figma/ce452ac1f57c867975b3e6e499deb8e8e1782c9a.webp",
+     "m": [
+      [
+       0.90464,
+       0,
+       0.0456
+      ],
+      [
+       0,
+       0.75329,
+       0.16597
+      ]
+     ],
+     "ar": 0.8006
+    },
+    {
+     "src": "/images/figma/4b2628c4dd850a6b17353acfb7e21c26520b1109.webp",
+     "m": [
+      [
+       0.81132,
+       0,
+       0.09431
+      ],
+      [
+       0,
+       0.67568,
+       0.17188
+      ]
+     ],
+     "ar": 0.8006
+    }
+   ],
+   "layout": {
+    "sig": "[\"Con dấu gỗ Hân Hoan\",155000,\"Sản phẩm giới hạn Trung Thu 2026\\n\\nAi cũng từng là con nít! Ai cũng từng nhảy chân sáo líu lo, tròn xoe mắt tò mò với mọi thứ và phấn khích cười tít mắt với những niềm vui rất đỗi nhỏ nhặt.\\n\\nMột mùa lễ trăng rằm lại đến, chúng tôi quyết định để bạn nhớ lại niềm hân hoan của ngày nhỏ ấy bằng một sản phẩm giới hạn dịp lễ này. Một con dấu gỗ nho nhỏ, nằm trong cái hộp màu mè, vui những niềm hân hoan be bé, chơi Trung thu hoá ra chỉ cần có thế!\",[],[\"Bao gồm:\",\"01 hộp đựng (kích thước 6.5x6.5cm)\",\"01 con dấu gỗ (đường kính 3.2cm)\",\"01 mực đỏ mini\"],null,false,\"/images/figma/13a318674676bd64965fed3edcc9ae81e46d1dcc.webp\",[\"/images/figma/be071f61853f0450e7cefd81680945e3b04003b3.webp\",\"/images/figma/daa728ad6ba78797a92b35f0f68a41afb7184302.webp\",\"/images/figma/ce452ac1f57c867975b3e6e499deb8e8e1782c9a.webp\",\"/images/figma/4b2628c4dd850a6b17353acfb7e21c26520b1109.webp\"]]",
+    "frameH": 2454,
+    "gallery": [
+     [
+      90,
+      107,
+      551,
+      689
+     ],
+     [
+      90,
+      853,
+      269,
+      336
+     ],
+     [
+      372,
+      853,
+      269,
+      336
+     ],
+     [
+      90,
+      1200,
+      269,
+      336
+     ],
+     [
+      372,
+      1200,
+      269,
+      336
+     ]
+    ],
+    "title": [
+     731,
+     98,
+     458,
+     93,
+     45
+    ],
+    "price": [
+     731,
+     155,
+     420,
+     21,
+     19
+    ],
+    "desc": [
+     731,
+     246,
+     458,
+     200,
+     20
+    ],
+    "cta": [
+     731,
+     475,
+     451,
+     40
+    ],
+    "line": [
+     731,
+     566,
+     452,
+     1
+    ],
+    "specs": [
+     731,
+     573,
+     458,
+     100,
+     20
+    ],
+    "suggest": [
+     87,
+     1593,
+     307,
+     89,
+     90
+    ],
+    "cards": [
+     87,
+     1674
+    ]
+   }
+  },
+  "box-set-tim-kiem-dieu-ky-dieu": {
+   "name": "Box set Tìm Kiếm Điều Kỳ Diệu",
+   "priceFrom": 200000,
+   "title": "BOX SET\nTÌM KIẾM ĐIỀU KỲ DIỆU",
+   "detailPrice": "200.000 VNĐ",
+   "cardPrice": "200.000 VNĐ",
+   "card": {
+    "src": "/images/figma/d5ab3991303c7ce24157da64f26aa375c11121fb.webp",
+    "m": [
+     [
+      0.81468,
+      0,
+      0.10043
+     ],
+     [
+      0,
+      0.68027,
+      0.18556
+     ]
+    ],
+    "ar": 0.8
+   },
+   "gallery": [
+    {
+     "src": "/images/figma/d5ab3991303c7ce24157da64f26aa375c11121fb.webp",
+     "m": [
+      [
+       0.81468,
+       0,
+       0.10043
+      ],
+      [
+       0,
+       0.68027,
+       0.18556
+      ]
+     ],
+     "ar": 0.79826
+    },
+    {
+     "src": "/images/figma/d67f026df7b3950f48c9cbdd3497610b3fda9382.webp",
+     "m": [
+      [
+       0.90282,
+       0,
+       0.08219
+      ],
+      [
+       0,
+       0.75188,
+       0.08494
+      ]
+     ],
+     "ar": 0.8006
+    },
+    {
+     "src": "/images/figma/0c78bf6039dd291993366a70a48aaa08ff8b492d.webp",
+     "m": [
+      [
+       0.76481,
+       0,
+       0.1171
+      ],
+      [
+       0,
+       0.63694,
+       0.27456
+      ]
+     ],
+     "ar": 0.8006
+    },
+    {
+     "src": "/images/figma/8cdf5b2e4ba8054a06d13b5df0574a74d2e40e96.webp",
+     "m": [
+      [
+       0.82715,
+       0,
+       0.08642
+      ],
+      [
+       0,
+       0.68966,
+       0.19953
+      ]
+     ],
+     "ar": 0.8006
+    },
+    {
+     "src": "/images/figma/e1279b05d44aab0dcf3aa2779e4a4e1da3866778.webp",
+     "m": [
+      [
+       0.5211,
+       0,
+       0.24158
+      ],
+      [
+       0,
+       0.97621,
+       0.0132
+      ]
+     ],
+     "ar": 0.8006
+    },
+    {
+     "src": "/images/figma/c7e7e111b458cce0d6fbfddac0702046bae39a20.webp",
+     "m": [
+      [
+       0.7512,
+       0,
+       0.12207
+      ],
+      [
+       0,
+       0.625,
+       0.25364
+      ]
+     ],
+     "ar": 0.8006
+    },
+    {
+     "src": "/images/figma/6e4ac41ab95270683be5355cc9b38cdcbcc9ed56.webp",
+     "m": [
+      [
+       0.89608,
+       0,
+       0.04877
+      ],
+      [
+       0,
+       0.74627,
+       0.20479
+      ]
+     ],
+     "ar": 0.8006
+    }
+   ],
+   "layout": {
+    "sig": "[\"Box set Tìm Kiếm Điều Kỳ Diệu\",200000,\"Đời thực kỳ diệu khi mình dành thời gian chú tâm ngó nhìn. Hơn cả một-cái-hộp, box set “TÌM KIẾM ĐIỀU KỲ DIỆU” dẫn bạn đi vào khu phố Tíc Cơ, quan sát đời sống trên mặt phẳng, chúng tôi mong được làm bạn bất giác mỉm cười khi khám phá ra những điều giấu kín trong bản đồ ấy.\\n\\nMột sản phẩm để bạn thấy hàng ngày chẳng phải bình thường, một sản phẩm để bạn mở ra ngắm nhìn, một sản phẩm để tặng nhau chẳng nhân dịp gì!\",[],[\"Box set gồm:\",\"01 box, chất liệu craft cứng\",\"01 tấm bản đồ\",\"01 set cards (gồm 10 tấm card điều kỳ diệu)\",\"01 tờ hướng dẫn sử dụng\"],null,false,\"/images/figma/d5ab3991303c7ce24157da64f26aa375c11121fb.webp\",[\"/images/figma/d67f026df7b3950f48c9cbdd3497610b3fda9382.webp\",\"/images/figma/0c78bf6039dd291993366a70a48aaa08ff8b492d.webp\",\"/images/figma/8cdf5b2e4ba8054a06d13b5df0574a74d2e40e96.webp\",\"/images/figma/e1279b05d44aab0dcf3aa2779e4a4e1da3866778.webp\",\"/images/figma/c7e7e111b458cce0d6fbfddac0702046bae39a20.webp\",\"/images/figma/6e4ac41ab95270683be5355cc9b38cdcbcc9ed56.webp\"]]",
+    "frameH": 2454,
+    "gallery": [
+     [
+      90,
+      107,
+      550,
+      689
+     ],
+     [
+      89,
+      853,
+      269,
+      336
+     ],
+     [
+      371,
+      853,
+      269,
+      336
+     ],
+     [
+      653,
+      853,
+      269,
+      336
+     ],
+     [
+      89,
+      1200,
+      269,
+      336
+     ],
+     [
+      371,
+      1200,
+      269,
+      336
+     ],
+     [
+      653,
+      1200,
+      269,
+      336
+     ]
+    ],
+    "title": [
+     731,
+     98,
+     458,
+     93,
+     45
+    ],
+    "price": [
+     731,
+     199,
+     420,
+     21,
+     19
+    ],
+    "desc": [
+     731,
+     290,
+     458,
+     160,
+     20
+    ],
+    "cta": [
+     731,
+     520,
+     451,
+     40
+    ],
+    "line": [
+     731,
+     611,
+     452,
+     1
+    ],
+    "specs": [
+     731,
+     618,
+     458,
+     100,
+     20
+    ],
+    "suggest": [
+     90,
+     1593,
+     307,
+     89,
+     90
+    ],
+    "cards": [
+     90,
+     1674
+    ]
+   }
+  },
+  "so-can-ban": {
+   "name": "BST Sổ Căn Bản",
+   "priceFrom": 255000,
+   "title": "BST SỔ CĂN BẢN",
+   "detailPrice": "255.000 VNĐ/ box",
+   "cardPrice": "255.000 VNĐ/ BST",
+   "card": {
+    "src": "/images/figma/8055ab6c91a7a98ccad3b697d171104fc7532db9.webp",
+    "m": [
+     [
+      0.92149,
+      0,
+      0.03016
+     ],
+     [
+      0,
+      0.94969,
+      0.04618
+     ]
+    ],
+    "ar": 0.79758
+   },
+   "gallery": [
+    {
+     "src": "/images/figma/8055ab6c91a7a98ccad3b697d171104fc7532db9.webp",
+     "m": [
+      [
+       0.92149,
+       0,
+       0.03016
+      ],
+      [
+       0,
+       0.94969,
+       0.04618
+      ]
+     ],
+     "ar": 0.79826
+    },
+    {
+     "src": "/images/figma/dc14c9de483752a2ad9432120b54637a2c867900.webp",
+     "fit": "cover"
+    },
+    {
+     "src": "/images/figma/b16d35436c642035e6a504cd49a8495c7debcf5e.webp",
+     "m": [
+      [
+       0.84804,
+       0,
+       0.15091
+      ],
+      [
+       0,
+       0.84746,
+       0.02434
+      ]
+     ],
+     "ar": 0.8006
+    },
+    {
+     "src": "/images/figma/d0d9afc8c453941fe4d6c2b8dc9528d9a7caba98.webp",
+     "m": [
+      [
+       0.72464,
+       0,
+       0.13633
+      ],
+      [
+       0,
+       0.72635,
+       0.13682
+      ]
+     ],
+     "ar": 0.8006
+    },
+    {
+     "src": "/images/figma/db031c9f3affb098ffdb05bf20a1c3c58ac655e5.webp",
+     "fit": "cover"
+    },
+    {
+     "src": "/images/figma/16a3bb9ecc7c9830bdb7e9246007feea1aa78ce1.webp",
+     "fit": "cover"
+    },
+    {
+     "src": "/images/figma/343596e9ef68b3551c42569815163c35eca6c585.webp",
+     "fit": "cover"
+    }
+   ],
+   "layout": {
+    "sig": "[\"BST Sổ Căn Bản\",255000,\"Ai cũng bắt đầu từ việc viết tay. Công nghệ khiến trải nghiệm ghi chép đơn giản và tiện lợi, nhưng cảm giác đưa bút trên giấy lại tăng sự tập trung tỉ mẩn và truyền thêm cảm hứng sáng tạo.  Như một bước để đưa bạn thực hành sự chú tâm hàng ngày, bộ sưu tập Sổ Căn Bản là tập hợp 03 cuốn sổ phục vụ cho hoạt động cần thiết trong đời sống - Sổ trống, Sổ nhật ký, Sổ lao động.\",[\"Sổ trống\",\"Sổ nhật ký\",\"Sổ lao động\",\"Bộ 3 sổ\"],[\"Định lượng giấy ruột sổ: 80gsm\",\"Độ dày vừa phải, gọn nhẹ mang theo hàng ngày\",\"Số trang: 160 trang\",\"Kích thước: 12.6 x 17.8cm\"],\"Mua bộ 03 sổ tặng kèm hộp ngoài\\nKhông kèm theo hộp khi mua sổ lẻ\",false,\"/images/figma/8055ab6c91a7a98ccad3b697d171104fc7532db9.webp\",[\"/images/figma/dc14c9de483752a2ad9432120b54637a2c867900.webp\",\"/images/figma/b16d35436c642035e6a504cd49a8495c7debcf5e.webp\",\"/images/figma/d0d9afc8c453941fe4d6c2b8dc9528d9a7caba98.webp\",\"/images/figma/db031c9f3affb098ffdb05bf20a1c3c58ac655e5.webp\",\"/images/figma/16a3bb9ecc7c9830bdb7e9246007feea1aa78ce1.webp\",\"/images/figma/343596e9ef68b3551c42569815163c35eca6c585.webp\"]]",
+    "frameH": 2454,
+    "gallery": [
+     [
+      90,
+      107,
+      550,
+      689
+     ],
+     [
+      90,
+      853,
+      270,
+      337
+     ],
+     [
+      371,
+      853,
+      269,
+      336
+     ],
+     [
+      651,
+      853,
+      269,
+      336
+     ],
+     [
+      90,
+      1203,
+      270,
+      337
+     ],
+     [
+      371,
+      1203,
+      270,
+      337
+     ],
+     [
+      652,
+      1203,
+      270,
+      337
+     ]
+    ],
+    "title": [
+     731,
+     107,
+     458,
+     21,
+     19
+    ],
+    "price": [
+     731,
+     149,
+     420,
+     21,
+     19
+    ],
+    "desc": [
+     731,
+     237,
+     458,
+     140,
+     20
+    ],
+    "options": {
+     "box": [
+      731,
+      425,
+      451,
+      71
+     ],
+     "buttons": [
+      [
+       731,
+       425,
+       130,
+       32,
+       758,
+       430,
+       75,
+       21
+      ],
+      [
+       892,
+       425,
+       130,
+       32,
+       913,
+       430,
+       87,
+       21
+      ],
+      [
+       1052,
+       425,
+       130,
+       32,
+       1074,
+       430,
+       97,
+       21
+      ],
+      [
+       731,
+       464,
+       130,
+       32,
+       752,
+       469,
+       87,
+       21
+      ]
+     ]
+    },
+    "cta": [
+     731,
+     510,
+     451,
+     40
+    ],
+    "line": [
+     731,
+     601,
+     452,
+     1
+    ],
+    "specs": [
+     731,
+     608,
+     458,
+     160,
+     20
+    ],
+    "suggest": [
+     87,
+     1593,
+     307,
+     89,
+     90
+    ],
+    "cards": [
+     87,
+     1674
+    ]
+   }
+  },
+  "bst-postcard-triet-ly-song-dan": {
+   "name": "BST Postcard Triết Lý Sống Đần",
+   "priceFrom": 120000,
+   "title": "POSTCARD\nTRIẾT LÝ SỐNG ĐẦN",
+   "detailPrice": "30.000 VNĐ/ tấm\n120.000 VNĐ/BST 05 tấm",
+   "cardPrice": "120.000 VNĐ",
+   "card": {
+    "src": "/images/figma/8bbe29285991058e0d74a7c4f611ed8ad8da3921.webp",
+    "m": [
+     [
+      0.99776,
+      0,
+      0.00021
+     ],
+     [
+      0,
+      1,
+      0
+     ]
+    ],
+    "ar": 0.79758
+   },
+   "gallery": [
+    {
+     "src": "/images/figma/8bbe29285991058e0d74a7c4f611ed8ad8da3921.webp",
+     "m": [
+      [
+       0.99776,
+       0,
+       0.00021
+      ],
+      [
+       0,
+       1,
+       0
+      ]
+     ],
+     "ar": 0.79826
+    },
+    {
+     "src": "/images/figma/81d38b67dae3dcd3e3270b531bd9f5257295f8eb.webp",
+     "fit": "cover"
+    },
+    {
+     "src": "/images/figma/76b771e486169c6821c7829e01fa9771cf94c4b3.webp",
+     "fit": "cover"
+    },
+    {
+     "src": "/images/figma/15be65ff0c36139802fd2c9257b810e0b74797cb.webp",
+     "fit": "cover"
+    },
+    {
+     "src": "/images/figma/06566725cbd4fa5a87aabd7a4ec2a7af0a7668ad.webp",
+     "fit": "cover"
+    },
+    {
+     "src": "/images/figma/930f31e2b7d02b18ae186cb2af4fc1b5f8ec1b6f.webp",
+     "fit": "cover"
+    },
+    {
+     "src": "/images/figma/97a942b72f2994ee4ca043dcc2a0404f018fab5e.webp",
+     "fit": "cover"
+    }
+   ],
+   "layout": {
+    "sig": "[\"BST Postcard Triết Lý Sống Đần\",120000,\"Đần là quản gia của Tíc Cơ, Đần yêu tự do, yêu lao động, thích trải nghiệm ưa tận hưởng, sống đời vô tri nhưng không vô nghĩa. Vì có lẽ đến cuối cùng mình chỉ muốn sống “đần” và không phải lo nghĩ gì nhiều, \\\"Triết lý sống Đần” bởi thế mà ra đời, dành để tặng mình tặng người tặng nhau!\",[\"BST 5 tấm\",\"Lối sống 3 không\",\"Cười vì điều nhỏ\",\"Hạnh phúc là tự thân\",\"Lao động\",\"Đời nhỏ tí\"],[\"Chất liệu: giấy mỹ thuật cao cấp\",\"Kích thước: 10.5 x 14.8cm\",\"Định lượng giấy: 300gsm\"],\"Có bán tấm rời\",false,\"/images/figma/8bbe29285991058e0d74a7c4f611ed8ad8da3921.webp\",[\"/images/figma/81d38b67dae3dcd3e3270b531bd9f5257295f8eb.webp\",\"/images/figma/76b771e486169c6821c7829e01fa9771cf94c4b3.webp\",\"/images/figma/15be65ff0c36139802fd2c9257b810e0b74797cb.webp\",\"/images/figma/06566725cbd4fa5a87aabd7a4ec2a7af0a7668ad.webp\",\"/images/figma/930f31e2b7d02b18ae186cb2af4fc1b5f8ec1b6f.webp\",\"/images/figma/97a942b72f2994ee4ca043dcc2a0404f018fab5e.webp\"]]",
+    "frameH": 2454,
+    "gallery": [
+     [
+      90,
+      107,
+      550,
+      689
+     ],
+     [
+      90,
+      853,
+      269,
+      336
+     ],
+     [
+      371,
+      853,
+      270,
+      337
+     ],
+     [
+      653,
+      852,
+      269,
+      337
+     ],
+     [
+      90,
+      1199,
+      270,
+      337
+     ],
+     [
+      372,
+      1200,
+      269,
+      336
+     ],
+     [
+      653,
+      1200,
+      269,
+      336
+     ]
+    ],
+    "title": [
+     731,
+     100,
+     458,
+     89,
+     45
+    ],
+    "price": [
+     731,
+     197,
+     477,
+     71,
+     31
+    ],
+    "desc": [
+     731,
+     306,
+     458,
+     80,
+     20
+    ],
+    "options": {
+     "box": [
+      731,
+      452,
+      451,
+      72
+     ],
+     "buttons": [
+      [
+       731,
+       452,
+       130,
+       32,
+       744,
+       457,
+       103,
+       21
+      ],
+      [
+       877,
+       452,
+       145,
+       32,
+       877,
+       457,
+       146,
+       21
+      ],
+      [
+       1036,
+       452,
+       145,
+       32,
+       1036,
+       457,
+       146,
+       21
+      ],
+      [
+       731,
+       492,
+       203,
+       32,
+       742,
+       497,
+       179,
+       21
+      ],
+      [
+       953,
+       492,
+       104,
+       32,
+       954,
+       496,
+       103,
+       21
+      ],
+      [
+       1076,
+       492,
+       105,
+       32,
+       1071,
+       497,
+       111,
+       21
+      ]
+     ]
+    },
+    "cta": [
+     731,
+     537,
+     451,
+     40
+    ],
+    "line": [
+     731,
+     628,
+     452,
+     1
+    ],
+    "specs": [
+     731,
+     635,
+     458,
+     120,
+     20
+    ],
+    "suggest": [
+     87,
+     1593,
+     307,
+     89,
+     90
+    ],
+    "cards": [
+     87,
+     1674
+    ]
+   }
+  },
+  "sticker-01-doi-de-ot": {
+   "name": "Set sticker 01: Đời Dễ Ợt",
+   "priceFrom": 65000,
+   "title": "SET STICKER 01:\nĐỜI DỄ ỢT",
+   "detailPrice": "65.000 VNĐ",
+   "cardPrice": "65.000 VNĐ",
+   "card": {
+    "src": "/images/figma/7ceaddb22e3c92a9baf2487cfa8c2ba2e6444f77.webp",
+    "m": [
+     [
+      0.6882,
+      0,
+      0.15553
+     ],
+     [
+      0,
+      0.575,
+      0.24431
+     ]
+    ],
+    "ar": 0.79758
+   },
+   "gallery": [
+    {
+     "src": "/images/figma/7ceaddb22e3c92a9baf2487cfa8c2ba2e6444f77.webp",
+     "m": [
+      [
+       0.6882,
+       0,
+       0.15553
+      ],
+      [
+       0,
+       0.575,
+       0.24431
+      ]
+     ],
+     "ar": 0.79826
+    },
+    {
+     "src": "/images/figma/378d930cd7a55fdc083a5c104263b07dcfdcd2d5.webp",
+     "m": [
+      [
+       0.69306,
+       0,
+       0.13109
+      ],
+      [
+       0,
+       0.57698,
+       0.25035
+      ]
+     ],
+     "ar": 0.8006
+    },
+    {
+     "src": "/images/figma/bf9ae0558cdef6240f82c8c5a00b6a971da5a79e.webp",
+     "fit": "cover"
+    }
+   ],
+   "layout": {
+    "sig": "[\"Set sticker 01: Đời Dễ Ợt\",65000,\"Là set sticker đầu tiên mà Tíc Cơ mở bán, mang tinh thần mà chúng tôi mong muốn lan toả: Đời dễ ợt như là ăn kẹo, bóc stickers dễ ợt như là bóc kẹo, đời dễ ợt khi mà mình dám sống. Sẵn sàng hành trình nhìn lại cuộc đời theo một cách nhìn khác!\",[],[\"01 set gồm 08 tấm sticker\",\"Chất liệu chống thấm nước\",\"Bóc tháo dễ dàng, nhỏ gọn bỏ túi\",\"Kích thước: 5cm - 7cm/tấm\"],null,false,\"/images/figma/7ceaddb22e3c92a9baf2487cfa8c2ba2e6444f77.webp\",[\"/images/figma/378d930cd7a55fdc083a5c104263b07dcfdcd2d5.webp\",\"/images/figma/bf9ae0558cdef6240f82c8c5a00b6a971da5a79e.webp\"]]",
+    "frameH": 2106,
+    "gallery": [
+     [
+      90,
+      107,
+      550,
+      689
+     ],
+     [
+      90,
+      853,
+      269,
+      336
+     ],
+     [
+      371,
+      852,
+      269,
+      337
+     ]
+    ],
+    "title": [
+     731,
+     98,
+     458,
+     93,
+     45
+    ],
+    "price": [
+     731,
+     199,
+     420,
+     21,
+     19
+    ],
+    "desc": [
+     731,
+     290,
+     458,
+     80,
+     20
+    ],
+    "cta": [
+     731,
+     417,
+     451,
+     40
+    ],
+    "line": [
+     731,
+     508,
+     452,
+     1
+    ],
+    "specs": [
+     731,
+     515,
+     458,
+     80,
+     20
+    ],
+    "suggest": [
+     90,
+     1245,
+     307,
+     89,
+     90
+    ],
+    "cards": [
+     90,
+     1326
+    ]
+   }
+  },
+  "sticker-02-nguoi-viet-yeu-nuoc": {
+   "name": "Set sticker 02: Người Việt Yêu Nước",
+   "priceFrom": 65000,
+   "title": "SET STICKER 02:\nNGƯỜI VIỆT YÊU NƯỚC",
+   "detailPrice": "65.000 VNĐ",
+   "cardPrice": "65.000 VNĐ",
+   "card": {
+    "src": "/images/figma/1d15b48ee687701a6adb9ea58f72ceb7ef781649.webp",
+    "m": [
+     [
+      0.68807,
+      0,
+      0.16146
+     ],
+     [
+      0,
+      0.57471,
+      0.2781
+     ]
+    ],
+    "ar": 0.79758
+   },
+   "gallery": [
+    {
+     "src": "/images/figma/1d15b48ee687701a6adb9ea58f72ceb7ef781649.webp",
+     "m": [
+      [
+       0.68807,
+       0,
+       0.16146
+      ],
+      [
+       0,
+       0.57471,
+       0.2781
+      ]
+     ],
+     "ar": 0.79826
+    },
+    {
+     "src": "/images/figma/a72f15f1022d6b1fd958a83ea0102b012cf208c1.webp",
+     "m": [
+      [
+       0.64556,
+       0,
+       0.15882
+      ],
+      [
+       0,
+       0.53763,
+       0.28212
+      ]
+     ],
+     "ar": 0.8006
+    },
+    {
+     "src": "/images/figma/270d85d994953a5105d3cdf80a428f62f36f1500.webp",
+     "fit": "cover"
+    }
+   ],
+   "layout": {
+    "sig": "[\"Set sticker 02: Người Việt Yêu Nước\",65000,\"Lấy cảm hứng từ cờ Hội Việt Nam với 5 màu sắc đặc trưng rực rỡ, Người Việt Yêu Nước là set sticker nhỏ theo bạn mỗi ngày, cùng bạn mang tinh thần Việt và sống một đời sống Việt.\",[],[\"01 set gồm 08 tấm sticker\",\"Chất liệu chống thấm nước\",\"Bóc tháo dễ dàng, nhỏ gọn bỏ túi\",\"Kích thước: 5cm - 7cm/tấm\"],null,false,\"/images/figma/1d15b48ee687701a6adb9ea58f72ceb7ef781649.webp\",[\"/images/figma/a72f15f1022d6b1fd958a83ea0102b012cf208c1.webp\",\"/images/figma/270d85d994953a5105d3cdf80a428f62f36f1500.webp\"]]",
+    "frameH": 2106,
+    "gallery": [
+     [
+      90,
+      107,
+      550,
+      689
+     ],
+     [
+      90,
+      853,
+      269,
+      336
+     ],
+     [
+      371,
+      852,
+      270,
+      337
+     ]
+    ],
+    "title": [
+     731,
+     98,
+     458,
+     93,
+     45
+    ],
+    "price": [
+     731,
+     199,
+     420,
+     21,
+     19
+    ],
+    "desc": [
+     731,
+     290,
+     458,
+     60,
+     20
+    ],
+    "cta": [
+     731,
+     417,
+     451,
+     40
+    ],
+    "line": [
+     731,
+     508,
+     452,
+     1
+    ],
+    "specs": [
+     731,
+     515,
+     458,
+     80,
+     20
+    ],
+    "suggest": [
+     90,
+     1245,
+     307,
+     89,
+     90
+    ],
+    "cards": [
+     90,
+     1326
+    ]
+   }
+  },
+  "sticker-03-hay-ho": {
+   "name": "Set sticker 03: Hay Ho",
+   "priceFrom": 65000,
+   "title": "SET STICKER 03:\nHAY HO",
+   "detailPrice": "65.000 VNĐ",
+   "cardPrice": "65.000 VNĐ",
+   "card": {
+    "src": "/images/figma/c9e7d736916cd710dc56ee4426a46e1790601fb5.webp",
+    "m": [
+     [
+      0.68807,
+      0,
+      0.15619
+     ],
+     [
+      0,
+      0.57471,
+      0.24352
+     ]
+    ],
+    "ar": 0.79819
+   },
+   "gallery": [
+    {
+     "src": "/images/figma/c9e7d736916cd710dc56ee4426a46e1790601fb5.webp",
+     "m": [
+      [
+       0.68807,
+       0,
+       0.15619
+      ],
+      [
+       0,
+       0.57471,
+       0.24352
+      ]
+     ],
+     "ar": 0.79826
+    },
+    {
+     "src": "/images/figma/c3dffd64d2a0456e834246ff47297ce494f45d5e.webp",
+     "m": [
+      [
+       0.66708,
+       0,
+       0.14916
+      ],
+      [
+       0,
+       0.55556,
+       0.26918
+      ]
+     ],
+     "ar": 0.8006
+    },
+    {
+     "src": "/images/figma/ed7b969f240018f2682178ae2410d6811b30b6cc.webp",
+     "fit": "cover"
+    }
+   ],
+   "layout": {
+    "sig": "[\"Set sticker 03: Hay Ho\",65000,\"Chắc như đinh đóng cột, bạn là người hay ho! Dân chơi chính hiệu, người sống phong cách, tay đua cool cuốn, chính là set sticker dành cho bạn!\",[],[\"01 set gồm 08 tấm sticker\",\"Chất liệu chống thấm nước\",\"Bóc tháo dễ dàng, nhỏ gọn bỏ túi\",\"Kích thước: 5cm - 7cm/tấm\"],null,false,\"/images/figma/c9e7d736916cd710dc56ee4426a46e1790601fb5.webp\",[\"/images/figma/c3dffd64d2a0456e834246ff47297ce494f45d5e.webp\",\"/images/figma/ed7b969f240018f2682178ae2410d6811b30b6cc.webp\"]]",
+    "frameH": 2106,
+    "gallery": [
+     [
+      90,
+      107,
+      550,
+      689
+     ],
+     [
+      90,
+      853,
+      269,
+      336
+     ],
+     [
+      371,
+      853,
+      269,
+      336
+     ]
+    ],
+    "title": [
+     731,
+     98,
+     458,
+     93,
+     45
+    ],
+    "price": [
+     731,
+     199,
+     420,
+     21,
+     19
+    ],
+    "desc": [
+     731,
+     290,
+     458,
+     40,
+     20
+    ],
+    "cta": [
+     731,
+     417,
+     451,
+     40
+    ],
+    "line": [
+     731,
+     508,
+     452,
+     1
+    ],
+    "specs": [
+     731,
+     515,
+     458,
+     80,
+     20
+    ],
+    "suggest": [
+     90,
+     1245,
+     307,
+     89,
+     90
+    ],
+    "cards": [
+     90,
+     1326
+    ]
+   }
+  },
+  "sticker-04-ca-hoa": {
+   "name": "Set sticker 04: Cà Hoa",
+   "priceFrom": 65000,
+   "title": "SET STICKER 04:\nCÀ HOA",
+   "detailPrice": "65.000 VNĐ",
+   "cardPrice": "65.000 VNĐ",
+   "card": {
+    "src": "/images/figma/f168080ca02513a79fa173f83cc38d0c3326fb71.webp",
+    "m": [
+     [
+      0.6414,
+      0,
+      0.1611
+     ],
+     [
+      0,
+      0.53476,
+      0.26951
+     ]
+    ],
+    "ar": 0.8006
+   },
+   "gallery": [
+    {
+     "src": "/images/figma/f168080ca02513a79fa173f83cc38d0c3326fb71.webp",
+     "m": [
+      [
+       0.6414,
+       0,
+       0.1611
+      ],
+      [
+       0,
+       0.53476,
+       0.26951
+      ]
+     ],
+     "ar": 0.79913
+    },
+    {
+     "src": "/images/figma/b42139ae6d750bbb19e813d421337e348c3b46e2.webp",
+     "m": [
+      [
+       0.68249,
+       0,
+       0.13909
+      ],
+      [
+       0,
+       0.56818,
+       0.25873
+      ]
+     ],
+     "ar": 0.8006
+    },
+    {
+     "src": "/images/figma/8d7178fc4a2535e2ad2dde67682aa723d7b41a54.webp",
+     "fit": "cover"
+    }
+   ],
+   "layout": {
+    "sig": "[\"Set sticker 04: Cà Hoa\",65000,\"Thích đi cà phê, thích ngắm hoa ngắm lá, thích lãng mạn cuộc đời, Cà Hoa dành cho mọi người yêu cuộc đời!\",[],[\"01 set gồm 08 tấm sticker\",\"Chất liệu chống thấm nước\",\"Bóc tháo dễ dàng, nhỏ gọn bỏ túi\",\"Kích thước: 5cm - 7cm/tấm\"],null,false,\"/images/figma/f168080ca02513a79fa173f83cc38d0c3326fb71.webp\",[\"/images/figma/b42139ae6d750bbb19e813d421337e348c3b46e2.webp\",\"/images/figma/8d7178fc4a2535e2ad2dde67682aa723d7b41a54.webp\"]]",
+    "frameH": 2106,
+    "gallery": [
+     [
+      90,
+      107,
+      549,
+      687
+     ],
+     [
+      90,
+      853,
+      269,
+      336
+     ],
+     [
+      371,
+      853,
+      269,
+      336
+     ]
+    ],
+    "title": [
+     731,
+     98,
+     458,
+     93,
+     45
+    ],
+    "price": [
+     731,
+     199,
+     420,
+     21,
+     19
+    ],
+    "desc": [
+     731,
+     290,
+     458,
+     40,
+     20
+    ],
+    "cta": [
+     731,
+     417,
+     451,
+     40
+    ],
+    "line": [
+     731,
+     508,
+     452,
+     1
+    ],
+    "specs": [
+     731,
+     515,
+     458,
+     80,
+     20
+    ],
+    "suggest": [
+     90,
+     1245,
+     307,
+     89,
+     90
+    ],
+    "cards": [
+     90,
+     1326
+    ]
+   }
+  },
+  "sticker-05-ban-lam-duoc-ma": {
+   "name": "Set sticker 05: Bạn Làm Được Mà",
+   "priceFrom": 65000,
+   "title": "SET STICKER 05:\nBẠN LÀM ĐƯỢC MÀ",
+   "detailPrice": "65.000 VNĐ",
+   "cardPrice": "65.000 VNĐ",
+   "card": {
+    "src": "/images/figma/14a06cb92813f7658fa9e04fbdfb8ad0a7222a56.webp",
+    "m": [
+     [
+      0.64163,
+      0,
+      0.17814
+     ],
+     [
+      0,
+      0.53476,
+      0.28951
+     ]
+    ],
+    "ar": 0.79758
+   },
+   "gallery": [
+    {
+     "src": "/images/figma/14a06cb92813f7658fa9e04fbdfb8ad0a7222a56.webp",
+     "m": [
+      [
+       0.64163,
+       0,
+       0.17814
+      ],
+      [
+       0,
+       0.53476,
+       0.28951
+      ]
+     ],
+     "ar": 0.79971
+    },
+    {
+     "src": "/images/figma/9a6a8b45f9003f90b93165206005f8976fbb071e.webp",
+     "m": [
+      [
+       0.67081,
+       0,
+       0.1682
+      ],
+      [
+       0,
+       0.55866,
+       0.27164
+      ]
+     ],
+     "ar": 0.8006
+    },
+    {
+     "src": "/images/figma/b422aeba18732fffef5efc6d2107e8a03048f0cc.webp",
+     "fit": "cover"
+    }
+   ],
+   "layout": {
+    "sig": "[\"Set sticker 05: Bạn Làm Được Mà\",65000,\"Chuyện khó thì làm từ từ, chuyện dễ thì làm cẩn thận, chuyện gì rồi cũng sẽ thành. Dán sticker Bạn làm được mà và nhẩm kỹ khẩu hiệu này mỗi ngày mỗi tháng!\",[],[\"01 set gồm 08 tấm sticker\",\"Chất liệu chống thấm nước\",\"Bóc tháo dễ dàng, nhỏ gọn bỏ túi\",\"Kích thước: 5cm - 7cm/tấm\"],null,false,\"/images/figma/14a06cb92813f7658fa9e04fbdfb8ad0a7222a56.webp\",[\"/images/figma/9a6a8b45f9003f90b93165206005f8976fbb071e.webp\",\"/images/figma/b422aeba18732fffef5efc6d2107e8a03048f0cc.webp\"]]",
+    "frameH": 2106,
+    "gallery": [
+     [
+      89,
+      107,
+      551,
+      689
+     ],
+     [
+      90,
+      853,
+      269,
+      336
+     ],
+     [
+      371,
+      853,
+      269,
+      336
+     ]
+    ],
+    "title": [
+     731,
+     98,
+     458,
+     93,
+     45
+    ],
+    "price": [
+     731,
+     199,
+     420,
+     21,
+     19
+    ],
+    "desc": [
+     731,
+     290,
+     458,
+     80,
+     20
+    ],
+    "cta": [
+     731,
+     417,
+     451,
+     40
+    ],
+    "line": [
+     731,
+     508,
+     452,
+     1
+    ],
+    "specs": [
+     731,
+     515,
+     458,
+     80,
+     20
+    ],
+    "suggest": [
+     90,
+     1245,
+     307,
+     89,
+     90
+    ],
+    "cards": [
+     90,
+     1326
+    ]
+   }
+  },
+  "sticker-06-doi-moi": {
+   "name": "Set sticker 06: Đời Mới",
+   "priceFrom": 65000,
+   "title": "SET STICKER 06:\nĐỜI MỚI",
+   "detailPrice": "65.000 VNĐ",
+   "cardPrice": "65.000 VNĐ",
+   "card": {
+    "src": "/images/figma/5333f3f45b6ea4951a6951ed1defe223d3853b4f.webp",
+    "m": [
+     [
+      0.62493,
+      0,
+      0.18891
+     ],
+     [
+      0,
+      0.52083,
+      0.28148
+     ]
+    ],
+    "ar": 0.8
+   },
+   "gallery": [
+    {
+     "src": "/images/figma/5333f3f45b6ea4951a6951ed1defe223d3853b4f.webp",
+     "m": [
+      [
+       0.62493,
+       0,
+       0.18891
+      ],
+      [
+       0,
+       0.52083,
+       0.28148
+      ]
+     ],
+     "ar": 0.79971
+    },
+    {
+     "src": "/images/figma/0ba1d50969a14e00fdd51413a685fa30b41ac8e7.webp",
+     "m": [
+      [
+       0.67733,
+       0,
+       0.14487
+      ],
+      [
+       0,
+       0.5618,
+       0.24592
+      ]
+     ],
+     "ar": 0.80357
+    },
+    {
+     "src": "/images/figma/517cec3280659969a6eddbd10b9cd03f9bf3518b.webp",
+     "fit": "cover"
+    }
+   ],
+   "layout": {
+    "sig": "[\"Set sticker 06: Đời Mới\",65000,\"Đời mới khi mình mới. Mọi điều cũ hoá mới, mọi điều mới hoá vui, mang tinh thần phơi phới sẵn sàng đón mọi điều sắp tới!\",[],[\"01 set gồm 08 tấm sticker\",\"Chất liệu chống thấm nước\",\"Bóc tháo dễ dàng, nhỏ gọn bỏ túi\",\"Kích thước: 5cm - 7cm/tấm\"],null,false,\"/images/figma/5333f3f45b6ea4951a6951ed1defe223d3853b4f.webp\",[\"/images/figma/0ba1d50969a14e00fdd51413a685fa30b41ac8e7.webp\",\"/images/figma/517cec3280659969a6eddbd10b9cd03f9bf3518b.webp\"]]",
+    "frameH": 2106,
+    "gallery": [
+     [
+      89,
+      107,
+      551,
+      689
+     ],
+     [
+      89,
+      853,
+      270,
+      336
+     ],
+     [
+      371,
+      853,
+      269,
+      336
+     ]
+    ],
+    "title": [
+     731,
+     98,
+     458,
+     93,
+     45
+    ],
+    "price": [
+     731,
+     199,
+     420,
+     21,
+     19
+    ],
+    "desc": [
+     731,
+     290,
+     458,
+     60,
+     20
+    ],
+    "cta": [
+     731,
+     417,
+     451,
+     40
+    ],
+    "line": [
+     731,
+     508,
+     452,
+     1
+    ],
+    "specs": [
+     731,
+     515,
+     458,
+     80,
+     20
+    ],
+    "suggest": [
+     90,
+     1245,
+     307,
+     89,
+     90
+    ],
+    "cards": [
+     90,
+     1326
+    ]
+   }
+  },
+  "sticker-07-dan-noi": {
+   "name": "Set sticker 07: Đần Nói",
+   "priceFrom": 65000,
+   "title": "SET STICKER 07:\nĐẦN NÓI",
+   "detailPrice": "65.000 VNĐ",
+   "cardPrice": "65.000 VNĐ",
+   "card": {
+    "src": "/images/figma/2fb862723afe1f7099cfd401f3f48d192f8fa8b1.webp",
+    "m": [
+     [
+      0.68439,
+      0,
+      0.15819
+     ],
+     [
+      0,
+      0.57143,
+      0.23846
+     ]
+    ],
+    "ar": 0.79758
+   },
+   "gallery": [
+    {
+     "src": "/images/figma/2fb862723afe1f7099cfd401f3f48d192f8fa8b1.webp",
+     "m": [
+      [
+       0.68439,
+       0,
+       0.15819
+      ],
+      [
+       0,
+       0.57143,
+       0.23846
+      ]
+     ],
+     "ar": 0.79826
+    },
+    {
+     "src": "/images/figma/92e3d21af67ebcfbf0b1161f3fd2b79b753a93f7.webp",
+     "m": [
+      [
+       0.68224,
+       0,
+       0.15761
+      ],
+      [
+       0,
+       0.56818,
+       0.27005
+      ]
+     ],
+     "ar": 0.8006
+    },
+    {
+     "src": "/images/figma/02507d74f5a7599da20b1ddf1848138c270ad954.webp",
+     "fit": "cover"
+    }
+   ],
+   "layout": {
+    "sig": "[\"Set sticker 07: Đần Nói\",65000,\"Vô tri nhưng không vô nghĩa, đấy là cách mà Đần chơi với đời. Một set sticker thấm nhuần tinh thần và lối sống Đần - đời dễ ợt nên sống dễ chịu với chính mình thôi!\",[],[\"01 set gồm 08 tấm sticker\",\"Chất liệu chống thấm nước\",\"Bóc tháo dễ dàng, nhỏ gọn bỏ túi\",\"Kích thước: 5cm - 7cm/tấm\"],null,false,\"/images/figma/2fb862723afe1f7099cfd401f3f48d192f8fa8b1.webp\",[\"/images/figma/92e3d21af67ebcfbf0b1161f3fd2b79b753a93f7.webp\",\"/images/figma/02507d74f5a7599da20b1ddf1848138c270ad954.webp\"]]",
+    "frameH": 2106,
+    "gallery": [
+     [
+      90,
+      107,
+      550,
+      689
+     ],
+     [
+      90,
+      853,
+      269,
+      336
+     ],
+     [
+      371,
+      853,
+      269,
+      336
+     ]
+    ],
+    "title": [
+     731,
+     98,
+     458,
+     93,
+     45
+    ],
+    "price": [
+     731,
+     199,
+     420,
+     21,
+     19
+    ],
+    "desc": [
+     731,
+     290,
+     458,
+     60,
+     20
+    ],
+    "cta": [
+     731,
+     417,
+     451,
+     40
+    ],
+    "line": [
+     731,
+     508,
+     452,
+     1
+    ],
+    "specs": [
+     731,
+     515,
+     458,
+     80,
+     20
+    ],
+    "suggest": [
+     90,
+     1245,
+     307,
+     89,
+     90
+    ],
+    "cards": [
+     90,
+     1326
+    ]
+   }
+  },
+  "sticker-08-dan-lao-dong": {
+   "name": "Set sticker 08: Đần Lao Động",
+   "priceFrom": 65000,
+   "title": "SET STICKER 08:\nĐẦN LAO ĐỘNG",
+   "detailPrice": "65.000 VNĐ",
+   "cardPrice": "65.000 VNĐ",
+   "card": {
+    "src": "/images/figma/df9322066e8a757249d819bd9e5afc046936cdf3.webp",
+    "m": [
+     [
+      0.70971,
+      0,
+      0.15267
+     ],
+     [
+      0,
+      0.59172,
+      0.24846
+     ]
+    ],
+    "ar": 0.7958
+   },
+   "gallery": [
+    {
+     "src": "/images/figma/df9322066e8a757249d819bd9e5afc046936cdf3.webp",
+     "m": [
+      [
+       0.70971,
+       0,
+       0.15267
+      ],
+      [
+       0,
+       0.59172,
+       0.24846
+      ]
+     ],
+     "ar": 0.79971
+    },
+    {
+     "src": "/images/figma/03215c94f5a5b7ac87035d5f826050fac0673aec.webp",
+     "m": [
+      [
+       0.62866,
+       0,
+       0.18393
+      ],
+      [
+       0,
+       0.52356,
+       0.28814
+      ]
+     ],
+     "ar": 0.8006
+    },
+    {
+     "src": "/images/figma/679049aeaaf10c1aecf137f1c7f69da3aac85db5.webp",
+     "fit": "cover"
+    }
+   ],
+   "layout": {
+    "sig": "[\"Set sticker 08: Đần Lao Động\",65000,\"Sống và cống hiến, làm và sống chiến, không ngừng lao động. Đần tiếp nối tinh thần lao động của người đồng bào mình và đưa tinh thần ấy vào một set sticker!\",[],[\"01 set gồm 08 tấm sticker\",\"Chất liệu chống thấm nước\",\"Bóc tháo dễ dàng, nhỏ gọn bỏ túi\",\"Kích thước: 5cm - 7cm/tấm\"],null,false,\"/images/figma/df9322066e8a757249d819bd9e5afc046936cdf3.webp\",[\"/images/figma/03215c94f5a5b7ac87035d5f826050fac0673aec.webp\",\"/images/figma/679049aeaaf10c1aecf137f1c7f69da3aac85db5.webp\"]]",
+    "frameH": 2106,
+    "gallery": [
+     [
+      90,
+      107,
+      551,
+      689
+     ],
+     [
+      90,
+      853,
+      269,
+      336
+     ],
+     [
+      371,
+      853,
+      269,
+      336
+     ]
+    ],
+    "title": [
+     731,
+     98,
+     458,
+     93,
+     45
+    ],
+    "price": [
+     731,
+     199,
+     420,
+     21,
+     19
+    ],
+    "desc": [
+     731,
+     290,
+     458,
+     60,
+     20
+    ],
+    "cta": [
+     731,
+     417,
+     451,
+     40
+    ],
+    "line": [
+     731,
+     508,
+     452,
+     1
+    ],
+    "specs": [
+     731,
+     515,
+     458,
+     80,
+     20
+    ],
+    "suggest": [
+     90,
+     1245,
+     307,
+     89,
+     90
+    ],
+    "cards": [
+     90,
+     1326
+    ]
+   }
+  },
+  "sticker-09-chuc-nhau-that-su": {
+   "name": "Set sticker 09: Chúc Nhau Thật Sự",
+   "priceFrom": 65000,
+   "title": "SET STICKER 09:\nCHÚC NHAU THẬT SỰ",
+   "detailPrice": "65.000 VNĐ",
+   "cardPrice": "65.000 VNĐ",
+   "card": {
+    "src": "/images/figma/9c336a85ed4630d98983e404c3a7eec75f23d018.webp",
+    "m": [
+     [
+      0.66513,
+      0,
+      0.16708
+     ],
+     [
+      0,
+      0.55556,
+      0.28029
+     ]
+    ],
+    "ar": 0.79279
+   },
+   "gallery": [
+    {
+     "src": "/images/figma/9c336a85ed4630d98983e404c3a7eec75f23d018.webp",
+     "m": [
+      [
+       0.66513,
+       0,
+       0.16708
+      ],
+      [
+       0,
+       0.55556,
+       0.28029
+      ]
+     ],
+     "ar": 0.79826
+    },
+    {
+     "src": "/images/figma/3e36e187d0277a033244792062e153372ab1104f.webp",
+     "m": [
+      [
+       0.63532,
+       0,
+       0.18159
+      ],
+      [
+       0,
+       0.5291,
+       0.26789
+      ]
+     ],
+     "ar": 0.8006
+    },
+    {
+     "src": "/images/figma/9379c6338f9d0492a3a2401436788d58b0ce8cb5.webp",
+     "fit": "cover"
+    }
+   ],
+   "layout": {
+    "sig": "[\"Set sticker 09: Chúc Nhau Thật Sự\",65000,\"Thuộc BST “Chúc Tết Nhau Thật Sự\\\"\\n\\nThay cho lời chúc bằng lời, một set sticker nhỏ để bạn gửi gián tiếp những lời chúc thành thật, chúc sức khoẻ, chúc bình an, chúc vững bền, chúc mọi điều. Hơn cả một lời nói ngắn, dán câu chúc bên cạnh để nhắc mình nhớ, nhắc ai đừng quên, nhắc nhau cho mọi ngày!\",[],[\"01 set gồm 08 tấm sticker\",\"Chất liệu chống thấm nước\",\"Bóc tháo dễ dàng, nhỏ gọn bỏ túi\",\"Kích thước: 5cm - 7cm/tấm\"],null,false,\"/images/figma/9c336a85ed4630d98983e404c3a7eec75f23d018.webp\",[\"/images/figma/3e36e187d0277a033244792062e153372ab1104f.webp\",\"/images/figma/9379c6338f9d0492a3a2401436788d58b0ce8cb5.webp\"]]",
+    "frameH": 2106,
+    "gallery": [
+     [
+      90,
+      107,
+      550,
+      689
+     ],
+     [
+      90,
+      853,
+      269,
+      336
+     ],
+     [
+      371,
+      853,
+      269,
+      337
+     ]
+    ],
+    "title": [
+     731,
+     98,
+     458,
+     93,
+     45
+    ],
+    "price": [
+     731,
+     199,
+     420,
+     21,
+     19
+    ],
+    "desc": [
+     731,
+     290,
+     458,
+     140,
+     20
+    ],
+    "cta": [
+     731,
+     465,
+     451,
+     40
+    ],
+    "line": [
+     731,
+     556,
+     452,
+     1
+    ],
+    "specs": [
+     731,
+     563,
+     458,
+     80,
+     20
+    ],
+    "suggest": [
+     90,
+     1245,
+     307,
+     89,
+     90
+    ],
+    "cards": [
+     90,
+     1326
+    ]
+   }
+  },
+  "postcard-nguoi-viet-yeu-nuoc": {
+   "name": "Postcard Người Việt Yêu Nước",
+   "priceFrom": 90000,
+   "title": "POSTCARD\nNGƯỜI VIỆT YÊU NƯỚC",
+   "detailPrice": "90.000 VNĐ/ set",
+   "cardPrice": "90.000 VNĐ/ set",
+   "card": {
+    "src": "/images/figma/88f29f16a306dea6b08d5133be10a08738f832c0.webp",
+    "m": [
+     [
+      0.80632,
+      0,
+      0.07979
+     ],
+     [
+      0,
+      0.75758,
+      0.1657
+     ]
+    ],
+    "ar": 0.79758
+   },
+   "gallery": [
+    {
+     "src": "/images/figma/88f29f16a306dea6b08d5133be10a08738f832c0.webp",
+     "m": [
+      [
+       0.80632,
+       0,
+       0.07979
+      ],
+      [
+       0,
+       0.75758,
+       0.1657
+      ]
+     ],
+     "ar": 0.79826
+    },
+    {
+     "src": "/images/figma/e05de8788da83fc6c617180a681d08368716c7b1.webp",
+     "m": [
+      [
+       1,
+       0,
+       0
+      ],
+      [
+       0,
+       0.99901,
+       0.00049
+      ]
+     ],
+     "ar": 0.8006
+    },
+    {
+     "src": "/images/figma/0dc79f8d2e646b080f17c79e1559cbe1f802c7bb.webp",
+     "m": [
+      [
+       0.79822,
+       0,
+       0.10026
+      ],
+      [
+       0,
+       1,
+       -0.00129
+      ]
+     ],
+     "ar": 0.79822
+    }
+   ],
+   "layout": {
+    "sig": "[\"Postcard Người Việt Yêu Nước\",90000,\"Từ đời sống, từ hơi thở, từ chất liệu hàng ngày, tinh thần Việt sống ở trong từng ngóc ngách. Tôn trọng và nương tựa những người chảy chung một dòng máu, người Việt mình chất, người Việt đẳng cấp, người Việt có nhau!\",[],[\"Một set gồm 03 tấm\",\"Kích thước: 10,5x15 cm\",\"Chất liệu: giấy mỹ thuật\"],\"Không bán rời từng tấm\",false,\"/images/figma/88f29f16a306dea6b08d5133be10a08738f832c0.webp\",[\"/images/figma/e05de8788da83fc6c617180a681d08368716c7b1.webp\",\"/images/figma/0dc79f8d2e646b080f17c79e1559cbe1f802c7bb.webp\"]]",
+    "frameH": 2106,
+    "gallery": [
+     [
+      90,
+      107,
+      550,
+      689
+     ],
+     [
+      90,
+      853,
+      269,
+      336
+     ],
+     [
+      371,
+      852,
+      269,
+      337
+     ]
+    ],
+    "title": [
+     731,
+     98,
+     458,
+     93,
+     45
+    ],
+    "price": [
+     731,
+     199,
+     420,
+     21,
+     19
+    ],
+    "desc": [
+     731,
+     290,
+     458,
+     60,
+     20
+    ],
+    "cta": [
+     731,
+     417,
+     451,
+     40
+    ],
+    "line": [
+     731,
+     508,
+     452,
+     1
+    ],
+    "specs": [
+     731,
+     515,
+     458,
+     120,
+     20
+    ],
+    "suggest": [
+     90,
+     1245,
+     307,
+     89,
+     90
+    ],
+    "cards": [
+     90,
+     1326
+    ]
+   }
+  },
+  "postcard-gai-dep": {
+   "name": "Postcard Gái Đẹp",
+   "priceFrom": 90000,
+   "title": "POSTCARD\nGÁI ĐẸP",
+   "detailPrice": "90.000 VNĐ/ set",
+   "cardPrice": "90.000 VNĐ/ set",
+   "card": {
+    "src": "/images/figma/41ef321334d61a1390988a9d30206be8c3f99e4c.webp",
+    "m": [
+     [
+      0.83807,
+      0,
+      0.08098
+     ],
+     [
+      0,
+      0.7874,
+      0.14102
+     ]
+    ],
+    "ar": 0.79758
+   },
+   "gallery": [
+    {
+     "src": "/images/figma/41ef321334d61a1390988a9d30206be8c3f99e4c.webp",
+     "m": [
+      [
+       0.83807,
+       0,
+       0.08098
+      ],
+      [
+       0,
+       0.7874,
+       0.14102
+      ]
+     ],
+     "ar": 0.79826
+    },
+    {
+     "src": "/images/figma/b9d3f057793f0d59609cc77c83613734f852de8e.webp",
+     "fit": "cover"
+    },
+    {
+     "src": "/images/figma/0dc79f8d2e646b080f17c79e1559cbe1f802c7bb.webp",
+     "m": [
+      [
+       0.79822,
+       0,
+       0.10026
+      ],
+      [
+       0,
+       1,
+       -0.00129
+      ]
+     ],
+     "ar": 0.79822
+    }
+   ],
+   "layout": {
+    "sig": "[\"Postcard Gái Đẹp\",90000,\"Đứng trước gái đẹp nên hơi ngại, bỏ ngỏ vài lời nhét postcards gửi tới đây. Dành cho tất cả những bạn gái trên cuộc đời, gái đẹp nhất là khi gái yêu mình, gái yêu người, gái yêu đời!\",[],[\"Một set gồm 03 tấm\",\"Kích thước: 10,5x15 cm\",\"Chất liệu: giấy mỹ thuật\"],\"Không bán rời từng tấm\",false,\"/images/figma/41ef321334d61a1390988a9d30206be8c3f99e4c.webp\",[\"/images/figma/b9d3f057793f0d59609cc77c83613734f852de8e.webp\",\"/images/figma/0dc79f8d2e646b080f17c79e1559cbe1f802c7bb.webp\"]]",
+    "frameH": 2106,
+    "gallery": [
+     [
+      90,
+      107,
+      550,
+      689
+     ],
+     [
+      89,
+      853,
+      269,
+      336
+     ],
+     [
+      371,
+      852,
+      269,
+      337
+     ]
+    ],
+    "title": [
+     731,
+     98,
+     458,
+     93,
+     45
+    ],
+    "price": [
+     731,
+     199,
+     420,
+     21,
+     19
+    ],
+    "desc": [
+     731,
+     290,
+     458,
+     60,
+     20
+    ],
+    "cta": [
+     731,
+     417,
+     451,
+     40
+    ],
+    "line": [
+     731,
+     508,
+     452,
+     1
+    ],
+    "specs": [
+     731,
+     515,
+     458,
+     120,
+     20
+    ],
+    "suggest": [
+     90,
+     1245,
+     307,
+     89,
+     90
+    ],
+    "cards": [
+     90,
+     1326
+    ]
+   }
+  },
+  "postcard-ban-hoi-toi-y-nghia-cuoc-doi": {
+   "name": "Postcard Bạn Hỏi Tôi Ý Nghĩa Cuộc Đời",
+   "priceFrom": 90000,
+   "title": "POSTCARD\nBẠN HỎI TÔI Ý NGHĨA CUỘC ĐỜI",
+   "detailPrice": "90.000 VNĐ/ set",
+   "cardPrice": "90.000 VNĐ/ set",
+   "card": {
+    "src": "/images/figma/3ac53ee6aa55e0eba5c303bb8a64ae01ee9bda65.webp",
+    "m": [
+     [
+      0.90199,
+      0,
+      0.04964
+     ],
+     [
+      0,
+      0.84746,
+      0.11732
+     ]
+    ],
+    "ar": 0.79758
+   },
+   "gallery": [
+    {
+     "src": "/images/figma/3ac53ee6aa55e0eba5c303bb8a64ae01ee9bda65.webp",
+     "m": [
+      [
+       0.90199,
+       0,
+       0.04964
+      ],
+      [
+       0,
+       0.84746,
+       0.11732
+      ]
+     ],
+     "ar": 0.79826
+    },
+    {
+     "src": "/images/figma/f895595af763020f1b764cab50328d61c378746e.webp",
+     "fit": "cover"
+    },
+    {
+     "src": "/images/figma/0dc79f8d2e646b080f17c79e1559cbe1f802c7bb.webp",
+     "m": [
+      [
+       0.79822,
+       0,
+       0.10026
+      ],
+      [
+       0,
+       1,
+       -0.00129
+      ]
+     ],
+     "ar": 0.79822
+    }
+   ],
+   "layout": {
+    "sig": "[\"Postcard Bạn Hỏi Tôi Ý Nghĩa Cuộc Đời\",90000,\"Đi đến cuối để vòng lại ban đầu, đi tìm ý nghĩa cuộc đời trong khi chẳng biết cuộc đời có ý nghĩa là gì? Chẳng sao cả, có Tíc Cơ cùng với bạn, tận hưởng hành trình và đi hỏi cuộc đời cho ra lẽ!\",[],[\"Một set gồm 03 tấm\",\"Kích thước: 10,5x15 cm\",\"Chất liệu: giấy mỹ thuật\"],\"Không bán rời từng tấm\",false,\"/images/figma/3ac53ee6aa55e0eba5c303bb8a64ae01ee9bda65.webp\",[\"/images/figma/f895595af763020f1b764cab50328d61c378746e.webp\",\"/images/figma/0dc79f8d2e646b080f17c79e1559cbe1f802c7bb.webp\"]]",
+    "frameH": 2106,
+    "gallery": [
+     [
+      90,
+      107,
+      550,
+      689
+     ],
+     [
+      89,
+      853,
+      269,
+      336
+     ],
+     [
+      371,
+      852,
+      269,
+      337
+     ]
+    ],
+    "title": [
+     731,
+     98,
+     458,
+     93,
+     45
+    ],
+    "price": [
+     731,
+     246,
+     420,
+     21,
+     19
+    ],
+    "desc": [
+     731,
+     337,
+     458,
+     60,
+     20
+    ],
+    "cta": [
+     731,
+     464,
+     451,
+     40
+    ],
+    "line": [
+     731,
+     555,
+     452,
+     1
+    ],
+    "specs": [
+     731,
+     562,
+     458,
+     120,
+     20
+    ],
+    "suggest": [
+     90,
+     1245,
+     307,
+     89,
+     90
+    ],
+    "cards": [
+     90,
+     1326
+    ]
+   }
+  },
+  "tui-ngu-du": {
+   "name": "Túi Ngủ Đủ",
+   "priceFrom": 350000,
+   "title": "TÚI NGỦ ĐỦ",
+   "detailPrice": "350.000 VNĐ",
+   "cardPrice": "350.000 VNĐ",
+   "card": {
+    "src": "/images/figma/98dbc52611e65a8d45552d03601a0877cb24494d.webp",
+    "m": [
+     [
+      0.74074,
+      0,
+      0.19519
+     ],
+     [
+      0,
+      0.74085,
+      0.18857
+     ]
+    ],
+    "ar": 0.8006
+   },
+   "gallery": [
+    {
+     "src": "/images/figma/98dbc52611e65a8d45552d03601a0877cb24494d.webp",
+     "m": [
+      [
+       0.74074,
+       0,
+       0.19519
+      ],
+      [
+       0,
+       0.74085,
+       0.18857
+      ]
+     ],
+     "ar": 0.79971
+    },
+    {
+     "src": "/images/figma/11b62f0745419c1fbc71af9b428eb22ca965e705.webp",
+     "m": [
+      [
+       0.83364,
+       0,
+       -0.00064
+      ],
+      [
+       0,
+       0.83333,
+       0.03305
+      ]
+     ],
+     "ar": 0.80119
+    },
+    {
+     "src": "/images/figma/7f022d097f57663080d4b4a5a1a3e819dc74afad.webp",
+     "m": [
+      [
+       0.87116,
+       0,
+       0.03088
+      ],
+      [
+       0,
+       0.86957,
+       0.0294
+      ]
+     ],
+     "ar": 0.80236
+    },
+    {
+     "src": "/images/figma/f74a127be377cf11d3b350c9dcb68d2e6300b5fb.webp",
+     "m": [
+      [
+       0.75284,
+       0,
+       0.18341
+      ],
+      [
+       0,
+       0.75188,
+       0.16781
+      ]
+     ],
+     "ar": 0.80119
+    },
+    {
+     "src": "/images/figma/3d18c7af69b3bc3849f31f6927881e52ebaca3db.webp",
+     "m": [
+      [
+       0.80415,
+       0,
+       0.09792
+      ],
+      [
+       0,
+       0.8,
+       0.10237
+      ]
+     ],
+     "ar": 0.80415
+    }
+   ],
+   "layout": {
+    "sig": "[\"Túi Ngủ Đủ\",350000,\"Lấy cảm hứng từ cái gối đưa bạn vào giấc, làm từ chất vải chần bông và chất liệu êm ru, một chiếc túi êm như gối, trông như gối, nhìn là muốn kê lên nằm, một chiếc túi nhắc bạn ngủ đủ, ngủ đủ và ngủ đủ!\",[],[\"Chất liệu: vải gió chần bông\",\"Quai túi có thể điều chỉnh độ dài nút thắt\",\"Túi tròn nhỏ có thể tháo rời\",\"Đường kính (túi lớn): 23cm\",\"Đường kính (túi bé): 9cm\",\"Dây quai: 120cm (khi chưa thắt nút)\"],null,true,\"/images/figma/98dbc52611e65a8d45552d03601a0877cb24494d.webp\",[\"/images/figma/11b62f0745419c1fbc71af9b428eb22ca965e705.webp\",\"/images/figma/7f022d097f57663080d4b4a5a1a3e819dc74afad.webp\",\"/images/figma/f74a127be377cf11d3b350c9dcb68d2e6300b5fb.webp\",\"/images/figma/3d18c7af69b3bc3849f31f6927881e52ebaca3db.webp\"]]",
+    "frameH": 2454,
+    "gallery": [
+     [
+      90,
+      107,
+      551,
+      689
+     ],
+     [
+      90,
+      853,
+      270,
+      337
+     ],
+     [
+      372,
+      853,
+      272,
+      339
+     ],
+     [
+      90,
+      1202,
+      270,
+      337
+     ],
+     [
+      372,
+      1203,
+      271,
+      337
+     ]
+    ],
+    "title": [
+     731,
+     98,
+     458,
+     93,
+     45
+    ],
+    "price": [
+     731,
+     153,
+     420,
+     21,
+     19
+    ],
+    "desc": [
+     731,
+     336,
+     458,
+     60,
+     20
+    ],
+    "cta": [
+     728,
+     506,
+     451,
+     40
+    ],
+    "line": [
+     728,
+     597,
+     452,
+     1
+    ],
+    "specs": [
+     728,
+     604,
+     458,
+     120,
+     20
+    ],
+    "suggest": [
+     87,
+     1593,
+     307,
+     89,
+     90
+    ],
+    "cards": [
+     87,
+     1674
+    ]
+   }
+  },
+  "tui-thuyen": {
+   "name": "Túi Thuyền",
+   "priceFrom": 360000,
+   "title": "TÚI THUYỀN",
+   "detailPrice": "360.000 VNĐ",
+   "cardPrice": "360.000 VNĐ",
+   "card": {
+    "src": "/images/figma/a64579317afc82bdf1461d15c67d5cf2574c1371.webp",
+    "fit": "cover"
+   },
+   "gallery": [
+    {
+     "src": "/images/figma/a64579317afc82bdf1461d15c67d5cf2574c1371.webp",
+     "fit": "cover"
+    },
+    {
+     "src": "/images/figma/38b7bae1342ee5f07e4741f95e1d683a6d1e0c6a.webp",
+     "m": [
+      [
+       0.8281,
+       0,
+       0.08595
+      ],
+      [
+       0,
+       0.77519,
+       0.13886
+      ]
+     ],
+     "ar": 0.80119
+    },
+    {
+     "src": "/images/figma/41e391dddf04d0fc5eb37dc55251e0b7eff942e5.webp",
+     "m": [
+      [
+       0.75873,
+       0,
+       0.15853
+      ],
+      [
+       0,
+       0.70922,
+       0.17229
+      ]
+     ],
+     "ar": 0.80236
+    },
+    {
+     "src": "/images/figma/7ae36d344fe73f4e2fcf419a6d3dd634ce6be2eb.webp",
+     "m": [
+      [
+       0.55638,
+       0,
+       0.24626
+      ],
+      [
+       0,
+       0.55556,
+       0.38553
+      ]
+     ],
+     "ar": 0.80119
+    },
+    {
+     "src": "/images/figma/4d1e780b8d606d8113850f2a8c214fe31729da5e.webp",
+     "m": [
+      [
+       0.8214,
+       0.01602,
+       0.06545
+      ],
+      [
+       -0.0097,
+       0.76326,
+       0.19996
+      ]
+     ],
+     "ar": 0.80712
+    }
+   ],
+   "layout": {
+    "sig": "[\"Túi Thuyền\",360000,\"Ra biển để ra khơi, ra khơi để thử điều mới. Lấy cảm hứng từ chiếc thuyền miền biển, Tíc Cơ ra mắt Túi Thuyền, nhắc mình cứ việc ra khơi và xông pha, thử cái này cái kia và dám không ngừng đi lên!\",[],[\"Đứng form dày dặn, hai ngăn nhỏ bên trong, có khoá kéo\",\"Chất liệu: vải gió dù dày, chống thấm nước\",\"Quai túi có thể điều chỉnh độ dài (130cm - 160cm)\",\"Kích thước đáy túi: 13x30cm\",\"Chiều cao túi: (trên: 45cm - dưới: 30cm - cao: 29cm)\"],null,true,\"/images/figma/a64579317afc82bdf1461d15c67d5cf2574c1371.webp\",[\"/images/figma/38b7bae1342ee5f07e4741f95e1d683a6d1e0c6a.webp\",\"/images/figma/41e391dddf04d0fc5eb37dc55251e0b7eff942e5.webp\",\"/images/figma/7ae36d344fe73f4e2fcf419a6d3dd634ce6be2eb.webp\",\"/images/figma/4d1e780b8d606d8113850f2a8c214fe31729da5e.webp\"]]",
+    "frameH": 2454,
+    "gallery": [
+     [
+      87,
+      107,
+      552,
+      690
+     ],
+     [
+      90,
+      853,
+      270,
+      337
+     ],
+     [
+      372,
+      853,
+      272,
+      339
+     ],
+     [
+      90,
+      1202,
+      270,
+      337
+     ],
+     [
+      372,
+      1203,
+      272,
+      337
+     ]
+    ],
+    "title": [
+     731,
+     98,
+     458,
+     93,
+     45
+    ],
+    "price": [
+     731,
+     153,
+     420,
+     21,
+     19
+    ],
+    "desc": [
+     731,
+     336,
+     458,
+     60,
+     20
+    ],
+    "cta": [
+     728,
+     506,
+     451,
+     40
+    ],
+    "line": [
+     728,
+     597,
+     452,
+     1
+    ],
+    "specs": [
+     728,
+     604,
+     458,
+     100,
+     20
+    ],
+    "suggest": [
+     87,
+     1593,
+     307,
+     89,
+     90
+    ],
+    "cards": [
+     87,
+     1674
+    ]
+   }
+  },
+  "li-xi-2026": {
+   "name": "Lì xì 2026",
+   "priceFrom": 85000,
+   "title": "LÌ XÌ 2026\n(THUỘC BST CHÚC TẾT NHAU THẬT SỰ)",
+   "detailPrice": "85.000 VNĐ/ bộ",
+   "cardPrice": "85.000 VNĐ",
+   "card": {
+    "src": "/images/figma/5d96f6fdc6bd5cbc6273918d544bbfc6bebd69c6.webp",
+    "m": [
+     [
+      0.88496,
+      0,
+      0.05715
+     ],
+     [
+      0,
+      0.88512,
+      0.05714
+     ]
+    ],
+    "ar": 0.8012
+   },
+   "gallery": [
+    {
+     "src": "/images/figma/5d96f6fdc6bd5cbc6273918d544bbfc6bebd69c6.webp",
+     "m": [
+      [
+       0.88496,
+       0,
+       0.05715
+      ],
+      [
+       0,
+       0.88512,
+       0.05714
+      ]
+     ],
+     "ar": 0.79971
+    },
+    {
+     "src": "/images/figma/be5207b096d3e8532ced68f8634418237fc91de1.webp",
+     "fit": "cover"
+    },
+    {
+     "src": "/images/figma/48de7651b838c0216fd6f2281b734780d1d6268d.webp",
+     "fit": "cover"
+    },
+    {
+     "src": "/images/figma/2a32c31c83140d14818933c838eab95ec6b0e897.webp",
+     "fit": "cover"
+    },
+    {
+     "src": "/images/figma/a4f872da85513c77d2c6f9242a881cd7b039e553.webp",
+     "fit": "cover"
+    },
+    {
+     "src": "/images/figma/398188087c24217890d41a0fe2d1197ae78e77a1.webp",
+     "fit": "cover"
+    },
+    {
+     "src": "/images/figma/5d392821216400c35641f98db0a1d40b66ea38c6.webp",
+     "fit": "cover"
+    }
+   ],
+   "layout": {
+    "sig": "[\"Lì xì 2026\",85000,\"Câu chúc đi trước, lì xì ngay sau. Tết về qua những phong lì xì màu sắc người ta hân hoan gửi nhau, mong muốn chúc nhau sức khoẻ, may mắn, niềm vui và tỉ ti thứ tốt đẹp trên đời. Chúc ngắn gọn mặt trước, thủ thỉ dài dài mặt sau, Tíc Cơ gửi lời chúc Tết qua bộ lì xì 2026, không hề sáo rỗng hay cho có, như một lời thì thầm gửi tới nhau mùa năm mới!\",[],[\"Một bộ gồm 06 lì xì (chỉ bán theo bộ)\",\"Kích thước: 8x16cm\",\"Chất liệu: giấy mỹ thuật\",\"Màu sắc bên ngoài có sự chênh lệch nhẹ\"],null,true,\"/images/figma/5d96f6fdc6bd5cbc6273918d544bbfc6bebd69c6.webp\",[\"/images/figma/be5207b096d3e8532ced68f8634418237fc91de1.webp\",\"/images/figma/48de7651b838c0216fd6f2281b734780d1d6268d.webp\",\"/images/figma/2a32c31c83140d14818933c838eab95ec6b0e897.webp\",\"/images/figma/a4f872da85513c77d2c6f9242a881cd7b039e553.webp\",\"/images/figma/398188087c24217890d41a0fe2d1197ae78e77a1.webp\",\"/images/figma/5d392821216400c35641f98db0a1d40b66ea38c6.webp\"]]",
+    "frameH": 2454,
+    "gallery": [
+     [
+      90,
+      107,
+      551,
+      689
+     ],
+     [
+      89,
+      853,
+      269,
+      336
+     ],
+     [
+      371,
+      853,
+      269,
+      336
+     ],
+     [
+      652,
+      853,
+      270,
+      337
+     ],
+     [
+      89,
+      1200,
+      269,
+      336
+     ],
+     [
+      371,
+      1200,
+      269,
+      336
+     ],
+     [
+      652,
+      1200,
+      269,
+      336
+     ]
+    ],
+    "title": [
+     731,
+     98,
+     458,
+     93,
+     45
+    ],
+    "price": [
+     731,
+     245,
+     420,
+     21,
+     19
+    ],
+    "desc": [
+     731,
+     336,
+     458,
+     100,
+     20
+    ],
+    "cta": [
+     728,
+     506,
+     451,
+     40
+    ],
+    "line": [
+     728,
+     597,
+     452,
+     1
+    ],
+    "specs": [
+     728,
+     604,
+     458,
+     80,
+     20
+    ],
+    "suggest": [
+     90,
+     1593,
+     307,
+     89,
+     90
+    ],
+    "cards": [
+     90,
+     1674
+    ]
+   }
+  },
+  "than-chu-nam-moi-2026": {
+   "name": "Thần chú năm mới 2026",
+   "priceFrom": 130000,
+   "title": "THẦN CHÚ NĂM MỚI 2026\n(THUỘC BST CHÚC TẾT NHAU THẬT SỰ)",
+   "detailPrice": "130.000 VNĐ",
+   "cardPrice": "130.000 VNĐ",
+   "card": {
+    "src": "/images/figma/dd188dc98b9d208a4fc505d57d56485a3ce84cd7.webp",
+    "fit": "cover"
+   },
+   "gallery": [
+    {
+     "src": "/images/figma/dd188dc98b9d208a4fc505d57d56485a3ce84cd7.webp",
+     "fit": "cover"
+    },
+    {
+     "src": "/images/figma/bbcf5444ae1d94a25f0c2a973151e3f767ba3ad2.webp",
+     "m": [
+      [
+       0.67991,
+       0,
+       0.22455
+      ],
+      [
+       0,
+       0.63694,
+       0.13601
+      ]
+     ],
+     "ar": 0.8006
+    },
+    {
+     "src": "/images/figma/77f9c25b6392f5394cf510aa3813afd38de32ac2.webp",
+     "fit": "cover"
+    },
+    {
+     "src": "/images/figma/2f600421539f7a388d9891ebbaa5d900ab200e4a.webp",
+     "fit": "cover"
+    },
+    {
+     "src": "/images/figma/bb219774a17eb56d3a8e925e1303b35832fd5a5e.webp",
+     "m": [
+      [
+       0.76255,
+       0,
+       0.13252
+      ],
+      [
+       0,
+       0.71429,
+       0.14324
+      ]
+     ],
+     "ar": 0.8006
+    },
+    {
+     "src": "/images/figma/1a13b824e4cb2413809acdb514f63e99f3e49f21.webp",
+     "m": [
+      [
+       0.76263,
+       0,
+       0.11705
+      ],
+      [
+       0,
+       0.71429,
+       0.17438
+      ]
+     ],
+     "ar": 0.8006
+    },
+    {
+     "src": "/images/figma/d5ea29f4b70c7d9a32f7ef0047b644bc1c5f5a3e.webp",
+     "m": [
+      [
+       0.72842,
+       0,
+       0.13557
+      ],
+      [
+       0,
+       0.68493,
+       0.12408
+      ]
+     ],
+     "ar": 0.79762
+    }
+   ],
+   "layout": {
+    "sig": "[\"Thần chú năm mới 2026\",130000,\"Thần chú năm mới là sản phẩm giới hạn hàng năm, ra mắt duy nhất vào đầu năm mới. Với tinh thần vận động toàn dân chúc Tết nhau thật sự, Thần Chú Năm Mới 2026 dưới hình thức một cuốn lịch cầm tay mini, đan xen với những câu chúc quen thuộc gần gũi, Tíc Cơ đơn giản là muốn nói: mấy câu chúc thuận miệng ấy vốn không hề qua loa, khi người ta nói ra từ sự chân thành và quý mến!\",[],[\"Lịch 12 tháng\",\"Kích thước: 9x9cm\",\"Chất liệu: giấy mỹ thuật ánh ngọc trai\"],null,true,\"/images/figma/dd188dc98b9d208a4fc505d57d56485a3ce84cd7.webp\",[\"/images/figma/bbcf5444ae1d94a25f0c2a973151e3f767ba3ad2.webp\",\"/images/figma/77f9c25b6392f5394cf510aa3813afd38de32ac2.webp\",\"/images/figma/2f600421539f7a388d9891ebbaa5d900ab200e4a.webp\",\"/images/figma/bb219774a17eb56d3a8e925e1303b35832fd5a5e.webp\",\"/images/figma/1a13b824e4cb2413809acdb514f63e99f3e49f21.webp\",\"/images/figma/d5ea29f4b70c7d9a32f7ef0047b644bc1c5f5a3e.webp\"]]",
+    "frameH": 2454,
+    "gallery": [
+     [
+      89,
+      107,
+      551,
+      689
+     ],
+     [
+      89,
+      853,
+      269,
+      336
+     ],
+     [
+      371,
+      853,
+      269,
+      336
+     ],
+     [
+      653,
+      853,
+      268,
+      335
+     ],
+     [
+      89,
+      1200,
+      269,
+      336
+     ],
+     [
+      371,
+      1200,
+      269,
+      336
+     ],
+     [
+      652,
+      1200,
+      268,
+      336
+     ]
+    ],
+    "title": [
+     731,
+     98,
+     458,
+     93,
+     45
+    ],
+    "price": [
+     731,
+     245,
+     420,
+     21,
+     19
+    ],
+    "desc": [
+     731,
+     336,
+     458,
+     140,
+     20
+    ],
+    "cta": [
+     728,
+     506,
+     451,
+     40
+    ],
+    "line": [
+     728,
+     597,
+     452,
+     1
+    ],
+    "specs": [
+     728,
+     604,
+     458,
+     60,
+     20
+    ],
+    "suggest": [
+     90,
+     1593,
+     307,
+     89,
+     90
+    ],
+    "cards": [
+     90,
+     1674
+    ]
+   }
+  },
+  "so-nghi-di": {
+   "name": "Sổ Nghỉ Đi",
+   "priceFrom": 150000,
+   "title": "SỔ NGHỈ ĐI",
+   "detailPrice": "150.000 VNĐ",
+   "cardPrice": "150.000 VNĐ",
+   "card": {
+    "src": "/images/figma/cd855dd03b918695a0f161a5e550b7502901ef71.webp",
+    "fit": "cover"
+   },
+   "gallery": [
+    {
+     "src": "/images/figma/cd855dd03b918695a0f161a5e550b7502901ef71.webp",
+     "fit": "cover"
+    },
+    {
+     "src": "/images/figma/e3c5aeb38cd1dea2f1fd2f6b856b0ded0598edea.webp",
+     "fit": "cover"
+    },
+    {
+     "src": "/images/figma/6a0d86e2c2734d006ce3362dba8e05d63aa56ff7.webp",
+     "fit": "cover"
+    }
+   ],
+   "layout": {
+    "sig": "[\"Sổ Nghỉ Đi\",150000,\"Tíc Cơ có một cuốn sổ để nhắc bạn Nghỉ đi! Làm nhiều thì dễ mệt, mệt nhiều thì nghỉ đi. Sổ Nghỉ đi nằm trong hộp quà Nghỉ Đi, hợp tác bởi Tíc Cơ và Freezedom trong chiến dịch ‘Thu Rồi Nghỉ Đi’!\",[],[\"Kích thước: size B6 (12,5 x 17,6 cm)\",\"Chất liệu: giấy kraft\",\"Số trang: 196 trang không kể bìa, ruột sổ chấm dot\",\"Khâu chỉ keo gáy\",\"Trong sổ bao gồm 8 trang minh hoạ chủ đề Nghỉ đi\"],null,true,\"/images/figma/cd855dd03b918695a0f161a5e550b7502901ef71.webp\",[\"/images/figma/e3c5aeb38cd1dea2f1fd2f6b856b0ded0598edea.webp\",\"/images/figma/6a0d86e2c2734d006ce3362dba8e05d63aa56ff7.webp\"]]",
+    "frameH": 2106,
+    "gallery": [
+     [
+      90,
+      107,
+      551,
+      689
+     ],
+     [
+      89,
+      853,
+      269,
+      336
+     ],
+     [
+      372,
+      853,
+      269,
+      336
+     ]
+    ],
+    "title": [
+     731,
+     98,
+     458,
+     93,
+     45
+    ],
+    "price": [
+     731,
+     153,
+     420,
+     21,
+     19
+    ],
+    "desc": [
+     731,
+     336,
+     458,
+     60,
+     20
+    ],
+    "cta": [
+     728,
+     506,
+     451,
+     40
+    ],
+    "line": [
+     728,
+     597,
+     452,
+     1
+    ],
+    "specs": [
+     728,
+     604,
+     458,
+     100,
+     20
+    ],
+    "suggest": [
+     90,
+     1245,
+     307,
+     89,
+     90
+    ],
+    "cards": [
+     90,
+     1326
+    ]
+   }
+  },
+  "ao-phong-thoai-mai": {
+   "name": "Áo phông Thoải Mái",
+   "priceFrom": 300000,
+   "title": "ÁO PHÔNG THOẢI MÁI",
+   "detailPrice": "300.000 VNĐ",
+   "cardPrice": "300.000 VNĐ",
+   "card": {
+    "src": "/images/figma/20f36495411906726aaeb380c47a01bbeb508291.webp",
+    "m": [
+     [
+      0.77266,
+      0,
+      0.06865
+     ],
+     [
+      0,
+      0.72993,
+      0.13434
+     ]
+    ],
+    "ar": 0.79456
+   },
+   "gallery": [
+    {
+     "src": "/images/figma/20f36495411906726aaeb380c47a01bbeb508291.webp",
+     "m": [
+      [
+       0.77266,
+       0,
+       0.06865
+      ],
+      [
+       0,
+       0.72993,
+       0.13434
+      ]
+     ],
+     "ar": 0.7939
+    },
+    {
+     "src": "/images/figma/426c0dd115b69c610e8bfc990cf4a02f0a39f54f.webp",
+     "m": [
+      [
+       0.87171,
+       0,
+       0.08745
+      ],
+      [
+       0,
+       0.81967,
+       0.12827
+      ]
+     ],
+     "ar": 0.79762
+    },
+    {
+     "src": "/images/figma/dfed301b14e07a08c95cb003fd1ddd6acda720ae.webp",
+     "m": [
+      [
+       0.5997,
+       0,
+       0.19929
+      ],
+      [
+       0,
+       0.5618,
+       0.36036
+      ]
+     ],
+     "ar": 0.8006
+    },
+    {
+     "src": "/images/figma/5e2acad4bc3dc6ae2732a94ff2a4128f1314ca04.webp",
+     "fit": "cover"
+    },
+    {
+     "src": "/images/figma/0bbaa21edd4802c683147fa3e8cb10926e5c6d51.webp",
+     "m": [
+      [
+       0.80046,
+       0,
+       0.09355
+      ],
+      [
+       0,
+       0.8,
+       0.00804
+      ]
+     ],
+     "ar": 0.8006
+    }
+   ],
+   "layout": {
+    "sig": "[\"Áo phông Thoải Mái\",300000,\"Nghĩ đơn giản, làm thoải mái, sống giản đơn, mặc Thoải Mái! Giống như hoạt động đầu tiên trong ngày là chọn quần chọn áo, ăn mặc thoải mái là bước đầu để giữ cho mình một tinh thần thoải mái!\",[],[\"Chất liệu: cotton 2 chiều\",\"Màu sắc: đen & trắng\",\"Size: M/L/XL\"],null,true,\"/images/figma/20f36495411906726aaeb380c47a01bbeb508291.webp\",[\"/images/figma/426c0dd115b69c610e8bfc990cf4a02f0a39f54f.webp\",\"/images/figma/dfed301b14e07a08c95cb003fd1ddd6acda720ae.webp\",\"/images/figma/5e2acad4bc3dc6ae2732a94ff2a4128f1314ca04.webp\",\"/images/figma/0bbaa21edd4802c683147fa3e8cb10926e5c6d51.webp\"]]",
+    "frameH": 2454,
+    "gallery": [
+     [
+      93,
+      107,
+      547,
+      689
+     ],
+     [
+      90,
+      853,
+      268,
+      336
+     ],
+     [
+      372,
+      853,
+      269,
+      336
+     ],
+     [
+      90,
+      1203,
+      269,
+      336
+     ],
+     [
+      372,
+      1203,
+      269,
+      336
+     ]
+    ],
+    "title": [
+     731,
+     98,
+     458,
+     93,
+     45
+    ],
+    "price": [
+     731,
+     153,
+     420,
+     21,
+     19
+    ],
+    "desc": [
+     731,
+     336,
+     458,
+     60,
+     20
+    ],
+    "cta": [
+     728,
+     506,
+     451,
+     40
+    ],
+    "line": [
+     728,
+     597,
+     452,
+     1
+    ],
+    "specs": [
+     728,
+     604,
+     458,
+     60,
+     20
+    ],
+    "suggest": [
+     87,
+     1593,
+     307,
+     89,
+     90
+    ],
+    "cards": [
+     87,
+     1674
+    ]
+   }
+  },
+  "mu-tai-beo-ha-ha": {
+   "name": "Mũ tai bèo Ha Ha",
+   "priceFrom": 320000,
+   "title": "[BST ĐẦU ĐỘI MŨ, CHÂN VÀO ĐỜI] MŨ TAI BÈO\nHA HA",
+   "detailPrice": "320.000 VNĐ",
+   "cardPrice": "320.000 VNĐ",
+   "card": {
+    "src": "/images/figma/86c21def520ab906b9ea6dba8a01030f3c6f77be.webp",
+    "m": [
+     [
+      0.97182,
+      0,
+      0.01409
+     ],
+     [
+      0,
+      0.90909,
+      0.02679
+     ]
+    ],
+    "ar": 0.8006
+   },
+   "gallery": [
+    {
+     "src": "/images/figma/86c21def520ab906b9ea6dba8a01030f3c6f77be.webp",
+     "m": [
+      [
+       0.97182,
+       0,
+       0.01409
+      ],
+      [
+       0,
+       0.90909,
+       0.02679
+      ]
+     ],
+     "ar": 0.80175
+    },
+    {
+     "src": "/images/figma/44f8b9fd33ddf61606f8b7d415691296ea72f6b7.webp",
+     "m": [
+      [
+       0.97464,
+       0,
+       0.00069
+      ],
+      [
+       0,
+       0.91576,
+       -0.00103
+      ]
+     ],
+     "ar": 0.79822
+    },
+    {
+     "src": "/images/figma/2c653a28c511fd498a049a49c20053b94ea7fa3a.webp",
+     "m": [
+      [
+       0.52459,
+       0,
+       0.22346
+      ],
+      [
+       0,
+       0.49261,
+       0.22953
+      ]
+     ],
+     "ar": 0.79822
+    }
+   ],
+   "layout": {
+    "sig": "[\"Mũ tai bèo Ha Ha\",320000,\"Một cú hợp tác bởi Neenee và Tíc Cơ!\\nKhông có mũ cũng được, nhưng có thì còn vui hơn. Biến mấy thứ mình đội hàng ngày thêm màu sắc và vào mood! Đầu đội mũ nâng cao tinh thần, chân cứ thế mà hoan hỷ nhảy vào đời!\\n\\nBạn haha, đời nở hoa, miệng ngân nga, mũ tô điểm vào một ngày âm u!\",[\"Mũ tai bèo Ha Ha\",\"Mũ lưỡi trai Chả Sao\"],[\"Chất liệu: kaki\",\"Đội được 2 mặt\",\"Kèm 2 màu dây: rêu, kem\",\"Nút bấm ở mặt màu kem\",\"2 size: S (55-57cm), M (58-60cm)\"],null,true,\"/images/figma/86c21def520ab906b9ea6dba8a01030f3c6f77be.webp\",[\"/images/figma/44f8b9fd33ddf61606f8b7d415691296ea72f6b7.webp\",\"/images/figma/2c653a28c511fd498a049a49c20053b94ea7fa3a.webp\"]]",
+    "frameH": 2106,
+    "gallery": [
+     [
+      90,
+      107,
+      550,
+      686
+     ],
+     [
+      90,
+      853,
+      269,
+      337
+     ],
+     [
+      371,
+      853,
+      269,
+      337
+     ]
+    ],
+    "title": [
+     731,
+     107,
+     458,
+     130,
+     45
+    ],
+    "price": [
+     727,
+     255,
+     420,
+     21,
+     19
+    ],
+    "desc": [
+     731,
+     345,
+     458,
+     120,
+     20
+    ],
+    "options": {
+     "box": [
+      731,
+      572,
+      452,
+      32
+     ],
+     "buttons": [
+      [
+       731,
+       572,
+       221,
+       32,
+       767,
+       577,
+       148,
+       21
+      ],
+      [
+       962,
+       572,
+       221,
+       32,
+       989,
+       577,
+       168,
+       21
+      ]
+     ]
+    },
+    "cta": [
+     732,
+     617,
+     451,
+     40
+    ],
+    "line": [
+     732,
+     709,
+     452,
+     1
+    ],
+    "specs": [
+     731,
+     716,
+     458,
+     120,
+     20
+    ],
+    "suggest": [
+     90,
+     1245,
+     307,
+     89,
+     90
+    ],
+    "cards": [
+     90,
+     1326
+    ]
+   }
+  },
+  "mu-luoi-trai-cha-sao": {
+   "name": "Mũ lưỡi trai Chả Sao",
+   "priceFrom": 320000,
+   "title": "[BST ĐẦU ĐỘI MŨ, CHÂN VÀO ĐỜI] MŨ LƯỠI TRAI\nCHẢ SAO",
+   "detailPrice": "320.000 VNĐ",
+   "cardPrice": "320.000 VNĐ",
+   "card": {
+    "src": "/images/figma/14341c1b98597c12ac27da8ad8e345dbc4a14bb1.webp",
+    "m": [
+     [
+      0.80985,
+      0,
+      0.06651
+     ],
+     [
+      0,
+      0.75758,
+      0.14845
+     ]
+    ],
+    "ar": 0.8018
+   },
+   "gallery": [
+    {
+     "src": "/images/figma/14341c1b98597c12ac27da8ad8e345dbc4a14bb1.webp",
+     "m": [
+      [
+       0.80985,
+       0,
+       0.06651
+      ],
+      [
+       0,
+       0.75758,
+       0.14845
+      ]
+     ],
+     "ar": 0.80175
+    },
+    {
+     "src": "/images/figma/c0a8909f075e66af1221028d8e2d84841cf20a32.webp",
+     "m": [
+      [
+       0.73699,
+       0,
+       0.11356
+      ],
+      [
+       0,
+       0.92329,
+       0.03635
+      ]
+     ],
+     "ar": 0.79822
+    },
+    {
+     "src": "/images/figma/ad2704a62df40b6896c0c91e7ec9ff2186edcbd4.webp",
+     "m": [
+      [
+       0.74184,
+       0,
+       0.12969
+      ],
+      [
+       0,
+       0.69444,
+       0.19632
+      ]
+     ],
+     "ar": 0.80119
+    }
+   ],
+   "layout": {
+    "sig": "[\"Mũ lưỡi trai Chả Sao\",320000,\"Một cú hợp tác bởi Neenee và Tíc Cơ!\\nKhông có mũ cũng được, nhưng có thì còn vui hơn. Biến mấy thứ mình đội hàng ngày thêm màu sắc và vào mood! Đầu đội mũ nâng cao tinh thần, chân cứ thế mà hoan hỷ nhảy vào đời!\\n\\nNghĩ sao thì đời vậy, nghĩ chả sao thì chả phải sợ! đội mũ chả sao, mãi tinh thần chả sao!\",[\"Mũ tai bèo Ha Ha\",\"Mũ lưỡi trai Chả Sao\"],[\"Chất liệu: kaki\",\"Mũi ngắn, vành cứng\",\"Có dây chỉnh size\",\"Hai màu: Xanh navy, Đỏ\"],null,true,\"/images/figma/14341c1b98597c12ac27da8ad8e345dbc4a14bb1.webp\",[\"/images/figma/c0a8909f075e66af1221028d8e2d84841cf20a32.webp\",\"/images/figma/ad2704a62df40b6896c0c91e7ec9ff2186edcbd4.webp\"]]",
+    "frameH": 2106,
+    "gallery": [
+     [
+      90,
+      107,
+      550,
+      686
+     ],
+     [
+      90,
+      853,
+      269,
+      337
+     ],
+     [
+      371,
+      853,
+      270,
+      337
+     ]
+    ],
+    "title": [
+     731,
+     107,
+     458,
+     130,
+     45
+    ],
+    "price": [
+     729,
+     255,
+     420,
+     21,
+     19
+    ],
+    "desc": [
+     731,
+     345,
+     458,
+     140,
+     20
+    ],
+    "options": {
+     "box": [
+      731,
+      572,
+      452,
+      32
+     ],
+     "buttons": [
+      [
+       731,
+       572,
+       221,
+       32,
+       767,
+       577,
+       148,
+       21
+      ],
+      [
+       962,
+       572,
+       221,
+       32,
+       989,
+       577,
+       168,
+       21
+      ]
+     ]
+    },
+    "cta": [
+     732,
+     617,
+     451,
+     40
+    ],
+    "line": [
+     732,
+     709,
+     452,
+     1
+    ],
+    "specs": [
+     731,
+     716,
+     458,
+     80,
+     20
+    ],
+    "suggest": [
+     90,
+     1245,
+     307,
+     89,
+     90
+    ],
+    "cards": [
+     90,
+     1326
+    ]
+   }
+  },
+  "keychain-nguoi-viet-yeu-nuoc": {
+   "name": "Keychain Người Việt Yêu Nước",
+   "priceFrom": 115000,
+   "title": "KEYCHAIN NGƯỜI VIỆT YÊU NƯỚC",
+   "detailPrice": "115.000 VNĐ",
+   "cardPrice": "115.000 VNĐ",
+   "card": {
+    "src": "/images/figma/3bb4436099c2f07b4784e1e4c7183f745adf263d.webp",
+    "fit": "cover"
+   },
+   "gallery": [
+    {
+     "src": "/images/figma/3bb4436099c2f07b4784e1e4c7183f745adf263d.webp",
+     "fit": "cover"
+    },
+    {
+     "src": "/images/figma/699fe8de8483cedcfad872662e054f70b59ce15a.webp",
+     "fit": "cover"
+    },
+    {
+     "src": "/images/figma/699fe8de8483cedcfad872662e054f70b59ce15a.webp",
+     "m": [
+      [
+       0.75188,
+       0,
+       0.24798
+      ],
+      [
+       0,
+       0.75225,
+       0.22683
+      ]
+     ],
+     "ar": 0.79941
+    }
+   ],
+   "layout": {
+    "sig": "[\"Keychain Người Việt Yêu Nước\",115000,\"Đi cùng bạn trên mọi nẻo đường, yêu nước bắt đầu từ những điều nhỏ. Tiếp nối với set sticker cùng tên, Tíc Cơ ra mắt keychain dành cho người yêu nước Việt, tạo ra tiếng “leng keng” cho đời!\",[],[\"Kích thước: 6-8 cm/piece\",\"Chất liệu: mica cứng\",\"Một set gồm 2 piece\"],null,true,\"/images/figma/3bb4436099c2f07b4784e1e4c7183f745adf263d.webp\",[\"/images/figma/699fe8de8483cedcfad872662e054f70b59ce15a.webp\",\"/images/figma/699fe8de8483cedcfad872662e054f70b59ce15a.webp\"]]",
+    "frameH": 2106,
+    "gallery": [
+     [
+      90,
+      107,
+      551,
+      689
+     ],
+     [
+      90,
+      853,
+      271,
+      339
+     ],
+     [
+      370,
+      853,
+      271,
+      339
+     ]
+    ],
+    "title": [
+     731,
+     98,
+     458,
+     93,
+     45
+    ],
+    "price": [
+     731,
+     200,
+     420,
+     21,
+     19
+    ],
+    "desc": [
+     731,
+     336,
+     458,
+     80,
+     20
+    ],
+    "cta": [
+     728,
+     506,
+     451,
+     40
+    ],
+    "line": [
+     728,
+     597,
+     452,
+     1
+    ],
+    "specs": [
+     728,
+     604,
+     458,
+     60,
+     20
+    ],
+    "suggest": [
+     90,
+     1245,
+     307,
+     89,
+     90
+    ],
+    "cards": [
+     90,
+     1326
+    ]
+   }
+  },
+  "keychain-uoc-duoc-lam-con-cho": {
+   "name": "Keychain Ước Được Làm Con Chó",
+   "priceFrom": 115000,
+   "title": "KEYCHAIN ƯỚC ĐƯỢC LÀM CON CHÓ",
+   "detailPrice": "115.000 VNĐ",
+   "cardPrice": "115.000 VNĐ",
+   "card": {
+    "src": "/images/figma/58822f5d674775867785daec3efe3e3b207428db.webp",
+    "fit": "cover"
+   },
+   "gallery": [
+    {
+     "src": "/images/figma/58822f5d674775867785daec3efe3e3b207428db.webp",
+     "fit": "cover"
+    },
+    {
+     "src": "/images/figma/65d7f8b7ac26dfd701ee1606630f56da501daa51.webp",
+     "fit": "cover"
+    },
+    {
+     "src": "/images/figma/65d7f8b7ac26dfd701ee1606630f56da501daa51.webp",
+     "m": [
+      [
+       0.59098,
+       0,
+       0.21884
+      ],
+      [
+       0,
+       0.5848,
+       0.26072
+      ]
+     ],
+     "ar": 0.80826
+    }
+   ],
+   "layout": {
+    "sig": "[\"Keychain Ước Được Làm Con Chó\",115000,\"Thi thoảng đời nó khó, chẳng sao nếu có ngồi xuống nghỉ tí, làm một con chó nằm dài chỉ việc ngắm nhìn cuộc đời. Nghỉ ngơi, hít thở, lấy đà, vặn ga, phóng vào đời, hôm nay Tíc Cơ cùng bạn ước được làm con chó!\",[],[\"Kích thước: 6-8 cm/piece\",\"Chất liệu: mica cứng\",\"Một set gồm 2 piece\"],null,true,\"/images/figma/58822f5d674775867785daec3efe3e3b207428db.webp\",[\"/images/figma/65d7f8b7ac26dfd701ee1606630f56da501daa51.webp\",\"/images/figma/65d7f8b7ac26dfd701ee1606630f56da501daa51.webp\"]]",
+    "frameH": 2106,
+    "gallery": [
+     [
+      93,
+      107,
+      551,
+      689
+     ],
+     [
+      90,
+      853,
+      271,
+      339
+     ],
+     [
+      370,
+      853,
+      274,
+      339
+     ]
+    ],
+    "title": [
+     731,
+     98,
+     458,
+     93,
+     45
+    ],
+    "price": [
+     731,
+     200,
+     420,
+     21,
+     19
+    ],
+    "desc": [
+     731,
+     336,
+     458,
+     80,
+     20
+    ],
+    "cta": [
+     728,
+     506,
+     451,
+     40
+    ],
+    "line": [
+     728,
+     597,
+     452,
+     1
+    ],
+    "specs": [
+     728,
+     604,
+     458,
+     60,
+     20
+    ],
+    "suggest": [
+     90,
+     1245,
+     307,
+     89,
+     90
+    ],
+    "cards": [
+     90,
+     1326
+    ]
+   }
+  },
+  "keychain-khong-so-cuoc-doi": {
+   "name": "Keychain Không Sợ Cuộc Đời",
+   "priceFrom": 115000,
+   "title": "KEYCHAIN KHÔNG SỢ CUỘC ĐỜI",
+   "detailPrice": "115.000 VNĐ",
+   "cardPrice": "115.000 VNĐ",
+   "card": {
+    "src": "/images/figma/60ca156959b79cc724f88c1082a0496887990862.webp",
+    "fit": "cover"
+   },
+   "gallery": [
+    {
+     "src": "/images/figma/60ca156959b79cc724f88c1082a0496887990862.webp",
+     "fit": "cover"
+    },
+    {
+     "src": "/images/figma/76e00ec5e8bd3e294cecba9c7cfa33ce70fbe139.webp",
+     "fit": "cover"
+    },
+    {
+     "src": "/images/figma/76e00ec5e8bd3e294cecba9c7cfa33ce70fbe139.webp",
+     "m": [
+      [
+       0.70423,
+       0,
+       0.19692
+      ],
+      [
+       0,
+       0.70457,
+       0.24425
+      ]
+     ],
+     "ar": 0.79941
+    }
+   ],
+   "layout": {
+    "sig": "[\"Keychain Không Sợ Cuộc Đời\",115000,\"Đời toàn chuyện cỏn con, chuyện lớn hóa chuyện nhỏ, chuyện nhỏ hóa ra chẳng có gì. Không sợ hãi và lo nghĩ nhiều, Tíc Cơ có keychain “Không sợ cuộc đời” dành cho mọi trái tim can trường!\",[],[\"Kích thước: 6-8 cm/piece\",\"Chất liệu: mica cứng\",\"Một set gồm 2 piece\"],null,true,\"/images/figma/60ca156959b79cc724f88c1082a0496887990862.webp\",[\"/images/figma/76e00ec5e8bd3e294cecba9c7cfa33ce70fbe139.webp\",\"/images/figma/76e00ec5e8bd3e294cecba9c7cfa33ce70fbe139.webp\"]]",
+    "frameH": 2106,
+    "gallery": [
+     [
+      93,
+      107,
+      551,
+      689
+     ],
+     [
+      90,
+      853,
+      271,
+      339
+     ],
+     [
+      371,
+      853,
+      271,
+      339
+     ]
+    ],
+    "title": [
+     731,
+     98,
+     458,
+     93,
+     45
+    ],
+    "price": [
+     731,
+     200,
+     420,
+     21,
+     19
+    ],
+    "desc": [
+     731,
+     336,
+     458,
+     80,
+     20
+    ],
+    "cta": [
+     728,
+     506,
+     451,
+     40
+    ],
+    "line": [
+     728,
+     597,
+     452,
+     1
+    ],
+    "specs": [
+     728,
+     604,
+     458,
+     60,
+     20
+    ],
+    "suggest": [
+     90,
+     1245,
+     307,
+     89,
+     90
+    ],
+    "cards": [
+     90,
+     1326
+    ]
+   }
+  },
+  "so-trong": {
+   "name": "Sổ Trống",
+   "priceFrom": 85000,
+   "title": "SỔ TRỐNG",
+   "detailPrice": "85.000 VNĐ/ sổ",
+   "gallery": [
+    {
+     "src": "/images/figma/db031c9f3affb098ffdb05bf20a1c3c58ac655e5.webp",
+     "fit": "cover"
+    },
+    {
+     "src": "/images/figma/fa28ec83f6434ac6cba912ac8dd31c772a409231.webp",
+     "fit": "cover"
+    },
+    {
+     "src": "/images/figma/6b8c028149912e3128e4d696c00d61e7d0d062a1.webp",
+     "fit": "cover"
+    },
+    {
+     "src": "/images/figma/5d82cbf9a61fe0a30ebd5bdced58c6504cd4da4a.webp",
+     "fit": "cover"
+    },
+    {
+     "src": "/images/figma/9e0243ecfd084eb664dd1b875208257bdd0c71bc.webp",
+     "fit": "cover"
+    }
+   ],
+   "layout": {
+    "sig": "[\"Sổ Trống\",85000,\"Một cuốn sổ trống trơn để bạn làm gì cũng được!\\n\\nViệc ngược việc xuôi cũng phải dành thời gian cho cả những thứ mình thích. Tíc Cơ quyết định để Sổ Trống là nơi bạn tự làm đầy trang giấy theo bất kỳ cách nào: vẽ ngôi nhà ngay trước mắt, đưa bút trong vô thức, ép khô chiếc lá vừa nhặt bên đường, nháp ý tưởng đầu tiên cho dự án cá nhân,... Cứ lôi Sổ Trống ra khi bạn quá tải, khi bạn cần nghỉ ngơi trong trống rỗng và làm đầy Sổ Trống cho đến khi chính bạn thấy đủ đầy!\",[\"Sổ trống\",\"Sổ nhật ký\",\"Sổ lao động\",\"Bộ 3 sổ\"],[\"Ruột giấy trơn, định lượng 80gsm\",\"Độ dày vừa phải, gọn nhẹ mang theo hàng ngày\",\"Số trang: 160 trang\",\"Kích thước: 12.6 x 17.8cm\"],\"Mua bộ 03 sổ tặng kèm hộp ngoài\\nKhông kèm theo hộp khi mua sổ lẻ\",false,\"/images/figma/db031c9f3affb098ffdb05bf20a1c3c58ac655e5.webp\",[\"/images/figma/fa28ec83f6434ac6cba912ac8dd31c772a409231.webp\",\"/images/figma/6b8c028149912e3128e4d696c00d61e7d0d062a1.webp\",\"/images/figma/5d82cbf9a61fe0a30ebd5bdced58c6504cd4da4a.webp\",\"/images/figma/9e0243ecfd084eb664dd1b875208257bdd0c71bc.webp\"]]",
+    "frameH": 2454,
+    "gallery": [
+     [
+      90,
+      107,
+      549,
+      686
+     ],
+     [
+      90,
+      853,
+      270,
+      338
+     ],
+     [
+      371,
+      853,
+      268,
+      335
+     ],
+     [
+      90,
+      1203,
+      270,
+      337
+     ],
+     [
+      371,
+      1204,
+      269,
+      336
+     ]
+    ],
+    "title": [
+     731,
+     107,
+     458,
+     21,
+     19
+    ],
+    "price": [
+     731,
+     149,
+     420,
+     21,
+     19
+    ],
+    "desc": [
+     731,
+     237,
+     458,
+     160,
+     20
+    ],
+    "options": {
+     "box": [
+      731,
+      425,
+      451,
+      71
+     ],
+     "buttons": [
+      [
+       731,
+       425,
+       130,
+       32,
+       758,
+       430,
+       75,
+       21
+      ],
+      [
+       892,
+       425,
+       130,
+       32,
+       913,
+       430,
+       87,
+       21
+      ],
+      [
+       1052,
+       425,
+       130,
+       32,
+       1074,
+       430,
+       97,
+       21
+      ],
+      [
+       731,
+       464,
+       130,
+       32,
+       752,
+       469,
+       87,
+       21
+      ]
+     ]
+    },
+    "cta": [
+     731,
+     510,
+     451,
+     40
+    ],
+    "line": [
+     731,
+     601,
+     452,
+     1
+    ],
+    "specs": [
+     731,
+     608,
+     458,
+     160,
+     20
+    ],
+    "suggest": [
+     87,
+     1593,
+     307,
+     89,
+     90
+    ],
+    "cards": [
+     87,
+     1674
+    ]
+   }
+  },
+  "so-nhat-ky": {
+   "name": "Sổ Nhật Ký",
+   "priceFrom": 85000,
+   "title": "SỔ NHẬT KÝ",
+   "detailPrice": "85.000 VNĐ/ sổ",
+   "gallery": [
+    {
+     "src": "/images/figma/16a3bb9ecc7c9830bdb7e9246007feea1aa78ce1.webp",
+     "fit": "cover"
+    },
+    {
+     "src": "/images/figma/0b32a1690f3f29b895f832a731d1532f791d325d.webp",
+     "fit": "cover"
+    },
+    {
+     "src": "/images/figma/862e3a1bc7986d028b94f9931fdec0d03db9812a.webp",
+     "fit": "cover"
+    },
+    {
+     "src": "/images/figma/73a81db39a8032d35ca688b454b4c3fb555f27f1.webp",
+     "fit": "cover"
+    },
+    {
+     "src": "/images/figma/54559b3e4a6ef65808bf6c2655abff4825c87e45.webp",
+     "fit": "cover"
+    },
+    {
+     "src": "/images/figma/820c30be60fe4ac076bfb2720471baa9a0461f1a.webp",
+     "fit": "cover"
+    },
+    {
+     "src": "/images/figma/e8fe13726573e27b53890ca70fe8dc8835480f66.webp",
+     "fit": "cover"
+    }
+   ],
+   "layout": {
+    "sig": "[\"Sổ Nhật Ký\",85000,\"Một cuốn sổ để bạn sắp xếp suy nghĩ trong đầu một cách riêng tư!\\n\\nNgày nào cũng là ngày đáng ghi lại nếu mình biết là mình đang sống! Buồn hay vui, vui hay buồn, viết nhật ký để ghi nhớ, để biết ơn, để trân trọng đời thường. Có một trăm suy nghĩ trong đầu thì viết ra, nghĩ nhiều không thông thì viết ra, yên tâm là Sổ Nhật Ký của bạn không ai được đọc!\",[\"Sổ trống\",\"Sổ nhật ký\",\"Sổ lao động\",\"Bộ 3 sổ\"],[\"Ruột giấy chấm dot, định lượng 80gsm\",\"Độ dày vừa phải, gọn nhẹ mang theo hàng ngày\",\"Số trang: 160 trang\",\"Kích thước: 12.6 x 17.8cm\",\"Có thêm mood tracker\"],\"Mua bộ 03 sổ tặng kèm hộp ngoài\\nKhông kèm theo hộp khi mua sổ lẻ\",false,\"/images/figma/16a3bb9ecc7c9830bdb7e9246007feea1aa78ce1.webp\",[\"/images/figma/0b32a1690f3f29b895f832a731d1532f791d325d.webp\",\"/images/figma/862e3a1bc7986d028b94f9931fdec0d03db9812a.webp\",\"/images/figma/73a81db39a8032d35ca688b454b4c3fb555f27f1.webp\",\"/images/figma/54559b3e4a6ef65808bf6c2655abff4825c87e45.webp\",\"/images/figma/820c30be60fe4ac076bfb2720471baa9a0461f1a.webp\",\"/images/figma/e8fe13726573e27b53890ca70fe8dc8835480f66.webp\"]]",
+    "frameH": 2454,
+    "gallery": [
+     [
+      90,
+      107,
+      549,
+      686
+     ],
+     [
+      90,
+      853,
+      270,
+      338
+     ],
+     [
+      371,
+      853,
+      269,
+      336
+     ],
+     [
+      651,
+      853,
+      269,
+      336
+     ],
+     [
+      90,
+      1203,
+      270,
+      337
+     ],
+     [
+      371,
+      1204,
+      269,
+      336
+     ],
+     [
+      651,
+      1203,
+      271,
+      338
+     ]
+    ],
+    "title": [
+     731,
+     107,
+     458,
+     21,
+     19
+    ],
+    "price": [
+     731,
+     149,
+     420,
+     21,
+     19
+    ],
+    "desc": [
+     731,
+     237,
+     458,
+     120,
+     20
+    ],
+    "options": {
+     "box": [
+      731,
+      425,
+      451,
+      71
+     ],
+     "buttons": [
+      [
+       731,
+       425,
+       130,
+       32,
+       758,
+       430,
+       75,
+       21
+      ],
+      [
+       892,
+       425,
+       130,
+       32,
+       913,
+       430,
+       87,
+       21
+      ],
+      [
+       1052,
+       425,
+       130,
+       32,
+       1074,
+       430,
+       97,
+       21
+      ],
+      [
+       731,
+       464,
+       130,
+       32,
+       752,
+       469,
+       87,
+       21
+      ]
+     ]
+    },
+    "cta": [
+     731,
+     510,
+     451,
+     40
+    ],
+    "line": [
+     731,
+     601,
+     452,
+     1
+    ],
+    "specs": [
+     731,
+     608,
+     458,
+     180,
+     20
+    ],
+    "suggest": [
+     87,
+     1593,
+     307,
+     89,
+     90
+    ],
+    "cards": [
+     87,
+     1674
+    ]
+   }
+  },
+  "so-lao-dong": {
+   "name": "Sổ Lao Động",
+   "priceFrom": 85000,
+   "title": "SỔ LAO ĐỘNG",
+   "detailPrice": "85.000 VNĐ/ sổ",
+   "gallery": [
+    {
+     "src": "/images/figma/343596e9ef68b3551c42569815163c35eca6c585.webp",
+     "fit": "cover"
+    },
+    {
+     "src": "/images/figma/651921c312a0e6cc5a92491de36b0c6ebcf4776a.webp",
+     "m": [
+      [
+       0.99846,
+       0,
+       0.00015
+      ],
+      [
+       0,
+       0.99408,
+       0.0005
+      ]
+     ],
+     "ar": 0.80357
+    },
+    {
+     "src": "/images/figma/58b1853b496ef257427df2dec1bb777c0048fdd3.webp",
+     "fit": "cover"
+    },
+    {
+     "src": "/images/figma/710bad7b80c44862d69b3bfa2b34e0d6e638e60f.webp",
+     "fit": "cover"
+    },
+    {
+     "src": "/images/figma/2e67a339680d7f7c8c8099e38bebc08fedfc04e0.webp",
+     "m": [
+      [
+       0.99626,
+       0,
+       0.00187
+      ],
+      [
+       0,
+       0.98824,
+       0
+      ]
+     ],
+     "ar": 0.80655
+    },
+    {
+     "src": "/images/figma/09c99ca111896cb61df2caf5153bc63c12397450.webp",
+     "m": [
+      [
+       0.73631,
+       0,
+       0.0951
+      ],
+      [
+       0,
+       0.6135,
+       0.24483
+      ]
+     ],
+     "ar": 0.8006
+    },
+    {
+     "src": "/images/figma/6b6b6bd0febe111db5514baf1e8f09f17676b7ee.webp",
+     "fit": "cover"
+    }
+   ],
+   "layout": {
+    "sig": "[\"Sổ Lao Động\",85000,\"Một cuốn sổ để bạn lao động vui và trơn tru!\\n\\nSống không chỉ có lao động, nhưng cần lao động để còn sống. Thực hành lao động quay về với những thứ đơn giản nhất: giấy và bút. Lên kế hoạch, chú thích công việc, sắp xếp nhiệm vụ, mang theo đi họp, tập trung và chuyên chú. Làm đầy sổ với công việc, để khi nhìn lại thấy chi chít những đánh dấu của sự cố gắng và tự hào!\",[\"Sổ trống\",\"Sổ nhật ký\",\"Sổ lao động\",\"Bộ 3 sổ\"],[\"Ruột giấy chấm dot, định lượng 80gsm\",\"Độ dày vừa phải, gọn nhẹ mang theo hàng ngày\",\"Số trang: 160 trang\",\"Kích thước: 12.6 x 17.8cm\",\"Có thêm lịch năm\"],\"Mua bộ 03 sổ tặng kèm hộp ngoài\\nKhông kèm theo hộp khi mua sổ lẻ\",false,\"/images/figma/343596e9ef68b3551c42569815163c35eca6c585.webp\",[\"/images/figma/651921c312a0e6cc5a92491de36b0c6ebcf4776a.webp\",\"/images/figma/58b1853b496ef257427df2dec1bb777c0048fdd3.webp\",\"/images/figma/710bad7b80c44862d69b3bfa2b34e0d6e638e60f.webp\",\"/images/figma/2e67a339680d7f7c8c8099e38bebc08fedfc04e0.webp\",\"/images/figma/09c99ca111896cb61df2caf5153bc63c12397450.webp\",\"/images/figma/6b6b6bd0febe111db5514baf1e8f09f17676b7ee.webp\"]]",
+    "frameH": 2454,
+    "gallery": [
+     [
+      90,
+      107,
+      549,
+      686
+     ],
+     [
+      90,
+      853,
+      270,
+      336
+     ],
+     [
+      371,
+      853,
+      269,
+      336
+     ],
+     [
+      651,
+      853,
+      269,
+      336
+     ],
+     [
+      90,
+      1203,
+      271,
+      336
+     ],
+     [
+      371,
+      1203,
+      269,
+      336
+     ],
+     [
+      651,
+      1203,
+      271,
+      340
+     ]
+    ],
+    "title": [
+     731,
+     107,
+     458,
+     21,
+     19
+    ],
+    "price": [
+     731,
+     149,
+     420,
+     21,
+     19
+    ],
+    "desc": [
+     731,
+     237,
+     458,
+     140,
+     20
+    ],
+    "options": {
+     "box": [
+      731,
+      425,
+      451,
+      71
+     ],
+     "buttons": [
+      [
+       731,
+       425,
+       130,
+       32,
+       758,
+       430,
+       75,
+       21
+      ],
+      [
+       892,
+       425,
+       130,
+       32,
+       913,
+       430,
+       87,
+       21
+      ],
+      [
+       1052,
+       425,
+       130,
+       32,
+       1074,
+       430,
+       97,
+       21
+      ],
+      [
+       731,
+       464,
+       130,
+       32,
+       752,
+       469,
+       87,
+       21
+      ]
+     ]
+    },
+    "cta": [
+     731,
+     510,
+     451,
+     40
+    ],
+    "line": [
+     731,
+     601,
+     452,
+     1
+    ],
+    "specs": [
+     731,
+     608,
+     458,
+     180,
+     20
+    ],
+    "suggest": [
+     87,
+     1593,
+     307,
+     89,
+     90
+    ],
+    "cards": [
+     87,
+     1674
+    ]
+   }
+  },
+  "dan-sinh-ton-01": {
+   "name": "Móc khoá 01: Đần Cứ Bình Tĩnh",
+   "priceFrom": 165000,
+   "title": "[BST ĐẦN SINH TỒN]\nMÓC KHOÁ 01\nĐẦN CỨ BÌNH TĨNH",
+   "detailPrice": "165.000 VNĐ/ box",
+   "gallery": [
+    {
+     "src": "/images/figma/ef4ef25a6a8f4a710f9fd609c193d5f2f856275e.webp",
+     "m": [
+      [
+       0.6948,
+       0,
+       0.16929
+      ],
+      [
+       0,
+       0.58055,
+       0.25375
+      ]
+     ],
+     "ar": 0.79826
+    },
+    {
+     "src": "/images/figma/1828f0dd902e6e171a18989b5fc3dd36ab491e35.webp",
+     "m": [
+      [
+       0.86448,
+       0,
+       0.06804
+      ],
+      [
+       0,
+       0.71942,
+       0.1664
+      ]
+     ],
+     "ar": 0.80119
+    },
+    {
+     "src": "/images/figma/368d07ae0a72eaabf2d8258a8251108eb7dd7bdd.webp",
+     "m": [
+      [
+       0.51814,
+       0,
+       0.24027
+      ],
+      [
+       0,
+       0.43103,
+       0.32438
+      ]
+     ],
+     "ar": 0.80119
+    },
+    {
+     "src": "/images/figma/1c6ac15f2b5bf7a332b8de702fdf94fee5c745ca.webp",
+     "m": [
+      [
+       0.54935,
+       0.00487,
+       0.22198
+      ],
+      [
+       -0.00259,
+       0.4587,
+       0.32862
+      ]
+     ],
+     "ar": 0.79822
+    },
+    {
+     "src": "/images/figma/878930d4e4521b79cba3c75fc35954d23d08ef61.webp",
+     "m": [
+      [
+       0.77956,
+       0,
+       0.12767
+      ],
+      [
+       0,
+       0.65359,
+       0.18662
+      ]
+     ],
+     "ar": 0.79525
+    }
+   ],
+   "layout": {
+    "sig": "[\"Móc khoá 01: Đần Cứ Bình Tĩnh\",165000,\"Nguyên tắc đầu tiên để sống sót là bình tĩnh trước mọi tình huống. Ngay lúc này, bạn có thể cầm Đần trong tay, bế Đần, treo Đần và lặp đi lặp lại câu nói “Cứ bình tĩnh” ở trong đầu!\",[\"01 - Đần cứ bình tình\",\"02 - Đần nuốt nước mắt vào trong\",\"03 - Đần vắt cực khô, sống cực căng\",\"BST 3 box\"],[\"Một set gồm: 1 box đựng, 1 gấu bông Đần, 1 piece mica trong suốt\",\"Kích thước: 12cm cả móc treo (có sai số nhẹ)\"],\"Mua 2 set giảm 5%, mua 3 set giảm 10%\",false,\"/images/figma/ef4ef25a6a8f4a710f9fd609c193d5f2f856275e.webp\",[\"/images/figma/1828f0dd902e6e171a18989b5fc3dd36ab491e35.webp\",\"/images/figma/368d07ae0a72eaabf2d8258a8251108eb7dd7bdd.webp\",\"/images/figma/1c6ac15f2b5bf7a332b8de702fdf94fee5c745ca.webp\",\"/images/figma/878930d4e4521b79cba3c75fc35954d23d08ef61.webp\"]]",
+    "frameH": 2454,
+    "gallery": [
+     [
+      90,
+      107,
+      550,
+      689
+     ],
+     [
+      90,
+      853,
+      270,
+      337
+     ],
+     [
+      371,
+      853,
+      270,
+      337
+     ],
+     [
+      90,
+      1203,
+      269,
+      337
+     ],
+     [
+      371,
+      1203,
+      268,
+      337
+     ]
+    ],
+    "title": [
+     731,
+     107,
+     458,
+     130,
+     45
+    ],
+    "price": [
+     731,
+     254,
+     420,
+     21,
+     19
+    ],
+    "desc": [
+     731,
+     342,
+     458,
+     80,
+     20
+    ],
+    "options": {
+     "box": [
+      731,
+      486,
+      451,
+      115
+     ],
+     "buttons": [
+      [
+       731,
+       486,
+       171,
+       32,
+       733,
+       490,
+       168,
+       21
+      ],
+      [
+       908,
+       486,
+       274,
+       32,
+       912,
+       490,
+       269,
+       21
+      ],
+      [
+       731,
+       530,
+       296,
+       32,
+       737,
+       534,
+       322,
+       21
+      ],
+      [
+       731,
+       569,
+       130,
+       32,
+       752,
+       573,
+       87,
+       21
+      ]
+     ]
+    },
+    "cta": [
+     731,
+     615,
+     451,
+     40
+    ],
+    "line": [
+     731,
+     706,
+     452,
+     1
+    ],
+    "specs": [
+     731,
+     713,
+     458,
+     100,
+     20
+    ],
+    "suggest": [
+     87,
+     1593,
+     307,
+     89,
+     90
+    ],
+    "cards": [
+     87,
+     1674
+    ]
+   }
+  },
+  "dan-sinh-ton-02": {
+   "name": "Móc khoá 02: Đần Nuốt Nước Mắt Vào Trong",
+   "priceFrom": 165000,
+   "title": "[BST ĐẦN SINH TỒN]\nMÓC KHOÁ 02\nĐẦN NUỐT NƯỚC MẮT\nVÀO TRONG",
+   "detailPrice": "165.000 VNĐ/ box",
+   "gallery": [
+    {
+     "src": "/images/figma/4ce44f4330ae8bc2fef5ac4b56d607aee3dacd70.webp",
+     "m": [
+      [
+       0.76565,
+       0,
+       0.11717
+      ],
+      [
+       0,
+       0.63694,
+       0.24484
+      ]
+     ],
+     "ar": 0.80116
+    },
+    {
+     "src": "/images/figma/3192e63386fc8f154aa17a14297f5acb41297bbc.webp",
+     "m": [
+      [
+       0.6368,
+       0,
+       0.14792
+      ],
+      [
+       0,
+       0.53191,
+       0.30685
+      ]
+     ],
+     "ar": 0.79822
+    },
+    {
+     "src": "/images/figma/368d07ae0a72eaabf2d8258a8251108eb7dd7bdd.webp",
+     "m": [
+      [
+       0.51814,
+       0,
+       0.24027
+      ],
+      [
+       0,
+       0.43103,
+       0.32438
+      ]
+     ],
+     "ar": 0.80119
+    },
+    {
+     "src": "/images/figma/1c6ac15f2b5bf7a332b8de702fdf94fee5c745ca.webp",
+     "m": [
+      [
+       0.54935,
+       0.00487,
+       0.22198
+      ],
+      [
+       -0.00259,
+       0.4587,
+       0.32862
+      ]
+     ],
+     "ar": 0.79822
+    },
+    {
+     "src": "/images/figma/3192e63386fc8f154aa17a14297f5acb41297bbc.webp",
+     "m": [
+      [
+       0.42604,
+       0,
+       0.16482
+      ],
+      [
+       0,
+       0.35587,
+       0.43545
+      ]
+     ],
+     "ar": 0.79525
+    }
+   ],
+   "layout": {
+    "sig": "[\"Móc khoá 02: Đần Nuốt Nước Mắt Vào Trong\",165000,\"Khó thì khóc, khóc xong rồi thì nuốt nước mắt vào trong, Nước mắt Đần rơi, nỗi buồn kết thúc, sẵn sàng đối diện cuộc đời. Treo Đần theo mình và cùng chúng tôi nuốt trọn mọi khó nhằn trước mắt!\",[\"01 - Đần cứ bình tình\",\"02 - Đần nuốt nước mắt vào trong\",\"03 - Đần vắt cực khô, sống cực căng\",\"BST 3 box\"],[\"Một set gồm: 1 box đựng, 1 gấu bông Đần, 1 piece mica trong suốt\",\"Kích thước: 12cm cả móc treo (có sai số nhẹ)\"],\"Mua 2 set giảm 5%, mua 3 set giảm 10%\",false,\"/images/figma/4ce44f4330ae8bc2fef5ac4b56d607aee3dacd70.webp\",[\"/images/figma/3192e63386fc8f154aa17a14297f5acb41297bbc.webp\",\"/images/figma/368d07ae0a72eaabf2d8258a8251108eb7dd7bdd.webp\",\"/images/figma/1c6ac15f2b5bf7a332b8de702fdf94fee5c745ca.webp\",\"/images/figma/3192e63386fc8f154aa17a14297f5acb41297bbc.webp\"]]",
+    "frameH": 2454,
+    "gallery": [
+     [
+      90,
+      107,
+      552,
+      689
+     ],
+     [
+      90,
+      853,
+      269,
+      337
+     ],
+     [
+      371,
+      853,
+      270,
+      337
+     ],
+     [
+      90,
+      1203,
+      269,
+      337
+     ],
+     [
+      371,
+      1203,
+      268,
+      337
+     ]
+    ],
+    "title": [
+     731,
+     107,
+     458,
+     130,
+     45
+    ],
+    "price": [
+     731,
+     295,
+     420,
+     21,
+     19
+    ],
+    "desc": [
+     731,
+     383,
+     458,
+     80,
+     20
+    ],
+    "options": {
+     "box": [
+      731,
+      527,
+      451,
+      115
+     ],
+     "buttons": [
+      [
+       731,
+       527,
+       171,
+       32,
+       733,
+       531,
+       168,
+       21
+      ],
+      [
+       908,
+       527,
+       274,
+       32,
+       912,
+       531,
+       269,
+       21
+      ],
+      [
+       731,
+       571,
+       296,
+       32,
+       737,
+       575,
+       322,
+       21
+      ],
+      [
+       731,
+       610,
+       130,
+       32,
+       752,
+       614,
+       87,
+       21
+      ]
+     ]
+    },
+    "cta": [
+     731,
+     656,
+     451,
+     40
+    ],
+    "line": [
+     731,
+     747,
+     452,
+     1
+    ],
+    "specs": [
+     731,
+     754,
+     458,
+     100,
+     20
+    ],
+    "suggest": [
+     87,
+     1593,
+     307,
+     89,
+     90
+    ],
+    "cards": [
+     87,
+     1674
+    ]
+   }
+  },
+  "dan-sinh-ton-03": {
+   "name": "Móc khoá 03: Đần Vắt Cực Khô, Sống Cực Căng",
+   "priceFrom": 165000,
+   "title": "[BST ĐẦN SINH TỒN]\nMÓC KHOÁ 03\nĐẦN VẮT CỰC KHÔ,\nSỐNG CỰC CĂNG",
+   "detailPrice": "165.000 VNĐ/ box",
+   "gallery": [
+    {
+     "src": "/images/figma/96469be5dfa3d01b37bde51905a0a9d58ef20ec5.webp",
+     "m": [
+      [
+       0.69604,
+       0,
+       0.15014
+      ],
+      [
+       0,
+       0.5814,
+       0.28274
+      ]
+     ],
+     "ar": 0.80116
+    },
+    {
+     "src": "/images/figma/c60a39c7d1c58584d602762dffa7935dad47fd86.webp",
+     "m": [
+      [
+       0.63343,
+       0,
+       0.18172
+      ],
+      [
+       0,
+       0.5291,
+       0.32692
+      ]
+     ],
+     "ar": 0.79822
+    },
+    {
+     "src": "/images/figma/368d07ae0a72eaabf2d8258a8251108eb7dd7bdd.webp",
+     "m": [
+      [
+       0.51814,
+       0,
+       0.24027
+      ],
+      [
+       0,
+       0.43103,
+       0.32438
+      ]
+     ],
+     "ar": 0.80119
+    },
+    {
+     "src": "/images/figma/1c6ac15f2b5bf7a332b8de702fdf94fee5c745ca.webp",
+     "m": [
+      [
+       0.54935,
+       0.00487,
+       0.22198
+      ],
+      [
+       -0.00259,
+       0.4587,
+       0.32862
+      ]
+     ],
+     "ar": 0.79822
+    },
+    {
+     "src": "/images/figma/adfd08d823ac309eab95fec554c637913a57bd3a.webp",
+     "m": [
+      [
+       0.84591,
+       0,
+       0.03225
+      ],
+      [
+       0,
+       0.70922,
+       0.18605
+      ]
+     ],
+     "ar": 0.79525
+    }
+   ],
+   "layout": {
+    "sig": "[\"Móc khoá 03: Đần Vắt Cực Khô, Sống Cực Căng\",165000,\"Làm ra làm, chơi ra chơi, người ta vẫn hay bảo thế. Vắt đến khi đủ tròn đủ vững. Dám vắt, dám làm, dám chơi, dám sống, đã sống thì sống cho ra trò!\",[\"01 - Đần cứ bình tình\",\"02 - Đần nuốt nước mắt vào trong\",\"03 - Đần vắt cực khô, sống cực căng\",\"BST 3 box\"],[\"Một set gồm: 1 box đựng, 1 gấu bông Đần, 1 piece mica trong suốt\",\"Kích thước: 12cm cả móc treo (có sai số nhẹ)\"],\"Mua 2 set giảm 5%, mua 3 set giảm 10%\",false,\"/images/figma/96469be5dfa3d01b37bde51905a0a9d58ef20ec5.webp\",[\"/images/figma/c60a39c7d1c58584d602762dffa7935dad47fd86.webp\",\"/images/figma/368d07ae0a72eaabf2d8258a8251108eb7dd7bdd.webp\",\"/images/figma/1c6ac15f2b5bf7a332b8de702fdf94fee5c745ca.webp\",\"/images/figma/adfd08d823ac309eab95fec554c637913a57bd3a.webp\"]]",
+    "frameH": 2454,
+    "gallery": [
+     [
+      90,
+      107,
+      552,
+      689
+     ],
+     [
+      90,
+      853,
+      269,
+      337
+     ],
+     [
+      371,
+      853,
+      270,
+      337
+     ],
+     [
+      90,
+      1203,
+      269,
+      337
+     ],
+     [
+      371,
+      1203,
+      268,
+      337
+     ]
+    ],
+    "title": [
+     731,
+     107,
+     458,
+     130,
+     45
+    ],
+    "price": [
+     731,
+     295,
+     420,
+     21,
+     19
+    ],
+    "desc": [
+     731,
+     383,
+     458,
+     40,
+     20
+    ],
+    "options": {
+     "box": [
+      731,
+      527,
+      451,
+      115
+     ],
+     "buttons": [
+      [
+       731,
+       527,
+       171,
+       32,
+       733,
+       531,
+       168,
+       21
+      ],
+      [
+       908,
+       527,
+       274,
+       32,
+       912,
+       531,
+       269,
+       21
+      ],
+      [
+       731,
+       571,
+       296,
+       32,
+       737,
+       575,
+       322,
+       21
+      ],
+      [
+       731,
+       610,
+       130,
+       32,
+       752,
+       614,
+       87,
+       21
+      ]
+     ]
+    },
+    "cta": [
+     731,
+     656,
+     451,
+     40
+    ],
+    "line": [
+     731,
+     747,
+     452,
+     1
+    ],
+    "specs": [
+     731,
+     754,
+     458,
+     100,
+     20
+    ],
+    "suggest": [
+     87,
+     1593,
+     307,
+     89,
+     90
+    ],
+    "cards": [
+     87,
+     1674
+    ]
+   }
+  }
+ }
+}

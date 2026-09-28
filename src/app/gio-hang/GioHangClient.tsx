@@ -25,7 +25,7 @@ export default function GioHangClient() {
   return (
     <section className="max-w-3xl mx-auto px-6 py-12">
       <Reveal variant="mask" className="mb-8">
-        <h1 className="font-[family-name:var(--font-heading)] text-3xl font-bold text-[var(--color-purple)]">Giỏ hàng</h1>
+        <h1 className="font-[family-name:var(--font-heading)] text-3xl font-bold text-[var(--color-purple)]">Mua đi bạn ơi!</h1>
       </Reveal>
 
       <div className="divide-y divide-[var(--color-ink)]/10">
@@ -78,7 +78,7 @@ export default function GioHangClient() {
         href="/checkout"
         className="block text-center w-full bg-[var(--color-purple)] text-white font-semibold py-4 rounded-lg uppercase text-sm tracking-wide mt-6 hover:bg-[var(--color-ink)] transition-colors"
       >
-        Thanh toán
+        Mua ngay mua ngay
       </Link>
     </section>
   );

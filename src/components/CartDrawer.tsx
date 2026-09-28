@@ -29,7 +29,7 @@ export default function CartDrawer() {
         >
             <div className="flex items-center justify-between px-6 py-5 border-b border-[var(--color-ink)]/10">
               <h2 className="font-[family-name:var(--font-heading)] text-xl font-bold text-[var(--color-purple)]">
-                Giỏ hàng {items.length > 0 && `(${items.length})`}
+                Mua đi bạn ơi! {items.length > 0 && `(${items.length})`}
               </h2>
               <button onClick={closeDrawer} aria-label="Đóng giỏ hàng" className="text-[var(--color-ink)]/60 hover:text-[var(--color-ink)]">
                 <X size={22} />

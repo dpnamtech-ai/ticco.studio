@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { cropFillStyle, type ImageTransform } from "@/lib/figmaCrop";
 
 interface ProjectCardProps {
   title: string;
@@ -12,6 +13,8 @@ interface ProjectCardProps {
   onOrange?: boolean;
   /** Compact variant used in the homepage collab preview row: 309/448 image, no link row. */
   compact?: boolean;
+  /** Figma imageTransform of the image fill (crop/zoom); default is object-cover. */
+  crop?: ImageTransform;
 }
 
 export default function ProjectCard({
@@ -22,6 +25,7 @@ export default function ProjectCard({
   index = 0,
   onOrange = false,
   compact = false,
+  crop,
 }: ProjectCardProps) {
   const linkClass = onOrange
     ? "text-white/90 hover:text-white"
@@ -35,7 +39,7 @@ export default function ProjectCard({
       transition={{ delay: index * 0.06, duration: 0.5 }}
     >
       <div className={`${compact ? "aspect-[309/448]" : "aspect-[436/486]"} relative overflow-hidden bg-[#D9D9D9] ${compact ? "" : "mb-4"}`}>
-        {image && <Image src={image} alt={title} fill quality={90} className="object-cover" sizes="(max-width: 768px) 100vw, 50vw" />}
+        {image && <Image src={image} alt={title} fill quality={90} className={crop ? "" : "object-cover"} style={crop && cropFillStyle(crop)} sizes="(max-width: 768px) 100vw, 50vw" />}
       </div>
       <h3
         className={

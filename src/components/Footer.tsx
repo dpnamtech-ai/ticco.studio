@@ -1,6 +1,3 @@
-"use client";
-
-import { usePathname } from "next/navigation";
 import { brand } from "@/data/content";
 import Reveal from "@/components/Reveal";
 
@@ -11,20 +8,13 @@ const social = [
   ["TikTok", "Tíc Cơ trong đời", brand.tiktok],
 ] as const;
 
-// Figma "footer" per page: purple 1280x337 (trang-chu, mascot-Dan, kham-pha) or
-// orange 1280x361 (ve-Tic-Co, du-an-Nguoi-Viet-Van-Dong). Positions are Figma px
-// converted to cqw (1280px = 100cqw) so the band scales with the viewport like the
-// other sections at 1920x1080.
+// Figma DEMO "footer": every frame uses the same purple 1283x337 band (the orange 361 variant is gone).
+// Positions are Figma px relative to the band, converted to cqw (1280px = 100cqw) so it scales with the
+// viewport like the other sections. Social block is right-aligned, its right edge at X1179 (= 101 from the right).
 const cq = (px: number) => `${(px / 12.8).toFixed(3)}cqw`;
-const variants = {
-  purple: { bg: "var(--color-purple)", h: 337, title: [81, 61], contact: [572, 149], since: [783, 149], social: [103, 148] },
-  orange: { bg: "#e66107", h: 361, title: [45, 66], contact: [633, 136], since: [844, 136], social: [42, 135] },
-} as const;
-const ORANGE_ROUTES = ["/ve-tic-co", "/kham-pha/nguoi-viet-van-dong"];
+const v = { h: 337, title: [83, 61], contact: [574, 149], since: [785, 149], social: [101, 148] } as const;
 
 export default function Footer() {
-  const pathname = usePathname();
-  const v = variants[ORANGE_ROUTES.some((r) => pathname?.startsWith(r)) ? "orange" : "purple"];
   const abs = (l: readonly number[], right = false) =>
     ({ position: "absolute", top: cq(l[1]), [right ? "right" : "left"]: cq(l[0]), whiteSpace: "nowrap" }) as const;
 
@@ -59,7 +49,7 @@ export default function Footer() {
   );
 
   return (
-    <footer id="contact" className="relative text-white" style={{ background: v.bg }}>
+    <footer id="contact" className="relative text-white" style={{ background: "var(--color-purple)" }}>
       {/* mobile: stacked */}
       <div className="md:hidden px-6 py-12 text-base leading-[19px] space-y-8">
         <p className="text-[35px] leading-[35px] font-medium uppercase">
@@ -76,9 +66,9 @@ export default function Footer() {
 
       {/* md+: Figma layout, scaled with width */}
       <div className="hidden md:block max-w-[1280px] mx-auto [container-type:inline-size]">
-        <div className="relative" style={{ height: cq(v.h), fontSize: cq(16), lineHeight: cq(19) }}>
+        <div className="relative" style={{ height: cq(v.h), fontSize: cq(16), lineHeight: cq(19), letterSpacing: cq(-0.8) }}>
           <Reveal at="edge" variant="mask" duration={1.1} style={abs(v.title)}>
-            <p className="font-medium uppercase" style={{ fontSize: cq(35), lineHeight: cq(35) }}>
+            <p className="font-medium uppercase" style={{ fontSize: cq(35), lineHeight: cq(35), letterSpacing: cq(-1.8) }}>
               Tíc Cơ
               <br />
               hân hoan
@@ -89,7 +79,7 @@ export default function Footer() {
           <Reveal at="edge" variant="blur" delay={0.2} style={abs(v.contact)}>
             <p>{contact}</p>
           </Reveal>
-          <Reveal at="edge" variant="blur" delay={0.3} style={abs(v.since)}>
+          <Reveal at="edge" variant="blur" delay={0.3} style={{ ...abs(v.since), width: cq(190), textAlign: "center" }}>
             <p>{since}</p>
           </Reveal>
           <Reveal at="edge" variant="up" delay={0.4} style={{ ...abs(v.social, true), textAlign: "right" }}>

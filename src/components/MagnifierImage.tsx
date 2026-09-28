@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef, useState, type CSSProperties } from "react";
 import Image from "next/image";
 
 interface MagnifierImageProps {
@@ -12,9 +12,11 @@ interface MagnifierImageProps {
   zoom?: number;
   /** Side length (px) of the lens square that follows the cursor. */
   lensSize?: number;
+  /** Style for the <img> itself (e.g. a Figma crop transform); the hover zoom is applied on a wrapper. */
+  imgStyle?: CSSProperties;
 }
 
-export default function MagnifierImage({ src, alt, sizes, priority, zoom = 2.2, lensSize = 130 }: MagnifierImageProps) {
+export default function MagnifierImage({ src, alt, sizes, priority, zoom = 2.2, lensSize = 130, imgStyle }: MagnifierImageProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(false);
   const [originPct, setOriginPct] = useState({ x: 50, y: 50 });
@@ -43,16 +45,12 @@ export default function MagnifierImage({ src, alt, sizes, priority, zoom = 2.2, 
       onMouseLeave={() => setActive(false)}
       onMouseMove={handleMove}
     >
-      <Image
-        src={src}
-        alt={alt}
-        fill
-        quality={90}
-        priority={priority}
-        sizes={sizes}
-        className="object-cover transition-transform duration-150 ease-out"
+      <div
+        className="absolute inset-0 transition-transform duration-150 ease-out"
         style={active ? { transform: `scale(${zoom})`, transformOrigin: `${originPct.x}% ${originPct.y}%` } : undefined}
-      />
+      >
+        <Image src={src} alt={alt} fill quality={90} priority={priority} sizes={sizes} style={imgStyle ?? { objectFit: "cover" }} />
+      </div>
       {active && (
         <div
           className="absolute border-2 border-white shadow-[0_0_0_1px_rgba(0,0,0,0.4)] bg-white/10 pointer-events-none"
