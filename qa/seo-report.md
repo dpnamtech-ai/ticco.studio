@@ -1,6 +1,6 @@
-# SEO / GEO report — 2026-09-29 20:36 UTC
+# SEO / GEO report — 2026-09-29 20:40 UTC
 
-Target: http://localhost:3100 · **Điểm trung bình: 100/100** · Site checks: 6/8
+Target: https://ticcostudio.vercel.app · **Điểm trung bình: 100/100** · Site checks: 6/8
 
 ## Site
 - ✅ robots.txt

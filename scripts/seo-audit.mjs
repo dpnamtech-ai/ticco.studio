@@ -58,7 +58,8 @@ for (const path of PAGES) {
     // SEO — 60
     ["Title 20–70 ký tự", 8, title.length >= 20 && title.length <= 70, `${title.length}`],
     ["Description 70–160 ký tự", 8, desc.length >= 70 && desc.length <= 160, `${desc.length}`],
-    ["Canonical đúng trang", 6, !!canonical && canonical.replace(BASE, "").length > 0, canonical ? canonical.replace(/^https?:\/\/[^/]+/, "") : "thiếu"],
+    // canonical must point at this page's own path (the home page's canonical is the bare origin)
+    ["Canonical đúng trang", 6, !!canonical && ((canonical.replace(/^https?:\/\/[^/]+/, "") || "/").replace(/&amp;/g, "&") === path), canonical ? canonical.replace(/^https?:\/\/[^/]+/, "") || "/" : "thiếu"],
     ["Đúng 1 thẻ H1", 6, h1 === 1, `${h1}`],
     ["Được phép index", 6, !noindex && r.status === 200, noindex ? "noindex" : `${r.status}`],
     ["Open Graph (title/desc/image)", 5, og === 3, `${og}/3`],
