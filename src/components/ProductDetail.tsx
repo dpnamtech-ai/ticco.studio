@@ -140,7 +140,7 @@ export default function ProductDetail({
               style={L && { ...at(L.gallery[i + 1]), ...box(L.gallery[i + 1]) }}
             >
               <div className="absolute inset-0 transition-transform duration-500 group-hover:scale-105">
-                <Image src={img.src} alt="" fill className={fade} onLoad={onLoad} style={fillStyle(img)} sizes={zoomSizes("(max-width: 1024px) 50vw, 22vw", img)} />
+                <Image src={img.src} alt={`${name} — ảnh ${i + 2}`} fill className={fade} onLoad={onLoad} style={fillStyle(img)} sizes={zoomSizes("(max-width: 1024px) 50vw, 22vw", img)} />
               </div>
             </Reveal>
           ))}

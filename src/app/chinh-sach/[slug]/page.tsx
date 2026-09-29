@@ -10,7 +10,9 @@ export const generateStaticParams = () => policies.map((p) => ({ slug: p.slug })
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
   const p = policies.find((x) => x.slug === slug);
-  return p ? { title: `${p.title} — Tíc Cơ`, description: `${p.title} khi mua hàng tại Tíc Cơ.` } : {};
+  // description = the policy's own opening lines (placeholders shown without brackets)
+  const lead = p?.blocks.join(" ").replace(/^- /gm, "").replace(/\n- /g, " ").replace(/[[\]]/g, "").replace(/\s+/g, " ");
+  return p ? { title: `${p.title} — Tíc Cơ`, description: `${p.title} Tíc Cơ: ${lead}`.slice(0, 157).replace(/\s+\S*$/, "") + "…", alternates: { canonical: `/chinh-sach/${p.slug}` } } : {};
 }
 
 export default async function PolicyPage({ params }: { params: Promise<{ slug: string }> }) {

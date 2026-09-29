@@ -24,8 +24,9 @@ const BIO_ART = [
 ] as const;
 
 export const metadata: Metadata = {
-  title: "Mascot Đần — Tíc Cơ",
-  description: mascotPage.tagline,
+  title: "Mascot Đần — nhân vật quản gia của Tíc Cơ",
+  description: `Đần — quản gia của Tíc Cơ: ${mascotPage.tagline} Móc khoá Đần Sinh Tồn, sticker Đần Nói, postcard Triết Lý Sống Đần.`,
+  alternates: { canonical: "/mascot-dan" },
 };
 
 export default async function MascotDanPage() {

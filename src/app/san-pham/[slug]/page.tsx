@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { abs, plainText } from "@/lib/site";
 import type { CSSProperties } from "react";
 import { notFound } from "next/navigation";
 import { getProducts, getProduct } from "@/lib/products";
@@ -25,9 +26,14 @@ export async function generateMetadata({
   const { slug } = await params;
   const product = await getProduct(slug);
   if (!product) return {};
+  const price = product.priceFrom > 0 ? `${product.priceFrom.toLocaleString("vi-VN")}đ` : "";
+  const blurb = plainText(product.description, 120);
   return {
-    title: `${product.name} — Tíc Cơ`,
-    description: `${product.name} — ${product.priceFrom.toLocaleString("vi-VN")} VNĐ. Sản phẩm Tíc Cơ.`,
+    title: `${product.name}${price ? ` — ${price}` : ""} | Tíc Cơ`,
+    description: blurb ? `${blurb}${price ? ` Giá ${price}.` : ""}` : `${product.name} của Tíc Cơ — ${product.category}.`,
+    keywords: [product.name, product.category, "Tíc Cơ", "quà tặng", "thương hiệu Việt"],
+    alternates: { canonical: `/san-pham/${product.id}` },
+    openGraph: { type: "website", title: product.name, images: product.image ? [product.image] : undefined },
   };
 }
 
@@ -60,20 +66,41 @@ export default async function ProductPage({
     "--pb": cq(L.frameH - FOOTER_H - L.cards[1] - CARD_H),
   } as CSSProperties);
 
+  const url = abs(`/san-pham/${product.id}`);
   const productJsonLd = {
     "@context": "https://schema.org",
-    "@type": "Product",
-    name: product.name,
-    description: product.description,
-    image: product.image ? `https://ticcostudio.vercel.app${product.image}` : undefined,
-    offers: {
-      "@type": "Offer",
-      priceCurrency: "VND",
-      price: product.priceFrom || undefined,
-      availability: product.soldOut
-        ? "https://schema.org/OutOfStock"
-        : "https://schema.org/InStock",
-    },
+    "@graph": [
+      {
+        "@type": "Product",
+        "@id": `${url}#product`,
+        name: product.name,
+        sku: product.id,
+        url,
+        category: product.category,
+        description: plainText(product.description, 500),
+        image: [product.image, ...(product.thumbnails ?? [])].filter((s): s is string => Boolean(s)).map(abs),
+        brand: { "@type": "Brand", name: "Tíc Cơ" },
+        ...(product.priceFrom > 0 && {
+          offers: {
+            "@type": "Offer",
+            url,
+            priceCurrency: "VND",
+            price: product.priceFrom,
+            itemCondition: "https://schema.org/NewCondition",
+            availability: product.soldOut ? "https://schema.org/OutOfStock" : "https://schema.org/InStock",
+            seller: { "@id": `${abs("/")}#org` },
+          },
+        }),
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Trang chủ", item: abs("/") },
+          { "@type": "ListItem", position: 2, name: "Sản phẩm", item: abs("/san-pham") },
+          { "@type": "ListItem", position: 3, name: product.name, item: url },
+        ],
+      },
+    ],
   };
 
   return (

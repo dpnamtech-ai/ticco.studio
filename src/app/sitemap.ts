@@ -1,9 +1,10 @@
 import type { MetadataRoute } from "next";
 import { getProducts } from "@/lib/products";
+import { SITE_URL as BASE } from "@/lib/site";
+import { SHOP_CATEGORIES } from "@/lib/shop";
 import { policies } from "@/data/legal";
 import { figmaPages } from "@/data/project-pages";
 
-const BASE = "https://ticcostudio.vercel.app";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const products = await getProducts();
@@ -14,6 +15,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/kham-pha",
     "/ve-tic-co",
     "/mascot-dan",
+    ...SHOP_CATEGORIES.filter((c) => c.slug !== "tat-ca").map((c) => `/san-pham?danh-muc=${c.slug}`),
     ...Object.keys(figmaPages).filter((k) => k !== "kham-pha").map((k) => `/kham-pha/${k}`),
     ...policies.map((p) => `/chinh-sach/${p.slug}`),
   ].map((path) => ({

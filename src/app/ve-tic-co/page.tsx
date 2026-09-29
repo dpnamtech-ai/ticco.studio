@@ -5,7 +5,8 @@ import Reveal from "@/components/Reveal";
 import { cropFillStyle } from "@/lib/figmaCrop";
 
 export const metadata: Metadata = {
-  title: "Về Tíc Cơ",
+  title: "Về Tíc Cơ — Thương hiệu Việt vui, nghệ, gần gũi",
+  alternates: { canonical: "/ve-tic-co" },
   description: "Tíc Cơ là thương hiệu Việt với các sản phẩm tiêu dùng sáng tạo, lấy cảm hứng từ chất liệu đời thường, do người trẻ Việt thiết kế.",
 };
 
@@ -45,11 +46,11 @@ export default function VeTicCoPage() {
       <section className="relative overflow-hidden text-white bg-gradient-to-b from-[#e66107] to-[#c15106] [container-type:inline-size]">
         {/* < md: stacked cards (the Figma geometry needs a desktop width to be readable) */}
         <div className="md:hidden px-6 py-10 flex flex-col gap-6">
-          <h1 className="text-right text-[56px] leading-[52px] font-bold tracking-[-0.06em] uppercase">
+          <p role="heading" aria-level={1} className="text-right text-[56px] leading-[52px] font-bold tracking-[-0.06em] uppercase">
             Về
             <br />
             Tíc Cơ!
-          </h1>
+          </p>
           {GROUPS.map((g, i) => (
             <div key={i} className="rounded-t-[50%_40px] p-6 pt-10 text-[18px] leading-[23px] tracking-[-0.05em] text-justify space-y-[23px]" style={{ background: BLOB_BG }}>
               {g.paras.map((p) => (

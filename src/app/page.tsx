@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import HeroSection from "@/components/HeroSection";
 import FeaturedProducts from "@/components/FeaturedProducts";
@@ -7,6 +8,12 @@ import ProductCard from "@/components/ProductCard";
 import { getProducts } from "@/lib/products";
 import Reveal from "@/components/Reveal";
 import { HOME_CATEGORY, figmaCardProps } from "@/data/figma-cards";
+
+export const metadata: Metadata = {
+  title: "Tíc Cơ — Sổ tay, túi tote, sticker & quà tặng thương hiệu Việt",
+  description: "Sổ tay, túi tote, sticker, postcard, móc khoá Đần và quà tặng đầy cá tính từ thương hiệu Việt Tíc Cơ. Giao toàn quốc, free ship đơn từ 500k.",
+  alternates: { canonical: "/" },
+};
 
 export default async function Home() {
   const products = await getProducts();

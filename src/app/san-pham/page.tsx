@@ -27,9 +27,12 @@ const href = (slug: string, page = 1) => {
 };
 
 export async function generateMetadata({ searchParams }: { searchParams: SearchParams }): Promise<Metadata> {
-  const tab = shopCategory(one((await searchParams)["danh-muc"]));
+  const sp = await searchParams;
+  const tab = shopCategory(one(sp["danh-muc"]));
+  const page = Number(one(sp.trang) ?? 1);
   return {
-    title: tab.slug === "tat-ca" ? "Sản phẩm — Tíc Cơ" : `${tab.label} — Tíc Cơ`,
+    alternates: { canonical: href(tab.slug, page > 1 ? page : 1) },
+    title: tab.slug === "tat-ca" ? "Tất cả sản phẩm Tíc Cơ — sổ tay, túi, sticker, quà tặng" : `${tab.label} — Sản phẩm Tíc Cơ`,
     description: "Toàn bộ sản phẩm Tíc Cơ: văn phòng phẩm, in ấn, túi xách, thời trang, phụ kiện đời sống.",
   };
 }

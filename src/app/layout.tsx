@@ -9,6 +9,8 @@ import CartDrawer from "@/components/CartDrawer";
 import PageTransition from "@/components/PageTransition";
 import ScrollProgress from "@/components/ScrollProgress";
 import { CartProvider } from "@/context/CartContext";
+import { SITE_URL, SOCIALS } from "@/lib/site";
+import { brand } from "@/data/content";
 
 // Figma specifies "Be Vietnam" (the original family), not "Be Vietnam Pro" —
 // different letterforms/metrics, not a version alias. Not in next/font/google's
@@ -33,15 +35,25 @@ const beVietnam = localFont({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://ticcostudio.vercel.app"),
+  metadataBase: new URL(SITE_URL),
+  applicationName: "Tíc Cơ",
+  // Search Console / Bing Webmaster ownership: paste each tool's verification code into these Vercel env vars.
+  verification: {
+    google: process.env.GOOGLE_SITE_VERIFICATION || undefined,
+    other: process.env.BING_SITE_VERIFICATION ? { "msvalidate.01": process.env.BING_SITE_VERIFICATION } : undefined,
+  },
+  robots: { index: true, follow: true, googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1 } },
+  twitter: { card: "summary_large_image" },
   title: {
     default: "Tíc Cơ — Đời dễ ợt, vợt Tíc Cơ",
     template: "%s",
   },
   description:
     "Tíc Cơ — thương hiệu Việt bán sổ tay, túi, in ấn và quà tặng nhỏ đầy cá tính, lấy cảm hứng từ chất liệu đời thường.",
-  keywords: ["sổ tay", "quà sinh nhật", "văn phòng phẩm", "túi tote", "quà tặng", "Tíc Cơ"],
+  keywords: ["Tíc Cơ", "ticco studio", "sổ tay", "văn phòng phẩm", "túi tote", "sticker", "postcard", "quà tặng", "quà sinh nhật", "móc khoá", "mascot Đần", "thương hiệu Việt"],
   openGraph: {
+    siteName: "Tíc Cơ",
+    locale: "vi_VN",
     title: "Tíc Cơ — Đời dễ ợt, vợt Tíc Cơ",
     description: "Sổ tay, túi, in ấn và những món đồ nhỏ đầy cá tính.",
     type: "website",
@@ -54,13 +66,33 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // Brand + site entities for search engines and AI answers (GEO): who Tíc Cơ is, where it lives, how to search it.
   const organizationJsonLd = {
     "@context": "https://schema.org",
-    "@type": "Organization",
-    name: "Tíc Cơ",
-    url: "https://ticcostudio.vercel.app",
-    logo: "https://ticcostudio.vercel.app/images/mascot-dan.png",
-    sameAs: ["https://www.instagram.com/ticco.studios"],
+    "@graph": [
+      {
+        "@type": ["Organization", "OnlineStore"],
+        "@id": `${SITE_URL}/#org`,
+        name: "Tíc Cơ",
+        alternateName: ["Tíc Cơ Studios", "ticco.studios"],
+        url: SITE_URL,
+        logo: `${SITE_URL}/images/logo-tic-co.png`,
+        description: brand.mission.split("\n")[0],
+        foundingDate: "2024",
+        email: brand.email,
+        sameAs: SOCIALS,
+        contactPoint: { "@type": "ContactPoint", contactType: "customer service", email: brand.email, availableLanguage: ["vi"] },
+      },
+      {
+        "@type": "WebSite",
+        "@id": `${SITE_URL}/#website`,
+        url: SITE_URL,
+        name: "Tíc Cơ",
+        inLanguage: "vi-VN",
+        publisher: { "@id": `${SITE_URL}/#org` },
+        potentialAction: { "@type": "SearchAction", target: `${SITE_URL}/tim-kiem?q={search_term_string}`, "query-input": "required name=search_term_string" },
+      },
+    ],
   };
 
   return (
