@@ -103,7 +103,8 @@ const clickText = (sel, text) => page.evaluate((sel, text) => {
 const loadAllImages = () => page.evaluate(async () => {
   for (let y = 0; y < document.body.scrollHeight; y += 600) { window.scrollTo(0, y); await new Promise((r) => setTimeout(r, 120)); }
   await Promise.all([...document.images].map((i) => (i.complete ? 0 : new Promise((r) => { i.onload = i.onerror = r; setTimeout(r, 15000); }))));
-  return [...document.images].filter((i) => !i.naturalWidth).map((i) => i.currentSrc || i.src);
+  // display:none images (e.g. the phone-only layout on desktop) never load and aren't seen — skip them
+  return [...document.images].filter((i) => i.offsetParent && !i.naturalWidth).map((i) => i.currentSrc || i.src);
 });
 const resetStorage = () => page.evaluate(() => { localStorage.clear(); sessionStorage.clear(); });
 const setCart = (lines) => page.evaluate((l) => localStorage.setItem("ticco-cart", JSON.stringify(l)), lines);
@@ -313,6 +314,25 @@ await test("PD-05", "BST Đầu Đội Mũ: 2 nút mũ dẫn sang trang từng m
   await go("/san-pham/bst-dau-doi-mu-chan-vao-doi");
   const hrefs = await page.evaluate(() => [...document.querySelectorAll("main a")].filter((a) => /^Mũ/.test(a.textContent.trim())).map((a) => a.getAttribute("href")));
   return expect(hrefs.includes("/san-pham/mu-tai-beo-ha-ha") && hrefs.includes("/san-pham/mu-luoi-trai-cha-sao"), `${hrefs}`);
+});
+await test("MAS-01", "Mascot: Đần nâng tạ lật đúng chiều Figma (bánh tạ to bên trái) (BUG-017)", async () => {
+  await go("/mascot-dan");
+  const t = await page.evaluate(() => [...document.querySelectorAll('img[alt="Mascot Đần nâng tạ"]')].map((i) => { const c = getComputedStyle(i); return `${c.scale}|${c.transform}`; }));
+  // Tailwind v4 mirrors with the CSS \`scale\` property (-1 1), older builds with transform: matrix(-1, …)
+  return expect(t.length && t.every((x) => /^-1|matrix\(-1/.test(x)), `${t}`);
+});
+await test("MAS-02", "Mascot mobile: chú thích hero nằm trong thiết kế, chữ >= 12px; 3 hàng Đần + chữ không chồng nhau (BUG-018)", async () => {
+  await mobile();
+  await go("/mascot-dan");
+  await page.evaluate(async () => { for (let y = 0; y < document.body.scrollHeight; y += 400) { scrollTo(0, y); await new Promise((r) => setTimeout(r, 100)); } });
+  await sleep(1500);
+  const m = await page.evaluate(() => {
+    const cap = [...document.querySelectorAll("p")].find((p) => p.textContent.startsWith("Chẳng phải") && p.offsetParent);
+    const rows = [...document.querySelectorAll('div[class~="lg:hidden"] .flex.items-center')].map((r) => { const img = r.querySelector("img").getBoundingClientRect(), p = r.querySelector("p").getBoundingClientRect(); return img.right <= p.left + 1 || p.right <= img.left + 1; });
+    return { capPx: cap ? parseFloat(getComputedStyle(cap).fontSize) : 0, rows: rows.length, sideBySide: rows.every(Boolean) };
+  });
+  await desktop();
+  return expect(m.capPx >= 12 && m.rows === 3 && m.sideBySide, JSON.stringify(m));
 });
 await test("PD-02", "Lựa chọn dạng link chuyển sang sản phẩm anh em (Sổ)", async () => {
   await go("/san-pham/so-trong");

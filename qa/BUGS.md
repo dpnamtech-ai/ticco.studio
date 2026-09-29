@@ -24,6 +24,9 @@ Mức độ: **P0** mất tiền/mất đơn/lộ dữ liệu · **P1** chặn k
 | BUG-014 | 30/09 | P1 | Ảnh "Tay ông đặt cạnh tay cháu" (Người Việt Vận Động) bị xoay ngang | Ảnh điện thoại có cờ EXIF xoay 90°; script tạo ảnh web bỏ cờ mà không xoay | `.rotate()` trong `scripts/figma-demo-webcopy.mjs`, tạo lại ảnh | IMG-02 | ✅ |
 | BUG-015 | 30/09 | P2 | Mobile: bấm lựa chọn Bandana không thấy gì thay đổi | Ảnh nằm phía trên, đổi ngoài màn hình | Tự cuộn tới ảnh + URL `?chon=` | PD-04 | ✅ |
 | BUG-016 | 30/09 | P2 | BST Đầu Đội Mũ: 2 nút mũ không dẫn sang trang mũ | Tên nút có dấu ngoặc kép, không khớp map link | `BUNDLE_LINKS` | PD-05 | ✅ |
+| BUG-017 | 30/09 | P1 | Trang Mascot: Đần nâng tạ bị lật trái/phải so với Figma → dải tím tím thứ 2 bắt đầu giữa khoảng trống (PC + mobile) | Layer Figma xoay 180°, PNG xuất ra chỉ lật dọc → kết quả là ảnh gương | `-scale-x-100` | MAS-01 | ✅ |
+| BUG-018 | 30/09 | P2 | Trang Mascot mobile: chú thích hero thành đoạn chữ thường (mất thiết kế); 3 dải tím trôi lơ lửng vì chữ bị ẩn | Cách sửa cũ ẩn chữ nhỏ và in lại dạng text thường | Hero: phóng to vùng giữa bản thiết kế (chú thích ~14px); phần giới thiệu: 3 hàng Đần + chữ + dải tím từ mép | MAS-02 | ✅ |
+| QA-GAP-01 | 30/09 | — | 75/75 pass nhưng lọt BUG-017/018: bộ test chỉ kiểm chức năng, **không so hình với Figma** | Thiếu tầng kiểm tra hình ảnh | Thêm `scripts/visual-diff.mjs` (so ảnh chụp trang với render Figma, báo vùng lệch) + review ảnh chụp mobile mỗi lần deploy | VIS-* | Đang làm |
 
 ## Còn mở (cần cấu hình/nội dung, không phải lỗi code)
 

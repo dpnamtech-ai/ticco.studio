@@ -16,6 +16,13 @@ const HERO_CALLOUTS = [
   [848, 261, 112, "Mình cũng chỉ muốn sống vui khoẻ"],
 ] as const;
 
+// The 3 Đần of "gioi-thieu-Dan": [src, alt, w, h, mirrored] — nâng tạ is mirrored to match Figma (see desktop layer).
+const BIO_ART = [
+  ["/images/mascot-dan/bio/dan-1.png", "Mascot Đần nhảy", 682, 845, false],
+  ["/images/mascot-dan/bio/dan-2.png", "Mascot Đần nâng tạ", 1391, 1002, true],
+  ["/images/mascot-dan/bio/dan-3.png", "Mascot Đần cầm laptop", 730, 708, false],
+] as const;
+
 export const metadata: Metadata = {
   title: "Mascot Đần — Tíc Cơ",
   description: mascotPage.tagline,
@@ -27,17 +34,18 @@ export default async function MascotDanPage() {
     <>
       {/* Figma "hero section" (visible 1280x532 from Y51), rebuilt from its layers; Figma px -> cqw */}
       <section className="relative w-full bg-[#f2f1f1]">
-      <div className="relative aspect-[1280/532] overflow-hidden [container-type:inline-size]">
-        <h1
-          className="absolute text-center font-semibold whitespace-pre text-[var(--color-purple)]"
-          style={{ left: cq(140), top: cq(112), width: cq(1001), fontSize: cq(125), lineHeight: cq(19), letterSpacing: cq(-13.75) }}
-        >
-          {"“SỐNG     ĐẦN     LÊN!”"}
-        </h1>
-        {[512, 803].map((x) => (
-          <div key={x} className="absolute bg-[var(--color-purple)]" style={{ left: cq(x), top: cq(137), width: cq(45), height: cq(6) }} />
-        ))}
-        <svg className="absolute inset-0 size-full max-lg:hidden" viewBox="0 0 1280 532" aria-hidden>
+      {/* phones: the headline on its own strip (same art, shifted up)… */}
+      <div className="lg:hidden relative aspect-[1280/170] overflow-hidden [container-type:inline-size]" aria-hidden>
+        <Headline dy={-30} tag="p" />
+      </div>
+      {/* …then the middle of the art (Figma x350-975, y200-500) zoomed in: callouts, lines and photo stay as designed but
+          the callouts read at ~14px instead of ~7px. Desktop: the whole 1280x532 art as in Figma. */}
+      <div className="relative max-lg:mx-auto max-lg:max-w-[560px] max-lg:aspect-[625/300] max-lg:overflow-hidden">
+      <div className="relative aspect-[1280/532] overflow-hidden [container-type:inline-size] max-lg:w-[204.8%] max-lg:ml-[-56%] max-lg:-mt-[32%]">
+        <div className="max-lg:hidden">
+          <Headline dy={0} tag="h1" />
+        </div>
+        <svg className="absolute inset-0 size-full" viewBox="0 0 1280 532" aria-hidden>
           <line x1="484" y1="236" x2="843" y2="309" stroke="#000" />
         </svg>
         <div className="absolute bg-[#d9d9d9]" style={{ left: cq(535), top: cq(219), width: cq(235), height: cq(235) }} />
@@ -53,18 +61,16 @@ export default async function MascotDanPage() {
           />
         </div>
         {HERO_CALLOUTS.map(([x, y, w, t]) => (
-          <p key={x} className="absolute whitespace-pre-line text-black max-lg:hidden" style={{ left: cq(x), top: cq(y), width: cq(w), fontSize: cq(22), lineHeight: cq(25), letterSpacing: cq(-1.1) }}>
+          <p key={x} className="absolute whitespace-pre-line text-black" style={{ left: cq(x), top: cq(y), width: cq(w), fontSize: cq(22), lineHeight: cq(25), letterSpacing: cq(-1.1) }}>
             {t}
           </p>
         ))}
-        <svg className="absolute inset-0 size-full max-lg:hidden" viewBox="0 0 1280 532" aria-hidden>
+        <svg className="absolute inset-0 size-full" viewBox="0 0 1280 532" aria-hidden>
           <line x1="843" y1="309" x2="592" y2="469" stroke="#000" />
         </svg>
       </div>
-      {/* phones: the callouts shrink to ~7px inside the scaled art, so show them as plain text instead */}
-      <div className="lg:hidden px-6 pb-8 text-center text-[15px] leading-snug text-black">
-        {HERO_CALLOUTS.map(([x, , , t]) => <p key={x}>{t.replace(/\n/g, " ")}</p>)}
       </div>
+      <div className="lg:hidden h-6" />
       </section>
 
       {/* Figma "sub text" (1280x120): purple band, #e5ff00 600 36/55 uppercase */}
@@ -91,7 +97,7 @@ export default async function MascotDanPage() {
 
       {/* Figma "gioi-thieu-Dan" (1280x782): bars/Đần in % of the frame, copy as live text in cqw */}
       <section className="relative w-full bg-[#f2f1f1]">
-      <div className="relative aspect-[1280/782] overflow-hidden [container-type:inline-size]">
+      <div className="relative aspect-[1280/782] overflow-hidden [container-type:inline-size] max-lg:hidden">
         <div className="absolute bg-[var(--color-purple)]" style={{ left: 0, top: "13.68%", width: "53.83%", height: "4.86%" }} />
         <div className="absolute bg-[var(--color-purple)]" style={{ left: "44.53%", right: 0, top: "38.75%", height: "4.86%" }} />
         <div className="absolute bg-[var(--color-purple)]" style={{ left: "47.03%", right: 0, top: "68.67%", height: "4.86%" }} />
@@ -100,7 +106,8 @@ export default async function MascotDanPage() {
           <Image src="/images/mascot-dan/bio/dan-1.png" alt="Mascot Đần nhảy" width={682} height={845} sizes="15vw" className="w-full h-auto" />
         </Reveal>
         <Reveal variant="right" delay={0.1} className="absolute" style={{ left: "27.27%", top: "23.4%", width: "24.69%" }}>
-          <Image src="/images/mascot-dan/bio/dan-2.png" alt="Mascot Đần nâng tạ" width={1391} height={1002} sizes="25vw" className="w-full h-auto" />
+          {/* Figma rotates this layer 180°; the exported PNG is only flipped vertically, so mirror it back (big plate on the left, body over the bar) */}
+          <Image src="/images/mascot-dan/bio/dan-2.png" alt="Mascot Đần nâng tạ" width={1391} height={1002} sizes="25vw" className="w-full h-auto -scale-x-100" />
         </Reveal>
         <Reveal variant="left" delay={0.2} className="absolute" style={{ left: "32.73%", top: "52.56%", width: "17.42%" }}>
           <Image src="/images/mascot-dan/bio/dan-3.png" alt="Mascot Đần cầm laptop" width={730} height={708} sizes="18vw" className="w-full h-auto" />
@@ -120,10 +127,24 @@ export default async function MascotDanPage() {
           </h2>
         </Reveal>
       </div>
-      {/* phones: bio copy + closing line as plain readable text under the art (they are ~7px inside the scaled layout) */}
-      <div className="lg:hidden px-6 pb-10 space-y-4 text-[14px] leading-snug text-[var(--color-purple)]">
-        {mascotPage.bio.map((b, i) => <p key={i} className="whitespace-pre-line">{b.text}</p>)}
-        <h2 className="pt-2 text-center text-[16px] font-medium uppercase">{mascotPage.closingHeading}</h2>
+      {/* phones: the desktop "staircase" as 3 rows — each Đần next to its own copy, with the purple bar running in from
+          the screen edge behind Đần (left edge for row 1, right edge for rows 2-3, as on desktop) */}
+      <div className="lg:hidden space-y-6 overflow-x-clip py-8 text-[15px] leading-snug text-[var(--color-purple)]">
+        {BIO_ART.map(([src, alt, w, h, mirror], i) => {
+          const left = i === 0;
+          return (
+            // Reveal wraps its children in its own div, so the row layout lives on an inner element.
+            <Reveal key={src} variant={left ? "left" : "right"}>
+              <div className={`relative flex items-center gap-4 px-6 ${left ? "" : "flex-row-reverse"}`}>
+                <div className={`absolute top-1/2 h-4 -translate-y-1/2 bg-[var(--color-purple)] ${left ? "left-0" : "right-0"}`} style={{ width: "calc(24px + 22%)" }} />
+                <Image src={src} alt={alt} width={w} height={h} sizes="40vw" className={`relative h-auto w-[38%] max-w-[200px] shrink-0 ${mirror ? "-scale-x-100" : ""}`} />
+                <p className="flex-1 whitespace-pre-line">{mascotPage.bio[i]?.text}</p>
+              </div>
+            </Reveal>
+          );
+        })}
+        {mascotPage.bio.slice(3).map((b, i) => <p key={i} className="px-6 whitespace-pre-line">{b.text}</p>)}
+        <h2 className="px-6 pt-2 text-center text-[17px] font-medium uppercase">{mascotPage.closingHeading}</h2>
       </div>
       </section>
 
@@ -171,5 +192,23 @@ function Banner({ h, y, from, to, lines }: { h: number; y: number; from: string;
       </Reveal>
       </div>
     </section>
+  );
+}
+
+// "“SỐNG — ĐẦN — LÊN!”": 125px text with the two dashes drawn as bars between the words (Figma px -> cqw).
+// dy shifts it up for the phone-only strip that shows it apart from the rest of the hero art.
+function Headline({ dy, tag: Tag }: { dy: number; tag: "h1" | "p" }) {
+  return (
+    <>
+      <Tag
+        className="absolute text-center font-semibold whitespace-pre text-[var(--color-purple)]"
+        style={{ left: cq(140), top: cq(112 + dy), width: cq(1001), fontSize: cq(125), lineHeight: cq(19), letterSpacing: cq(-13.75) }}
+      >
+        {"“SỐNG     ĐẦN     LÊN!”"}
+      </Tag>
+      {[512, 803].map((x) => (
+        <div key={x} className="absolute bg-[var(--color-purple)]" style={{ left: cq(x), top: cq(137 + dy), width: cq(45), height: cq(6) }} />
+      ))}
+    </>
   );
 }

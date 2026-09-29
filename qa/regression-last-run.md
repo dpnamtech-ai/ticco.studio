@@ -1,7 +1,7 @@
-# Regression — 2026-09-29 19:40 UTC
+# Regression — 2026-09-29 19:52 UTC
 
 Target: http://localhost:3100 (local, full incl. orders on a mock Sheet)
-Result: **75/75 pass**
+Result: **77/77 pass**
 
 | | ID | Case | Chi tiết |
 |---|---|---|---|
@@ -42,6 +42,8 @@ Result: **75/75 pass**
 | ✅ | PD-01 | Chọn 'Xanh rêu' đổi ảnh chính (lot-coc-ra-khoi) (BUG-005) |  |
 | ✅ | PD-04 | Điện thoại: bấm lựa chọn -> tự cuộn thấy ảnh mới + URL ?chon= (BUG-015) |  |
 | ✅ | PD-05 | BST Đầu Đội Mũ: 2 nút mũ dẫn sang trang từng mũ |  |
+| ✅ | MAS-01 | Mascot: Đần nâng tạ lật đúng chiều Figma (bánh tạ to bên trái) (BUG-017) |  |
+| ✅ | MAS-02 | Mascot mobile: chú thích hero nằm trong thiết kế, chữ >= 12px; 3 hàng Đần + chữ không chồng nhau (BUG-018) |  |
 | ✅ | PD-02 | Lựa chọn dạng link chuyển sang sản phẩm anh em (Sổ) |  |
 | ✅ | PD-03 | Sản phẩm hết hàng hiện SOLD OUT, không có nút thêm giỏ |  |
 | ✅ | SRC-01 | Tìm 'dan' ra cả Sản phẩm và Khám phá, có nhãn phân biệt |  |
