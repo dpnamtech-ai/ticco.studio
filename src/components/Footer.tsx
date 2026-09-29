@@ -1,7 +1,6 @@
 import { brand } from "@/data/content";
 import Link from "next/link";
 import Reveal from "@/components/Reveal";
-import Fill from "@/components/Fill";
 import { policies, seller } from "@/data/legal";
 
 const social = [
@@ -91,31 +90,22 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Seller info + policy links required for e-commerce (ND 52/2013 + 85/2021). Not in the Figma: a darker strip under
-          the designed band, small type, so the band itself stays as designed. Draft values from src/data/legal.ts. */}
-      <div className="bg-[#3a0c70] text-[12.5px] leading-relaxed text-white/80">
-        <div className="flex flex-col gap-6 px-6 py-7 md:flex-row md:justify-between md:gap-10 md:px-[6.5%]">
-          {/* Kept to the essentials; licence no., representative and address live on /chinh-sach/thong-tin-nguoi-ban. */}
-          <div className="space-y-0.5">
-            <p className="font-semibold text-white"><Fill>{seller.name}</Fill> · MST <Fill>{seller.taxId}</Fill></p>
-            <p>
-              Hotline/Zalo <Fill>{seller.phone}</Fill> · <a href={`mailto:${seller.email}`} className="underline-offset-2 hover:underline">{seller.email}</a>
-            </p>
-          </div>
-          <div className="flex shrink-0 flex-col gap-4 md:items-end">
-            <ul className="flex flex-wrap gap-x-4 gap-y-1.5 md:max-w-[420px] md:justify-end">
-              {policies.map((p) => (
-                <li key={p.slug}>
-                  <Link href={`/chinh-sach/${p.slug}`} className="text-white underline-offset-2 hover:underline">{p.title}</Link>
-                </li>
-              ))}
-            </ul>
-            {seller.bctUrl ? (
+      {/* Policy links + seller-info page (legally required, ND 52/2013). A thin strip under the Figma band; the
+          Bộ Công Thương badge appears once src/data/legal.ts has its link. */}
+      <div className="bg-[#3a0c70] text-[12.5px] text-white/80">
+        <div className="flex flex-col gap-3 px-6 py-5 md:flex-row md:items-center md:justify-between md:px-[6.5%]">
+          <ul className="flex flex-wrap gap-x-4 gap-y-1.5">
+            {policies.map((p) => (
+              <li key={p.slug}>
+                <Link href={`/chinh-sach/${p.slug}`} className="text-white underline-offset-2 hover:underline">{p.title}</Link>
+              </li>
+            ))}
+          </ul>
+          <div className="flex items-center gap-4 text-white/60">
+            {seller.bctUrl && (
               <a href={seller.bctUrl} target="_blank" rel="noopener noreferrer" className="text-white underline">Đã thông báo Bộ Công Thương</a>
-            ) : (
-              <span className="rounded border border-dashed border-white/50 px-3 py-2 text-[11px] text-white/70">Logo “Đã thông báo Bộ Công Thương” (gắn sau khi được duyệt)</span>
             )}
-            <p className="text-white/60">© 2024–{new Date().getFullYear()} Tíc Cơ Studios</p>
+            <span>© 2024–{new Date().getFullYear()} Tíc Cơ Studios</span>
           </div>
         </div>
       </div>

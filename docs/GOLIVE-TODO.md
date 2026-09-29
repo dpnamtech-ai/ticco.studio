@@ -1,6 +1,6 @@
 # Go-live TODO — ticco.studio (cập nhật 30/09 sáng)
 
-Prod: https://ticcostudio.vercel.app · commit mới nhất `26a5921` · regression local 80/80, prod 70/70, admin 16/16.
+Prod: https://ticcostudio.vercel.app · regression local 81/81, prod 70/70 (chạy lại sau deploy), admin 16/16.
 Test plan: `qa/MASTER-TEST-PLAN.md` · Bug log: `qa/BUGS.md` · Mẫu footer/chính sách: `docs/footer-phap-ly-mau.md`
 
 ## A. Chặn go-live (P0) — cần bạn/khách
@@ -17,7 +17,7 @@ Test plan: `qa/MASTER-TEST-PLAN.md` · Bug log: `qa/BUGS.md` · Mẫu footer/ch�
 | # | Việc | Ai |
 |---|---|---|
 | B1 | Tên miền thật: gửi tên + nơi mua → Claude `vercel domains add`, bạn thêm DNS; sửa `metadataBase`, sitemap | Bạn + Claude |
-| B2 | Footer người bán + 5 trang chính sách: khách điền `docs/footer-phap-ly-mau.md` → Claude dựng trang | Khách → Claude |
+| B2 | ĐÃ DỰNG (30/09): footer chỉ 1 dòng link (user không muốn phơi tên/MST/địa chỉ); trang `/chinh-sach/thong-tin-nguoi-ban` + 5 chính sách, chỗ `[...]` tô vàng = khách điền trong `src/data/legal.ts`. Khi được Bộ CT duyệt: điền `seller.bctUrl` là logo tự hiện | Khách điền |
 | B3 | Thông báo website với Bộ Công Thương (online.gov.vn) sau khi có tên miền | Khách |
 | B4 | Khách duyệt giá/mô tả/tồn kho/hết hàng; chốt phí ship (30k, free từ 500k) | Khách |
 | B5 | Quản lý sản phẩm: (a) giữ catalog trong code (Claude sửa hộ) hoặc (b) bật Supabase admin → chạy `supabase/schema*.sql` (kể cả **schema-6**), seed lại 40 SP **đủ 6 ảnh phụ + cột variant_options**, tạo tài khoản admin (`app_metadata.role=admin`), set env Supabase trên Vercel, chạy `scripts/rls-check.mjs` | Bạn quyết |
@@ -26,7 +26,7 @@ Test plan: `qa/MASTER-TEST-PLAN.md` · Bug log: `qa/BUGS.md` · Mẫu footer/ch�
 | # | Việc |
 |---|---|
 | C1 | **Hiệu ứng mobile**: chạm màn hình → vài con Đần rơi xuống (thay con trỏ Đần trên PC). Nhẹ, không chặn thao tác, tắt khi `prefers-reduced-motion` |
-| C2 | **SEO + GEO**: từ khoá/title/description từng trang, JSON-LD (Product, Organization, BreadcrumbList), rà `robots.txt`, **`llms.txt`**, sitemap đủ trang, canonical theo tên miền thật; hướng dẫn **Google Search Console + Bing Webmaster** (verify + submit sitemap — cần tên miền thật); report kiểm tra kiểu Geoptie (điểm SEO/GEO từng trang) |
+| C2 | **SEO + GEO (làm ĐẦU TIÊN ngày mai, user giục)**: từ khoá/title/description từng trang, JSON-LD (Product, Organization, BreadcrumbList), rà `robots.txt`, **`llms.txt`**, sitemap đủ trang, canonical theo tên miền thật; hướng dẫn **Google Search Console + Bing Webmaster** (verify + submit sitemap — cần tên miền thật); report kiểm tra kiểu Geoptie (điểm SEO/GEO từng trang) |
 
 ## D. Bộ test cần cải thiện
 1. **So hình với Figma tự động** (lỗ hổng lớn nhất — đã lọt BUG-017/018): cần render mới 59 frame DEMO (ảnh trong `design/figma-assets` là bản 18/09, chỉ kham-pha + mascot còn khớp) → script chụp trang 1280 + so từng vùng (diff pixel) → báo vùng lệch + ảnh cạnh nhau. Hỏi user cách lấy render (user không muốn dùng Figma REST/MCP).

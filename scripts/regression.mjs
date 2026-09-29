@@ -164,13 +164,13 @@ await test("ADM-30", "Gọi thẳng 6 server action admin (tạo/sửa/xoá SP, 
   }
   return expect(Object.keys(node).length >= 6 && !bad.length, bad.join(", ") || "no actions in manifest");
 });
-await test("LEG-01", "Footer gọn (tên + MST + liên hệ, KHÔNG lộ địa chỉ/người đại diện) + 6 link thông tin/chính sách mở được", async () => {
+await test("LEG-01", "Footer chỉ có link Thông tin người bán + 5 chính sách (mở được), không phơi thông tin người bán", async () => {
   const html = await (await fetch(`${BASE}/san-pham`)).text();
   const links = [...new Set([...html.matchAll(/href="(\/chinh-sach\/[a-z-]+)"/g)].map((m) => m[1]))];
   const bad = [];
   for (const l of links) if ((await fetch(BASE + l)).status !== 200) bad.push(l);
   const footer = html.slice(html.lastIndexOf("<footer"));
-  return expect(/MST/.test(footer) && !/Người đại diện|Địa chỉ:/.test(footer) && links.length === 6 && !bad.length, `links=${links.length} bad=${bad}`);
+  return expect(!/MST|Người đại diện|Địa chỉ:/.test(footer) && links.length === 6 && !bad.length, `links=${links.length} bad=${bad}`);
 });
 await test("SEC-11", "Security headers (chống nhúng iframe, sniff, HSTS)", async () => {
   const h = (await fetch(BASE)).headers;

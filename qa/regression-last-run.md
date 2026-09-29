@@ -1,4 +1,4 @@
-# Regression — 2026-09-29 20:27 UTC
+# Regression — 2026-09-29 20:29 UTC
 
 Target: http://localhost:3100 (local, full incl. orders on a mock Sheet)
 Result: **81/81 pass**
@@ -9,7 +9,7 @@ Result: **81/81 pass**
 | ✅ | SMK-02 | Sản phẩm không tồn tại trả 404 |  |
 | ✅ | SEC-10 | Admin chưa đăng nhập: chuyển về /admin/login (hoặc 404 khi chưa bật Supabase), không bao giờ 200/500 (BUG-010) |  |
 | ✅ | ADM-30 | Gọi thẳng 6 server action admin (tạo/sửa/xoá SP, đổi đơn, upload, đăng xuất) khi chưa đăng nhập -> bị chặn |  |
-| ✅ | LEG-01 | Footer gọn (tên + MST + liên hệ, KHÔNG lộ địa chỉ/người đại diện) + 6 link thông tin/chính sách mở được |  |
+| ✅ | LEG-01 | Footer chỉ có link Thông tin người bán + 5 chính sách (mở được), không phơi thông tin người bán |  |
 | ✅ | SEC-11 | Security headers (chống nhúng iframe, sniff, HSTS) |  |
 | ✅ | IMG-01 | Ảnh load đủ + không tràn ngang (1280) / |  |
 | ✅ | IMG-01 | Ảnh load đủ + không tràn ngang (1280) /san-pham |  |
