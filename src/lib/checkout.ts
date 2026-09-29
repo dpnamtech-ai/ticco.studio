@@ -59,7 +59,7 @@ export function validateOrder(raw: unknown): ValidationResult {
   if (!PHONE_RE.test(value.phone)) errors.phone = "Số điện thoại chưa đúng (10 số, bắt đầu bằng 0)";
   if (value.email && !EMAIL_RE.test(value.email)) errors.email = "Email chưa đúng";
   if (!value.province) errors.province = "Vui lòng nhập tỉnh / thành phố";
-  if (!value.district) errors.district = "Vui lòng nhập quận / huyện";
+  // no quận/huyện since the 2025 merger — the field is kept only for old clients/bookmarks, optional
   if (!value.ward) errors.ward = "Vui lòng nhập phường / xã";
   if (value.address.length < 5) errors.address = "Vui lòng nhập số nhà, tên đường";
 

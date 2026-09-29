@@ -1,7 +1,7 @@
-# Regression — 2026-09-29 19:52 UTC
+# Regression — 2026-09-29 19:57 UTC
 
 Target: http://localhost:3100 (local, full incl. orders on a mock Sheet)
-Result: **77/77 pass**
+Result: **79/79 pass**
 
 | | ID | Case | Chi tiết |
 |---|---|---|---|
@@ -29,6 +29,7 @@ Result: **77/77 pass**
 | ✅ | MOB-02 | Menu mobile mở được, đủ 4 mục + có nút tìm kiếm |  |
 | ✅ | MOB-03 | Menu đang mở, bấm kính lúp -> menu đóng, thấy ngay ô tìm kiếm (BUG-011) |  |
 | ✅ | MOB-04 | Menu mobile có danh mục sản phẩm (Tất cả, Văn phòng phẩm, In ấn…) bấm vào đúng tab |  |
+| ✅ | MOB-05 | Thanh trên điện thoại có icon giỏ + số; menu không còn nút 'Giỏ hàng' to |  |
 | ✅ | CART-03 | Giỏ hàng trên điện thoại: có ảnh, tên không bị bẻ từng chữ, không tràn ngang (BUG-013) |  |
 | ✅ | UI-01 | Navbar Figma 2026-09-29: logo trái x≈35 rộng 83, 4 mục cách nhau 46 |  |
 | ✅ | UI-02 | Mục menu của trang hiện tại in đậm |  |
@@ -57,6 +58,7 @@ Result: **77/77 pass**
 | ✅ | CART-01 | Thêm 2 lựa chọn khác nhau = 2 dòng, giá đúng từng lựa chọn (BUG-008) |  |
 | ✅ | CART-02 | Trang giỏ: tăng số lượng, giữ sau khi tải lại, xoá dòng |  |
 | ✅ | CANCEL-01 | Rời checkout giữa chừng: giỏ hàng vẫn còn nguyên |  |
+| ✅ | CO-ADDR | Checkout: gõ không dấu 'ha noi' -> chọn Thành phố Hà Nội; 'ba dinh' -> Phường Ba Đình; không còn ô Quận/Huyện |  |
 | ✅ | CANCEL-02 | Giỏ trống -> checkout báo 'Giỏ hàng trống', không có form đặt |  |
 | ✅ | SEC-02 | JSON hỏng -> 400 |  |
 | ✅ | SEC-03 | Honeypot (bot điền ô ẩn) -> 400 |  |

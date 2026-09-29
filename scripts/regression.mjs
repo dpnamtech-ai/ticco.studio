@@ -80,7 +80,7 @@ async function throttle() {
 }
 const order = async (body, ip = `10.0.0.${++ipSeq}`) =>
   (await throttle(), fetch(`${BASE}/api/orders`, { method: "POST", headers: { "Content-Type": "application/json", "x-forwarded-for": ip }, body: typeof body === "string" ? body : JSON.stringify(body) }));
-const customer = { name: "Regression Test", phone: "0900000000", email: "", province: "Hà Nội", district: "Ba Đình", ward: "Điện Biên", address: "12 Phố Test", note: "" };
+const customer = { name: "Regression Test", phone: "0900000000", email: "", province: "Thành phố Hà Nội", ward: "Phường Ba Đình", address: "12 Phố Test", note: "" };
 const PC = "bst-postcard-triet-ly-song-dan";
 const item = (o = {}) => ({ id: PC, variant: "Lao động", qty: 1, ...o });
 
@@ -113,7 +113,7 @@ const badge = () => page.evaluate(() => [...document.querySelectorAll('nav [aria
 const bodyHas = (s) => page.evaluate((s) => document.body.innerText.includes(s), s);
 
 async function fillCheckout(c) {
-  const byLabel = { name: "Họ và tên", phone: "Số điện thoại", province: "Tỉnh", district: "Quận", ward: "Phường", address: "Số nhà", note: "Ghi chú" };
+  const byLabel = { name: "Họ và tên", phone: "Số điện thoại", province: "Tỉnh", ward: "Phường", address: "Số nhà", note: "Ghi chú" };
   for (const [k, label] of Object.entries(byLabel)) {
     if (!c[k]) continue;
     const h = await page.evaluateHandle((label) => [...document.querySelectorAll("form label")].find((l) => l.textContent.trim().startsWith(label))?.querySelector("input,textarea"), label);
@@ -210,6 +210,10 @@ await test("MOB-04", "Menu mobile có danh mục sản phẩm (Tất cả, Văn 
   await go("/");
   await page.click('button[aria-label="Menu"]');
   await sleep(700);
+  const collapsed = await page.evaluate(() => ![...document.querySelectorAll("div.fixed a")].some((a) => a.textContent.trim() === "In ấn"));
+  if (!collapsed) return "mục con không được thu gọn mặc định";
+  await page.click('button[aria-label="Mở Sản phẩm"]');
+  await sleep(300);
   const links = await page.evaluate(() => [...document.querySelectorAll("div.fixed a")].map((a) => [a.textContent.trim(), a.getAttribute("href")]));
   const want = ["Tất cả sản phẩm", "Văn phòng phẩm", "In ấn", "Túi xách", "Thời trang", "Phụ kiện đời sống"];
   const miss = want.filter((w) => !links.some(([t]) => t === w));
@@ -218,6 +222,18 @@ await test("MOB-04", "Menu mobile có danh mục sản phẩm (Tất cả, Văn 
   await sleep(900); // menu exit animation
   const active = await page.evaluate(() => document.querySelector('nav[aria-label="Danh mục sản phẩm"] a[aria-current="page"]')?.textContent.trim());
   return expect(page.url().includes("danh-muc=in-an") && /in ấn/i.test(active ?? "") && !(await page.$("div.fixed.inset-0")), `${page.url()} active=${active}`);
+});
+await test("MOB-05", "Thanh trên điện thoại có icon giỏ + số; menu không còn nút 'Giỏ hàng' to", async () => {
+  await go("/");
+  await setCart([{ id: PC, name: "x", variant: "Lao động", price: 30000, qty: 3 }]);
+  await go("/");
+  const n = await page.evaluate(() => [...document.querySelectorAll('nav button[aria-label="Giỏ hàng"]')].find((b) => b.offsetParent)?.textContent.trim());
+  await page.click('button[aria-label="Menu"]');
+  await sleep(600);
+  const bigBtn = await page.evaluate(() => [...document.querySelectorAll("div.fixed button")].some((b) => /Giỏ hàng/.test(b.textContent)));
+  await page.click('button[aria-label="Menu"]');
+  await resetStorage();
+  return expect(n === "3" && !bigBtn, JSON.stringify({ n, bigBtn }));
 });
 await test("CART-03", "Giỏ hàng trên điện thoại: có ảnh, tên không bị bẻ từng chữ, không tràn ngang (BUG-013)", async () => {
   await go(`/san-pham/dan-sinh-ton-03`);
@@ -428,6 +444,29 @@ await test("CANCEL-01", "Rời checkout giữa chừng: giỏ hàng vẫn còn n
   await go("/san-pham");
   await go("/gio-hang");
   return expect((await cartLines()).length === 1, `cart=${(await cartLines()).length}`);
+});
+await test("CO-ADDR", "Checkout: gõ không dấu 'ha noi' -> chọn Thành phố Hà Nội; 'ba dinh' -> Phường Ba Đình; không còn ô Quận/Huyện", async () => {
+  await go("/");
+  await setCart([{ id: PC, name: "x", variant: "Lao động", price: 30000, qty: 1 }]);
+  await go("/checkout");
+  await page.waitForFunction(() => document.querySelector('input[role="combobox"]'));
+  const field = (label) => page.evaluateHandle((l) => [...document.querySelectorAll("form label")].find((x) => x.textContent.trim().startsWith(l)).querySelector("input"), label);
+  const pickOpt = async (label, typed, want) => {
+    const el = (await field(label)).asElement();
+    await el.click();
+    await el.type(typed);
+    await sleep(300);
+    const opts = await page.evaluate(() => [...document.querySelectorAll('[role="option"]')].map((o) => o.textContent));
+    if (!opts.includes(want)) throw new Error(`${typed}: ${opts.slice(0, 5)}`);
+    await page.evaluate((w) => [...document.querySelectorAll('[role="option"]')].find((o) => o.textContent === w).dispatchEvent(new MouseEvent("mousedown", { bubbles: true })), want);
+    await sleep(200);
+    return page.evaluate((e) => e.value, el);
+  };
+  await sleep(800); // province list loads
+  const p = await pickOpt("Tỉnh", "ha noi", "Thành phố Hà Nội");
+  const w = await pickOpt("Phường", "ba dinh", "Phường Ba Đình");
+  const district = await page.evaluate(() => [...document.querySelectorAll("form label")].some((l) => /Quận/.test(l.textContent)));
+  return expect(p === "Thành phố Hà Nội" && w === "Phường Ba Đình" && !district, JSON.stringify({ p, w, district }));
 });
 await test("CANCEL-02", "Giỏ trống -> checkout báo 'Giỏ hàng trống', không có form đặt", async () => {
   await resetStorage();

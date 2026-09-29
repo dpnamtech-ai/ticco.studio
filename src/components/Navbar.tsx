@@ -3,9 +3,9 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { Search, ShoppingCart, Menu, X } from "lucide-react";
+import { Search, ShoppingCart, Menu, X, ChevronDown } from "lucide-react";
 import { navLinks, brand } from "@/data/content";
 import { useCart } from "@/context/CartContext";
 
@@ -40,16 +40,26 @@ function NavItem({ link, active }: { link: NavLink; active: boolean }) {
   );
 }
 
+// The menu section (with sub-pages) that a path belongs to, e.g. /kham-pha/x -> "/kham-pha".
+const sectionOf = (p: string) => navLinks.find((l) => "children" in l && (p === l.href || p.startsWith(`${l.href}/`)))?.href ?? null;
+
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const { totalItems, openDrawer } = useCart();
   const pathname = usePathname();
+  // which collapsible section of the mobile menu is open
+  const [expanded, setExpanded] = useState<string | null>(() => sectionOf(pathname));
   // A section is active on its own page and any page below it (e.g. /kham-pha/nguoi-viet-van-dong).
   const isActive = (href: string) => pathname === href || pathname.startsWith(`${href}/`);
   // Any navigation (menu link, the always-visible search icon, logo, back button) closes the full-screen mobile
-  // menu; otherwise it stays on top of the new page and the tap looks like it did nothing.
-  // eslint-disable-next-line react-hooks/set-state-in-effect
-  useEffect(() => setMenuOpen(false), [pathname]);
+  // menu — otherwise it stays on top of the new page and the tap looks like it did nothing — and opens the
+  // menu section of the page you're on. Done while rendering (React's "adjust state on prop change"), not in an effect.
+  const [seenPath, setSeenPath] = useState(pathname);
+  if (seenPath !== pathname) {
+    setSeenPath(pathname);
+    setMenuOpen(false);
+    setExpanded(sectionOf(pathname));
+  }
 
   return (
     <>
@@ -96,10 +106,18 @@ export default function Navbar() {
             </button>
           </div>
 
-          {/* Mobile search + burger */}
+          {/* Mobile: search + cart (with count) + burger, always in the bar */}
           <Link href="/tim-kiem" aria-label="Tìm kiếm" className="md:hidden ml-auto">
             <Search size={22} />
           </Link>
+          <button onClick={openDrawer} aria-label="Giỏ hàng" className="md:hidden relative">
+            <ShoppingCart size={23} />
+            {totalItems > 0 && (
+              <span className="absolute -top-1.5 -right-2 flex h-[18px] min-w-[18px] items-center justify-center rounded-full bg-[var(--color-purple)] px-1 text-[11px] font-bold leading-none text-white">
+                {totalItems}
+              </span>
+            )}
+          </button>
           <button
             className="md:hidden"
             onClick={() => setMenuOpen(!menuOpen)}
@@ -114,45 +132,54 @@ export default function Navbar() {
       <AnimatePresence>
         {menuOpen && (
           <motion.div
-            className="fixed inset-0 z-40 bg-[var(--color-orange)] text-white flex flex-col pt-20 px-8"
+            className="fixed inset-0 z-40 overflow-y-auto bg-[var(--color-orange)] text-white flex flex-col pt-20 pb-10 px-8"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
           >
-            <ul className="flex flex-col gap-6 mt-8">
-              {navLinks.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    onClick={() => setMenuOpen(false)}
-                    aria-current={isActive(link.href) ? "page" : undefined}
-                    className={`font-[family-name:var(--font-heading)] text-3xl font-bold ${isActive(link.href) ? "underline underline-offset-8 decoration-4" : ""}`}
-                  >
-                    {link.label}
-                  </Link>
-                  {"children" in link && link.children && (
-                    <ul className="mt-3 ml-4 flex flex-col gap-3 text-lg font-semibold">
-                      {link.children.map((c) => (
-                        <li key={c.href}>
-                          <Link href={c.href} onClick={() => setMenuOpen(false)}>
-                            {c.label}
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </li>
-              ))}
+            {/* Top level stays short: sections with sub-pages collapse (chevron), the one you're in starts open. */}
+            <ul className="mt-4 flex flex-col divide-y divide-white/20">
+              {navLinks.map((link) => {
+                const kids = "children" in link ? link.children : undefined;
+                const open = expanded === link.href;
+                return (
+                  <li key={link.href} className="py-3">
+                    <div className="flex items-center justify-between">
+                      <Link
+                        href={link.href}
+                        onClick={() => setMenuOpen(false)}
+                        aria-current={isActive(link.href) ? "page" : undefined}
+                        className={`font-[family-name:var(--font-heading)] text-2xl font-bold ${isActive(link.href) ? "underline underline-offset-8 decoration-2" : ""}`}
+                      >
+                        {link.label}
+                      </Link>
+                      {kids && (
+                        <button
+                          type="button"
+                          aria-label={`${open ? "Thu gọn" : "Mở"} ${link.label}`}
+                          aria-expanded={open}
+                          onClick={() => setExpanded(open ? null : link.href)}
+                          className="-mr-2 p-2"
+                        >
+                          <ChevronDown size={22} className={`transition-transform ${open ? "rotate-180" : ""}`} />
+                        </button>
+                      )}
+                    </div>
+                    {kids && open && (
+                      <ul className="mt-2 ml-1 flex flex-col gap-2.5 pb-1 text-base font-semibold text-white/90">
+                        {kids.map((c) => (
+                          <li key={c.href}>
+                            <Link href={c.href} onClick={() => setMenuOpen(false)}>
+                              {c.label}
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </li>
+                );
+              })}
             </ul>
-            <button
-              onClick={() => {
-                setMenuOpen(false);
-                openDrawer();
-              }}
-              className="mt-auto mb-12 inline-flex items-center justify-center gap-2 text-center text-sm font-semibold bg-white text-[var(--color-orange)] px-5 py-4 rounded-full"
-            >
-              <ShoppingCart size={18} /> Giỏ hàng {totalItems > 0 && `(${totalItems})`}
-            </button>
           </motion.div>
         )}
       </AnimatePresence>

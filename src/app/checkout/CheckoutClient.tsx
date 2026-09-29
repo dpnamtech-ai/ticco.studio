@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useId, useState } from "react";
 import { useCart } from "@/context/CartContext";
 import AddressMap from "@/components/AddressMap";
 import { FREE_SHIP_MIN, shippingFor } from "@/lib/checkout";
@@ -63,6 +63,11 @@ export default function CheckoutClient() {
   const [formError, setFormError] = useState("");
   const [sending, setSending] = useState(false);
   const [placed, setPlaced] = useState<Placed | null>(null);
+  // tỉnh/thành -> phường/xã, public/data/vn-dia-gioi.json (provinces.open-api.vn v2, 34 tỉnh / 3321 xã, 2025)
+  const [units, setUnits] = useState<Record<string, string[]> | null>(null);
+  useEffect(() => {
+    fetch("/data/vn-dia-gioi.json").then((r) => r.json()).then(setUnits).catch(() => setUnits({}));
+  }, []);
 
   // Restore the payment screen after a refresh.
   useEffect(() => {
@@ -189,15 +194,30 @@ export default function CheckoutClient() {
           <input className={input} type="email" value={form.email} onChange={set("email")} autoComplete="email" />
         </Field>
 
-        <div className="grid gap-5 sm:grid-cols-3">
+        {/* Since 1/7/2025 Vietnam has 2 levels: 34 tỉnh/thành -> phường/xã (no quận/huyện). */}
+        <div className="grid gap-5 sm:grid-cols-2">
           <Field label="Tỉnh / Thành phố" error={errors.province}>
-            <input className={input} value={form.province} onChange={set("province")} autoComplete="address-level1" required />
-          </Field>
-          <Field label="Quận / Huyện" error={errors.district}>
-            <input className={input} value={form.district} onChange={set("district")} autoComplete="address-level2" required />
+            <Combobox
+              value={form.province}
+              options={Object.keys(units ?? {})}
+              placeholder="Gõ để tìm, vd: ha noi"
+              autoComplete="address-level1"
+              onChange={(v) => {
+                setForm((f) => ({ ...f, province: v, ward: f.province === v ? f.ward : "" }));
+                setErrors((er) => ({ ...er, province: "" }));
+              }}
+            />
           </Field>
           <Field label="Phường / Xã" error={errors.ward}>
-            <input className={input} value={form.ward} onChange={set("ward")} required />
+            <Combobox
+              value={form.ward}
+              options={units?.[form.province] ?? []}
+              placeholder={form.province ? "Gõ để tìm phường/xã" : "Chọn tỉnh/thành trước"}
+              onChange={(v) => {
+                setForm((f) => ({ ...f, ward: v }));
+                setErrors((er) => ({ ...er, ward: "" }));
+              }}
+            />
           </Field>
         </div>
         <Field label="Số nhà, tên đường" error={errors.address}>
@@ -246,5 +266,72 @@ export default function CheckoutClient() {
         </dl>
       </aside>
     </section>
+  );
+}
+
+// Accent-insensitive: "ha noi" / "HN"-style partials find "Thành phố Hà Nội"; "dinh" finds "Phường Ba Đình".
+const fold = (s: string) => s.normalize("NFD").replace(/\p{M}/gu, "").replace(/đ/gi, "d").toLowerCase();
+
+// Type-to-filter dropdown. Free text is still accepted (a new ward name, or the list failed to load);
+// options only help the customer pick the exact official name quickly.
+function Combobox({ value, options, onChange, placeholder, autoComplete }: { value: string; options: string[]; onChange: (v: string) => void; placeholder?: string; autoComplete?: string }) {
+  const [open, setOpen] = useState(false);
+  const [active, setActive] = useState(0);
+  const listId = useId();
+  const q = fold(value.trim());
+  const matches = (q ? options.filter((o) => fold(o).includes(q)) : options).slice(0, 50);
+  const pick = (v: string) => {
+    onChange(v);
+    setOpen(false);
+  };
+  return (
+    <div className="relative">
+      <input
+        className={input}
+        value={value}
+        placeholder={placeholder}
+        autoComplete={autoComplete ?? "off"}
+        role="combobox"
+        aria-controls={listId}
+        aria-expanded={open && matches.length > 0}
+        onFocus={() => setOpen(true)}
+        onBlur={() => setTimeout(() => setOpen(false), 150)}
+        onChange={(e) => {
+          onChange(e.target.value);
+          setOpen(true);
+          setActive(0);
+        }}
+        onKeyDown={(e) => {
+          if (!open || !matches.length) return;
+          if (e.key === "Escape") return setOpen(false);
+          const next = { ArrowDown: Math.min(active + 1, matches.length - 1), ArrowUp: Math.max(active - 1, 0) }[e.key];
+          if (next !== undefined) {
+            e.preventDefault();
+            setActive(next);
+          } else if (e.key === "Enter") {
+            e.preventDefault();
+            pick(matches[active]);
+          }
+        }}
+      />
+      {open && matches.length > 0 && !(matches.length === 1 && matches[0] === value) && (
+        <ul id={listId} role="listbox" className="absolute z-20 mt-1 max-h-64 w-full overflow-y-auto rounded-lg border border-[var(--color-ink)]/15 bg-white py-1 shadow-lg">
+          {matches.map((o, i) => (
+            <li
+              key={o}
+              role="option"
+              aria-selected={i === active}
+              onMouseDown={(e) => {
+                e.preventDefault();
+                pick(o);
+              }}
+              className={`cursor-pointer px-4 py-2 text-sm ${i === active ? "bg-[var(--color-purple)]/10 text-[var(--color-purple)]" : ""}`}
+            >
+              {o}
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
   );
 }
