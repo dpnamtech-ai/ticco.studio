@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { cropFillStyle, zoomSizes, type ImageTransform } from "@/lib/figmaCrop";
 
@@ -15,6 +16,8 @@ interface ProjectCardProps {
   compact?: boolean;
   /** Figma imageTransform of the image fill (crop/zoom); default is object-cover. */
   crop?: ImageTransform;
+  /** Makes the whole card (image + title) a link. */
+  href?: string;
 }
 
 export default function ProjectCard({
@@ -26,6 +29,7 @@ export default function ProjectCard({
   onOrange = false,
   compact = false,
   crop,
+  href,
 }: ProjectCardProps) {
   const linkClass = onOrange
     ? "text-white/90 hover:text-white"
@@ -38,6 +42,7 @@ export default function ProjectCard({
       viewport={{ once: true, margin: "0px 0px -35% 0px" }}
       transition={{ delay: index * 0.06, duration: 0.5 }}
     >
+      <CardLink href={href}>
       <div className={`${compact ? "aspect-[309/448]" : "aspect-[436/486]"} relative overflow-hidden bg-[#D9D9D9] ${compact ? "" : "mb-4"}`}>
         {image && <Image src={image} alt={title} fill className={crop ? "" : "object-cover"} style={crop && cropFillStyle(crop)} sizes={zoomSizes("(max-width: 768px) 100vw, 50vw", crop)} />}
       </div>
@@ -50,6 +55,7 @@ export default function ProjectCard({
       >
         {title}
       </h3>
+      </CardLink>
       {!compact && (
         <div className="flex gap-6 text-sm">
           <a href={productHref} className={linkClass}>
@@ -65,3 +71,6 @@ export default function ProjectCard({
     </motion.div>
   );
 }
+
+const CardLink = ({ href, children }: { href?: string; children: React.ReactNode }) =>
+  href && href !== "#" ? <Link href={href} className="block">{children}</Link> : <>{children}</>;

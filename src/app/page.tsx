@@ -25,14 +25,12 @@ export default async function Home() {
                 max(): exact Figma on desktop; phones get a >=44px bar and >=15px text, centred */}
             <div className="relative" style={{ height: "max(7.031cqw, calc(44px + 0.468cqw))" }}>
             <div className="absolute inset-x-0 bg-[var(--color-purple)]" style={{ top: "0.234cqw", height: "max(6.250cqw, 44px)" }} />
-            <h2 className="absolute font-semibold uppercase text-white whitespace-nowrap" style={{ left: "6.094cqw", top: "0.000cqw", fontSize: "max(15px, 1.5625cqw)", lineHeight: "max(7.031cqw, calc(44px + 0.468cqw))", letterSpacing: "-0.0625cqw" }}>
-              Danh mục sản phẩm:
+            {/* Figma 2026-09-29: "NHỮNG THỨ CHÚNG TÔI CÓ!" at x71, 5px above the old text box */}
+            <h2 className="absolute font-semibold uppercase text-white whitespace-nowrap" style={{ left: "5.547cqw", top: "-0.391cqw", fontSize: "max(15px, 1.5625cqw)", lineHeight: "max(7.031cqw, calc(44px + 0.468cqw))", letterSpacing: "-0.0625cqw" }}>
+              Những thứ chúng tôi có!
             </h2>
           </div>
           </Reveal>
-          <Link href="/san-pham" className="hidden lg:block absolute lg:left-[79.453cqw] lg:top-[8.594cqw] lg:text-[1.5625cqw] font-semibold uppercase text-[var(--color-purple)] hover:underline">
-            Tất cả sản phẩm &gt;
-          </Link>
         </div>
 
         <div className="bg-[#f2f1f1]">

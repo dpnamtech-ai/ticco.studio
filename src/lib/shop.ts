@@ -68,6 +68,20 @@ export const VARIANT_LINKS: Record<string, string>[] = [
   },
   { "Mũ tai bèo Ha Ha": "mu-tai-beo-ha-ha", "Mũ lưỡi trai Chả Sao": "mu-luoi-trai-cha-sao" },
 ];
+// In-page options that each have their own photo: option label -> gallery index shown in the main image slot.
+// ponytail: indexes into the product's gallery order (image, then thumbnails); re-check if /admin reorders photos.
+export const VARIANT_IMAGES: Record<string, Record<string, number>> = {
+  "bst-postcard-triet-ly-song-dan": {
+    "BST 5 tấm": 0,
+    "Lối sống 3 không": 1,
+    "Cười vì điều nhỏ": 2,
+    "Hạnh phúc là tự thân": 3,
+    "Lao động": 4,
+    "Đời nhỏ tí": 5,
+  },
+  "khan-bandana-van-su-tuy-minh": { "Xanh lá": 0, "Tím": 1 },
+  "lot-coc-ra-khoi": { "Hoạ tiết sọc": 0, "Xanh rêu": 2 },
+};
 export const variantLinksFor = (id: string) => VARIANT_LINKS.find((g) => Object.values(g).includes(id));
 
 export const shopCategory = (slug: string | undefined) => SHOP_CATEGORIES.find((c) => c.slug === slug) ?? SHOP_CATEGORIES[0];

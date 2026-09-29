@@ -18,15 +18,9 @@ function NavItem({ link, active }: { link: NavLink; active: boolean }) {
       <Link
         href={link.href}
         aria-current={active ? "page" : undefined}
-        className={`hover-underline flex items-center ${link.href === "/kham-pha" ? "gap-px" : "gap-1"} hover:opacity-80 transition-opacity ${active ? "is-active font-extrabold" : ""}`}
+        className={`hover-underline flex items-center hover:opacity-80 transition-opacity ${active ? "is-active font-extrabold" : ""}`}
       >
         {link.label}
-        {/* Figma "Subtract": 7x6 down chevron in #ffd9c6 (gap 4px after SẢN PHẨM, 1px after KHÁM PHÁ) */}
-        {link.dropdown && (
-          <svg width="7" height="6" viewBox="0 0 7 6" aria-hidden className="shrink-0 md:w-[calc(7*var(--u))] md:h-[calc(6*var(--u))]">
-            <path d="M0.4 0.6 3.5 5.2 6.6 0.6" fill="none" stroke="#ffd9c6" strokeWidth="1.3" />
-          </svg>
-        )}
       </Link>
       {"children" in link && link.children && (
         // pt-2 is an invisible bridge so the pointer can travel from the item to the card without closing it
@@ -52,31 +46,21 @@ export default function Navbar() {
   const pathname = usePathname();
   // A section is active on its own page and any page below it (e.g. /kham-pha/nguoi-viet-van-dong).
   const isActive = (href: string) => pathname === href || pathname.startsWith(`${href}/`);
-  const left = navLinks.slice(0, 2);
-  const right = navLinks.slice(2);
 
   return (
     <>
       <nav className="sticky top-0 z-50 bg-[var(--color-orange)] text-white">
-        {/* md+: Figma "thanh-chon" — logo centred (X615-664), left group ends 31px before it, right group starts
-            30px after it; item gaps 38px (left) / 33px (right); Be Vietnam 600 13/19, no letter-spacing. */}
-        <div className="relative max-w-[1280px] md:max-w-[calc(1280*var(--u))] mx-auto px-6 h-16 md:h-[calc(27*var(--u))] flex items-center justify-between gap-6 md:grid md:grid-cols-[1fr_auto_1fr] md:gap-0">
-          {/* Desktop nav — left */}
-          <ul className="hidden md:flex justify-end items-center gap-[calc(38*var(--u))] mr-[calc(31*var(--u))] text-[calc(13*var(--u))] leading-[calc(19*var(--u))] font-semibold uppercase">
-            {left.map((link) => (
-              <NavItem key={link.href} link={link} active={isActive(link.href)} />
-            ))}
-          </ul>
-
+        {/* md+: Figma "thanh-chon" (2026-09-29) — logo left (X35, 83x25), the 4 items centred as one group
+            with 46px gaps and no dropdown chevrons; Be Vietnam 600 13/19, no letter-spacing. */}
+        <div className="relative max-w-[1280px] md:max-w-[calc(1280*var(--u))] mx-auto px-6 h-16 md:h-[calc(27*var(--u))] flex items-center justify-between gap-6 md:justify-center md:gap-0">
           {/* Wordmark */}
-          <Link href="/" aria-label={brand.shortName} className="shrink-0">
-            {/* Figma logo layer "1 1" (49x15), real lettering */}
-            <Image src="/images/logo-tic-co.png" alt={brand.shortName} width={2731} height={837} sizes="(min-width: 768px) 74px, 72px" priority className="w-[72px] md:w-[calc(49*var(--u))] h-auto" />
+          <Link href="/" aria-label={brand.shortName} className="shrink-0 md:absolute md:left-[calc(35*var(--u))] md:top-1/2 md:-translate-y-1/2">
+            <Image src="/images/logo-tic-co.png" alt={brand.shortName} width={2731} height={837} sizes="(min-width: 768px) 125px, 72px" priority className="w-[72px] md:w-[calc(83*var(--u))] h-auto" />
           </Link>
 
-          {/* Desktop nav — right */}
-          <ul className="hidden md:flex items-center gap-[calc(33*var(--u))] ml-[calc(30*var(--u))] text-[calc(13*var(--u))] leading-[calc(19*var(--u))] font-semibold uppercase">
-            {right.map((link) => (
+          {/* Desktop nav */}
+          <ul className="hidden md:flex items-center gap-[calc(46*var(--u))] text-[calc(13*var(--u))] leading-[calc(19*var(--u))] font-semibold uppercase">
+            {navLinks.map((link) => (
               <NavItem key={link.href} link={link} active={isActive(link.href)} />
             ))}
           </ul>
@@ -84,9 +68,9 @@ export default function Navbar() {
           {/* Icons */}
           {/* Figma "Frame 5" X1153-1219: search 21px (#fef7ff) + cart art 36x36, gap 9 */}
           <div className="hidden md:flex items-center gap-[calc(9*var(--u))] md:absolute md:right-[calc(61*var(--u))] md:top-1/2 md:-translate-y-1/2">
-            <button aria-label="Tìm kiếm" className="text-[#fef7ff] hover:opacity-80 transition-opacity">
+            <Link href="/tim-kiem" aria-label="Tìm kiếm" className="text-[#fef7ff] hover:opacity-80 transition-opacity">
               <Search size={21} className="size-[calc(21*var(--u))]" />
-            </button>
+            </Link>
             <button onClick={openDrawer} aria-label="Giỏ hàng" className="relative hover:opacity-80 transition-opacity">
               <Image src="/images/figma/f7cee81a817a7fd43fa1390005911ca6d22bbadf.webp" alt="" width={108} height={108} className="size-[calc(36*var(--u))]" />
               <AnimatePresence>
@@ -97,7 +81,9 @@ export default function Navbar() {
                     animate={{ scale: 1 }}
                     exit={{ scale: 0 }}
                     transition={{ type: "spring", stiffness: 500, damping: 15 }}
-                    className="absolute -top-1 -right-2 bg-[var(--color-purple)] text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center"
+                    // The 36u cart art overflows the 27u bar by 4.5u each side: top 4.5u keeps the badge inside the bar,
+                    // so it isn't cut off by the viewport edge once the promo bar scrolls away.
+                    className="absolute top-[calc(4.5*var(--u))] -right-[calc(8*var(--u))] bg-[var(--color-purple)] text-white text-[calc(12*var(--u))] leading-none font-bold min-w-[calc(18*var(--u))] h-[calc(18*var(--u))] px-[calc(4*var(--u))] rounded-full flex items-center justify-center"
                   >
                     {totalItems}
                   </motion.span>
@@ -106,9 +92,12 @@ export default function Navbar() {
             </button>
           </div>
 
-          {/* Mobile burger */}
+          {/* Mobile search + burger */}
+          <Link href="/tim-kiem" aria-label="Tìm kiếm" className="md:hidden ml-auto">
+            <Search size={22} />
+          </Link>
           <button
-            className="md:hidden ml-auto"
+            className="md:hidden"
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label="Menu"
           >

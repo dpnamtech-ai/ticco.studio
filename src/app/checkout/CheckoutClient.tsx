@@ -4,10 +4,10 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useCart } from "@/context/CartContext";
 import AddressMap from "@/components/AddressMap";
-import { FREE_SHIP_MIN, shippingFor, vietQrUrl } from "@/lib/checkout";
+import { FREE_SHIP_MIN, shippingFor } from "@/lib/checkout";
 
 // Bank account shown after checkout (public info). Set in .env.local / Vercel:
-//   NEXT_PUBLIC_BANK_ID (VietQR short code, e.g. MB, VCB, ACB), NEXT_PUBLIC_BANK_ACCOUNT, NEXT_PUBLIC_BANK_ACCOUNT_NAME
+//   NEXT_PUBLIC_BANK_ID (bank name shown to the customer, e.g. MB, VCB, ACB), NEXT_PUBLIC_BANK_ACCOUNT, NEXT_PUBLIC_BANK_ACCOUNT_NAME
 const BANK = {
   id: process.env.NEXT_PUBLIC_BANK_ID ?? "",
   account: process.env.NEXT_PUBLIC_BANK_ACCOUNT ?? "",
@@ -111,7 +111,7 @@ export default function CheckoutClient() {
     }
   }
 
-  // ---- Step 2: pay by bank transfer (VietQR) ----
+  // ---- Step 2: pay by bank transfer (static shop QR) ----
   if (placed) {
     const configured = BANK.id && BANK.account;
     return (
@@ -123,18 +123,9 @@ export default function CheckoutClient() {
 
         <div className="grid gap-6 md:grid-cols-[240px_1fr]">
           <div className="rounded-lg bg-white p-3 text-center shadow-sm">
-            {configured ? (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img
-                src={vietQrUrl({ bank: BANK.id, account: BANK.account, name: BANK.name, amount: placed.total, info: placed.code })}
-                alt={`Mã VietQR chuyển khoản ${vnd(placed.total)} nội dung ${placed.code}`}
-                className="mx-auto h-auto w-full"
-                width={240}
-                height={300}
-              />
-            ) : (
-              <p className="p-6 text-sm text-[var(--color-ink)]/60">Chưa cấu hình tài khoản ngân hàng nhận tiền.</p>
-            )}
+            {/* Shop's own static QR (client's choice, no VietQR): the customer types the amount + note from the rows beside it. */}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/images/qr-thanh-toan.png" alt="Mã QR chuyển khoản Tíc Cơ" className="mx-auto h-auto w-full" width={240} height={240} />
           </div>
           <div>
             {configured && (

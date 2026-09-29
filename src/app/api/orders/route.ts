@@ -7,7 +7,8 @@ import { makeOrderCode, shippingFor, validateOrder, type OrderInput } from "@/li
 // stores the order (Supabase, when configured) and emails the shop. Payment itself is a bank transfer
 // (VietQR) confirmed by hand, so nothing here touches money.
 //
-// Env (all optional; missing ones only disable that step):
+// Env (each optional; a missing one only disables that step, but at least one must record the order):
+//   ORDER_SHEET_URL, ORDER_SHEET_SECRET                       -> append a row to the Google Sheet (scripts/google-sheet-orders.gs)
 //   RESEND_API_KEY, ORDER_NOTIFY_EMAIL [, ORDER_FROM_EMAIL]   -> email the shop
 //   NEXT_PUBLIC_SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY       -> save into the `orders` table
 
@@ -62,6 +63,26 @@ async function sendShopEmail(code: string, o: OrderInput, lines: PricedLine[], s
     return res.ok;
   } catch (e) {
     console.error("[orders] resend error", e);
+    return false;
+  }
+}
+
+async function sendToSheet(code: string, o: OrderInput, lines: PricedLine[], subtotal: number, shipping: number, total: number) {
+  const url = process.env.ORDER_SHEET_URL;
+  if (!url) return false;
+  try {
+    // Apps Script answers a POST with a redirect to the result; fetch follows it.
+    const res = await fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ secret: process.env.ORDER_SHEET_SECRET, code, customer: { ...o, items: undefined }, items: lines, subtotal, shipping, total }),
+      signal: AbortSignal.timeout(15_000),
+    });
+    const out = (await res.json().catch(() => null)) as { ok?: boolean } | null;
+    if (!out?.ok) console.error("[orders] sheet rejected", res.status, out);
+    return Boolean(out?.ok);
+  } catch (e) {
+    console.error("[orders] sheet error", e);
     return false;
   }
 }
@@ -126,10 +147,16 @@ export async function POST(req: Request) {
   const total = subtotal + shipping;
   const code = makeOrderCode();
 
-  const [stored, emailed] = await Promise.all([
+  const [stored, sheeted, emailed] = await Promise.all([
     saveOrder(code, order, lines, subtotal, shipping, total),
+    sendToSheet(code, order, lines, subtotal, shipping, total),
     sendShopEmail(code, order, lines, subtotal, shipping, total),
   ]);
+  // Never tell the customer "đặt hàng thành công" (and show the QR) for an order the shop has no record of.
+  if (!stored && !sheeted && !emailed) {
+    console.error(`[orders] order ${code} was not recorded anywhere`, JSON.stringify({ order, lines, total }));
+    return NextResponse.json({ error: "Chưa gửi được đơn hàng, bạn thử lại sau ít phút hoặc nhắn Tíc Cơ qua Facebook/Instagram nhé." }, { status: 503 });
+  }
 
-  return NextResponse.json({ code, subtotal, shipping, total, stored, emailed });
+  return NextResponse.json({ code, subtotal, shipping, total, stored, sheeted, emailed });
 }

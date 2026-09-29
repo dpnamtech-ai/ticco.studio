@@ -57,7 +57,7 @@ export default function CollabSection() {
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 lg:gap-x-[6.172cqw] lg:mt-[0.313cqw]">
           {featured.map((project, i) => (
-            <ProjectCard key={project.id} title={FIGMA_TITLES[project.id] ?? project.title} image={FIGMA_IMAGES[project.id]?.src ?? project.image} crop={FIGMA_IMAGES[project.id]?.crop} index={i} compact onOrange />
+            <ProjectCard key={project.id} title={FIGMA_TITLES[project.id] ?? project.title} image={FIGMA_IMAGES[project.id]?.src ?? project.image} crop={FIGMA_IMAGES[project.id]?.crop} index={i} href={project.articleHref} compact onOrange />
           ))}
         </div>
       </div>

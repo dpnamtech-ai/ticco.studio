@@ -30,13 +30,6 @@ export function makeOrderCode() {
   return `TC${t}${r}`;
 }
 
-// VietQR image (public quick-link service, no key needed). Bank = short code such as "MB", "VCB", "ACB".
-export function vietQrUrl(p: { bank: string; account: string; name?: string; amount: number; info: string }) {
-  const q = new URLSearchParams({ amount: String(p.amount), addInfo: p.info });
-  if (p.name) q.set("accountName", p.name);
-  return `https://img.vietqr.io/image/${encodeURIComponent(p.bank)}-${encodeURIComponent(p.account)}-compact2.png?${q}`;
-}
-
 const PHONE_RE = /^(0|\+84)\d{9}$/;
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 

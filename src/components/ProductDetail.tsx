@@ -24,6 +24,8 @@ interface ProductDetailProps {
   variants: string[];
   /** Option label → sibling product id, when the option buttons switch products (Sổ Căn Bản, Đần Sinh Tồn, mũ). */
   variantLinks?: Record<string, string>;
+  /** Option label → gallery index to show as the main image when that option is picked (postcards, bandana). */
+  variantImages?: Record<string, number>;
   specs: string[];
   note?: string;
   /** Main image first, then the small ones, each with its Figma crop. */
@@ -38,6 +40,9 @@ interface ProductDetailProps {
 }
 
 type Vars = CSSProperties & Record<`--${string}`, string>;
+// Full-quality photos are heavy: each one fades in from a soft blur once loaded, over the grey box, instead of popping in.
+const fade = "opacity-0 blur-[6px] transition-[opacity,filter] duration-700 ease-out data-[loaded=true]:opacity-100 data-[loaded=true]:blur-none";
+const onLoad = (e: React.SyntheticEvent<HTMLImageElement>) => (e.currentTarget.dataset.loaded = "true");
 const cq = (px: number) => `${Math.round((px / 12.8) * 1e4) / 1e4}cqw`;
 /** Desktop box at Figma frame coordinates, relative to (ox, oy); the page content starts at frame y 51. */
 const at = (b: Box | undefined, ox = 0, oy = 51): Vars | undefined =>
@@ -54,6 +59,7 @@ export default function ProductDetail({
   description,
   variants,
   variantLinks,
+  variantImages,
   specs,
   note,
   gallery,
@@ -73,7 +79,8 @@ export default function ProductDetail({
     setTimeout(() => setAdded(false), 1500);
   };
 
-  const [main, ...smalls] = gallery;
+  const [first, ...smalls] = gallery;
+  const main = gallery[variantImages?.[selected] ?? 0] ?? first;
   const wide = smalls.length > 4;
   const specText = specs.join("\n") + (note ? `${specs.length ? "\n\n" : ""}Lưu ý:\n${note}` : "");
   const abs = L ? "lg:absolute lg:left-(--x) lg:top-(--y) lg:w-(--w)" : "";
@@ -92,7 +99,7 @@ export default function ProductDetail({
     >
       <Reveal variant="curtain" duration={1.3} className={`order-1 ${L ? abs : "lg:order-none lg:col-start-1 lg:row-start-1"}`} style={at(L?.gallery[0])}>
         <div className="relative aspect-[550/689] bg-[#d9d9d9] overflow-hidden" style={L && box(L.gallery[0])}>
-          {main && <Image src={main.src} alt={name} fill priority sizes={zoomSizes("(max-width: 1024px) 100vw, 43vw", main)} style={fillStyle(main)} />}
+          {main && <Image key={main.src} src={main.src} alt={selected === variants[0] ? name : `${name} - ${selected}`} fill priority className={fade} onLoad={onLoad} sizes={zoomSizes("(max-width: 1024px) 100vw, 43vw", main)} style={fillStyle(main)} />}
         </div>
       </Reveal>
 
@@ -109,7 +116,7 @@ export default function ProductDetail({
               style={L && { ...at(L.gallery[i + 1]), ...box(L.gallery[i + 1]) }}
             >
               <div className="absolute inset-0 transition-transform duration-500 group-hover:scale-105">
-                <Image src={img.src} alt="" fill style={fillStyle(img)} sizes={zoomSizes("(max-width: 1024px) 50vw, 22vw", img)} />
+                <Image src={img.src} alt="" fill className={fade} onLoad={onLoad} style={fillStyle(img)} sizes={zoomSizes("(max-width: 1024px) 50vw, 22vw", img)} />
               </div>
             </Reveal>
           ))}
@@ -226,7 +233,7 @@ export default function ProductDetail({
             </Reveal>
             <Reveal variant="up" delay={0.3} className={`mt-4 ${flow("lg:mt-[1.953cqw]")} ${abs}`} style={at(L?.extraImg)}>
               <div className="relative w-full max-w-[394px] lg:max-w-none lg:w-[30.781cqw] overflow-hidden" style={{ aspectRatio: `${extra.w} / ${extra.h}` }}>
-                <Image src={extra.src} alt={`${name} — ${extra.label}`} fill style={fillStyle(extra)} sizes={zoomSizes("(max-width: 1024px) 100vw, 31vw", extra)} />
+                <Image src={extra.src} alt={`${name} — ${extra.label}`} fill className={fade} onLoad={onLoad} style={fillStyle(extra)} sizes={zoomSizes("(max-width: 1024px) 100vw, 31vw", extra)} />
               </div>
             </Reveal>
           </>

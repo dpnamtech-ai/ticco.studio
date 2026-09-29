@@ -70,7 +70,7 @@ export default function ProductCard({ id, name, priceFrom, image, index = 0, sol
                 src={image}
                 alt={name}
                 fill
-               
+                className={`transition-opacity duration-700 ${loaded ? "opacity-100" : "opacity-0"}`}
                 onLoad={() => setLoaded(true)}
                 style={fillStyle(crop)}
                 sizes={zoomSizes(compact ? "(max-width: 768px) 50vw, 25vw" : "(max-width: 1024px) 50vw, 25vw", crop?.m, compact ? 1.1 : 1.05)}

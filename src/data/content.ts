@@ -14,11 +14,10 @@ export const brand = {
 
 export const navLinks = [
   { label: "Về Tíc Cơ", href: "/ve-tic-co" },
-  { label: "Sản phẩm", href: "/san-pham", dropdown: true },
+  { label: "Sản phẩm", href: "/san-pham" },
   {
     label: "Khám phá",
     href: "/kham-pha",
-    dropdown: true,
     children: [
       { label: "Dự án riêng", href: "/kham-pha#du-an-rieng" },
       { label: "Dự án chung tay hợp tác", href: "/kham-pha#du-an-hop-tac" },
