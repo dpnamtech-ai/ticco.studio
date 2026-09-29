@@ -26,7 +26,7 @@ Test plan: `qa/MASTER-TEST-PLAN.md` · Bug log: `qa/BUGS.md` · Mẫu footer/ch�
 | # | Việc |
 |---|---|
 | C1 | **Hiệu ứng mobile**: chạm màn hình → vài con Đần rơi xuống (thay con trỏ Đần trên PC). Nhẹ, không chặn thao tác, tắt khi `prefers-reduced-motion` |
-| C2 | **SEO + GEO (làm ĐẦU TIÊN ngày mai, user giục)**: từ khoá/title/description từng trang, JSON-LD (Product, Organization, BreadcrumbList), rà `robots.txt`, **`llms.txt`**, sitemap đủ trang, canonical theo tên miền thật; hướng dẫn **Google Search Console + Bing Webmaster** (verify + submit sitemap — cần tên miền thật); report kiểm tra kiểu Geoptie (điểm SEO/GEO từng trang) |
+| C2 | ĐÃ LÀM 30/09 (736ef25): prod 64 → 99/100 (`scripts/seo-audit.mjs`). Còn: khi có domain làm theo `docs/SEO-GSC-BING.md` (đổi `NEXT_PUBLIC_SITE_URL`, verify GSC + Bing, submit sitemap). Mô tả gốc: **SEO + GEO**: từ khoá/title/description từng trang, JSON-LD (Product, Organization, BreadcrumbList), rà `robots.txt`, **`llms.txt`**, sitemap đủ trang, canonical theo tên miền thật; hướng dẫn **Google Search Console + Bing Webmaster** (verify + submit sitemap — cần tên miền thật); report kiểm tra kiểu Geoptie (điểm SEO/GEO từng trang) |
 
 ## D. Bộ test cần cải thiện
 1. **So hình với Figma tự động** (lỗ hổng lớn nhất — đã lọt BUG-017/018): cần render mới 59 frame DEMO (ảnh trong `design/figma-assets` là bản 18/09, chỉ kham-pha + mascot còn khớp) → script chụp trang 1280 + so từng vùng (diff pixel) → báo vùng lệch + ảnh cạnh nhau. Hỏi user cách lấy render (user không muốn dùng Figma REST/MCP).
