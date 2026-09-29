@@ -112,7 +112,9 @@ export default function CheckoutClient() {
   }
 
   // ---- Step 2: pay by bank transfer (static shop QR) ----
-  if (placed) {
+  // Placing an order empties the cart, so a non-empty cart means the customer started a NEW order after
+  // this one: show the form again instead of trapping them on the old payment screen.
+  if (placed && items.length === 0) {
     const configured = BANK.id && BANK.account;
     return (
       <section className="mx-auto max-w-2xl px-6 py-12">
@@ -132,7 +134,7 @@ export default function CheckoutClient() {
               width={240}
               height={240}
               // Until the shop's QR file is uploaded, show a note instead of a broken image.
-              onError={(e) => e.currentTarget.replaceWith(Object.assign(document.createElement("p"), { className: "p-6 text-sm text-[var(--color-ink)]/60", textContent: "Chuyển khoản theo thông tin bên cạnh, Tíc Cơ sẽ liên hệ xác nhận." }))}
+              onError={(e) => e.currentTarget.replaceWith(Object.assign(document.createElement("p"), { className: "p-6 text-sm text-[var(--color-ink)]/60", textContent: "Chuyển khoản theo thông tin tài khoản trong trang này, Tíc Cơ sẽ liên hệ xác nhận." }))}
             />
           </div>
           <div>

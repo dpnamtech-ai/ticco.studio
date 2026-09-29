@@ -1,7 +1,9 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
-import { useCart } from "@/context/CartContext";
+import { X } from "lucide-react";
+import { useCart, variantNote } from "@/context/CartContext";
 import Reveal from "@/components/Reveal";
 
 export default function GioHangClient() {
@@ -30,39 +32,48 @@ export default function GioHangClient() {
 
       <div className="divide-y divide-[var(--color-ink)]/10">
         {items.map((item) => (
-          <div key={`${item.id}-${item.variant}`} className="flex items-center gap-4 py-5">
-            <div className="w-20 h-20 bg-[#D9D9D9] shrink-0" />
-            <div className="flex-1">
-              <p className="font-semibold text-[var(--color-ink)]">{item.name}</p>
-              <p className="text-sm text-[var(--color-ink)]/50">{item.variant}</p>
+          // Photo left; name + remove on top, quantity + line total underneath — reads the same on a phone and a laptop.
+          <div key={`${item.id}-${item.variant}`} className="flex gap-4 py-5">
+            <Link href={`/san-pham/${item.id}`} className="relative w-20 h-24 sm:w-24 sm:h-28 shrink-0 overflow-hidden bg-[#D9D9D9]">
+              {item.image && <Image src={item.image} alt={item.name} fill sizes="96px" className="object-cover" />}
+            </Link>
+            <div className="flex min-w-0 flex-1 flex-col">
+              <div className="flex items-start justify-between gap-3">
+                <div className="min-w-0">
+                  <Link href={`/san-pham/${item.id}`} className="font-semibold leading-snug text-[var(--color-ink)] line-clamp-2 hover:underline">
+                    {item.name}
+                  </Link>
+                  {variantNote(item) && <p className="mt-0.5 text-sm text-[var(--color-ink)]/55 truncate">{variantNote(item)}</p>}
+                </div>
+                <button
+                  onClick={() => removeItem(item.id, item.variant)}
+                  aria-label="Xoá"
+                  className="-mr-1 -mt-1 shrink-0 p-1 text-[var(--color-ink)]/40 hover:text-[var(--color-orange)]"
+                >
+                  <X size={18} />
+                </button>
+              </div>
+              <div className="mt-auto flex items-center justify-between gap-3 pt-3">
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={() => updateQty(item.id, item.variant, item.qty - 1)}
+                    className="w-8 h-8 rounded-full border border-[var(--color-ink)]/20 hover:bg-[var(--color-ink)]/5"
+                    aria-label="Giảm số lượng"
+                  >
+                    −
+                  </button>
+                  <span className="w-6 text-center">{item.qty}</span>
+                  <button
+                    onClick={() => updateQty(item.id, item.variant, item.qty + 1)}
+                    className="w-8 h-8 rounded-full border border-[var(--color-ink)]/20 hover:bg-[var(--color-ink)]/5"
+                    aria-label="Tăng số lượng"
+                  >
+                    +
+                  </button>
+                </div>
+                <p className="whitespace-nowrap font-semibold text-[var(--color-ink)]">{(item.price * item.qty).toLocaleString("vi-VN")} VNĐ</p>
+              </div>
             </div>
-            <div className="flex items-center gap-2">
-              <button
-                onClick={() => updateQty(item.id, item.variant, item.qty - 1)}
-                className="w-8 h-8 rounded-full border border-[var(--color-ink)]/20 hover:bg-[var(--color-ink)]/5"
-                aria-label="Giảm số lượng"
-              >
-                −
-              </button>
-              <span className="w-6 text-center">{item.qty}</span>
-              <button
-                onClick={() => updateQty(item.id, item.variant, item.qty + 1)}
-                className="w-8 h-8 rounded-full border border-[var(--color-ink)]/20 hover:bg-[var(--color-ink)]/5"
-                aria-label="Tăng số lượng"
-              >
-                +
-              </button>
-            </div>
-            <p className="w-28 text-right font-semibold text-[var(--color-ink)]">
-              {(item.price * item.qty).toLocaleString("vi-VN")} VNĐ
-            </p>
-            <button
-              onClick={() => removeItem(item.id, item.variant)}
-              aria-label="Xoá"
-              className="text-[var(--color-ink)]/40 hover:text-[var(--color-orange)] text-sm"
-            >
-              Xoá
-            </button>
           </div>
         ))}
       </div>

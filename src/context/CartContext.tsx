@@ -8,6 +8,15 @@ export interface CartItem {
   variant: string;
   price: number;
   qty: number;
+  /** Photo of the picked option (older carts saved before this field have none -> grey box). */
+  image?: string;
+}
+
+// The option line under the name, or nothing when it only repeats the name
+// ("Móc khoá 03: Đần Vắt Cực Khô…" / "03 - Đần vắt cực khô…") or is the placeholder "Mặc định".
+export function variantNote(i: Pick<CartItem, "name" | "variant">) {
+  const v = i.variant.replace(/^\d+\s*-\s*/, "").trim().toLowerCase();
+  return !v || v === "mặc định" || i.name.toLowerCase().includes(v) ? "" : i.variant;
 }
 
 interface CartContextValue {

@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Search, ShoppingCart, Menu, X } from "lucide-react";
 import { navLinks, brand } from "@/data/content";
@@ -46,6 +46,10 @@ export default function Navbar() {
   const pathname = usePathname();
   // A section is active on its own page and any page below it (e.g. /kham-pha/nguoi-viet-van-dong).
   const isActive = (href: string) => pathname === href || pathname.startsWith(`${href}/`);
+  // Any navigation (menu link, the always-visible search icon, logo, back button) closes the full-screen mobile
+  // menu; otherwise it stays on top of the new page and the tap looks like it did nothing.
+  // eslint-disable-next-line react-hooks/set-state-in-effect
+  useEffect(() => setMenuOpen(false), [pathname]);
 
   return (
     <>

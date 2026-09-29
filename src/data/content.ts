@@ -1,3 +1,4 @@
+import { SHOP_CATEGORIES } from "@/lib/shop";
 export const brand = {
   name: "Tíc Cơ",
   shortName: "tíc cơ",
@@ -14,7 +15,11 @@ export const brand = {
 
 export const navLinks = [
   { label: "Về Tíc Cơ", href: "/ve-tic-co" },
-  { label: "Sản phẩm", href: "/san-pham" },
+  {
+    label: "Sản phẩm",
+    href: "/san-pham",
+    children: SHOP_CATEGORIES.map((c) => ({ label: c.label, href: c.slug === "tat-ca" ? "/san-pham" : `/san-pham?danh-muc=${c.slug}` })),
+  },
   {
     label: "Khám phá",
     href: "/kham-pha",

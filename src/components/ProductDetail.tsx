@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type CSSProperties } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
@@ -72,10 +72,30 @@ export default function ProductDetail({
   const own = variantLinks && Object.keys(variantLinks).find((label) => variantLinks[label] === id);
   const [selected, setSelected] = useState(own ?? variants[0] ?? "Mặc định");
   const [added, setAdded] = useState(false);
+  const mainRef = useRef<HTMLDivElement>(null);
+
+  // ?chon=<option> opens the product on that option (shareable links to "Bandana - Tím").
+  useEffect(() => {
+    const v = new URLSearchParams(window.location.search).get("chon");
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    if (v && variants.includes(v)) setSelected(v);
+  }, [variants]);
+
+  const pick = (v: string) => {
+    setSelected(v);
+    const url = new URL(window.location.href);
+    url.searchParams.set("chon", v);
+    window.history.replaceState(null, "", url);
+    // On phones the photo sits above the option buttons: bring it into view so the switch is visible.
+    if (variantImages && variantImages[v] !== undefined) {
+      const r = mainRef.current?.getBoundingClientRect();
+      if (r && r.bottom < window.innerHeight * 0.35) mainRef.current!.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
   const { addItem } = useCart();
 
   const handleAdd = () => {
-    addItem({ id, name, variant: selected, price: priceFor({ id, priceFrom }, selected) });
+    addItem({ id, name, variant: selected, price: priceFor({ id, priceFrom }, selected), image: main?.src });
     setAdded(true);
     setTimeout(() => setAdded(false), 1500);
   };
@@ -99,7 +119,7 @@ export default function ProductDetail({
       style={L ? ({ "--wh": cq(layoutBottom(L) - 51) } as Vars) : undefined}
     >
       <Reveal variant="curtain" duration={1.3} className={`order-1 ${L ? abs : "lg:order-none lg:col-start-1 lg:row-start-1"}`} style={at(L?.gallery[0])}>
-        <div className="relative aspect-[550/689] bg-[#d9d9d9] overflow-hidden" style={L && box(L.gallery[0])}>
+        <div ref={mainRef} className="relative aspect-[550/689] bg-[#d9d9d9] overflow-hidden scroll-mt-20" style={L && box(L.gallery[0])}>
           {main && <Image key={main.src} src={main.src} alt={selected === variants[0] ? name : `${name} - ${selected}`} fill priority className={fade} onLoad={onLoad} sizes={zoomSizes("(max-width: 1024px) 100vw, 43vw", main)} style={fillStyle(main)} />}
         </div>
       </Reveal>
@@ -183,7 +203,7 @@ export default function ProductDetail({
                     {target && target !== id ? (
                       <Link href={`/san-pham/${target}`} className={option}><span className={label}>{v}</span></Link>
                     ) : (
-                      <button type="button" onClick={() => setSelected(v)} aria-pressed={selected === v} className={`${option} ${selected === v ? picked : ""}`}>
+                      <button type="button" onClick={() => pick(v)} aria-pressed={selected === v} className={`${option} ${selected === v ? picked : ""}`}>
                         <span className={label}>{v}</span>
                       </button>
                     )}

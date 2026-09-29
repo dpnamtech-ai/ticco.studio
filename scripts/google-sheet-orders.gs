@@ -23,6 +23,15 @@ const COLUMNS = [
 ];
 const MONEY = '#,##0" ₫"';
 
+// Chạy tay trong trình soạn Apps Script (chọn hàm testOrder → Chạy) để xem thử 1 đơn mẫu.
+function testOrder() {
+  doPost({ postData: { contents: JSON.stringify({
+    secret: SECRET, code: "TCTEST001", subtotal: 150000, shipping: 30000, total: 180000,
+    customer: { name: "Nguyễn Văn A", phone: "0912345678", email: "a@example.com", province: "Hà Nội", district: "Ba Đình", ward: "Điện Biên", address: "12 Phố Mẫu", note: "Giao giờ hành chính" },
+    items: [{ name: "BST Postcard Triết Lý Sống Đần", variant: "Lao động", qty: 2, price: 30000 }, { name: "Set sticker 07: Đần Nói", variant: "", qty: 1, price: 90000 }],
+  }) } });
+}
+
 function doPost(e) {
   const o = JSON.parse(e.postData.contents);
   if (o.secret !== SECRET) return json({ ok: false, error: "forbidden" });
@@ -81,12 +90,3 @@ function sheet_() {
 
 const fmt_ = (n) => `${Number(n).toLocaleString("vi-VN")}đ`;
 const json = (o) => ContentService.createTextOutput(JSON.stringify(o)).setMimeType(ContentService.MimeType.JSON);
-
-// Chạy tay trong trình soạn Apps Script (chọn hàm testOrder → Chạy) để xem thử 1 đơn mẫu.
-function testOrder() {
-  doPost({ postData: { contents: JSON.stringify({
-    secret: SECRET, code: "TCTEST001", subtotal: 150000, shipping: 30000, total: 180000,
-    customer: { name: "Nguyễn Văn A", phone: "0912345678", email: "a@example.com", province: "Hà Nội", district: "Ba Đình", ward: "Điện Biên", address: "12 Phố Mẫu", note: "Giao giờ hành chính" },
-    items: [{ name: "BST Postcard Triết Lý Sống Đần", variant: "Lao động", qty: 2, price: 30000 }, { name: "Set sticker 07: Đần Nói", variant: "", qty: 1, price: 90000 }],
-  }) } });
-}

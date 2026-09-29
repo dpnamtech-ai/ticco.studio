@@ -1,9 +1,10 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { X } from "lucide-react";
-import { useCart } from "@/context/CartContext";
+import { useCart, variantNote } from "@/context/CartContext";
 
 export default function CartDrawer() {
   const { items, updateQty, removeItem, subtotal, isDrawerOpen, closeDrawer } = useCart();
@@ -60,10 +61,12 @@ export default function CartDrawer() {
                         exit={{ opacity: 0, height: 0 }}
                         className="flex items-center gap-3 py-4"
                       >
-                        <div className="w-16 h-16 bg-[#D9D9D9] shrink-0" />
+                        <div className="relative w-16 h-20 bg-[#D9D9D9] shrink-0 overflow-hidden">
+                          {item.image && <Image src={item.image} alt="" fill sizes="64px" className="object-cover" />}
+                        </div>
                         <div className="flex-1 min-w-0">
-                          <p className="font-semibold text-sm text-[var(--color-ink)] truncate">{item.name}</p>
-                          <p className="text-xs text-[var(--color-ink)]/50">{item.variant}</p>
+                          <p className="font-semibold text-sm leading-snug text-[var(--color-ink)] line-clamp-2">{item.name}</p>
+                          {variantNote(item) && <p className="text-xs text-[var(--color-ink)]/50 truncate">{variantNote(item)}</p>}
                           <div className="flex items-center gap-2 mt-2">
                             <button
                               onClick={() => updateQty(item.id, item.variant, item.qty - 1)}

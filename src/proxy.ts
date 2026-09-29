@@ -6,6 +6,11 @@ import { isAdmin } from "@/lib/supabase/admin-check";
 // session. Also refreshes the auth cookie on each request (required by
 // @supabase/ssr in the App Router).
 export async function proxy(request: NextRequest) {
+  // No Supabase configured (e.g. production before the DB is set up) = no admin at all. Fail closed with a 404
+  // instead of crashing (500) inside createServerClient.
+  if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
+    return new NextResponse("Not found", { status: 404 });
+  }
   let response = NextResponse.next({ request });
 
   const supabase = createServerClient(

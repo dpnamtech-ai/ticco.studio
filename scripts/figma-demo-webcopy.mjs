@@ -17,10 +17,15 @@ for (const f of readdirSync(".figma-cache/demo").filter((f) => f !== "_index.jso
 const dir = process.env.OUT || "public/images/figma";
 mkdirSync(dir, { recursive: true });
 let n = 0;
+const only = process.env.ONLY; // regenerate a single imageRef
 for (const f of readdirSync("design/demo-images")) {
   const ref = f.split(".")[0], out = `${dir}/${ref}.webp`;
-  const img = sharp(`design/demo-images/${f}`, { limitInputPixels: false });
-  const { width } = await img.metadata();
+  if (only && ref !== only) continue;
+  // .rotate() applies the EXIF orientation (phone photos stored sideways + a "rotate 90°" flag). Figma honours
+  // that flag; re-encoding without it strips the flag and the photo shows up lying on its side.
+  const img = sharp(`design/demo-images/${f}`, { limitInputPixels: false }).rotate();
+  const meta = await img.metadata();
+  const width = meta.orientation >= 5 ? meta.height : meta.width;
   await img.resize({ width: Math.min(width, need[ref] || 2560), withoutEnlargement: true }).webp({ quality: 95, alphaQuality: 100, smartSubsample: true }).toFile(out);
   n++;
 }

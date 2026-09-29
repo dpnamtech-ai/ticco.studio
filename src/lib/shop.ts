@@ -97,7 +97,11 @@ const VARIANT_PRICES: Record<string, Record<string, number>> = {
 /** Price charged for one unit of `variant` — used by the cart (display) and /api/orders (the real charge). */
 export const priceFor = (p: { id: string; priceFrom: number }, variant: string) => VARIANT_PRICES[p.id]?.[variant] ?? p.priceFrom;
 
-export const variantLinksFor = (id: string) => VARIANT_LINKS.find((g) => Object.values(g).includes(id));
+// A combo whose options open the standalone products but which isn't one of the options itself.
+const BUNDLE_LINKS: Record<string, Record<string, string>> = {
+  "bst-dau-doi-mu-chan-vao-doi": { 'Mũ tai bèo "Ha Ha"': "mu-tai-beo-ha-ha", 'Mũ lưỡi trai "Chả Sao"': "mu-luoi-trai-cha-sao" },
+};
+export const variantLinksFor = (id: string) => VARIANT_LINKS.find((g) => Object.values(g).includes(id)) ?? BUNDLE_LINKS[id];
 
 export const shopCategory = (slug: string | undefined) => SHOP_CATEGORIES.find((c) => c.slug === slug) ?? SHOP_CATEGORIES[0];
 export const slugForCategory = (category: string) => SHOP_CATEGORIES.find((c) => c.category === category)?.slug ?? "tat-ca";
