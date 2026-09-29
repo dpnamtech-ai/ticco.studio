@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { productCategories } from "@/data/content";
 import DescriptionEditor from "./DescriptionEditor";
+import { THUMB_SLOTS, formatVariantLines, type VariantOptions } from "@/lib/variants";
 
 type Product = {
   id: string;
@@ -20,6 +21,7 @@ type Product = {
   sold_out: boolean;
   stock: number;
   bundle_items: { id: string; qty: number }[] | null;
+  variant_options: VariantOptions | null;
 };
 
 // One image field: file upload (wins) + a text fallback for a manual URL/path, with a preview
@@ -130,20 +132,27 @@ export default function ProductForm({
         <p className="text-xs text-black/40 mt-1">Chọn ảnh để tải lên (ưu tiên) hoặc dán URL nếu ảnh đã có sẵn ở nơi khác.</p>
       </div>
       <div className="grid grid-cols-2 gap-4">
-        <ImageField field="thumb_0" label="Ảnh phụ 1" value={product?.thumbnails?.[0]} />
-        <ImageField field="thumb_1" label="Ảnh phụ 2" value={product?.thumbnails?.[1]} />
+        {Array.from({ length: THUMB_SLOTS }, (_, i) => (
+          <ImageField key={i} field={`thumb_${i}`} label={`Ảnh phụ ${i + 1} (= ảnh số ${i + 2})`} value={product?.thumbnails?.[i]} />
+        ))}
       </div>
       <div>
         <label className="block text-sm font-medium mb-1">Mô tả</label>
         <DescriptionEditor name="description" defaultValue={product?.description} />
       </div>
       <div>
-        <label className="block text-sm font-medium mb-1">Biến thể (mỗi dòng 1 loại, vd Size M / Size L)</label>
+        <label className="block text-sm font-medium mb-1">Biến thể / lựa chọn — mỗi dòng 1 lựa chọn</label>
+        <p className="mb-2 text-xs leading-relaxed text-black/60">
+          Dạng <code>tên | giá | ảnh số | link</code>, chỉ cần tên, các cột sau tuỳ chọn. Ảnh số: 1 = ảnh chính, 2 = ảnh phụ 1…
+          <br />
+          <code>Size M</code> · <code>Lao động | 30000 | 5</code> (giá riêng + đổi sang ảnh 5) · <code>Tím | | 2</code> (chỉ đổi ảnh) ·{" "}
+          <code>Sổ nhật ký | | | so-nhat-ky</code> (bấm là sang trang sản phẩm đó)
+        </p>
         <textarea
           name="variants"
-          rows={3}
-          defaultValue={product?.variants?.join("\n")}
-          className="w-full border border-black/15 rounded-lg px-3 py-2"
+          rows={5}
+          defaultValue={formatVariantLines(product?.variants ?? [], product?.variant_options)}
+          className="w-full border border-black/15 rounded-lg px-3 py-2 font-mono text-sm"
         />
       </div>
       <div>

@@ -1,14 +1,13 @@
-# Regression — 2026-09-29 20:11 UTC
+# Regression — 2026-09-29 20:04 UTC
 
-Target: http://localhost:3100 (local, full incl. orders on a mock Sheet)
-Result: **80/80 pass**
+Target: https://ticcostudio.vercel.app (production, read-only)
+Result: **70/70 pass**
 
 | | ID | Case | Chi tiết |
 |---|---|---|---|
 | ✅ | SMK-01 | Mọi URL trong sitemap + trang phụ trả 200 |  |
 | ✅ | SMK-02 | Sản phẩm không tồn tại trả 404 |  |
 | ✅ | SEC-10 | Admin chưa đăng nhập: chuyển về /admin/login (hoặc 404 khi chưa bật Supabase), không bao giờ 200/500 (BUG-010) |  |
-| ✅ | ADM-30 | Gọi thẳng 6 server action admin (tạo/sửa/xoá SP, đổi đơn, upload, đăng xuất) khi chưa đăng nhập -> bị chặn |  |
 | ✅ | SEC-11 | Security headers (chống nhúng iframe, sniff, HSTS) |  |
 | ✅ | IMG-01 | Ảnh load đủ + không tràn ngang (1280) / |  |
 | ✅ | IMG-01 | Ảnh load đủ + không tràn ngang (1280) /san-pham |  |
@@ -75,13 +74,4 @@ Result: **80/80 pass**
 | ✅ | VAL-10 | Email sai -> 422 |  |
 | ✅ | SEC-04 | GET /api/orders không được phép (405) |  |
 | ✅ | VAL-11 | Form báo lỗi SĐT sai ngay dưới ô nhập |  |
-| ✅ | ORD-01 | Đặt hàng: màn tổng quan + mã đơn + tổng đúng; Sheet nhận giá đúng dù giỏ bị sửa giá |  |
-| ✅ | ORD-02 | Tải lại trang sau khi đặt vẫn thấy thông tin chuyển khoản |  |
-| ✅ | ORD-03 | Đặt xong, mua tiếp, vào checkout -> form đơn MỚI (không kẹt ở đơn cũ) (BUG-009) |  |
-| ✅ | ORD-04 | Miễn phí ship khi đơn >= 500k |  |
-| ✅ | SEC-05 | Giá giả gửi từ client bị bỏ qua (server tự tính) |  |
-| ✅ | SEC-06 | Chèn công thức vào Sheet bị vô hiệu (= + - @ -> chữ thường) |  |
-| ✅ | SEC-07 | XSS trong tên/ghi chú: giao diện không chạy script |  |
-| ✅ | CANCEL-03 | Sheet lỗi -> khách thấy báo lỗi, giỏ hàng GIỮ NGUYÊN để thử lại |  |
-| ✅ | SEC-09 | Chống spam: đơn thứ 7 trong 1 phút từ 1 IP -> 429 |  |
 | ✅ | CON-01 | Không có lỗi JS trong console trên các trang đã mở |  |

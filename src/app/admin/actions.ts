@@ -4,6 +4,8 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { supabaseAdmin, supabaseServer } from "@/lib/supabase/server";
 import { isAdmin } from "@/lib/supabase/admin-check";
+import { MAX_PRICE, THUMB_SLOTS, parseVariantLines } from "@/lib/variants";
+import { sanitizeDescription } from "@/lib/sanitize";
 
 // Server Actions are public HTTP endpoints — Next can invoke them from ANY
 // route, so the /admin middleware matcher does not protect them. Every action
@@ -17,10 +19,6 @@ async function requireAdmin() {
 }
 
 function parseProductForm(formData: FormData) {
-  const variants = String(formData.get("variants") || "")
-    .split("\n")
-    .map((s) => s.trim())
-    .filter(Boolean);
   const specs = String(formData.get("specs") || "")
     .split("\n")
     .map((s) => s.trim())
@@ -42,8 +40,7 @@ function parseProductForm(formData: FormData) {
     price_from: Number(formData.get("price_from") || 0),
     unit: String(formData.get("unit") || "sản phẩm").trim(),
     image: String(formData.get("image") || "").trim() || null,
-    description: String(formData.get("description") || "").trim(),
-    variants,
+    description: sanitizeDescription(String(formData.get("description") || "").trim()),
     specs,
     note: String(formData.get("note") || "").trim() || null,
     sold_out: formData.get("sold_out") === "on",
@@ -95,17 +92,32 @@ export async function uploadEditorImage(formData: FormData): Promise<string> {
   return uploadImage(file);
 }
 
-export async function createProduct(formData: FormData) {
-  await requireAdmin();
+// Everything that needs the uploaded photos or the other products: images, the "Biến thể" lines (prices /
+// photo numbers / links are checked against them) and field sanity checks. Throws a readable Vietnamese error.
+async function completeProduct(formData: FormData, selfId: string) {
   const product = parseProductForm(formData);
+  if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(product.id) || product.id.length > 80) throw new Error("ID chỉ gồm chữ thường không dấu, số và gạch ngang (vd so-can-ban)");
+  if (!product.name || product.name.length > 120) throw new Error("Tên sản phẩm phải có, tối đa 120 ký tự");
+  if (!Number.isInteger(product.price_from) || product.price_from < 0 || product.price_from > MAX_PRICE) throw new Error("Giá không hợp lệ");
+  if (!Number.isInteger(product.stock) || product.stock > 1_000_000) throw new Error("Tồn kho không hợp lệ");
   product.image = await resolveImageField(formData, "image", product.image);
   const thumbnails = (
-    await Promise.all([
-      resolveImageField(formData, "thumb_0", null),
-      resolveImageField(formData, "thumb_1", null),
-    ])
+    await Promise.all(Array.from({ length: THUMB_SLOTS }, (_, i) => resolveImageField(formData, `thumb_${i}`, null)))
   ).filter((t): t is string => Boolean(t));
-  const { error } = await supabaseAdmin().from("products").insert({ ...product, thumbnails });
+  const { data: rows } = await supabaseAdmin().from("products").select("id");
+  const parsed = parseVariantLines(String(formData.get("variants") || ""), {
+    imageCount: (product.image ? 1 : 0) + thumbnails.length,
+    productIds: new Set((rows ?? []).map((r) => r.id as string)),
+    selfId,
+  });
+  if (!parsed.ok) throw new Error(parsed.error);
+  return { ...product, thumbnails, variants: parsed.variants, variant_options: parsed.options };
+}
+
+export async function createProduct(formData: FormData) {
+  await requireAdmin();
+  const product = await completeProduct(formData, String(formData.get("id") || "").trim());
+  const { error } = await supabaseAdmin().from("products").insert(product);
   if (error) throw new Error(error.message);
   revalidatePath("/admin");
   revalidatePath("/san-pham");
@@ -115,15 +127,8 @@ export async function createProduct(formData: FormData) {
 
 export async function updateProduct(originalId: string, formData: FormData) {
   await requireAdmin();
-  const product = parseProductForm(formData);
-  product.image = await resolveImageField(formData, "image", product.image);
-  const thumbnails = (
-    await Promise.all([
-      resolveImageField(formData, "thumb_0", null),
-      resolveImageField(formData, "thumb_1", null),
-    ])
-  ).filter((t): t is string => Boolean(t));
-  const { error } = await supabaseAdmin().from("products").update({ ...product, thumbnails }).eq("id", originalId);
+  const product = await completeProduct(formData, originalId);
+  const { error } = await supabaseAdmin().from("products").update(product).eq("id", originalId);
   if (error) throw new Error(error.message);
   revalidatePath("/admin");
   revalidatePath("/san-pham");

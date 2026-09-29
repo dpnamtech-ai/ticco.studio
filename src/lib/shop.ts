@@ -95,7 +95,21 @@ const VARIANT_PRICES: Record<string, Record<string, number>> = {
   },
 };
 /** Price charged for one unit of `variant` — used by the cart (display) and /api/orders (the real charge). */
-export const priceFor = (p: { id: string; priceFrom: number }, variant: string) => VARIANT_PRICES[p.id]?.[variant] ?? p.priceFrom;
+// Admin-set option prices (products.variant_options) win; the hardcoded table covers the static catalog.
+export const priceFor = (p: { id: string; priceFrom: number; variantOptions?: Record<string, { price?: number }> }, variant: string) =>
+  p.variantOptions?.[variant]?.price ?? VARIANT_PRICES[p.id]?.[variant] ?? p.priceFrom;
+
+type Opts = Record<string, { image?: number; link?: string }> | undefined;
+/** Option -> photo index (0-based gallery) — from /admin when set, else the hardcoded table. */
+export function variantImagesFor(id: string, opts: Opts) {
+  const fromAdmin = Object.entries(opts ?? {}).filter(([, o]) => o.image).map(([k, o]) => [k, o.image! - 1] as const);
+  return fromAdmin.length ? Object.fromEntries(fromAdmin) : VARIANT_IMAGES[id];
+}
+/** Option -> sibling product id — from /admin when set, else the hardcoded groups. */
+export function variantLinksForProduct(id: string, opts: Opts) {
+  const fromAdmin = Object.entries(opts ?? {}).filter(([, o]) => o.link).map(([k, o]) => [k, o.link!] as const);
+  return fromAdmin.length ? Object.fromEntries(fromAdmin) : variantLinksFor(id);
+}
 
 // A combo whose options open the standalone products but which isn't one of the options itself.
 const BUNDLE_LINKS: Record<string, Record<string, string>> = {

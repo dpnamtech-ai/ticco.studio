@@ -15,6 +15,8 @@ export type Product = {
   note?: string;
   soldOut?: boolean;
   stock?: number;
+  /** Per-option price / photo / link from /admin (src/lib/variants.ts). */
+  variantOptions?: Record<string, { price?: number; image?: number; link?: string }>;
   /** Set when this product is a combo/bundle: ids of the standalone products it's made of. */
   bundleItems?: { id: string; qty: number }[];
 };
@@ -54,6 +56,7 @@ export async function getProducts(): Promise<Product[]> {
       soldOut: p.sold_out,
       stock: p.stock ?? 0,
       bundleItems: p.bundle_items ?? undefined,
+      variantOptions: p.variant_options ?? undefined,
     }));
   } catch {
     return fromStatic();

@@ -27,6 +27,8 @@ interface ProductDetailProps {
   variantLinks?: Record<string, string>;
   /** Option label → gallery index to show as the main image when that option is picked (postcards, bandana). */
   variantImages?: Record<string, number>;
+  /** Admin per-option settings; only prices are read here (priceFor). */
+  variantOptions?: Record<string, { price?: number }>;
   specs: string[];
   note?: string;
   /** Main image first, then the small ones, each with its Figma crop. */
@@ -61,6 +63,7 @@ export default function ProductDetail({
   variants,
   variantLinks,
   variantImages,
+  variantOptions,
   specs,
   note,
   gallery,
@@ -95,7 +98,7 @@ export default function ProductDetail({
   const { addItem } = useCart();
 
   const handleAdd = () => {
-    addItem({ id, name, variant: selected, price: priceFor({ id, priceFrom }, selected), image: main?.src });
+    addItem({ id, name, variant: selected, price: priceFor({ id, priceFrom, variantOptions }, selected), image: main?.src });
     setAdded(true);
     setTimeout(() => setAdded(false), 1500);
   };

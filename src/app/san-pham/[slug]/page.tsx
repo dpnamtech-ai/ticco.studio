@@ -5,7 +5,7 @@ import { getProducts, getProduct } from "@/lib/products";
 import ProductDetail from "@/components/ProductDetail";
 import ProductCard from "@/components/ProductCard";
 import Reveal from "@/components/Reveal";
-import { suggestionsFor, variantLinksFor, VARIANT_IMAGES } from "@/lib/shop";
+import { suggestionsFor, variantImagesFor, variantLinksForProduct } from "@/lib/shop";
 import { figmaDisplay, layoutBottom } from "@/lib/shopFigma";
 
 const cq = (px: number) => `${Math.round((px / 12.8) * 1e4) / 1e4}cqw`;
@@ -96,8 +96,9 @@ export default async function ProductPage({
             `${product.name} là sản phẩm thuộc dòng ${product.category} của Tíc Cơ — thiết kế đơn giản, dùng được hàng ngày.`
           }
           variants={product.variants ?? []}
-          variantLinks={variantLinksFor(product.id)}
-          variantImages={VARIANT_IMAGES[product.id]}
+          variantLinks={variantLinksForProduct(product.id, product.variantOptions)}
+          variantImages={variantImagesFor(product.id, product.variantOptions)}
+          variantOptions={product.variantOptions}
           specs={product.specs ?? []}
           note={product.note}
           gallery={f.gallery}

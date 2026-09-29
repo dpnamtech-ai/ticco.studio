@@ -9,7 +9,7 @@
 // Writes qa/regression-last-run.md. Exit code 1 when anything fails. A failing case = a bug: log it in qa/BUGS.md.
 import { spawn, execSync } from "node:child_process";
 import { createServer } from "node:http";
-import { existsSync, readdirSync, writeFileSync } from "node:fs";
+import { existsSync, readFileSync, readdirSync, writeFileSync } from "node:fs";
 import puppeteer from "puppeteer-core";
 
 const PROD = process.argv[2];
@@ -147,6 +147,22 @@ await test("SEC-10", "Admin chưa đăng nhập: chuyển về /admin/login (ho�
     if (!toLogin && r.status !== 404) bad.push(`${p}=${r.status}`);
   }
   return expect(!bad.length, bad.join(", "));
+});
+await test("ADM-30", "Gọi thẳng 6 server action admin (tạo/sửa/xoá SP, đổi đơn, upload, đăng xuất) khi chưa đăng nhập -> bị chặn", async () => {
+  if (!LOCAL) return true; // action ids come from this machine's build manifest
+  const { node } = JSON.parse(readFileSync(".next/server/server-reference-manifest.json", "utf8"));
+  const bad = [];
+  for (const [id, a] of Object.entries(node)) {
+    for (const path of ["/admin", "/admin/orders", "/admin/products/new", "/"]) {
+      const r = await fetch(BASE + path, { method: "POST", redirect: "manual", headers: { "Next-Action": id, "Content-Type": "text/plain;charset=UTF-8", Accept: "text/x-component" }, body: JSON.stringify(["so-trong"]) });
+      const body = await r.text();
+      // /admin/*: the proxy answers (404 without Supabase, redirect to /admin/login with it) before any action runs.
+      // "/": the admin actions aren't loaded on that page, so Next answers an empty "{}" — never a redirect/revalidate.
+      const blocked = path === "/" ? r.status === 200 && body.trim() === "{}" && !r.headers.get("x-action-revalidated") : r.status === 404 || /\/admin\/login/.test(r.headers.get("location") ?? "");
+      if (!blocked) bad.push(`${a.exportedName}@${path}=${r.status}`);
+    }
+  }
+  return expect(Object.keys(node).length >= 6 && !bad.length, bad.join(", ") || "no actions in manifest");
 });
 await test("SEC-11", "Security headers (chống nhúng iframe, sniff, HSTS)", async () => {
   const h = (await fetch(BASE)).headers;

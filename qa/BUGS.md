@@ -28,6 +28,7 @@ Mức độ: **P0** mất tiền/mất đơn/lộ dữ liệu · **P1** chặn k
 | BUG-018 | 30/09 | P2 | Trang Mascot mobile: chú thích hero thành đoạn chữ thường (mất thiết kế); 3 dải tím trôi lơ lửng vì chữ bị ẩn | Cách sửa cũ ẩn chữ nhỏ và in lại dạng text thường | Hero: phóng to vùng giữa bản thiết kế (chú thích ~14px); phần giới thiệu: 3 hàng Đần + chữ + dải tím từ mép | MAS-02 | ✅ |
 | BUG-019 | 30/09 | P2 | Menu mobile dài, chữ to, nút "Giỏ hàng" to ở cuối trông vụng; thanh trên không có icon giỏ | Menu liệt kê hết mục con; giỏ chỉ vào được qua menu | Mục con thu gọn (mở sẵn mục đang xem), chữ nhỏ hơn, icon giỏ + số trên thanh | MOB-04, MOB-05 | ✅ |
 | BUG-020 | 30/09 | P1 | Checkout phải gõ tay tỉnh/quận/phường, dễ sai; còn ô Quận/Huyện dù VN đã bỏ cấp huyện từ 1/7/2025 | Ô nhập tự do | Ô chọn có tìm nhanh (gõ không dấu), 34 tỉnh + 3321 phường/xã (`public/data/vn-dia-gioi.json`), bỏ Quận/Huyện | CO-ADDR | ✅ |
+| BUG-021 | 30/09 | P1 | Admin: nhập giá `1.5e3` được nhận thành 15.000đ | `Number()` hiểu số mũ sau khi bỏ dấu chấm | Giá chỉ nhận chữ số (+ dấu phân cách nghìn) | ADM-12 | ✅ (bắt bởi test trước khi lên prod) |
 | QA-GAP-01 | 30/09 | — | 75/75 pass nhưng lọt BUG-017/018: bộ test chỉ kiểm chức năng, **không so hình với Figma** | Thiếu tầng kiểm tra hình ảnh | Thêm `scripts/visual-diff.mjs` (so ảnh chụp trang với render Figma, báo vùng lệch) + review ảnh chụp mobile mỗi lần deploy | VIS-* | Đang làm |
 
 ## Còn mở (cần cấu hình/nội dung, không phải lỗi code)
