@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { getProducts } from "@/lib/products";
+import { priceFor } from "@/lib/shop";
 import { supabaseAdmin } from "@/lib/supabase/server";
 import { makeOrderCode, shippingFor, validateOrder, type OrderInput } from "@/lib/checkout";
 
@@ -67,6 +68,10 @@ async function sendShopEmail(code: string, o: OrderInput, lines: PricedLine[], s
   }
 }
 
+// Customer text must never be read as a formula by Google Sheets ("=IMPORTXML(...)" could leak other rows):
+// a leading apostrophe makes the cell plain text and is not shown.
+const cell = (v: string) => (/^[=+\-@\t\r]/.test(v) ? `'${v}` : v);
+
 async function sendToSheet(code: string, o: OrderInput, lines: PricedLine[], subtotal: number, shipping: number, total: number) {
   const url = process.env.ORDER_SHEET_URL;
   if (!url) return false;
@@ -75,7 +80,15 @@ async function sendToSheet(code: string, o: OrderInput, lines: PricedLine[], sub
     const res = await fetch(url, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ secret: process.env.ORDER_SHEET_SECRET, code, customer: { ...o, items: undefined }, items: lines, subtotal, shipping, total }),
+      body: JSON.stringify({
+        secret: process.env.ORDER_SHEET_SECRET,
+        code,
+        customer: Object.fromEntries(Object.entries(o).filter(([k]) => k !== "items").map(([k, v]) => [k, cell(String(v))])),
+        items: lines.map((l) => ({ ...l, name: cell(l.name), variant: cell(l.variant) })),
+        subtotal,
+        shipping,
+        total,
+      }),
       signal: AbortSignal.timeout(15_000),
     });
     const out = (await res.json().catch(() => null)) as { ok?: boolean } | null;
@@ -139,7 +152,7 @@ export async function POST(req: Request) {
     if (!p.bundleItems?.length && (p.stock ?? 0) > 0 && it.qty > p.stock!) {
       return NextResponse.json({ error: `"${p.name}" chỉ còn ${p.stock} sản phẩm` }, { status: 422 });
     }
-    lines.push({ id: p.id, name: p.name, variant: it.variant, qty: it.qty, price: p.priceFrom });
+    lines.push({ id: p.id, name: p.name, variant: it.variant, qty: it.qty, price: priceFor(p, it.variant) });
   }
 
   const subtotal = lines.reduce((s, l) => s + l.price * l.qty, 0);

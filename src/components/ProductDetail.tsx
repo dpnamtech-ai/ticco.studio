@@ -10,6 +10,7 @@ import Reveal from "@/components/Reveal";
 import type { Crop } from "@/lib/shop";
 import { fillStyle, zoomSizes } from "@/lib/figmaCrop";
 import { layoutBottom, type Box, type FigmaLayout } from "@/lib/shopFigma";
+import { priceFor } from "@/lib/shop";
 
 interface ProductDetailProps {
   id: string;
@@ -74,7 +75,7 @@ export default function ProductDetail({
   const { addItem } = useCart();
 
   const handleAdd = () => {
-    addItem({ id, name, variant: selected, price: priceFrom });
+    addItem({ id, name, variant: selected, price: priceFor({ id, priceFrom }, selected) });
     setAdded(true);
     setTimeout(() => setAdded(false), 1500);
   };

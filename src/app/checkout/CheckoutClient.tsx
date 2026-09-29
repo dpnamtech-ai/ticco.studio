@@ -125,7 +125,15 @@ export default function CheckoutClient() {
           <div className="rounded-lg bg-white p-3 text-center shadow-sm">
             {/* Shop's own static QR (client's choice, no VietQR): the customer types the amount + note from the rows beside it. */}
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/images/qr-thanh-toan.png" alt="Mã QR chuyển khoản Tíc Cơ" className="mx-auto h-auto w-full" width={240} height={240} />
+            <img
+              src="/images/qr-thanh-toan.png"
+              alt="Mã QR chuyển khoản Tíc Cơ"
+              className="mx-auto h-auto w-full"
+              width={240}
+              height={240}
+              // Until the shop's QR file is uploaded, show a note instead of a broken image.
+              onError={(e) => e.currentTarget.replaceWith(Object.assign(document.createElement("p"), { className: "p-6 text-sm text-[var(--color-ink)]/60", textContent: "Chuyển khoản theo thông tin bên cạnh, Tíc Cơ sẽ liên hệ xác nhận." }))}
+            />
           </div>
           <div>
             {configured && (

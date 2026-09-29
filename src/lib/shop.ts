@@ -82,6 +82,21 @@ export const VARIANT_IMAGES: Record<string, Record<string, number>> = {
   "khan-bandana-van-su-tuy-minh": { "Xanh lá": 0, "Tím": 1 },
   "lot-coc-ra-khoi": { "Hoạ tiết sọc": 0, "Xanh rêu": 2 },
 };
+// Options priced differently from the product's base price (single postcard vs the 5-card set).
+// ponytail: hardcoded like VARIANT_IMAGES; move into the products table if /admin needs to edit it.
+const VARIANT_PRICES: Record<string, Record<string, number>> = {
+  "bst-postcard-triet-ly-song-dan": {
+    "BST 5 tấm": 120_000,
+    "Lối sống 3 không": 30_000,
+    "Cười vì điều nhỏ": 30_000,
+    "Hạnh phúc là tự thân": 30_000,
+    "Lao động": 30_000,
+    "Đời nhỏ tí": 30_000,
+  },
+};
+/** Price charged for one unit of `variant` — used by the cart (display) and /api/orders (the real charge). */
+export const priceFor = (p: { id: string; priceFrom: number }, variant: string) => VARIANT_PRICES[p.id]?.[variant] ?? p.priceFrom;
+
 export const variantLinksFor = (id: string) => VARIANT_LINKS.find((g) => Object.values(g).includes(id));
 
 export const shopCategory = (slug: string | undefined) => SHOP_CATEGORIES.find((c) => c.slug === slug) ?? SHOP_CATEGORIES[0];
