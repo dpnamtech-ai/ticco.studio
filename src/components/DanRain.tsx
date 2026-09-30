@@ -2,9 +2,10 @@
 
 import { useEffect, useRef } from "react";
 
-// Phones' answer to the desktop Đần cursor: every tap drops a few little Đần that tumble down and fade.
-// Plain DOM + Web Animations (no React state per sprite), pointer-events none so taps still hit the page,
-// capped at MAX sprites, finger taps only (pointerType "touch": no mouse/pen), off for prefers-reduced-motion.
+// Phones' answer to the desktop Đần cursor: a tap drops a few little Đần that tumble down and fade; holding the
+// finger keeps them pouring out (following the finger) until it lifts. Plain DOM + Web Animations (no React state per
+// sprite), pointer-events none so taps still hit the page, capped at MAX sprites, finger only (pointerType "touch":
+// no mouse/pen), off for prefers-reduced-motion.
 const ART = [
   "/images/mascot-dan/bio/dan-1.png",
   "/images/mascot-dan/bio/dan-2.png",
@@ -12,7 +13,8 @@ const ART = [
   "/images/figma/d589ad7c701656373d6884e2905ee9267b4d2665.webp",
 ].map((src) => `/_next/image?url=${encodeURIComponent(src)}&w=128&q=100`);
 const PER_TAP = 3;
-const MAX = 24;
+const HOLD_EVERY = 140; // ms between Đần while the finger stays down
+const MAX = 40;
 
 export default function DanRain() {
   const layer = useRef<HTMLDivElement>(null);
@@ -23,31 +25,52 @@ export default function DanRain() {
     // warm the image cache on touch devices so the first tap isn't blank
     if (matchMedia("(pointer: coarse)").matches) ART.forEach((src) => (new Image().src = src));
 
-    const drop = (e: PointerEvent) => {
-      if (e.pointerType !== "touch" || root.childElementCount >= MAX) return;
-      for (let i = 0; i < PER_TAP; i++) {
-        const img = document.createElement("img");
-        const size = 30 + Math.random() * 18;
-        img.src = ART[Math.floor(Math.random() * ART.length)];
-        img.alt = "";
-        img.style.cssText = `position:fixed;left:${e.clientX - size / 2}px;top:${e.clientY - size / 2}px;width:${size}px;height:auto;will-change:transform,opacity`;
-        root.appendChild(img);
-        const dx = (Math.random() - 0.5) * 140;
-        const spin = (Math.random() - 0.5) * 420;
-        img
-          .animate(
-            [
-              { transform: "translate(0,0) rotate(0deg) scale(0.4)", opacity: 1 },
-              { transform: `translate(${dx * 0.4}px,-${30 + Math.random() * 40}px) rotate(${spin * 0.3}deg) scale(1)`, opacity: 1, offset: 0.25 },
-              { transform: `translate(${dx}px,${220 + Math.random() * 160}px) rotate(${spin}deg) scale(0.9)`, opacity: 0 },
-            ],
-            { duration: 1000 + Math.random() * 400, easing: "cubic-bezier(.35,.1,.6,1)", delay: i * 40 },
-          )
-          .finished.finally(() => img.remove());
-      }
+    const spawn = (x: number, y: number, delay = 0) => {
+      if (root.childElementCount >= MAX) return;
+      const img = document.createElement("img");
+      const size = 30 + Math.random() * 18;
+      img.src = ART[Math.floor(Math.random() * ART.length)];
+      img.alt = "";
+      img.style.cssText = `position:fixed;left:${x - size / 2}px;top:${y - size / 2}px;width:${size}px;height:auto;will-change:transform,opacity`;
+      root.appendChild(img);
+      const dx = (Math.random() - 0.5) * 140;
+      const spin = (Math.random() - 0.5) * 420;
+      img
+        .animate(
+          [
+            { transform: "translate(0,0) rotate(0deg) scale(0.4)", opacity: 1 },
+            { transform: `translate(${dx * 0.4}px,-${30 + Math.random() * 40}px) rotate(${spin * 0.3}deg) scale(1)`, opacity: 1, offset: 0.25 },
+            { transform: `translate(${dx}px,${220 + Math.random() * 160}px) rotate(${spin}deg) scale(0.9)`, opacity: 0 },
+          ],
+          // slow, floaty fall
+          { duration: 1700 + Math.random() * 600, easing: "cubic-bezier(.3,.1,.55,1)", delay },
+        )
+        .finished.finally(() => img.remove());
     };
-    window.addEventListener("pointerdown", drop, { passive: true });
-    return () => window.removeEventListener("pointerdown", drop);
+
+    let timer = 0;
+    let at = { x: 0, y: 0 };
+    const stop = () => clearInterval(timer);
+    const down = (e: PointerEvent) => {
+      if (e.pointerType !== "touch") return;
+      at = { x: e.clientX, y: e.clientY };
+      for (let i = 0; i < PER_TAP; i++) spawn(at.x, at.y, i * 40);
+      stop();
+      timer = window.setInterval(() => spawn(at.x, at.y), HOLD_EVERY);
+    };
+    const move = (e: PointerEvent) => {
+      if (e.pointerType === "touch") at = { x: e.clientX, y: e.clientY };
+    };
+    window.addEventListener("pointerdown", down, { passive: true });
+    window.addEventListener("pointermove", move, { passive: true });
+    // pointercancel fires when the touch turns into a scroll, so scrolling stops the stream too
+    for (const t of ["pointerup", "pointercancel"]) window.addEventListener(t, stop);
+    return () => {
+      stop();
+      window.removeEventListener("pointerdown", down);
+      window.removeEventListener("pointermove", move);
+      for (const t of ["pointerup", "pointercancel"]) window.removeEventListener(t, stop);
+    };
   }, []);
 
   return <div ref={layer} aria-hidden className="pointer-events-none fixed inset-0 z-[9998] overflow-hidden" />;
