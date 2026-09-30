@@ -13,11 +13,12 @@ const PAGES = [
       "671:464": "/kham-pha/nguoi-viet-van-dong", "671:468": "/kham-pha/chuc-tet-nhau-that-su",
       "671:472": "/kham-pha/lam-moi-doi-di", "671:476": "/kham-pha/minh-trong-nha-nha-trong-nuoc",
       "671:484": "/kham-pha/freezedom-thu-roi-nghi-di", "671:488": "/kham-pha/neenee-dau-doi-mu-chan-vao-doi",
-      // events have no page of their own: the booth is covered on Người Việt Vận Động, the pop-up on Thu rồi nghỉ đi
-      "671:496": "/kham-pha/nguoi-viet-van-dong", "671:500": "/kham-pha/freezedom-thu-roi-nghi-di",
+      // events have no page of their own: jump straight to the event part of the project page that covers it
+      "671:496": "/kham-pha/nguoi-viet-van-dong#le-hoi-doc-lap", "671:500": "/kham-pha/freezedom-thu-roi-nghi-di#pop-up-event",
     },
   },
-  { slug: "nguoi-viet-van-dong", file: "du-an-Nguoi-Viet-Van-Dong", alt: "Người Việt Vận Động — Tíc Cơ" },
+  // anchors may name a section or a single text layer (the event heading sits mid-section)
+  { slug: "nguoi-viet-van-dong", file: "du-an-Nguoi-Viet-Van-Dong", alt: "Người Việt Vận Động — Tíc Cơ", anchors: { "671:560": "le-hoi-doc-lap" } },
   {
     slug: "chuc-tet-nhau-that-su", file: "du-an-Chuc-Tet-Nhau-That-Su", alt: "Chúc Tết Nhau Thật Sự — Tíc Cơ",
     links: {
@@ -27,7 +28,7 @@ const PAGES = [
   },
   { slug: "lam-moi-doi-di", file: "du-an-Lam-Moi-Doi-Di", alt: "Làm Mới Đời Đi — Tíc Cơ" },
   { slug: "minh-trong-nha-nha-trong-nuoc", file: "du-an-Minh-trong-nha-Nha-trong-nuoc", alt: "Mình Trong Nhà, Nhà Trong Nước — Tíc Cơ" },
-  { slug: "freezedom-thu-roi-nghi-di", file: "du-an-Thu-roi-nghi-di", alt: "Tíc Cơ x Freezedom: Thu Rồi Nghỉ Đi", links: { "735:179": "/san-pham/so-nghi-di" } },
+  { slug: "freezedom-thu-roi-nghi-di", file: "du-an-Thu-roi-nghi-di", alt: "Tíc Cơ x Freezedom: Thu Rồi Nghỉ Đi", links: { "735:179": "/san-pham/so-nghi-di" }, anchors: { "735:190": "pop-up-event" } },
   {
     slug: "neenee-dau-doi-mu-chan-vao-doi", file: "du-an-Dau-doi-mu-chan-vao-doi", alt: "Tíc Cơ x Neenee: Đầu đội mũ, Chân vào đời",
     links: { "735:299": "/san-pham/bst-dau-doi-mu-chan-vao-doi", "735:300": "/san-pham/bst-dau-doi-mu-chan-vao-doi" },
@@ -44,6 +45,8 @@ const warn = [];
 const MARK_PARTS = {
   "732:34": ["01 sổ tay Nghỉ Đi từ Tíc Cơ", "02 hộp kem trong collection Thu Rồi", "từ Freezedom."],
 };
+// Event copy that plays the word-scatter effect on scroll (client reference video, see ScatterText)
+const SCATTER = new Set([]); // layer ids, e.g. "671:560"
 const overlaps = (a, b) => a.x < b.x + b.w && a.x + a.w > b.x && a.y < b.y + b.h && a.y + a.h > b.y;
 
 function build(cfg) {
@@ -77,6 +80,8 @@ function build(cfg) {
         tag: !h1Done && f.size >= 80 ? "h1" : f.size >= 36 ? "h2" : "p",
       };
       if (t.tag === "h1") h1Done = true;
+      if (cfg.anchors?.[n.id]) t.anchor = cfg.anchors[n.id];
+      if (SCATTER.has(n.id)) t.fx = "scatter";
       if (auto === "WIDTH_AND_HEIGHT" || lines === Math.round(l.h / f.lineHeight) - lead) t.nowrap = true;
       if (l.opacity != null) t.op = r(l.opacity);
       // text sitting on a solid vector (speech bubble / highlight) keeps that colour behind it on mobile

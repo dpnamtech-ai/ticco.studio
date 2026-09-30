@@ -526,7 +526,7 @@ export const figmaPages: Record<string, FigPage> = {
         "kind": "line"
        }
       ],
-      "href": "/kham-pha/nguoi-viet-van-dong"
+      "href": "/kham-pha/nguoi-viet-van-dong#le-hoi-doc-lap"
      },
      {
       "k": "card",
@@ -567,7 +567,7 @@ export const figmaPages: Record<string, FigPage> = {
         "nowrap": true
        }
       ],
-      "href": "/kham-pha/freezedom-thu-roi-nghi-di"
+      "href": "/kham-pha/freezedom-thu-roi-nghi-di#pop-up-event"
      }
     ],
     "bg": "linear-gradient(180deg,#e66107,#eb7b2e)",
@@ -936,6 +936,7 @@ export const figmaPages: Record<string, FigPage> = {
       "align": "l",
       "color": "#ffffff",
       "tag": "h2",
+      "anchor": "le-hoi-doc-lap",
       "nowrap": true
      },
      {
@@ -2672,7 +2673,8 @@ export const figmaPages: Record<string, FigPage> = {
       "tag": "p"
      }
     ],
-    "bg": "#ac8bc3"
+    "bg": "#ac8bc3",
+    "anchor": "pop-up-event"
    },
    {
     "id": "735:189",

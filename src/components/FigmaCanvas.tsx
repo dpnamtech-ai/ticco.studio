@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Fragment, type CSSProperties, type ReactNode } from "react";
 import Reveal from "@/components/Reveal";
+import ScatterText from "@/components/ScatterText";
 import { cropFillStyle, zoomSizes, type ImageTransform } from "@/lib/figmaCrop";
 
 /*
@@ -16,6 +17,8 @@ export type FigText = Box & {
   color: string; tag: "h1" | "h2" | "p"; nowrap?: boolean; op?: number; bubble?: string;
   /** highlight colour drawn behind each line (Figma highlight vector); markParts = only these runs */
   mark?: string; markParts?: string[];
+  /** id to jump to (e.g. /kham-pha/x#le-hoi-doc-lap); fx "scatter" = words fly in on scroll (ScatterText) */
+  anchor?: string; fx?: "scatter";
 };
 export type FigImg = Box & { k: "img"; src: string; alt: string; crop?: ImageTransform; rot?: number };
 export type FigBox = Box & { k: "box"; bg: string; radius?: string | number; kind?: "line" | "dot" };
@@ -93,7 +96,12 @@ function Text({ t, o, hover }: { t: FigText; o: number; hover?: boolean }) {
     "--fs": cq(t.size), "--fsm": `${mSize(t.size)}px`, "--lh": t.lh, "--lhm": Math.min(Math.max(t.lh, 1.2), 1.6), "--bub": t.bubble ?? "transparent",
   };
   return (
-    <Reveal variant="blur" duration={1.1} className={`${POS} max-lg:w-full`} style={pos(t, o)}>
+    <>
+    {t.anchor && (
+      // jump target: at the text's own spot on desktop, in its place in the flow on phones (the navbar is sticky)
+      <div id={t.anchor} aria-hidden className={`${POS} max-lg:w-full scroll-mt-[calc(90*var(--u))] max-lg:scroll-mt-20`} style={pos(t, o)} />
+    )}
+    <Reveal variant={t.fx ? "up" : "blur"} duration={t.fx ? 0.01 : 1.1} className={`${POS} max-lg:w-full`} style={pos(t, o)}>
       <Tag
         style={style}
         className={`flex flex-col ${ITEMS[t.align]} m-0 [--mk:var(--lhm)] lg:[--mk:var(--lh)] text-[length:var(--fsm)] leading-[var(--lhm)] lg:text-[length:var(--fs)] lg:leading-[var(--lh)] ${
@@ -101,7 +109,9 @@ function Text({ t, o, hover }: { t: FigText; o: number; hover?: boolean }) {
         } ${hover ? "transition-transform duration-500 ease-out lg:group-hover:translate-x-[0.9cqw]" : ""}`}
       >
         <span className={`${t.nowrap ? "lg:whitespace-pre" : ""} ${TA[t.align]} ${t.mark ? "relative" : ""}`}>
-          {t.mark ? (
+          {t.fx === "scatter" ? (
+            <ScatterText text={t.text} />
+          ) : t.mark ? (
             // two identical layouts stacked: highlights only (text transparent) underneath, the text on top, so no
             // row's highlight ever paints over the descenders/diacritics of the row above
             <>
@@ -114,6 +124,7 @@ function Text({ t, o, hover }: { t: FigText; o: number; hover?: boolean }) {
         </span>
       </Tag>
     </Reveal>
+    </>
   );
 }
 
@@ -179,7 +190,7 @@ export default function FigmaCanvas({ page }: { page: FigPage }) {
               className={`lg:contents max-lg:relative max-lg:flex max-lg:flex-wrap max-lg:gap-6 ${hasText ? "max-lg:px-6 max-lg:py-12 text-white" : ""}`}
             >
               {s.anchor && (
-                <div id={s.anchor} aria-hidden className="absolute top-0 lg:top-[var(--y)] scroll-mt-[27px]" style={{ "--y": cq(s.y) } as Vars} />
+                <div id={s.anchor} aria-hidden className="absolute top-0 lg:top-[var(--y)] scroll-mt-[calc(27*var(--u))] max-lg:scroll-mt-16" style={{ "--y": cq(s.y) } as Vars} />
               )}
               {s.items.map((it) => {
                 if (it.k !== "card") return <Leaf key={it.id} l={it} o={ord(it)} />;
