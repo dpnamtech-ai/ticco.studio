@@ -1,7 +1,7 @@
 import { brand } from "@/data/content";
 import Link from "next/link";
 import Reveal from "@/components/Reveal";
-import { policies, seller } from "@/data/legal";
+import { policies } from "@/data/legal";
 
 const social = [
   ["Facebook", "Tíc Cơ Studios", brand.facebook],
@@ -89,24 +89,17 @@ export default function Footer() {
           </Reveal>
         </div>
       </div>
-
-      {/* Policy links + seller-info page (legally required, ND 52/2013). A thin strip under the Figma band; the
-          Bộ Công Thương badge appears once src/data/legal.ts has its link. */}
+      {/* Policy links (seller-info page stays reachable by URL but isn't listed, per client). */}
       <div className="bg-[#3a0c70] text-[12.5px] text-white/80">
         <div className="flex flex-col gap-3 px-6 py-5 md:flex-row md:items-center md:justify-between md:px-[6.5%]">
           <ul className="flex flex-wrap gap-x-4 gap-y-1.5">
-            {policies.map((p) => (
+            {policies.filter((p) => p.slug !== "thong-tin-nguoi-ban").map((p) => (
               <li key={p.slug}>
                 <Link href={`/chinh-sach/${p.slug}`} className="text-white underline-offset-2 hover:underline">{p.title}</Link>
               </li>
             ))}
           </ul>
-          <div className="flex items-center gap-4 text-white/60">
-            {seller.bctUrl && (
-              <a href={seller.bctUrl} target="_blank" rel="noopener noreferrer" className="text-white underline">Đã thông báo Bộ Công Thương</a>
-            )}
-            <span>© 2024–{new Date().getFullYear()} Tíc Cơ Studios</span>
-          </div>
+          <span className="text-white/60">© Tíc Cơ Studios</span>
         </div>
       </div>
     </footer>

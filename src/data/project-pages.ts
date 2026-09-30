@@ -1118,16 +1118,6 @@ export const figmaPages: Record<string, FigPage> = {
       ]
      },
      {
-      "k": "box",
-      "id": "668:51",
-      "x": 228,
-      "y": 432,
-      "w": 253,
-      "h": 95,
-      "bg": "#b00808",
-      "radius": 24
-     },
-     {
       "k": "text",
       "id": "668:35",
       "x": 233,
@@ -1142,17 +1132,7 @@ export const figmaPages: Record<string, FigPage> = {
       "align": "l",
       "color": "#ffffff",
       "tag": "p",
-      "bubble": "#b00808"
-     },
-     {
-      "k": "box",
-      "id": "668:60",
-      "x": 882,
-      "y": 287,
-      "w": 287,
-      "h": 94,
-      "bg": "#b00808",
-      "radius": 24
+      "mark": "#b00808"
      },
      {
       "k": "text",
@@ -1169,7 +1149,7 @@ export const figmaPages: Record<string, FigPage> = {
       "align": "r",
       "color": "#ffffff",
       "tag": "p",
-      "bubble": "#b00808"
+      "mark": "#b00808"
      }
     ],
     "bg": "#fea0c9"
@@ -1234,16 +1214,6 @@ export const figmaPages: Record<string, FigPage> = {
       "bg": "#fea0c9"
      },
      {
-      "k": "box",
-      "id": "668:119",
-      "x": 336,
-      "y": 1333,
-      "w": 608,
-      "h": 197,
-      "bg": "#b00808",
-      "radius": 24
-     },
-     {
       "k": "text",
       "id": "668:72",
       "x": 343,
@@ -1258,7 +1228,7 @@ export const figmaPages: Record<string, FigPage> = {
       "align": "j",
       "color": "#ffffff",
       "tag": "p",
-      "bubble": "#b00808"
+      "mark": "#b00808"
      },
      {
       "k": "text",
@@ -2305,16 +2275,6 @@ export const figmaPages: Record<string, FigPage> = {
       "nowrap": true
      },
      {
-      "k": "box",
-      "id": "735:108",
-      "x": 125,
-      "y": 2219,
-      "w": 397,
-      "h": 84,
-      "bg": "#270350",
-      "radius": 24
-     },
-     {
       "k": "text",
       "id": "732:34",
       "x": 95,
@@ -2329,7 +2289,12 @@ export const figmaPages: Record<string, FigPage> = {
       "align": "l",
       "color": "#ffffff",
       "tag": "p",
-      "bubble": "#270350"
+      "mark": "#270350",
+      "markParts": [
+       "01 sổ tay Nghỉ Đi từ Tíc Cơ",
+       "02 hộp kem trong collection Thu Rồi",
+       "từ Freezedom."
+      ]
      },
      {
       "k": "card",

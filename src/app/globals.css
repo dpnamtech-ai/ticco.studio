@@ -98,8 +98,17 @@ body {
 .step-b { opacity: 0; animation-name: step-b; }
 .step-alt { animation-delay: -0.4s; }
 .bob { animation: bob 0.4s ease-in-out infinite; }
+/* the three big Đần on /mascot-dan: pop in one after another, then hover (float) up and down */
+@keyframes dan-pop { 0% { transform: scale(0.3); opacity: 0; } 60% { transform: scale(1.08); opacity: 1; } 100% { transform: scale(1); } }
+@keyframes dan-float { 0%, 100% { transform: translateY(0) rotate(0); } 50% { transform: translateY(-1.2cqw) rotate(-1.5deg); } }
+.dan-pop { animation: dan-pop 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) backwards; }
+.dan-float { animation: dan-float 3s ease-in-out infinite; }
+/* where supported, the pop plays as each Đần scrolls into view instead of at page load */
+@supports (animation-timeline: view()) {
+  .dan-pop { animation-timeline: view(); animation-range: entry 30% cover 45%; }
+}
 @media (prefers-reduced-motion: reduce) {
-  .step-a, .step-b, .bob { animation: none; }
+  .step-a, .step-b, .bob, .dan-pop, .dan-float { animation: none; }
   .step-b { opacity: 0; }
 }
 

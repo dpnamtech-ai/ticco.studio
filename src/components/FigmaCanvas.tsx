@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Fragment, type CSSProperties } from "react";
+import { Fragment, type CSSProperties, type ReactNode } from "react";
 import Reveal from "@/components/Reveal";
 import { cropFillStyle, zoomSizes, type ImageTransform } from "@/lib/figmaCrop";
 
@@ -14,6 +14,8 @@ type Box = { id: string; x: number; y: number; w: number; h: number };
 export type FigText = Box & {
   k: "text"; text: string; size: number; lh: number; ls: number; wt: number; align: "l" | "c" | "r" | "j";
   color: string; tag: "h1" | "h2" | "p"; nowrap?: boolean; op?: number; bubble?: string;
+  /** highlight colour drawn behind each line (Figma highlight vector); markParts = only these runs */
+  mark?: string; markParts?: string[];
 };
 export type FigImg = Box & { k: "img"; src: string; alt: string; crop?: ImageTransform; rot?: number };
 export type FigBox = Box & { k: "box"; bg: string; radius?: string | number; kind?: "line" | "dot" };
@@ -42,18 +44,46 @@ const TA = { l: "text-left", c: "text-center", r: "text-left lg:text-right", j: 
 
 // Figma's hard line breaks are tuned for the 1280 canvas: keep them on desktop, but on mobile
 // turn a single break into a space (blank lines = paragraph breaks stay everywhere).
-function figmaLines(text: string) {
+function figmaLines(text: string, mark: (line: string) => ReactNode = (l) => l) {
   const lines = text.split("\n");
   const lead = lines.findIndex((l) => l.trim());
-  return lines.map((line, i) => {
-    if (i === lines.length - 1) return line;
-    const hard = i >= lead && (!line.trim() || !lines[i + 1].trim());
+  return lines.map((raw, i) => {
+    const line = mark(raw);
+    if (i === lines.length - 1) return <Fragment key={i}>{line}</Fragment>;
+    const hard = i >= lead && (!raw.trim() || !lines[i + 1].trim());
     return hard ? (
       <Fragment key={i}>{line}<br /></Fragment>
     ) : (
       <Fragment key={i}>{line}<br className="max-lg:hidden" /><span className="lg:hidden"> </span></Fragment>
     );
   });
+}
+
+// Figma highlight: flat colour behind the text, hugging each line. The paint is trimmed to one line pitch (--mk em,
+// centred) so the rows meet edge to edge; padding + negative margin (cloned per line) pad it sideways without moving
+// the text.
+const Mark = ({ c, children }: { c: string; children: ReactNode }) => (
+  <span
+    style={{
+      background: `linear-gradient(transparent calc(50% - var(--mk) * 0.5em), ${c} 0, ${c} calc(50% + var(--mk) * 0.5em), transparent 0)`,
+      padding: "0 0.2em", margin: "0 -0.2em", boxDecorationBreak: "clone", WebkitBoxDecorationBreak: "clone",
+    }}
+  >
+    {children}
+  </span>
+);
+
+function markLine(t: FigText) {
+  const c = t.mark;
+  if (!c) return undefined;
+  return function marked(line: string): ReactNode {
+    if (!line.trim()) return line;
+    if (!t.markParts) return <Mark c={c}>{line}</Mark>;
+    const part = t.markParts.find((p) => line.includes(p));
+    if (!part) return line;
+    const at = line.indexOf(part);
+    return <>{line.slice(0, at)}<Mark c={c}>{part}</Mark>{line.slice(at + part.length)}</>;
+  };
 }
 
 function Text({ t, o, hover }: { t: FigText; o: number; hover?: boolean }) {
@@ -66,11 +96,22 @@ function Text({ t, o, hover }: { t: FigText; o: number; hover?: boolean }) {
     <Reveal variant="blur" duration={1.1} className={`${POS} max-lg:w-full`} style={pos(t, o)}>
       <Tag
         style={style}
-        className={`flex flex-col ${ITEMS[t.align]} m-0 text-[length:var(--fsm)] leading-[var(--lhm)] lg:text-[length:var(--fs)] lg:leading-[var(--lh)] ${
+        className={`flex flex-col ${ITEMS[t.align]} m-0 [--mk:var(--lhm)] lg:[--mk:var(--lh)] text-[length:var(--fsm)] leading-[var(--lhm)] lg:text-[length:var(--fs)] lg:leading-[var(--lh)] ${
           t.bubble ? `max-lg:w-fit max-lg:bg-[var(--bub)] max-lg:px-4 max-lg:py-3 max-lg:rounded-2xl ${t.align === "c" ? "max-lg:mx-auto" : ""}` : ""
         } ${hover ? "transition-transform duration-500 ease-out lg:group-hover:translate-x-[0.9cqw]" : ""}`}
       >
-        <span className={`${t.nowrap ? "lg:whitespace-pre" : ""} ${TA[t.align]}`}>{figmaLines(t.text)}</span>
+        <span className={`${t.nowrap ? "lg:whitespace-pre" : ""} ${TA[t.align]} ${t.mark ? "relative" : ""}`}>
+          {t.mark ? (
+            // two identical layouts stacked: highlights only (text transparent) underneath, the text on top, so no
+            // row's highlight ever paints over the descenders/diacritics of the row above
+            <>
+              <span aria-hidden className="select-none text-transparent">{figmaLines(t.text, markLine(t))}</span>
+              <span className="absolute inset-0">{figmaLines(t.text)}</span>
+            </>
+          ) : (
+            figmaLines(t.text)
+          )}
+        </span>
       </Tag>
     </Reveal>
   );

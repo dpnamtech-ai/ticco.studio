@@ -39,7 +39,8 @@ const DAN: { src: string; x: number; y: number; w: number; h: number; crop: Imag
 // Caption boxes (Figma "Vector", #e85f08) + their text boxes; `tr` = right-aligned text whose box ends at X310.
 // ponytail: the vector outlines aren't in the cached file (no geometry), so the boxes are plain rectangles.
 const CAPTIONS = [
-  { box: [815, 44, 172, 102], tx: 818, ty: 47 },
+  // moved up-left of the Figma spot (815, 44) so it no longer covers the third Đần's head
+  { box: [775, 18, 172, 102], tx: 778, ty: 21 },
   { box: [490, 103, 103, 73], tx: 495, ty: 108 },
   { box: [169, 290, 152, 73], tx: 172, ty: 294 },
   { box: [169, 193, 147, 68], tr: 310, ty: 193 },
@@ -48,7 +49,7 @@ const CAPTIONS = [
 export default function MarchingDan({ alt }: { alt: string }) {
   return (
     <div className="[container-type:inline-size]">
-      <div className="relative w-full aspect-[1280/664] overflow-hidden bg-[#e5e5e5]" role="img" aria-label={alt}>
+      <div className="relative w-full aspect-[1280/664] overflow-clip bg-[#e5e5e5]" role="img" aria-label={alt}>
         {SLOTS.map((frames, i) => (
           <div key={i} className="absolute inset-0 bob pointer-events-none">
             {frames.map((f) => (
@@ -66,13 +67,14 @@ export default function MarchingDan({ alt }: { alt: string }) {
           </div>
         ))}
 
-        {DAN.map((d) => (
-          <div
-            key={d.src}
-            className="absolute overflow-hidden"
-            style={{ left: cq(d.x), top: cq(d.y), width: cq(d.w), height: cq(d.h), transform: d.mirror ? "scaleX(-1)" : undefined }}
-          >
-            <Image src={`/images/figma/${d.src}.webp`} alt="" fill sizes={zoomSizes("40vw", d.crop)} style={cropFillStyle(d.crop)} />
+        {DAN.map((d, i) => (
+          // one transform per box: outer pops in, middle floats (out of step per Đần), inner carries the mirror
+          <div key={d.src} className="absolute dan-pop" style={{ left: cq(d.x), top: cq(d.y), width: cq(d.w), height: cq(d.h) }}>
+            <div className="absolute inset-0 dan-float" style={{ animationDelay: `${-i * 0.9}s` }}>
+              <div className="absolute inset-0 overflow-hidden" style={{ transform: d.mirror ? "scaleX(-1)" : undefined }}>
+                <Image src={`/images/figma/${d.src}.webp`} alt="" fill sizes={zoomSizes("40vw", d.crop)} style={cropFillStyle(d.crop)} />
+              </div>
+            </div>
           </div>
         ))}
 

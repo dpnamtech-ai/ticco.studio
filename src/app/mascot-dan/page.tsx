@@ -5,6 +5,7 @@ import { mascotPage } from "@/data/content";
 import ProductCard from "@/components/ProductCard";
 import Reveal from "@/components/Reveal";
 import MarchingDan from "@/components/MarchingDan";
+import ScrollFillText from "@/components/ScrollFillText";
 import { getProducts } from "@/lib/products";
 import { cropFillStyle } from "@/lib/figmaCrop";
 import { MASCOT_GRID, figmaCardProps } from "@/data/figma-cards";
@@ -77,20 +78,19 @@ export default async function MascotDanPage() {
       {/* Figma "sub text" (1280x120): purple band, #e5ff00 600 36/55 uppercase */}
       <section className="[container-type:inline-size] bg-[var(--color-purple)]">
         <div className="relative" style={{ height: cq(120) }}>
-          <Reveal variant="wipe" duration={1.1} className="absolute" style={{ left: cq(60), top: cq(28), width: cq(1158) }}>
-            <p className="text-center font-semibold uppercase text-[#e5ff00]" style={{ fontSize: cq(36), lineHeight: cq(55), letterSpacing: cq(-2.88) }}>
-              {mascotPage.tagline}
-            </p>
-          </Reveal>
+          <ScrollFillText
+            text={mascotPage.tagline}
+            className="absolute text-center font-semibold uppercase text-[#e5ff00]"
+            style={{ left: cq(60), top: cq(28), width: cq(1158), fontSize: cq(36), lineHeight: cq(55), letterSpacing: cq(-2.88) }}
+          />
         </div>
       </section>
 
       <section>
-        <Reveal variant="scale" duration={1.1}>
+        {/* the three Đần pop in on their own (.dan-float), so no Reveal around the scene */}
         <MarchingDan
           alt={`${mascotPage.traits.captions.join(" ").replaceAll("\n", " ")} ${mascotPage.traits.tagline}`}
         />
-        </Reveal>
       </section>
 
       {/* Figma "text" (1280x284): gradient #e66107 -> #c54e08, 600 37/44 uppercase text box at y75 */}
@@ -182,15 +182,11 @@ function Banner({ h, y, from, to, lines }: { h: number; y: number; from: string;
     // cq units on the container element itself would resolve against the viewport, so size an inner box
     <section className="[container-type:inline-size] text-white">
       <div className="relative" style={{ height: cq(h), background: `linear-gradient(180deg, ${from}, ${to})` }}>
-      <Reveal variant="up" duration={1} className="absolute inset-x-0" style={{ top: cq(y) }}>
-        <p className="text-center font-semibold uppercase" style={{ fontSize: cq(37), lineHeight: cq(44), letterSpacing: cq(-1.85) }}>
-          {lines.map((l, i) => (
-            <span key={i} className="block">
-              {l}
-            </span>
-          ))}
-        </p>
-      </Reveal>
+      <ScrollFillText
+        text={lines.join("\n")}
+        className="absolute inset-x-0 whitespace-pre-line text-center font-semibold uppercase"
+        style={{ top: cq(y), fontSize: cq(37), lineHeight: cq(44), letterSpacing: cq(-1.85) }}
+      />
       </div>
     </section>
   );

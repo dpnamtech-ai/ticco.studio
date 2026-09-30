@@ -40,6 +40,11 @@ const TOP = 51; // promo bar + navbar rows, rendered by the site layout
 const r = (v) => Math.round(v * 100) / 100;
 const css = (g) => `linear-gradient(180deg,${g.stops[0][0]},${g.stops[1][0]})`; // every DEMO gradient is top→bottom, 2 effective stops
 const warn = [];
+// Highlight vectors that cover only part of their text: the highlighted runs (the vector outline isn't in the cache).
+const MARK_PARTS = {
+  "732:34": ["01 sổ tay Nghỉ Đi từ Tíc Cơ", "02 hộp kem trong collection Thu Rồi", "từ Freezedom."],
+};
+const overlaps = (a, b) => a.x < b.x + b.w && a.x + a.w > b.x && a.y < b.y + b.h && a.y + a.h > b.y;
 
 function build(cfg) {
   const demo = JSON.parse(readFileSync(`.figma-cache/demo/${cfg.file}.json`, "utf8"));
@@ -75,8 +80,12 @@ function build(cfg) {
       if (auto === "WIDTH_AND_HEIGHT" || lines === Math.round(l.h / f.lineHeight) - lead) t.nowrap = true;
       if (l.opacity != null) t.op = r(l.opacity);
       // text sitting on a solid vector (speech bubble / highlight) keeps that colour behind it on mobile
-      const bub = (parent?.children || []).map((c) => L[c.id]).find((v) => (v?.type === "VECTOR" || v?.type === "RECTANGLE") && v.color && !v.image && v.w < 1270 && v.x < l.x + l.w && v.x + v.w > l.x && v.y < l.y + l.h && v.y + v.h > l.y);
-      if (bub) t.bubble = bub.color;
+      const bub = (parent?.children || []).map((c) => L[c.id]).find((v) => (v?.type === "VECTOR" || v?.type === "RECTANGLE") && v.color && !v.image && v.w < 1270 && overlaps(v, l));
+      // a solid vector behind text is a line-by-line highlight in the design (drawn as text background, see FigmaCanvas)
+      if (bub?.type === "VECTOR") {
+        t.mark = bub.color;
+        if (MARK_PARTS[n.id]) t.markParts = MARK_PARTS[n.id];
+      } else if (bub) t.bubble = bub.color;
       return t;
     }
     if (l.image) {
@@ -90,6 +99,8 @@ function build(cfg) {
       return i;
     }
     if (l.type === "LINE" && l.stroke) return { k: "box", ...box, h: l.stroke.weight, bg: l.stroke.color, kind: "line" };
+    // highlight vector behind a text: the text draws it (t.mark)
+    if (l.type === "VECTOR" && l.color && !l.gradient && (parent?.children || []).some((c) => L[c.id]?.type === "TEXT" && overlaps(l, L[c.id]))) return null;
     if (l.color || l.gradient) {
       const b = { k: "box", ...box, bg: l.gradient ? css(l.gradient) : l.color };
       if (l.type === "ELLIPSE") b.radius = "50%";

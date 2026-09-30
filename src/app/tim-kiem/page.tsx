@@ -1,59 +1,19 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { getProducts, type Product } from "@/lib/products";
+import type { Product } from "@/lib/products";
 import { SHOP_CATEGORIES } from "@/lib/shop";
 import { vnd } from "@/lib/shopFigma";
-import { figmaPages } from "@/data/project-pages";
-import { projects } from "@/data/content";
-import type { FigLeaf } from "@/components/FigmaCanvas";
+import { cleanQuery, search } from "@/lib/search";
 
 export const metadata: Metadata = { title: "Tìm kiếm — Tíc Cơ", robots: { index: false } };
 
 type SearchParams = Promise<{ q?: string | string[] }>;
 
-// Typed with accents ("áo") -> accents must match, so "áo" doesn't hit "bao", "cao", "giao".
-// Typed without ("so tay") -> accent-insensitive, so it still finds "Sổ tay". Either way a match must start a word.
-const strip = (s: string) => s.normalize("NFD").replace(/\p{M}/gu, "").replace(/đ/gi, "d").toLowerCase();
-const accented = (q: string) => strip(q) !== q.toLowerCase().normalize("NFC");
-function matcher(q: string) {
-  const key = accented(q) ? (s: string) => s.normalize("NFC").toLowerCase() : strip;
-  const escaped = key(q).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-  const re = new RegExp(`(^|[^\\p{L}\\p{N}])${escaped}`, "u");
-  return (text: string) => re.test(key(text));
-}
-// Server component on a dynamic route: a fresh pick on every request is the point.
-const pickRandom = <T,>(list: T[], n: number) => list.map((x) => [Math.random(), x] as const).sort((a, b) => a[0] - b[0]).slice(0, n).map(([, x]) => x);
-const plain = (html: string) => html.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim();
-
-// Every text layer of a /kham-pha page (cards included), in reading order.
-function pageTexts(slug: string) {
-  return figmaPages[slug].sections
-    .flatMap((s) => s.items.flatMap((it) => ("items" in it ? it.items : [it])))
-    .filter((l): l is Extract<FigLeaf, { k: "text" }> => l.k === "text")
-    .map((t) => t.text.replace(/\s+/g, " ").trim());
-}
-
+// Full-page results (target of the sitelinks search box in the JSON-LD); the navbar opens SearchDrawer instead.
 export default async function TimKiemPage({ searchParams }: { searchParams: SearchParams }) {
-  const raw = (await searchParams).q;
-  const q = (Array.isArray(raw) ? raw[0] : raw)?.trim().slice(0, 80) ?? "";
-  const hit = q ? matcher(q) : () => false;
-
-  // Products: name matches only; the description is a fallback when no name matches
-  // (otherwise "áo" also lists every product whose blurb mentions a shirt).
-  const all = await getProducts();
-  const byName = q ? all.filter((p) => hit(p.name)) : [];
-  const products = byName.length || !q ? byName : all.filter((p) => hit(plain(p.description)));
-  // Random in-stock picks under the results (or instead of them) so the page never ends empty.
-  const suggestions = pickRandom(all.filter((p) => !p.soldOut && !products.includes(p)), 8);
-
-  const content = q
-    ? Object.keys(figmaPages).flatMap((slug) => {
-        const title = slug === "kham-pha" ? "Khám phá - Dự án vui" : (projects.find((p) => p.id === slug)?.title ?? slug);
-        const found = [title, ...pageTexts(slug)].find(hit);
-        return found ? [{ slug, title, snippet: found === title ? "" : found, href: slug === "kham-pha" ? "/kham-pha" : `/kham-pha/${slug}` }] : [];
-      })
-    : [];
+  const q = cleanQuery((await searchParams).q);
+  const { products, content } = await search(q);
 
   return (
     <section className="mx-auto max-w-4xl px-6 py-12">
@@ -123,12 +83,6 @@ export default async function TimKiemPage({ searchParams }: { searchParams: Sear
         </p>
       )}
 
-      {suggestions.length > 0 && (
-        <>
-          <h2 className="mt-12 mb-4 text-lg font-bold text-[var(--color-purple)]">{q ? "Có thể bạn cũng thích" : "Có thể bạn sẽ thích"}</h2>
-          <ProductGrid items={suggestions} />
-        </>
-      )}
     </section>
   );
 }

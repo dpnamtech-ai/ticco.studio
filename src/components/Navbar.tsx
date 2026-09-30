@@ -8,6 +8,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Search, ShoppingCart, Menu, X, ChevronDown } from "lucide-react";
 import { navLinks, brand } from "@/data/content";
 import { useCart } from "@/context/CartContext";
+import SearchDrawer from "@/components/SearchDrawer";
 
 type NavLink = (typeof navLinks)[number];
 
@@ -45,6 +46,7 @@ const sectionOf = (p: string) => navLinks.find((l) => "children" in l && (p === 
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
   const { totalItems, openDrawer } = useCart();
   const pathname = usePathname();
   // which collapsible section of the mobile menu is open
@@ -82,9 +84,9 @@ export default function Navbar() {
           {/* Icons */}
           {/* Figma "Frame 5" X1153-1219: search 21px (#fef7ff) + cart art 36x36, gap 9 */}
           <div className="hidden md:flex items-center gap-[calc(9*var(--u))] md:absolute md:right-[calc(61*var(--u))] md:top-1/2 md:-translate-y-1/2">
-            <Link href="/tim-kiem" aria-label="Tìm kiếm" className="text-[#fef7ff] hover:opacity-80 transition-opacity">
+            <button onClick={() => setSearchOpen(true)} aria-label="Tìm kiếm" className="text-[#fef7ff] hover:opacity-80 transition-opacity">
               <Search size={21} className="size-[calc(21*var(--u))]" />
-            </Link>
+            </button>
             <button onClick={openDrawer} aria-label="Giỏ hàng" className="relative hover:opacity-80 transition-opacity">
               <Image src="/images/figma/f7cee81a817a7fd43fa1390005911ca6d22bbadf.webp" alt="" width={108} height={108} className="size-[calc(36*var(--u))]" />
               <AnimatePresence>
@@ -107,9 +109,9 @@ export default function Navbar() {
           </div>
 
           {/* Mobile: search + cart (with count) + burger, always in the bar */}
-          <Link href="/tim-kiem" aria-label="Tìm kiếm" className="md:hidden ml-auto">
+          <button onClick={() => { setMenuOpen(false); setSearchOpen(true); }} aria-label="Tìm kiếm" className="md:hidden ml-auto">
             <Search size={22} />
-          </Link>
+          </button>
           <button onClick={openDrawer} aria-label="Giỏ hàng" className="md:hidden relative">
             <ShoppingCart size={23} />
             {totalItems > 0 && (
@@ -127,6 +129,8 @@ export default function Navbar() {
           </button>
         </div>
       </nav>
+
+      <SearchDrawer open={searchOpen} onClose={() => setSearchOpen(false)} />
 
       {/* Mobile menu */}
       <AnimatePresence>
