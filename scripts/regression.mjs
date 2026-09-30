@@ -168,13 +168,13 @@ await test("ADM-30", "Gọi thẳng 6 server action admin (tạo/sửa/xoá SP, 
   }
   return expect(Object.keys(node).length >= 6 && !bad.length, bad.join(", ") || "no actions in manifest");
 });
-await test("LEG-01", "Footer chỉ có link Thông tin người bán + 5 chính sách (mở được), không phơi thông tin người bán", async () => {
+await test("LEG-01", "Footer chỉ có 5 link chính sách (mở được), không có link/thông tin người bán (khách yêu cầu bỏ)", async () => {
   const html = await (await fetch(`${BASE}/san-pham`)).text();
   const links = [...new Set([...html.matchAll(/href="(\/chinh-sach\/[a-z-]+)"/g)].map((m) => m[1]))];
   const bad = [];
   for (const l of links) if ((await fetch(BASE + l)).status !== 200) bad.push(l);
   const footer = html.slice(html.lastIndexOf("<footer"));
-  return expect(!/MST|Người đại diện|Địa chỉ:/.test(footer) && links.length === 6 && !bad.length, `links=${links.length} bad=${bad}`);
+  return expect(!/MST|Người đại diện|Địa chỉ:/.test(footer) && links.length === 5 && !links.includes("/chinh-sach/thong-tin-nguoi-ban") && !bad.length, `links=${links.length} bad=${bad}`);
 });
 await test("SEC-11", "Security headers (chống nhúng iframe, sniff, HSTS)", async () => {
   const h = (await fetch(BASE)).headers;
@@ -222,22 +222,25 @@ for (const p of READ_PAGES) {
 }
 await test("MOB-02", "Menu mobile mở được, đủ 4 mục + có nút tìm kiếm", async () => {
   await go("/");
-  const search = await page.$('nav a[href="/tim-kiem"]');
+  const search = await page.$('nav button[aria-label="Tìm kiếm"]');
   await page.click('button[aria-label="Menu"]');
   await sleep(700);
   const labels = await page.evaluate(() => [...document.querySelectorAll("div.fixed a")].map((a) => a.textContent.trim()));
   return expect(search && ["Về Tíc Cơ", "Sản phẩm", "Khám phá", "Mascot Đần"].every((l) => labels.includes(l)), `search=${!!search} labels=${labels}`);
 });
-await test("MOB-03", "Menu đang mở, bấm kính lúp -> menu đóng, thấy ngay ô tìm kiếm (BUG-011)", async () => {
+await test("MOB-03", "Menu đang mở, bấm kính lúp -> menu đóng, thanh tìm kiếm trượt ra, con trỏ ở ô nhập (BUG-011)", async () => {
   // menu from MOB-02 is still open
-  await Promise.all([page.waitForNavigation({ waitUntil: "networkidle2" }), page.evaluate(() => [...document.querySelectorAll('nav a[aria-label="Tìm kiếm"]')].find((a) => a.offsetParent).click())]);
+  await page.evaluate(() => [...document.querySelectorAll('nav button[aria-label="Tìm kiếm"]')].find((b) => b.offsetParent).click());
   await sleep(700);
   const s = await page.evaluate(() => {
-    const input = document.querySelector('input[name="q"]').getBoundingClientRect();
-    const top = document.elementFromPoint(input.x + 10, input.y + input.height / 2);
-    return { menuOpen: !!document.querySelector("div.fixed.inset-0.z-40"), inputOnTop: top?.getAttribute("name") === "q" };
+    const input = document.querySelector('aside[role="dialog"] input[type="search"]');
+    const r = input?.getBoundingClientRect();
+    const top = r && document.elementFromPoint(r.x + 10, r.y + r.height / 2);
+    return { menuOpen: !!document.querySelector("div.fixed.inset-0.z-40"), inputOnTop: top === input, focused: document.activeElement === input };
   });
-  return expect(!s.menuOpen && s.inputOnTop, JSON.stringify(s));
+  await page.keyboard.press("Escape");
+  await sleep(500);
+  return expect(!s.menuOpen && s.inputOnTop && s.focused, JSON.stringify(s));
 });
 await test("FX-01", "Mobile: chạm màn hình -> Đần rơi rồi tự biến mất, không chặn thao tác; PC không có", async () => {
   // tap plain text (a policy page paragraph), not a link — a link would navigate away mid-animation
@@ -434,21 +437,31 @@ await test("SRC-06", "Tìm 'túi' chỉ ra túi", async () => {
   const n = await productNames();
   return expect(n.length >= 3 && n.every((x) => /^túi/i.test(x)), `${n}`);
 });
-await test("SRC-07", "Trang tìm kiếm không trống: chưa gõ -> có danh mục + gợi ý; không có kết quả -> vẫn có gợi ý", async () => {
+await test("SRC-07", "Trang /tim-kiem chưa gõ -> có danh mục, không có mục gợi ý (khách bỏ 'Có thể bạn sẽ thích')", async () => {
   await go("/tim-kiem");
   const a = await page.evaluate(() => ({ cats: document.querySelectorAll('main nav[aria-label="Danh mục sản phẩm"] a').length, sug: [...document.querySelectorAll("main h2")].some((h) => /Có thể bạn/.test(h.textContent)) }));
-  await go("/tim-kiem?q=zzqxqzz");
-  const b = await page.evaluate(() => [...document.querySelectorAll("main h2")].some((h) => /Có thể bạn/.test(h.textContent)));
-  return expect(a.cats === 6 && a.sug && b, JSON.stringify({ ...a, noResultSug: b }));
+  return expect(a.cats === 6 && !a.sug, JSON.stringify(a));
 });
 await test("SRC-03", "Không có kết quả -> thông báo + link xem sản phẩm", async () => {
   await go("/tim-kiem?q=zzqxqzz");
   return expect(await bodyHas("Không tìm thấy"), "no empty state");
 });
-await test("SRC-04", "Kính lúp trên navbar mở trang tìm kiếm, con trỏ ở ô nhập", async () => {
+await test("SRC-04", "Kính lúp trên navbar mở thanh tìm kiếm bên phải: trống khi chưa gõ, gõ ra kết quả, Esc đóng, trang sau không cuộn", async () => {
   await go("/");
-  await Promise.all([page.waitForNavigation({ waitUntil: "networkidle2" }), page.evaluate(() => [...document.querySelectorAll('nav a[aria-label="Tìm kiếm"]')].find((a) => a.offsetParent).click())]);
-  return expect(page.url().includes("/tim-kiem") && (await page.evaluate(() => document.activeElement?.getAttribute("name") === "q")), page.url());
+  await page.evaluate(() => [...document.querySelectorAll('nav button[aria-label="Tìm kiếm"]')].find((b) => b.offsetParent).click());
+  await sleep(700);
+  const s = await page.evaluate(() => {
+    const panel = document.querySelector('aside[role="dialog"]');
+    const input = panel?.querySelector('input[type="search"]');
+    return { open: !!panel, focused: document.activeElement === input, empty: !panel?.querySelector("ul"), locked: getComputedStyle(document.documentElement).overflow === "hidden" };
+  });
+  await page.keyboard.type("dan");
+  await page.waitForFunction(() => document.querySelector('aside[role="dialog"] ul li a'), { timeout: 8000 }).catch(() => {});
+  const hits = await page.evaluate(() => document.querySelectorAll('aside[role="dialog"] ul li a').length);
+  await page.keyboard.press("Escape");
+  await sleep(600);
+  const closed = !(await page.$('aside[role="dialog"]'));
+  return expect(s.open && s.focused && s.empty && s.locked && hits > 0 && closed, JSON.stringify({ ...s, hits, closed }));
 });
 await test("SEC-01", "XSS qua ô tìm kiếm không chạy script", async () => {
   dialogs.length = 0;
@@ -463,10 +476,16 @@ await test("CART-01", "Thêm 2 lựa chọn khác nhau = 2 dòng, giá đúng t�
   await go("/");
   await resetStorage();
   await go(`/san-pham/${PC}`);
-  await clickText("main button", "Lao động");
+  // picking an option rewrites the URL (?chon=…); wait for it before adding (slower on prod than local)
+  const pick = async (label) => {
+    await clickText("main button", label);
+    await page.waitForFunction((l) => new URL(location.href).searchParams.get("chon") === l || (l === "BST 5 tấm" && !location.search), { timeout: 8000 }, label).catch(() => {});
+    await page.waitForFunction(() => [...document.querySelectorAll("main button")].some((b) => b.textContent.trim() === "Thêm vào giỏ hàng"), { timeout: 8000 });
+  };
+  await pick("Lao động");
   await clickText("main button", "Thêm vào giỏ hàng");
   await sleep(1800); // the button shows "Đã thêm" for 1.5s
-  await clickText("main button", "BST 5 tấm");
+  await pick("BST 5 tấm");
   await clickText("main button", "Thêm vào giỏ hàng");
   await sleep(400);
   const cart = (await cartLines()).map((i) => `${i.variant}:${i.price}x${i.qty}`);
