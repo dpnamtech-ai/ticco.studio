@@ -6,10 +6,11 @@
 //   Production (read-only: every order request it sends is one the server must REJECT, so no order is created):
 //     node scripts/regression.mjs https://ticcostudio.vercel.app
 //
+// Also saves full-page screenshots to qa/visual/<page>-1280.jpg / -390.jpg for the mandatory eyeball pass (V).
 // Writes qa/regression-last-run.md. Exit code 1 when anything fails. A failing case = a bug: log it in qa/BUGS.md.
 import { spawn, execSync } from "node:child_process";
 import { createServer } from "node:http";
-import { existsSync, readFileSync, readdirSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from "node:fs";
 import puppeteer from "puppeteer-core";
 
 const PROD = process.argv[2];
@@ -125,6 +126,9 @@ async function fillCheckout(c) {
 }
 const submitCheckout = () => page.click("form button:not([type=button])");
 
+mkdirSync("qa/visual", { recursive: true });
+const shotName = (p, w) => `qa/visual/${(p.replace(/[/?=&]+/g, "-").replace(/^-|-$/g, "") || "home")}-${w}.jpg`;
+const snap = (p, w) => page.screenshot({ path: shotName(p, w), fullPage: true, type: "jpeg", quality: 55 });
 const READ_PAGES = ["/", "/san-pham", `/san-pham/${PC}`, "/kham-pha", "/kham-pha/nguoi-viet-van-dong", "/ve-tic-co", "/mascot-dan", "/tim-kiem?q=dan"];
 
 // ================= 1. Smoke / hạ tầng =================
@@ -185,6 +189,8 @@ for (const p of READ_PAGES) {
     await go(p);
     const broken = await loadAllImages();
     const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
+    await sleep(800); // let reveal animations settle before the review screenshot
+    await snap(p, 1280);
     return expect(!broken.length && overflow <= 1, `broken=${broken.slice(0, 3).join(" ")} overflow=${overflow}px`);
   });
 }
@@ -207,7 +213,10 @@ await mobile();
 for (const p of READ_PAGES) {
   await test("MOB-01", `Không tràn ngang trên điện thoại (390) ${p}`, async () => {
     await go(p);
+    await loadAllImages();
+    await sleep(800);
     const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
+    await snap(p, 390);
     return expect(overflow <= 1, `overflow=${overflow}px`);
   });
 }
@@ -226,9 +235,21 @@ await test("MOB-03", "Menu đang mở, bấm kính lúp -> menu đóng, thấy n
   const s = await page.evaluate(() => {
     const input = document.querySelector('input[name="q"]').getBoundingClientRect();
     const top = document.elementFromPoint(input.x + 10, input.y + input.height / 2);
-    return { menuOpen: !!document.querySelector("div.fixed.inset-0"), inputOnTop: top?.getAttribute("name") === "q" };
+    return { menuOpen: !!document.querySelector("div.fixed.inset-0.z-40"), inputOnTop: top?.getAttribute("name") === "q" };
   });
   return expect(!s.menuOpen && s.inputOnTop, JSON.stringify(s));
+});
+await test("FX-01", "Mobile: chạm màn hình -> Đần rơi rồi tự biến mất, không chặn thao tác; PC không có", async () => {
+  // tap plain text (a policy page paragraph), not a link — a link would navigate away mid-animation
+  await go("/chinh-sach/doi-tra");
+  const pt = await page.evaluate(() => { const r = document.querySelector("section li").getBoundingClientRect(); return { x: r.left + 40, y: r.top + 10 }; });
+  await page.touchscreen.tap(pt.x, pt.y);
+  await sleep(250);
+  const during = await page.evaluate(() => document.querySelectorAll('div[class~="z-[9998]"] > img').length);
+  const passThrough = await page.evaluate(() => getComputedStyle(document.querySelector('div[class~="z-[9998]"]')).pointerEvents);
+  await sleep(2000);
+  const after = await page.evaluate(() => document.querySelectorAll('div[class~="z-[9998]"] > img').length);
+  return expect(during >= 3 && after === 0 && passThrough === "none", JSON.stringify({ during, after, passThrough }));
 });
 await test("MOB-04", "Menu mobile có danh mục sản phẩm (Tất cả, Văn phòng phẩm, In ấn…) bấm vào đúng tab", async () => {
   await go("/");
@@ -245,7 +266,7 @@ await test("MOB-04", "Menu mobile có danh mục sản phẩm (Tất cả, Văn 
   await Promise.all([page.waitForNavigation({ waitUntil: "networkidle2" }), page.evaluate(() => [...document.querySelectorAll("div.fixed a")].find((a) => a.textContent.trim() === "In ấn").click())]);
   await sleep(900); // menu exit animation
   const active = await page.evaluate(() => document.querySelector('nav[aria-label="Danh mục sản phẩm"] a[aria-current="page"]')?.textContent.trim());
-  return expect(page.url().includes("danh-muc=in-an") && /in ấn/i.test(active ?? "") && !(await page.$("div.fixed.inset-0")), `${page.url()} active=${active}`);
+  return expect(page.url().includes("danh-muc=in-an") && /in ấn/i.test(active ?? "") && !(await page.$("div.fixed.inset-0.z-40")), `${page.url()} active=${active}`);
 });
 await test("MOB-05", "Thanh trên điện thoại có icon giỏ + số; menu không còn nút 'Giỏ hàng' to", async () => {
   await go("/");

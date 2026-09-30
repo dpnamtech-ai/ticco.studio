@@ -1,7 +1,7 @@
-# Regression — 2026-09-29 20:38 UTC
+# Regression — 2026-09-30 01:59 UTC
 
 Target: http://localhost:3100 (local, full incl. orders on a mock Sheet)
-Result: **81/81 pass**
+Result: **82/82 pass**
 
 | | ID | Case | Chi tiết |
 |---|---|---|---|
@@ -30,6 +30,7 @@ Result: **81/81 pass**
 | ✅ | MOB-01 | Không tràn ngang trên điện thoại (390) /tim-kiem?q=dan |  |
 | ✅ | MOB-02 | Menu mobile mở được, đủ 4 mục + có nút tìm kiếm |  |
 | ✅ | MOB-03 | Menu đang mở, bấm kính lúp -> menu đóng, thấy ngay ô tìm kiếm (BUG-011) |  |
+| ✅ | FX-01 | Mobile: chạm màn hình -> Đần rơi rồi tự biến mất, không chặn thao tác; PC không có |  |
 | ✅ | MOB-04 | Menu mobile có danh mục sản phẩm (Tất cả, Văn phòng phẩm, In ấn…) bấm vào đúng tab |  |
 | ✅ | MOB-05 | Thanh trên điện thoại có icon giỏ + số; menu không còn nút 'Giỏ hàng' to |  |
 | ✅ | CART-03 | Giỏ hàng trên điện thoại: có ảnh, tên không bị bẻ từng chữ, không tràn ngang (BUG-013) |  |

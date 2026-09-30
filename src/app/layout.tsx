@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import DanCursor from "@/components/DanCursor";
+import DanRain from "@/components/DanRain";
 import PromoBar from "@/components/PromoBar";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -105,6 +106,7 @@ export default function RootLayout({
         <CartProvider>
           <ScrollProgress />
           <DanCursor />
+          <DanRain />
           <PromoBar />
           <Navbar />
           <main>

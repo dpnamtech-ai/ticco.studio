@@ -59,3 +59,6 @@ dev.log
 dev.err
 design/demo-images/
 design/demo-ref/
+
+# regression screenshots (regenerated every run, reviewed locally)
+qa/visual/
