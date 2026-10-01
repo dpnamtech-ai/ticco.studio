@@ -250,7 +250,7 @@ await test("FX-01", "Mobile: chạm màn hình -> Đần rơi rồi tự biến 
   await sleep(250);
   const during = await page.evaluate(() => document.querySelectorAll('div[class~="z-[9998]"] > img').length);
   const passThrough = await page.evaluate(() => getComputedStyle(document.querySelector('div[class~="z-[9998]"]')).pointerEvents);
-  await sleep(2000);
+  await sleep(3000); // fall lasts up to ~2.3s + per-Đần stagger (DanRain.tsx)
   const after = await page.evaluate(() => document.querySelectorAll('div[class~="z-[9998]"] > img').length);
   return expect(during >= 3 && after === 0 && passThrough === "none", JSON.stringify({ during, after, passThrough }));
 });

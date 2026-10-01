@@ -1,6 +1,6 @@
-# Regression — 2026-10-01 17:52 UTC
+# Regression — 2026-10-01 18:20 UTC
 
-Target: http://localhost:3123 (production, read-only)
+Target: https://ticcostudio.vercel.app (production, read-only)
 Result: **73/73 pass**
 
 | | ID | Case | Chi tiết |
