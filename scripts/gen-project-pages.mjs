@@ -27,7 +27,15 @@ const PAGES = [
     },
   },
   { slug: "lam-moi-doi-di", file: "du-an-Lam-Moi-Doi-Di", alt: "Làm Mới Đời Đi — Tíc Cơ" },
-  { slug: "minh-trong-nha-nha-trong-nuoc", file: "du-an-Minh-trong-nha-Nha-trong-nuoc", alt: "Mình Trong Nhà, Nhà Trong Nước — Tíc Cơ" },
+  {
+    slug: "minh-trong-nha-nha-trong-nuoc", file: "du-an-Minh-trong-nha-Nha-trong-nuoc", alt: "Mình Trong Nhà, Nhà Trong Nước — Tíc Cơ",
+    // "Đọc thêm về ..." cards -> the client's Instagram posts (em bé / phụ nữ giao thời / ông cựu chiến binh)
+    links: {
+      "735:173": "https://www.instagram.com/p/C_QXPIePuEk/?img_index=1",
+      "735:174": "https://www.instagram.com/p/C_Vh3yZPY3L/?img_index=1",
+      "735:175": "https://www.instagram.com/p/C_Vh3yZPY3L/?img_index=1", // TODO client: same link as 735:174, waiting for the ông's post
+    },
+  },
   { slug: "freezedom-thu-roi-nghi-di", file: "du-an-Thu-roi-nghi-di", alt: "Tíc Cơ x Freezedom: Thu Rồi Nghỉ Đi", links: { "735:179": "/san-pham/so-nghi-di" }, anchors: { "735:190": "pop-up-event" } },
   {
     slug: "neenee-dau-doi-mu-chan-vao-doi", file: "du-an-Dau-doi-mu-chan-vao-doi", alt: "Tíc Cơ x Neenee: Đầu đội mũ, Chân vào đời",

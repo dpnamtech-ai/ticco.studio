@@ -18,7 +18,8 @@ type Placed = { code: string; subtotal: number; shipping: number; total: number 
 const STORE_KEY = "ticco-last-order";
 const vnd = (n: number) => `${n.toLocaleString("vi-VN")} VNĐ`;
 
-const empty = { name: "", phone: "", email: "", province: "", district: "", ward: "", address: "", note: "", website: "" };
+// addrFormat: "moi" = 2025 (tỉnh -> xã), "cu" = before 1/7/2025 (tỉnh -> quận/huyện -> xã); customer picks.
+const empty = { name: "", phone: "", email: "", addrFormat: "moi", province: "", district: "", ward: "", address: "", note: "", website: "" };
 
 function Field({ label, error, children }: { label: string; error?: string; children: React.ReactNode }) {
   return (
@@ -68,6 +69,15 @@ export default function CheckoutClient() {
   useEffect(() => {
     fetch("/data/vn-dia-gioi.json").then((r) => r.json()).then(setUnits).catch(() => setUnits({}));
   }, []);
+  // old 3-level units, public/data/vn-dia-gioi-cu.json (provinces.open-api.vn v1, 63 tỉnh / 696 huyện / 10051 xã); loaded only if picked
+  const oldFmt = form.addrFormat === "cu";
+  const [oldUnits, setOldUnits] = useState<Record<string, Record<string, string[]>> | null>(null);
+  useEffect(() => {
+    if (oldFmt && !oldUnits) fetch("/data/vn-dia-gioi-cu.json").then((r) => r.json()).then(setOldUnits).catch(() => setOldUnits({}));
+  }, [oldFmt, oldUnits]);
+  const provinces = Object.keys((oldFmt ? oldUnits : units) ?? {});
+  const districts = Object.keys(oldUnits?.[form.province] ?? {});
+  const wards = (oldFmt ? oldUnits?.[form.province]?.[form.district] : units?.[form.province]) ?? [];
 
   // Restore the payment screen after a refresh.
   useEffect(() => {
@@ -194,25 +204,62 @@ export default function CheckoutClient() {
           <input className={input} type="email" value={form.email} onChange={set("email")} autoComplete="email" />
         </Field>
 
-        {/* Since 1/7/2025 Vietnam has 2 levels: 34 tỉnh/thành -> phường/xã (no quận/huyện). */}
-        <div className="grid gap-5 sm:grid-cols-2">
+        {/* Since 1/7/2025 Vietnam has 2 levels: 34 tỉnh/thành -> phường/xã (no quận/huyện). Old 3-level kept for customers used to it. */}
+        <fieldset className="flex flex-wrap gap-x-6 gap-y-2 text-sm">
+          <legend className="mb-1 block text-sm font-semibold text-[var(--color-ink)]">Kiểu địa chỉ</legend>
+          {[
+            ["moi", "Địa chỉ mới (từ 1/7/2025)"],
+            ["cu", "Địa chỉ cũ (có quận/huyện)"],
+          ].map(([v, label]) => (
+            <label key={v} className="flex cursor-pointer items-center gap-2">
+              <input
+                type="radio"
+                name="addrFormat"
+                value={v}
+                checked={form.addrFormat === v}
+                onChange={() => {
+                  // province/ward names differ between the two lists, so start over
+                  setForm((f) => ({ ...f, addrFormat: v, province: "", district: "", ward: "" }));
+                  setErrors((er) => ({ ...er, province: "", district: "", ward: "" }));
+                }}
+                className="accent-[var(--color-purple)]"
+              />
+              {label}
+            </label>
+          ))}
+        </fieldset>
+        <div className={`grid gap-5 ${oldFmt ? "sm:grid-cols-3" : "sm:grid-cols-2"}`}>
           <Field label="Tỉnh / Thành phố" error={errors.province}>
             <Combobox
               value={form.province}
-              options={Object.keys(units ?? {})}
+              options={provinces}
               placeholder="Gõ để tìm, vd: ha noi"
               autoComplete="address-level1"
               onChange={(v) => {
-                setForm((f) => ({ ...f, province: v, ward: f.province === v ? f.ward : "" }));
+                setForm((f) => (f.province === v ? f : { ...f, province: v, district: "", ward: "" }));
                 setErrors((er) => ({ ...er, province: "" }));
               }}
             />
           </Field>
+          {oldFmt && (
+            <Field label="Quận / Huyện" error={errors.district}>
+              <Combobox
+                value={form.district}
+                options={districts}
+                placeholder={form.province ? "Gõ để tìm quận/huyện" : "Chọn tỉnh/thành trước"}
+                autoComplete="address-level2"
+                onChange={(v) => {
+                  setForm((f) => (f.district === v ? f : { ...f, district: v, ward: "" }));
+                  setErrors((er) => ({ ...er, district: "" }));
+                }}
+              />
+            </Field>
+          )}
           <Field label="Phường / Xã" error={errors.ward}>
             <Combobox
               value={form.ward}
-              options={units?.[form.province] ?? []}
-              placeholder={form.province ? "Gõ để tìm phường/xã" : "Chọn tỉnh/thành trước"}
+              options={wards}
+              placeholder={(oldFmt ? form.district : form.province) ? "Gõ để tìm phường/xã" : oldFmt ? "Chọn quận/huyện trước" : "Chọn tỉnh/thành trước"}
               onChange={(v) => {
                 setForm((f) => ({ ...f, ward: v }));
                 setErrors((er) => ({ ...er, ward: "" }));

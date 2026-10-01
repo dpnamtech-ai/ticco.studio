@@ -1,7 +1,7 @@
-# Regression — 2026-09-30 01:59 UTC
+# Regression — 2026-10-01 17:52 UTC
 
-Target: http://localhost:3100 (local, full incl. orders on a mock Sheet)
-Result: **82/82 pass**
+Target: http://localhost:3123 (production, read-only)
+Result: **73/73 pass**
 
 | | ID | Case | Chi tiết |
 |---|---|---|---|
@@ -9,7 +9,7 @@ Result: **82/82 pass**
 | ✅ | SMK-02 | Sản phẩm không tồn tại trả 404 |  |
 | ✅ | SEC-10 | Admin chưa đăng nhập: chuyển về /admin/login (hoặc 404 khi chưa bật Supabase), không bao giờ 200/500 (BUG-010) |  |
 | ✅ | ADM-30 | Gọi thẳng 6 server action admin (tạo/sửa/xoá SP, đổi đơn, upload, đăng xuất) khi chưa đăng nhập -> bị chặn |  |
-| ✅ | LEG-01 | Footer chỉ có link Thông tin người bán + 5 chính sách (mở được), không phơi thông tin người bán |  |
+| ✅ | LEG-01 | Footer chỉ có 5 link chính sách (mở được), không có link/thông tin người bán (khách yêu cầu bỏ) |  |
 | ✅ | SEC-11 | Security headers (chống nhúng iframe, sniff, HSTS) |  |
 | ✅ | IMG-01 | Ảnh load đủ + không tràn ngang (1280) / |  |
 | ✅ | IMG-01 | Ảnh load đủ + không tràn ngang (1280) /san-pham |  |
@@ -29,7 +29,7 @@ Result: **82/82 pass**
 | ✅ | MOB-01 | Không tràn ngang trên điện thoại (390) /mascot-dan |  |
 | ✅ | MOB-01 | Không tràn ngang trên điện thoại (390) /tim-kiem?q=dan |  |
 | ✅ | MOB-02 | Menu mobile mở được, đủ 4 mục + có nút tìm kiếm |  |
-| ✅ | MOB-03 | Menu đang mở, bấm kính lúp -> menu đóng, thấy ngay ô tìm kiếm (BUG-011) |  |
+| ✅ | MOB-03 | Menu đang mở, bấm kính lúp -> menu đóng, thanh tìm kiếm trượt ra, con trỏ ở ô nhập (BUG-011) |  |
 | ✅ | FX-01 | Mobile: chạm màn hình -> Đần rơi rồi tự biến mất, không chặn thao tác; PC không có |  |
 | ✅ | MOB-04 | Menu mobile có danh mục sản phẩm (Tất cả, Văn phòng phẩm, In ấn…) bấm vào đúng tab |  |
 | ✅ | MOB-05 | Thanh trên điện thoại có icon giỏ + số; menu không còn nút 'Giỏ hàng' to |  |
@@ -54,9 +54,9 @@ Result: **82/82 pass**
 | ✅ | SRC-02 | Gõ không dấu vẫn tìm được ('so' chứa mọi kết quả của 'sổ') |  |
 | ✅ | SRC-05 | Tìm 'áo' chỉ ra sản phẩm là áo, không lẫn 'bao/cao/giao' (BUG-012) |  |
 | ✅ | SRC-06 | Tìm 'túi' chỉ ra túi |  |
-| ✅ | SRC-07 | Trang tìm kiếm không trống: chưa gõ -> có danh mục + gợi ý; không có kết quả -> vẫn có gợi ý |  |
+| ✅ | SRC-07 | Trang /tim-kiem chưa gõ -> có danh mục, không có mục gợi ý (khách bỏ 'Có thể bạn sẽ thích') |  |
 | ✅ | SRC-03 | Không có kết quả -> thông báo + link xem sản phẩm |  |
-| ✅ | SRC-04 | Kính lúp trên navbar mở trang tìm kiếm, con trỏ ở ô nhập |  |
+| ✅ | SRC-04 | Kính lúp trên navbar mở thanh tìm kiếm bên phải: trống khi chưa gõ, gõ ra kết quả, Esc đóng, trang sau không cuộn |  |
 | ✅ | SEC-01 | XSS qua ô tìm kiếm không chạy script |  |
 | ✅ | CART-01 | Thêm 2 lựa chọn khác nhau = 2 dòng, giá đúng từng lựa chọn (BUG-008) |  |
 | ✅ | CART-02 | Trang giỏ: tăng số lượng, giữ sau khi tải lại, xoá dòng |  |
@@ -77,13 +77,4 @@ Result: **82/82 pass**
 | ✅ | VAL-10 | Email sai -> 422 |  |
 | ✅ | SEC-04 | GET /api/orders không được phép (405) |  |
 | ✅ | VAL-11 | Form báo lỗi SĐT sai ngay dưới ô nhập |  |
-| ✅ | ORD-01 | Đặt hàng: màn tổng quan + mã đơn + tổng đúng; Sheet nhận giá đúng dù giỏ bị sửa giá |  |
-| ✅ | ORD-02 | Tải lại trang sau khi đặt vẫn thấy thông tin chuyển khoản |  |
-| ✅ | ORD-03 | Đặt xong, mua tiếp, vào checkout -> form đơn MỚI (không kẹt ở đơn cũ) (BUG-009) |  |
-| ✅ | ORD-04 | Miễn phí ship khi đơn >= 500k |  |
-| ✅ | SEC-05 | Giá giả gửi từ client bị bỏ qua (server tự tính) |  |
-| ✅ | SEC-06 | Chèn công thức vào Sheet bị vô hiệu (= + - @ -> chữ thường) |  |
-| ✅ | SEC-07 | XSS trong tên/ghi chú: giao diện không chạy script |  |
-| ✅ | CANCEL-03 | Sheet lỗi -> khách thấy báo lỗi, giỏ hàng GIỮ NGUYÊN để thử lại |  |
-| ✅ | SEC-09 | Chống spam: đơn thứ 7 trong 1 phút từ 1 IP -> 429 |  |
 | ✅ | CON-01 | Không có lỗi JS trong console trên các trang đã mở |  |

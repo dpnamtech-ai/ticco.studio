@@ -200,7 +200,7 @@ export default function FigmaCanvas({ page }: { page: FigPage }) {
                 const kids = it.items.map((c) => <Leaf key={c.id} l={c} o={cOrd(c)} hover={Boolean(it.href) && c.k === "text"} inCard />);
                 const style = { "--o": ord(it) } as Vars;
                 return it.href ? (
-                  <Link key={it.id} href={it.href} className={`${cls} group`} style={style}>
+                  <Link key={it.id} href={it.href} className={`${cls} group`} style={style} {...(/^https?:/.test(it.href) && { target: "_blank", rel: "noopener noreferrer" })}>
                     {kids}
                   </Link>
                 ) : (

@@ -12,15 +12,47 @@ import Reveal from "@/components/Reveal";
   badges render the user's own Figma-exported PNGs (baked-in layout/
   typography) instead of hand-typed text, per their own design.
 */
+// Mission copy split at the Figma line breaks; "" = paragraph gap. Each line slides up from behind its own
+// mask, one after another (was a baked PNG). On phones a long line may wrap and slides as one block.
+const MISSION_LINES = [
+  "Tíc Cơ là thương hiệu Việt với các sản phẩm tiêu dùng sáng tạo",
+  "lấy cảm hứng từ chất liệu đời thường,",
+  "do người trẻ Việt thiết kế.",
+  "",
+  "Chúng tôi hướng tới việc lan toả lối sống phóng khoáng, xởi lởi",
+  "và tích cực, bước đi cùng người trẻ trong hành trình phát triển",
+  "mình và khám phá cuộc sống hàng ngày",
+  "theo những góc nhìn mới.",
+];
+
+function MissionText({ className, style }: { className?: string; style?: React.CSSProperties }) {
+  return (
+    // flex column: the masks' py-2/-my-2 would otherwise collapse between lines and add 8px to every line
+    <div className={`flex flex-col ${className}`} style={style}>
+      <p className="sr-only">{brand.mission}</p>
+      {MISSION_LINES.map((l, i) =>
+        l ? (
+          <Reveal key={i} variant="mask" duration={1} delay={i * 0.09}>
+            <span aria-hidden className="block">{l}</span>
+          </Reveal>
+        ) : (
+          <div key={i} aria-hidden className="h-[1lh]" />
+        ),
+      )}
+    </div>
+  );
+}
+
 export default function BrandSection() {
   return (
     <>
     <section className="max-md:hidden relative w-full bg-[var(--color-orange)] text-white">
-    <div className="relative aspect-[1283/820] overflow-hidden">
-      <Reveal variant="mask" duration={1.2} className="absolute" style={{ left: "17.69%", top: "11.22%", width: "64.77%" }}>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/images/brand/mission-text.png" alt={brand.mission} className="w-full h-auto" />
-      </Reveal>
+    <div className="relative aspect-[1283/820] overflow-hidden [container-type:inline-size]">
+      {/* Figma 671:66: Be Vietnam Medium 30/33, ls -1.2, centred, 831 wide; units = cqw of the 1283-wide section */}
+      <MissionText
+        className="absolute text-center font-medium"
+        style={{ left: "17.69%", top: "11.22%", width: "64.77%", fontSize: "2.338cqw", lineHeight: "2.572cqw", letterSpacing: "-0.0935cqw" }}
+      />
 
       <a
         href="/ve-tic-co"
@@ -88,10 +120,7 @@ export default function BrandSection() {
 
     {/* Phones: the same content stacked, at readable sizes (the absolute composition above is desktop only) */}
     <section className="md:hidden bg-[var(--color-orange)] text-white px-5 py-12 flex flex-col items-center gap-9 overflow-hidden">
-      <Reveal variant="blur" className="w-full">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/images/brand/mission-text.png" alt={brand.mission} className="w-full h-auto" />
-      </Reveal>
+      <MissionText className="w-full text-center text-[17px] font-medium leading-snug tracking-[-0.03em] [text-wrap:balance]" />
       <a href="/ve-tic-co" className="w-[62%]">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src="/images/brand/link-hieu-hon.png" alt="Hiểu hơn về Tíc Cơ!" className="w-full h-auto" />

@@ -2008,7 +2008,8 @@ export const figmaPages: Record<string, FigPage> = {
         "tag": "p",
         "nowrap": true
        }
-      ]
+      ],
+      "href": "https://www.instagram.com/p/C_QXPIePuEk/?img_index=1"
      },
      {
       "k": "card",
@@ -2041,7 +2042,8 @@ export const figmaPages: Record<string, FigPage> = {
         "tag": "p",
         "nowrap": true
        }
-      ]
+      ],
+      "href": "https://www.instagram.com/p/C_Vh3yZPY3L/?img_index=1"
      },
      {
       "k": "card",
@@ -2074,7 +2076,8 @@ export const figmaPages: Record<string, FigPage> = {
         "tag": "p",
         "nowrap": true
        }
-      ]
+      ],
+      "href": "https://www.instagram.com/p/C_Vh3yZPY3L/?img_index=1"
      }
     ],
     "bg": "#b51515"
