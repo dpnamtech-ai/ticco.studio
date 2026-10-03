@@ -50,6 +50,10 @@ if (LOCAL) {
       res.end(JSON.stringify(ok ? { ok: true } : { ok: false, error: "forbidden" }));
     });
   }).listen(3199);
+  // A server already on :3100 would be an older build answering in place of this one: refuse instead of testing it.
+  if (await fetch(BASE).then(() => true, () => false)) {
+    throw new Error(`${BASE} is already in use: stop that server (an old build) so this run tests the current .next`);
+  }
   server = spawn("npx", ["next", "start", "-p", "3100"], {
     shell: true,
     stdio: "ignore",
