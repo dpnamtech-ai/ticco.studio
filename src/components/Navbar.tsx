@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import Image from "next/image";
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
@@ -9,15 +8,18 @@ import { Search, ShoppingCart, Menu, X, ChevronDown } from "lucide-react";
 import { navLinks, brand } from "@/data/content";
 import { useCart } from "@/context/CartContext";
 import SearchDrawer from "@/components/SearchDrawer";
+import LangSwitch, { useLang, usePagePath } from "@/components/LangSwitch";
+import { localize } from "@/lib/i18n";
 
 type NavLink = (typeof navLinks)[number];
 
 // Desktop item; "Khám phá" opens a sub-menu on hover/focus that jumps to a section of /kham-pha.
 function NavItem({ link, active }: { link: NavLink; active: boolean }) {
+  const lang = useLang();
   return (
     <li className="relative group md:h-[calc(27*var(--u))] flex items-center">
       <Link
-        href={link.href}
+        href={localize(link.href, lang)}
         aria-current={active ? "page" : undefined}
         className={`hover-underline flex items-center hover:opacity-80 transition-opacity ${active ? "is-active font-extrabold" : ""}`}
       >
@@ -29,7 +31,7 @@ function NavItem({ link, active }: { link: NavLink; active: boolean }) {
           <ul className="min-w-[250px] rounded-lg bg-white py-2 text-[var(--color-purple)] shadow-xl ring-1 ring-black/10">
             {link.children.map((c) => (
               <li key={c.href}>
-                <Link href={c.href} className="block whitespace-nowrap px-5 py-2.5 transition-colors hover:bg-[var(--color-orange)]/15">
+                <Link href={localize(c.href, lang)} className="block whitespace-nowrap px-5 py-2.5 transition-colors hover:bg-[var(--color-orange)]/15">
                   {c.label}
                 </Link>
               </li>
@@ -48,7 +50,9 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const { totalItems, openDrawer } = useCart();
-  const pathname = usePathname();
+  const lang = useLang();
+  // without the /en prefix, so active states and sections work the same in both languages
+  const pathname = usePagePath();
   // which collapsible section of the mobile menu is open
   const [expanded, setExpanded] = useState<string | null>(() => sectionOf(pathname));
   // A section is active on its own page and any page below it (e.g. /kham-pha/nguoi-viet-van-dong).
@@ -70,7 +74,7 @@ export default function Navbar() {
             with 46px gaps and no dropdown chevrons; Be Vietnam 600 13/19, no letter-spacing. */}
         <div className="relative max-w-[1280px] md:max-w-[calc(1280*var(--u))] mx-auto px-6 h-16 md:h-[calc(27*var(--u))] flex items-center justify-between gap-6 md:justify-center md:gap-0">
           {/* Wordmark */}
-          <Link href="/" aria-label={brand.shortName} className="shrink-0 md:absolute md:left-[calc(35*var(--u))] md:top-1/2 md:-translate-y-1/2">
+          <Link href={localize("/", lang)} aria-label={brand.shortName} className="shrink-0 md:absolute md:left-[calc(35*var(--u))] md:top-1/2 md:-translate-y-1/2">
             <Image src="/images/logo-tic-co.png" alt={brand.shortName} width={2731} height={837} sizes="(min-width: 768px) 125px, 72px" priority className="w-[72px] md:w-[calc(83*var(--u))] h-auto" />
           </Link>
 
@@ -84,6 +88,7 @@ export default function Navbar() {
           {/* Icons */}
           {/* Figma "Frame 5" X1153-1219: search 21px (#fef7ff) + cart art 36x36, gap 9 */}
           <div className="hidden md:flex items-center gap-[calc(9*var(--u))] md:absolute md:right-[calc(61*var(--u))] md:top-1/2 md:-translate-y-1/2">
+            <LangSwitch variant="short" className="mr-[calc(8*var(--u))] text-[calc(12*var(--u))] font-semibold leading-none" />
             <button onClick={() => setSearchOpen(true)} aria-label="Tìm kiếm" className="text-[#fef7ff] hover:opacity-80 transition-opacity">
               <Search size={21} className="size-[calc(21*var(--u))]" />
             </button>
@@ -150,7 +155,7 @@ export default function Navbar() {
                   <li key={link.href} className="py-3">
                     <div className="flex items-center justify-between">
                       <Link
-                        href={link.href}
+                        href={localize(link.href, lang)}
                         onClick={() => setMenuOpen(false)}
                         aria-current={isActive(link.href) ? "page" : undefined}
                         className={`font-[family-name:var(--font-heading)] text-2xl font-bold ${isActive(link.href) ? "underline underline-offset-8 decoration-2" : ""}`}
@@ -173,7 +178,7 @@ export default function Navbar() {
                       <ul className="mt-2 ml-1 flex flex-col gap-2.5 pb-1 text-base font-semibold text-white/90">
                         {kids.map((c) => (
                           <li key={c.href}>
-                            <Link href={c.href} onClick={() => setMenuOpen(false)}>
+                            <Link href={localize(c.href, lang)} onClick={() => setMenuOpen(false)}>
                               {c.label}
                             </Link>
                           </li>
@@ -184,6 +189,7 @@ export default function Navbar() {
                 );
               })}
             </ul>
+            <LangSwitch variant="long" className="mt-8 text-lg font-semibold" onSwitch={() => setMenuOpen(false)} />
           </motion.div>
         )}
       </AnimatePresence>
