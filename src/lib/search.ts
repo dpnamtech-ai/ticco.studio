@@ -37,8 +37,11 @@ export async function search(q: string) {
   const products = byName.length ? byName : all.filter((p) => hit(plain(p.description)));
   const content = Object.keys(figmaPages).flatMap((slug) => {
     const title = slug === "kham-pha" ? "Khám phá - Dự án vui" : (projects.find((p) => p.id === slug)?.title ?? slug);
-    const found = [title, ...pageTexts(slug)].find(hit);
-    return found ? [{ slug, title, snippet: found === title ? "" : found, href: slug === "kham-pha" ? "/kham-pha" : `/kham-pha/${slug}` }] : [];
+    const texts = pageTexts(slug);
+    const found = [title, ...texts].find(hit);
+    // Title itself matched: show the page's first real sentence instead of an empty line (looked like missing meta).
+    const intro = () => texts.find((t) => t.length > 40 && t !== title) ?? "";
+    return found ? [{ slug, title, snippet: found === title ? intro() : found, href: slug === "kham-pha" ? "/kham-pha" : `/kham-pha/${slug}` }] : [];
   });
   return { products, content };
 }
