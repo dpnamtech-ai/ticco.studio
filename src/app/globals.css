@@ -111,6 +111,18 @@ body {
   .step-a, .step-b, .bob, .dan-pop, .dan-float { animation: none; }
   .step-b { opacity: 0; }
 }
+/* Scatter.tsx: words wait scattered (random offset/scale/skew, blurred) and fly into place when the group gets .sw-in */
+.sw-word {
+  display: inline-block;
+  opacity: 0;
+  filter: blur(0.6cqw);
+  transform: translate(var(--sx), var(--sy)) scale(var(--ss)) skewX(var(--sk));
+  transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1) var(--sd), opacity 0.7s ease var(--sd), filter 1s ease var(--sd);
+}
+.sw-in .sw-word { opacity: 1; filter: none; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .sw-word { opacity: 1; filter: none; transform: none; transition: none; }
+}
 
 /* Rich-text product description (admin's Tiptap editor + the public product page share this). */
 .rich-content h2 { font-size: 1.25rem; font-weight: 700; margin: 1em 0 0.4em; }

@@ -11,6 +11,7 @@ import PageTransition from "@/components/PageTransition";
 import ScrollProgress from "@/components/ScrollProgress";
 import { CartProvider } from "@/context/CartContext";
 import { SITE_URL, SOCIALS } from "@/lib/site";
+import { getProducts } from "@/lib/products";
 import { brand } from "@/data/content";
 
 // Figma specifies "Be Vietnam" (the original family), not "Be Vietnam Pro" —
@@ -62,11 +63,13 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // product id -> photo, so carts saved before the cart stored photos (grey boxes) get one back
+  const cartImages = Object.fromEntries((await getProducts()).flatMap((p) => (p.image ? [[p.id, p.image]] : [])));
   // Brand + site entities for search engines and AI answers (GEO): who Tíc Cơ is, where it lives, how to search it.
   const organizationJsonLd = {
     "@context": "https://schema.org",
@@ -103,7 +106,7 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
         />
-        <CartProvider>
+        <CartProvider images={cartImages}>
           <ScrollProgress />
           <DanCursor />
           <DanRain />

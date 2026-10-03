@@ -6,6 +6,8 @@ import ProductCard from "@/components/ProductCard";
 import Reveal from "@/components/Reveal";
 import MarchingDan from "@/components/MarchingDan";
 import ScrollFillText from "@/components/ScrollFillText";
+import { ScatterGroup } from "@/components/Scatter";
+import { ScatterWords, scatterVars } from "@/components/scatterWords";
 import { getProducts } from "@/lib/products";
 import { cropFillStyle } from "@/lib/figmaCrop";
 import { MASCOT_GRID, figmaCardProps } from "@/data/figma-cards";
@@ -35,7 +37,9 @@ export default async function MascotDanPage() {
   return (
     <>
       {/* Figma "hero section" (visible 1280x532 from Y51), rebuilt from its layers; Figma px -> cqw */}
+      {/* headline + callouts fly in word by word and assemble (client's reference video), see Scatter.tsx */}
       <section className="relative w-full bg-[#f2f1f1]">
+      <ScatterGroup>
       {/* phones: the headline on its own strip (same art, shifted up)… */}
       <div className="lg:hidden relative aspect-[1280/170] overflow-hidden [container-type:inline-size]" aria-hidden>
         <Headline dy={-30} tag="p" />
@@ -62,9 +66,9 @@ export default async function MascotDanPage() {
             style={cropFillStyle([[0.357902, 0, 0.321581], [0, 0.390978, 0.359367]])}
           />
         </div>
-        {HERO_CALLOUTS.map(([x, y, w, t]) => (
+        {HERO_CALLOUTS.map(([x, y, w, t], i) => (
           <p key={x} className="absolute whitespace-pre-line text-black" style={{ left: cq(x), top: cq(y), width: cq(w), fontSize: cq(22), lineHeight: cq(25), letterSpacing: cq(-1.1) }}>
-            {t}
+            <ScatterWords text={t} seed={10 + i} />
           </p>
         ))}
         <svg className="absolute inset-0 size-full" viewBox="0 0 1280 532" aria-hidden>
@@ -73,6 +77,7 @@ export default async function MascotDanPage() {
       </div>
       </div>
       <div className="lg:hidden h-6" />
+      </ScatterGroup>
       </section>
 
       {/* Figma "sub text" (1280x120): purple band, #e5ff00 600 36/55 uppercase */}
@@ -201,10 +206,10 @@ function Headline({ dy, tag: Tag }: { dy: number; tag: "h1" | "p" }) {
         className="absolute text-center font-semibold whitespace-pre text-[var(--color-purple)]"
         style={{ left: cq(140), top: cq(112 + dy), width: cq(1001), fontSize: cq(125), lineHeight: cq(19), letterSpacing: cq(-13.75) }}
       >
-        {"“SỐNG     ĐẦN     LÊN!”"}
+        <ScatterWords text={"“SỐNG     ĐẦN     LÊN!”"} seed={1} />
       </Tag>
       {[512, 803].map((x) => (
-        <div key={x} className="absolute bg-[var(--color-purple)]" style={{ left: cq(x), top: cq(137 + dy), width: cq(45), height: cq(6) }} />
+        <div key={x} className="sw-word absolute bg-[var(--color-purple)]" style={{ ...scatterVars(x), left: cq(x), top: cq(137 + dy), width: cq(45), height: cq(6) }} />
       ))}
     </>
   );

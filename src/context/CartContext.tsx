@@ -37,7 +37,7 @@ const CartContext = createContext<CartContextValue | null>(null);
 
 const STORAGE_KEY = "ticco-cart";
 
-export function CartProvider({ children }: { children: ReactNode }) {
+export function CartProvider({ children, images = {} }: { children: ReactNode; images?: Record<string, string> }) {
   const [items, setItems] = useState<CartItem[]>([]);
   const [hydrated, setHydrated] = useState(false);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -47,11 +47,12 @@ export function CartProvider({ children }: { children: ReactNode }) {
       const raw = localStorage.getItem(STORAGE_KEY);
       // hydrate from localStorage after mount (reading it during render would mismatch SSR)
       // eslint-disable-next-line react-hooks/set-state-in-effect
-      if (raw) setItems(JSON.parse(raw));
+      if (raw) setItems((JSON.parse(raw) as CartItem[]).map((i) => (i.image ? i : { ...i, image: images[i.id] })));
     } catch {
       // ignore corrupted storage
     }
     setHydrated(true);
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- images is the server catalog, fixed for the page
   }, []);
 
   useEffect(() => {
