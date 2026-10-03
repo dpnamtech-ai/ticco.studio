@@ -1,13 +1,13 @@
-# SEO / GEO report — 2026-09-29 20:40 UTC
+# SEO / GEO report — 2026-10-03 20:16 UTC
 
-Target: https://ticcostudio.vercel.app · **Điểm trung bình: 100/100** · Site checks: 6/8
+Target: https://ticcostudios.com · **Điểm trung bình: 100/100** · Site checks: 6/8
 
 ## Site
 - ✅ robots.txt
 - ✅ robots.txt cho phép bot AI (GPTBot, ClaudeBot, PerplexityBot, Google-Extended)
-- ✅ sitemap.xml (63 URL)
+- ✅ sitemap.xml (126 URL)
 - ✅ sitemap dùng cùng tên miền với web
-- ✅ llms.txt (12674 ký tự)
+- ✅ llms.txt (12314 ký tự)
 - ✅ Admin/giỏ/checkout bị chặn index
 - ❌ Xác minh Google Search Console (meta)
 - ❌ Xác minh Bing Webmaster (meta)

@@ -1,7 +1,7 @@
-# Regression — 2026-10-01 18:20 UTC
+# Regression — 2026-10-03 20:16 UTC
 
-Target: https://ticcostudio.vercel.app (production, read-only)
-Result: **73/73 pass**
+Target: https://ticcostudios.com (production, read-only)
+Result: **74/74 pass**
 
 | | ID | Case | Chi tiết |
 |---|---|---|---|
@@ -70,7 +70,8 @@ Result: **73/73 pass**
 | ✅ | VAL-03 | Giỏ rỗng -> 422 |  |
 | ✅ | VAL-04 | Sản phẩm không tồn tại -> 422 |  |
 | ✅ | VAL-05 | Số lượng 0 -> 422 |  |
-| ✅ | VAL-06 | Số lượng 21 (quá 20) -> 422 |  |
+| ✅ | VAL-06 | Số lượng 100 (quá 99) -> 422 |  |
+| ✅ | VAL-06b | Số lượng 26 (đơn sỉ, ảnh lỗi 03/10) -> 200 |  |
 | ✅ | VAL-07 | Số lượng lẻ 1.5 -> 422 |  |
 | ✅ | VAL-08 | 31 dòng hàng -> 422 |  |
 | ✅ | VAL-09 | Sản phẩm hết hàng -> 422 |  |

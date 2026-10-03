@@ -16,7 +16,7 @@ Test plan: `qa/MASTER-TEST-PLAN.md` · Bug log: `qa/BUGS.md` · Mẫu footer/ch�
 ## B. Nên xong trước mở bán (P1)
 | # | Việc | Ai |
 |---|---|---|
-| B1 | Tên miền thật: gửi tên + nơi mua → Claude `vercel domains add`, bạn thêm DNS; sửa `metadataBase`, sitemap | Bạn + Claude |
+| B1 | ✅ 03/10 — ticcostudios.com (Mắt Bão, NS mặc định; A @ 76.76.21.21, CNAME www, TXT google-site-verification) gắn Vercel, NEXT_PUBLIC_SITE_URL đặt + redeploy, GSC đã xác minh (Miền) + gửi sitemap | — |
 | B2 | ĐÃ DỰNG (30/09): footer chỉ 1 dòng link (user không muốn phơi tên/MST/địa chỉ); trang `/chinh-sach/thong-tin-nguoi-ban` + 5 chính sách, chỗ `[...]` tô vàng = khách điền trong `src/data/legal.ts`. Khi được Bộ CT duyệt: điền `seller.bctUrl` là logo tự hiện | Khách điền |
 | B3 | Thông báo website với Bộ Công Thương (online.gov.vn) sau khi có tên miền | Khách |
 | B4 | Khách duyệt giá/mô tả/tồn kho/hết hàng; chốt phí ship (30k, free từ 500k) | Khách |
