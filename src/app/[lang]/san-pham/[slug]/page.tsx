@@ -43,6 +43,12 @@ export async function generateMetadata({
   };
 }
 
+// Shrink for a translated title longer than the Figma copy: single lines keep their width, multi-line their area.
+const fitRatio = (source: string, shown: string) => {
+  const r = source.replace(/\s+/g, "").length / shown.replace(/\s+/g, "").length;
+  return r >= 1 ? 1 : source.includes("\n") ? Math.sqrt(r) : r;
+};
+
 // Figma san-pham-* frames. Desktop values are Figma px / 12.8 (1280px frame = 100cqw).
 export default async function ProductPage({
   params,
@@ -125,6 +131,7 @@ export default async function ProductPage({
           name={product.name}
           priceFrom={product.priceFrom}
           title={T(f.title)}
+          titleFit={fitRatio(f.title, T(f.title))}
           priceLabel={T(f.detailPrice)}
           description={
             T(product.description) ||

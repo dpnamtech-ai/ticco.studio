@@ -22,6 +22,8 @@ interface ProductDetailProps {
   priceFrom: number;
   /** Heading copy (Figma line breaks); shown uppercase. */
   title: string;
+  /** < 1 shrinks the desktop title: a translation longer than the Figma copy it was laid out for. */
+  titleFit?: number;
   /** Price copy, e.g. "445.000 VNĐ/ BST 3 box". */
   priceLabel: string;
   description: string;
@@ -61,6 +63,7 @@ export default function ProductDetail({
   name,
   priceFrom,
   title,
+  titleFit = 1,
   priceLabel,
   description,
   variants,
@@ -157,7 +160,7 @@ export default function ProductDetail({
         {/* Figma's SOLD OUT frames pin the description at Y336 and the button at Y506 whatever the title length. */}
         <div className={L ? "lg:contents" : soldOut ? "lg:min-h-[13.516cqw]" : undefined}>
           <Reveal variant="up" duration={1.1} className={abs} style={at(L?.title)}>
-            <h1 className={`text-[28px] lg:text-[3.125cqw] leading-tight ${L ? "lg:leading-(--lh)" : "lg:leading-[3.516cqw]"} font-semibold uppercase tracking-[-1.2px] lg:tracking-[-0.156cqw] text-[#53129e] whitespace-pre-line`}>
+            <h1 style={{ "--fit": String(titleFit) } as Vars} className={`text-[28px] lg:text-[calc(3.125cqw*var(--fit))] leading-tight ${L ? "lg:leading-(--lh)" : "lg:leading-[3.516cqw]"} font-semibold uppercase tracking-[-1.2px] lg:tracking-[-0.156cqw] text-[#53129e] whitespace-pre-line`}>
               {title}
             </h1>
           </Reveal>

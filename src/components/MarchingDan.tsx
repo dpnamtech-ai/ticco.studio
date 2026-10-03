@@ -85,10 +85,15 @@ export default async function MarchingDan({ alt }: { alt: string }) {
         <div aria-hidden className="font-semibold text-white max-lg:hidden" style={{ fontSize: cq(24), lineHeight: cq(30), letterSpacing: cq(-1.68) }}>
           {CAPTIONS.map((c, i) => (
             <div key={i}>
-              <div className="absolute bg-[#e85f08]" style={{ left: cq(c.box[0]), top: cq(c.box[1]), width: cq(c.box[2]), height: cq(c.box[3]) }} />
+              {/* English copy doesn't fit the Figma boxes (sized to the Vietnamese): there the orange box hugs the text */}
+              {lang === "vi" && <div className="absolute bg-[#e85f08]" style={{ left: cq(c.box[0]), top: cq(c.box[1]), width: cq(c.box[2]), height: cq(c.box[3]) }} />}
               <p
-                className="absolute whitespace-pre"
-                style={{ top: cq(c.ty), ...("tr" in c ? { right: cq(1280 - c.tr), textAlign: "right" } : { left: cq(c.tx) }) }}
+                className={`absolute whitespace-pre ${lang === "vi" ? "" : "bg-[#e85f08]"}`}
+                style={
+                  lang === "vi"
+                    ? { top: cq(c.ty), ...("tr" in c ? { right: cq(1280 - c.tr), textAlign: "right" } : { left: cq(c.tx) }) }
+                    : { top: cq(c.box[1]), padding: `${cq(3)} ${cq(5)}`, ...("tr" in c ? { right: cq(1280 - c.box[0] - c.box[2]), textAlign: "right" } : { left: cq(c.box[0]) }) }
+                }
               >
                 {T(mascotPage.traits.captions[i])}
               </p>

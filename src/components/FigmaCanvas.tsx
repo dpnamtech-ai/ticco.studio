@@ -5,7 +5,7 @@ import Reveal from "@/components/Reveal";
 import ScatterText from "@/components/ScatterText";
 import { cropFillStyle, zoomSizes, type ImageTransform } from "@/lib/figmaCrop";
 import { DEFAULT_LANG, localize, type Lang } from "@/lib/i18n";
-import { tx } from "@/lib/t";
+import { t, tx } from "@/lib/t";
 
 /*
   Renders a Figma frame laid out by src/data/project-pages.ts (generated from the DEMO file).
@@ -178,9 +178,53 @@ function Leaf({ l, o, hover, inCard }: { l: FigLeaf; o: number; hover?: boolean;
   return <Shape b={l} o={o} />;
 }
 
+// Figma texts are sized for the Vietnamese copy (fixed boxes, many set line by line). For a translation:
+// - the Vietnamese line breaks are kept: an unbroken translation is split into as many balanced lines;
+// - set lines (nowrap, a box exactly that many lines tall, or a short title) shrink by the longest-line ratio, so
+//   they keep their width; wrapping paragraphs shrink by the square root of the length ratio (same area).
+// ponytail: character count stands in for rendered width; fine for Latin copy of similar weight.
+const len = (s: string) => s.replace(/\s+/g, " ").trim().length;
+const longest = (s: string) => Math.max(...s.split("\n").map(len));
+
+// "a b c d" into n lines of about equal length (word boundaries only)
+function balance(s: string, n: number) {
+  const words = s.split(/\s+/);
+  const target = len(s) / n;
+  const lines: string[] = [];
+  let cur = "";
+  for (const w of words) {
+    if (cur && lines.length < n - 1 && len(`${cur} ${w}`) > target + w.length / 2) {
+      lines.push(cur);
+      cur = w;
+    } else cur = cur ? `${cur} ${w}` : w;
+  }
+  return [...lines, cur].join("\n");
+}
+
+function fitText(page: FigPage, lang: Lang): FigPage {
+  const fit = (v: unknown): unknown => {
+    if (Array.isArray(v)) return v.map(fit);
+    if (!v || typeof v !== "object") return v;
+    const o = v as Record<string, unknown>;
+    if (o.k === "text") {
+      const l = o as FigText;
+      const n = l.text.split("\n").length;
+      let text = t(l.text, lang);
+      if (text === l.text) return l;
+      // (not paragraphs: a blank line in the Vietnamese means paragraphs, which the translation keeps its own way)
+      if (n > 1 && !text.includes("\n") && !l.text.includes("\n\n")) text = balance(text, n);
+      const setLines = l.nowrap || l.h <= l.size * l.lh * (n + 0.5) || (n === 1 && len(l.text) < 60);
+      const r = setLines ? longest(l.text) / longest(text) : Math.sqrt(len(l.text) / len(text));
+      return { ...l, text, size: l.size * Math.min(1, r) };
+    }
+    return Object.fromEntries(Object.entries(o).map(([k, x]) => [k, fit(x)]));
+  };
+  return fit(page) as FigPage;
+}
+
 // lang: texts/alts come translated (tx keeps image paths, links and #colours), card links stay in the language.
 export default function FigmaCanvas({ page: source, lang = DEFAULT_LANG }: { page: FigPage; lang?: Lang }) {
-  const page = tx(source, lang);
+  const page = lang === DEFAULT_LANG ? source : tx(fitText(source, lang), lang);
   return (
     <div className="[container-type:inline-size]">
       <div className="relative overflow-hidden lg:h-[var(--H)]" style={{ "--H": cq(page.h) } as Vars}>
