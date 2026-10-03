@@ -110,8 +110,8 @@ export default function ProductDetail({
   const abs = L ? "lg:absolute lg:left-(--x) lg:top-(--y) lg:w-(--w)" : "";
   const flow = (cls: string) => (L ? "lg:mt-0" : cls); // desktop spacing of the flow layout; positioned boxes need none
   const body = "text-sm lg:text-[1.094cqw] leading-5 lg:leading-[1.563cqw] font-light tracking-[-0.3px] lg:tracking-[-0.055cqw] text-black whitespace-pre-line";
-  const option = `relative flex items-center justify-center h-8 min-w-[110px] px-3 rounded-md lg:rounded-[0.469cqw] bg-[#53129e] text-white text-[15px] lg:text-[1.406cqw] lg:leading-[1.484cqw] font-light whitespace-nowrap transition-opacity hover:opacity-85 ${L ? "lg:w-full lg:h-full lg:min-w-0 lg:px-0" : "lg:h-[2.5cqw] lg:min-w-[10.156cqw] lg:px-[1.25cqw]"}`;
-  const label = L ? "lg:absolute lg:left-(--tx) lg:top-(--ty) lg:w-(--tw) text-center" : "";
+  const option = `relative flex items-center justify-center h-8 min-w-[110px] px-3 rounded-md lg:rounded-[0.469cqw] bg-[#53129e] text-white text-[15px] lg:text-[1.406cqw] lg:leading-[1.484cqw] font-light tracking-[-0.05em] whitespace-nowrap transition-opacity hover:opacity-85 ${L ? "lg:w-full lg:h-full lg:min-w-0 lg:px-[0.469cqw]" :"lg:h-[2.5cqw] lg:min-w-[10.156cqw] lg:px-[1.25cqw]"}`;
+  const label = "text-center";
   const picked = "ring-2 ring-[#53129e] ring-offset-2 ring-offset-[#f5f5f5]";
   const cta = `${variants.length ? "mt-4" : "mt-8"} ${flow(variants.length ? "lg:mt-[1.094cqw]" : "lg:mt-[3.672cqw]")} flex items-center justify-center w-full lg:w-[35.234cqw] h-10 lg:h-[3.125cqw] rounded-md lg:rounded-[0.469cqw] text-lg lg:text-[1.719cqw] lg:leading-[1.484cqw]`;
   const box = (b: Box) => ({ aspectRatio: `${b[2]} / ${b[3]}` });
@@ -199,9 +199,10 @@ export default function ProductDetail({
                 return (
                   <li
                     key={v}
-                    className={`flex ${brk ? "basis-full" : ""} ${b ? "lg:absolute lg:left-(--x) lg:top-(--y) lg:w-(--w) lg:h-(--h)" : ""}`}
-                    // Figma's labels aren't always centred in their button, so the label box is placed too.
-                    style={b && L?.options && { ...at(b, L.options.box[0], L.options.box[1]), "--tx": cq(b[4] - b[0]), "--ty": cq(b[5] - b[1]), "--tw": cq(b[6]) } as Vars}
+                    // Figma width is a minimum: some Figma labels are wider than their own button ("03 - Đần vắt cực khô…"),
+                    // so the button grows to the right instead of letting the text spill out.
+                    className={`flex ${brk ? "basis-full" : ""} ${b ? "lg:absolute lg:left-(--x) lg:top-(--y) lg:w-max lg:min-w-(--w) lg:h-(--h)" : ""}`}
+                    style={b && L?.options && at(b, L.options.box[0], L.options.box[1])}
                   >
                     {target && target !== id ? (
                       <Link href={`/san-pham/${target}`} className={option}><span className={label}>{v}</span></Link>
