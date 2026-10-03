@@ -1,11 +1,27 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 import { isAdmin } from "@/lib/supabase/admin-check";
+import { stripLang } from "@/lib/i18n";
+
+// Language routing: Vietnamese keeps unprefixed URLs and is rewritten to the app/[lang] tree as /vi/...; /en/... is
+// English as is; a typed /vi/... redirects to the unprefixed URL so each page has one address.
+export async function proxy(request: NextRequest) {
+  const { pathname } = request.nextUrl;
+  if (pathname === "/admin" || pathname.startsWith("/admin/")) return adminGate(request);
+  if (/^\/en(\/|$)/.test(pathname)) return NextResponse.next();
+  const url = request.nextUrl.clone();
+  if (/^\/vi(\/|$)/.test(pathname)) {
+    url.pathname = stripLang(pathname);
+    return NextResponse.redirect(url, 308);
+  }
+  url.pathname = `/vi${pathname === "/" ? "" : pathname}`;
+  return NextResponse.rewrite(url);
+}
 
 // Gate every /admin/* route except /admin/login behind a signed-in Supabase
 // session. Also refreshes the auth cookie on each request (required by
 // @supabase/ssr in the App Router).
-export async function proxy(request: NextRequest) {
+async function adminGate(request: NextRequest) {
   // No Supabase configured (e.g. production before the DB is set up) = no admin at all. Fail closed with a 404
   // instead of crashing (500) inside createServerClient.
   if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
@@ -48,5 +64,6 @@ export async function proxy(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/admin/:path*"],
+  // everything except Next internals, API routes and files (images, robots.txt, sitemap.xml, llms.txt, data/*.json)
+  matcher: ["/((?!_next|api/|.*\\..*).*)"],
 };

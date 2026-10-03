@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import "./globals.css";
+import "../globals.css";
 import DanCursor from "@/components/DanCursor";
 import DanRain from "@/components/DanRain";
 import PromoBar from "@/components/PromoBar";
@@ -12,6 +12,8 @@ import ScrollProgress from "@/components/ScrollProgress";
 import { CartProvider } from "@/context/CartContext";
 import { SITE_URL, SOCIALS } from "@/lib/site";
 import { getProducts } from "@/lib/products";
+import { notFound } from "next/navigation";
+import { LANGS, isLang } from "@/lib/i18n";
 import { brand } from "@/data/content";
 
 // Figma specifies "Be Vietnam" (the original family), not "Be Vietnam Pro" —
@@ -21,18 +23,18 @@ import { brand } from "@/data/content";
 const beVietnam = localFont({
   variable: "--font-be-vietnam",
   src: [
-    { path: "../fonts/be-vietnam/be-vietnam-latin-300.woff2", weight: "300", style: "normal" },
-    { path: "../fonts/be-vietnam/be-vietnam-vietnamese-300.woff2", weight: "300", style: "normal" },
-    { path: "../fonts/be-vietnam/be-vietnam-latin-400.woff2", weight: "400", style: "normal" },
-    { path: "../fonts/be-vietnam/be-vietnam-vietnamese-400.woff2", weight: "400", style: "normal" },
-    { path: "../fonts/be-vietnam/be-vietnam-latin-500.woff2", weight: "500", style: "normal" },
-    { path: "../fonts/be-vietnam/be-vietnam-vietnamese-500.woff2", weight: "500", style: "normal" },
-    { path: "../fonts/be-vietnam/be-vietnam-latin-600.woff2", weight: "600", style: "normal" },
-    { path: "../fonts/be-vietnam/be-vietnam-vietnamese-600.woff2", weight: "600", style: "normal" },
-    { path: "../fonts/be-vietnam/be-vietnam-latin-700.woff2", weight: "700", style: "normal" },
-    { path: "../fonts/be-vietnam/be-vietnam-vietnamese-700.woff2", weight: "700", style: "normal" },
-    { path: "../fonts/be-vietnam/be-vietnam-latin-800.woff2", weight: "800", style: "normal" },
-    { path: "../fonts/be-vietnam/be-vietnam-vietnamese-800.woff2", weight: "800", style: "normal" },
+    { path: "../../fonts/be-vietnam/be-vietnam-latin-300.woff2", weight: "300", style: "normal" },
+    { path: "../../fonts/be-vietnam/be-vietnam-vietnamese-300.woff2", weight: "300", style: "normal" },
+    { path: "../../fonts/be-vietnam/be-vietnam-latin-400.woff2", weight: "400", style: "normal" },
+    { path: "../../fonts/be-vietnam/be-vietnam-vietnamese-400.woff2", weight: "400", style: "normal" },
+    { path: "../../fonts/be-vietnam/be-vietnam-latin-500.woff2", weight: "500", style: "normal" },
+    { path: "../../fonts/be-vietnam/be-vietnam-vietnamese-500.woff2", weight: "500", style: "normal" },
+    { path: "../../fonts/be-vietnam/be-vietnam-latin-600.woff2", weight: "600", style: "normal" },
+    { path: "../../fonts/be-vietnam/be-vietnam-vietnamese-600.woff2", weight: "600", style: "normal" },
+    { path: "../../fonts/be-vietnam/be-vietnam-latin-700.woff2", weight: "700", style: "normal" },
+    { path: "../../fonts/be-vietnam/be-vietnam-vietnamese-700.woff2", weight: "700", style: "normal" },
+    { path: "../../fonts/be-vietnam/be-vietnam-latin-800.woff2", weight: "800", style: "normal" },
+    { path: "../../fonts/be-vietnam/be-vietnam-vietnamese-800.woff2", weight: "800", style: "normal" },
   ],
 });
 
@@ -63,11 +65,15 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+// Both languages are prerendered; any other /xx/ segment is a 404.
+export const dynamicParams = false;
+export function generateStaticParams() {
+  return LANGS.map((lang) => ({ lang }));
+}
+
+export default async function RootLayout({ children, params }: LayoutProps<"/[lang]">) {
+  const { lang } = await params;
+  if (!isLang(lang)) notFound();
   // product id -> photo, so carts saved before the cart stored photos (grey boxes) get one back
   const cartImages = Object.fromEntries((await getProducts()).flatMap((p) => (p.image ? [[p.id, p.image]] : [])));
   // Brand + site entities for search engines and AI answers (GEO): who Tíc Cơ is, where it lives, how to search it.
@@ -100,7 +106,7 @@ export default async function RootLayout({
   };
 
   return (
-    <html lang="vi" className={beVietnam.variable} suppressHydrationWarning>
+    <html lang={lang} className={beVietnam.variable} suppressHydrationWarning>
       <body className="grain">
         <script
           type="application/ld+json"

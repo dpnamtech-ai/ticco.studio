@@ -94,7 +94,15 @@ const consoleErrors = [];
 page.on("console", (m) => m.type() === "error" && consoleErrors.push(`${page.url()}: ${m.text()}`));
 const desktop = () => page.setViewport({ width: 1280, height: 900 });
 const mobile = () => page.setViewport({ width: 390, height: 844, isMobile: true, hasTouch: true });
-const go = (path) => page.goto(BASE + path, { waitUntil: "networkidle2", timeout: 60000 });
+// On a navigation timeout, name the requests still open (what kept the page from going idle).
+const pending = new Set();
+page.on("request", (r) => pending.add(r.url()));
+page.on("requestfinished", (r) => pending.delete(r.url()));
+page.on("requestfailed", (r) => pending.delete(r.url()));
+const go = (path) =>
+  page.goto(BASE + path, { waitUntil: "networkidle2", timeout: 60000 }).catch((e) => {
+    throw new Error(`${e.message}; still open: ${[...pending].slice(0, 5).join(", ")}`);
+  });
 const clickText = (sel, text) => page.evaluate((sel, text) => {
   const el = [...document.querySelectorAll(sel)].find((e) => e.textContent.trim().toLowerCase() === text.toLowerCase());
   if (!el) throw new Error(`no ${sel} "${text}"`);
