@@ -6,13 +6,9 @@ import { useCart } from "@/context/CartContext";
 import AddressMap from "@/components/AddressMap";
 import { FREE_SHIP_MIN, shippingFor } from "@/lib/checkout";
 
-// Bank account shown after checkout (public info). Set in .env.local / Vercel:
-//   NEXT_PUBLIC_BANK_ID (bank name shown to the customer, e.g. MB, VCB, ACB), NEXT_PUBLIC_BANK_ACCOUNT, NEXT_PUBLIC_BANK_ACCOUNT_NAME
-const BANK = {
-  id: process.env.NEXT_PUBLIC_BANK_ID ?? "",
-  account: process.env.NEXT_PUBLIC_BANK_ACCOUNT ?? "",
-  name: process.env.NEXT_PUBLIC_BANK_ACCOUNT_NAME ?? "",
-};
+// Shop QR poster + the account printed on it (for customers who transfer by hand); change both together.
+const QR_SRC = "/images/qr-thanh-toan.jpg";
+const ACCOUNT = { bank: "Techcombank", number: "19037100037019" }; // PHAM KHANH LY
 
 type Placed = { code: string; subtotal: number; shipping: number; total: number };
 const STORE_KEY = "ticco-last-order";
@@ -34,13 +30,13 @@ function Field({ label, error, children }: { label: string; error?: string; chil
 const input =
   "w-full rounded-lg border border-[var(--color-ink)]/20 bg-white px-4 py-3 text-base outline-none transition-colors focus:border-[var(--color-purple)]";
 
-function CopyRow({ label, value }: { label: string; value: string }) {
+function CopyRow({ label, value, shown = value }: { label: string; value: string; shown?: string }) {
   const [done, setDone] = useState(false);
   return (
     <div className="flex items-center justify-between gap-3 border-b border-[var(--color-ink)]/10 py-2 text-sm">
-      <span className="text-[var(--color-ink)]/60">{label}</span>
-      <span className="flex items-center gap-2 font-semibold">
-        {value}
+      <span className="whitespace-nowrap text-[var(--color-ink)]/60">{label}</span>
+      <span className="flex items-center gap-2 text-right font-semibold">
+        {shown}
         <button
           type="button"
           onClick={() => {
@@ -131,40 +127,38 @@ export default function CheckoutClient() {
   // Placing an order empties the cart, so a non-empty cart means the customer started a NEW order after
   // this one: show the form again instead of trapping them on the old payment screen.
   if (placed && items.length === 0) {
-    const configured = BANK.id && BANK.account;
     return (
-      <section className="mx-auto max-w-2xl px-6 py-12">
+      <section className="mx-auto max-w-4xl px-6 py-12">
         <h1 className="mb-2 font-[family-name:var(--font-heading)] text-3xl font-bold text-[var(--color-purple)]">Đặt hàng thành công</h1>
         <p className="mb-8 text-[var(--color-ink)]/75">
           Cảm ơn bạn! Vui lòng chuyển khoản để Tíc Cơ xác nhận đơn <b>{placed.code}</b>. Tíc Cơ sẽ liên hệ qua số điện thoại bạn đã nhập.
         </p>
 
-        <div className="grid gap-6 md:grid-cols-[240px_1fr]">
-          <div className="rounded-lg bg-white p-3 text-center shadow-sm">
-            {/* Shop's own static QR (client's choice, no VietQR): the customer types the amount + note from the rows beside it. */}
+        {/* Shop's own static poster QR (client's file, shown uncropped): it carries no amount/note, so those two
+            sit in a highlighted box the customer copies from. Phones can't scan their own screen -> save button. */}
+        <div className="grid items-start gap-8 md:grid-cols-[minmax(0,360px)_1fr]">
+          <div className="mx-auto w-full max-w-[360px]">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/images/qr-thanh-toan.png"
-              alt="Mã QR chuyển khoản Tíc Cơ"
-              className="mx-auto h-auto w-full"
-              width={240}
-              height={240}
-              // Until the shop's QR file is uploaded, show a note instead of a broken image.
-              onError={(e) => e.currentTarget.replaceWith(Object.assign(document.createElement("p"), { className: "p-6 text-sm text-[var(--color-ink)]/60", textContent: "Chuyển khoản theo thông tin tài khoản trong trang này, Tíc Cơ sẽ liên hệ xác nhận." }))}
-            />
+            <img src={QR_SRC} alt="Mã QR chuyển khoản Tíc Cơ (Techcombank)" width={1878} height={2560} className="h-auto w-full rounded-lg bg-white shadow-sm" />
+            <a
+              href={QR_SRC}
+              download="tic-co-qr-chuyen-khoan.jpg"
+              className="mt-3 block rounded-lg border-2 border-[var(--color-purple)] py-3 text-center font-semibold text-[var(--color-purple)] md:hidden"
+            >
+              Lưu ảnh QR để quét trong app ngân hàng
+            </a>
           </div>
           <div>
-            {configured && (
-              <>
-                <CopyRow label="Ngân hàng" value={BANK.id} />
-                <CopyRow label="Số tài khoản" value={BANK.account} />
-                {BANK.name && <CopyRow label="Chủ tài khoản" value={BANK.name} />}
-              </>
-            )}
-            <CopyRow label="Số tiền" value={String(placed.total)} />
-            <CopyRow label="Nội dung" value={placed.code} />
+            <div className="rounded-lg border-2 border-[var(--color-orange)] bg-[var(--color-orange)]/5 p-4">
+              <p className="mb-2 text-sm font-semibold text-[var(--color-orange)]">Mã QR không tự điền, bạn nhập đúng 2 dòng này:</p>
+              <CopyRow label="Số tiền" value={String(placed.total)} shown={vnd(placed.total)} />
+              <CopyRow label="Nội dung" value={placed.code} />
+            </div>
+            <div className="mt-4">
+              <CopyRow label={`STK ${ACCOUNT.bank}`} value={ACCOUNT.number} />
+            </div>
             <p className="mt-4 text-sm text-[var(--color-ink)]/60">
-              Tạm tính {vnd(placed.subtotal)} · Ship {placed.shipping ? vnd(placed.shipping) : "miễn phí"} · <b>Tổng {vnd(placed.total)}</b>. Nhớ ghi đúng nội dung chuyển khoản.
+              Tạm tính {vnd(placed.subtotal)} · Ship {placed.shipping ? vnd(placed.shipping) : "miễn phí"} · <b>Tổng {vnd(placed.total)}</b>
             </p>
           </div>
         </div>

@@ -36,7 +36,7 @@ Mức độ: **P0** mất tiền/mất đơn/lộ dữ liệu · **P1** chặn k
 | Mã | Mức | Mô tả | Ai |
 |---|---|---|---|
 | OPEN-01 | P0 | Prod chưa có `ORDER_SHEET_URL/SECRET` → đặt hàng trên live báo lỗi (an toàn, không mất đơn) | Bạn: Vercel env |
-| OPEN-02 | P0 | Prod chưa có `NEXT_PUBLIC_BANK_*` → màn chuyển khoản không có STK | Bạn: Vercel env |
-| OPEN-03 | P1 | Chưa có ảnh QR shop (`public/images/qr-thanh-toan.png`) — đang hiện câu thay thế | Khách |
+| OPEN-02 | — | ✅ 03/10 STK hiện từ hằng ACCOUNT (theo ảnh QR), bỏ env NEXT_PUBLIC_BANK_* | — |
+| OPEN-03 | — | ✅ 03/10 ảnh QR shop đã có (`qr-thanh-toan.jpg`) | — |
 | OPEN-04 | P1 | Footer thiếu thông tin người bán + trang chính sách (mẫu: `docs/footer-phap-ly-mau.md`) | Khách duyệt |
 | OPEN-05 | P2 | Chưa gắn tên miền thật | Bạn |

@@ -7,9 +7,9 @@ Test plan: `qa/MASTER-TEST-PLAN.md` · Bug log: `qa/BUGS.md` · Mẫu footer/ch�
 | # | Việc | Ai | Ghi chú |
 |---|---|---|---|
 | A1 | ✅ 30/09 08:25 — `ORDER_SHEET_URL/SECRET` đã đặt trên Vercel, đơn test TCFGJZ30A4 vào Sheet OK. (cũ:) Vercel → Settings → Environment Variables (Production): `ORDER_SHEET_URL`, `ORDER_SHEET_SECRET` | Bạn | Giá trị đã có trong chat 30/09. Chưa có → đặt hàng trên live báo lỗi (không mất đơn) |
-| A2 | Vercel env: `NEXT_PUBLIC_BANK_ID`, `NEXT_PUBLIC_BANK_ACCOUNT`, `NEXT_PUBLIC_BANK_ACCOUNT_NAME` | Bạn/khách | Chưa có → màn chuyển khoản không có STK |
+| A2 | ✅ 03/10 — Không cần env nữa: STK lấy theo ảnh QR, hằng `ACCOUNT` trong `src/app/checkout/CheckoutClient.tsx` (đổi QR thì đổi cả số này) | — | — |
 | A3 | Sau A1+A2: Redeploy, rồi đặt 1 đơn thật trên điện thoại → thấy dòng trong Sheet → xoá | Bạn + Claude | Hoặc `! npx vercel login` để Claude tự làm A1–A3 |
-| A4 | Ảnh QR của shop → `public/images/qr-thanh-toan.png` | Khách | Đang hiện câu thay thế |
+| A4 | ✅ 03/10 — QR Techcombank (poster gốc, không cắt) ở `public/images/qr-thanh-toan.jpg` | — | — |
 | A5 | ✅ Sheet "Bị hạn chế" + đã xoá dòng test (30/09). Sheet đơn hàng: Chia sẻ = "Bị hạn chế"; xoá các dòng test (TCCURLTEST, TC1PK96026, TC1QUXT0HL, TC1RI3K014) | Bạn | Sheet chứa SĐT/địa chỉ khách |
 | A6 | ✅ 2FA Vercel + GitHub (30/09); còn Google. Bật 2FA: GitHub `dpnamtech-ai`, Vercel, Google | Bạn | Ai vào được là đổi được STK/QR |
 
