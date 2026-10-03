@@ -39,6 +39,12 @@ function doPost(e) {
   const lock = LockService.getScriptLock();
   lock.waitLock(20000);
   try {
+    // Sequential order code TC00001, TC00002…, counted here (under the lock) so two orders never share a number.
+    // Restart/jump the counter: Cài đặt dự án → Thuộc tính tập lệnh → ORDER_SEQ = last number used.
+    const props = PropertiesService.getScriptProperties();
+    const seq = Number(props.getProperty("ORDER_SEQ") || 0) + 1;
+    props.setProperty("ORDER_SEQ", String(seq));
+    o.code = "TC" + String(seq).padStart(5, "0");
     const sh = sheet_();
     const c = o.customer;
     const items = o.items.map((l) => `${l.qty} × ${l.name}${l.variant ? ` (${l.variant})` : ""} — ${fmt_(l.price * l.qty)}`).join("\n");
@@ -50,10 +56,22 @@ function doPost(e) {
     sh.insertRowAfter(1); // newest order on top, right under the header
     sh.getRange(2, 1, 1, row.length).setValues([row]).setVerticalAlignment("top").setBackground(null).setFontWeight(null).setFontColor("#222222");
     sh.getRange(2, 12).setFontWeight("bold");
-    return json({ ok: true });
+    return json({ ok: true, code: o.code });
   } finally {
     lock.releaseLock();
   }
+}
+
+// Shop types a Giao Hàng Nhanh tracking code into "Mã vận đơn" → the cell becomes a link to GHN's tracking page.
+// Simple trigger: runs on manual edits only, no deploy needed.
+const TRACKING_COL = COLUMNS.findIndex((c) => c[0] === "Mã vận đơn") + 1;
+function onEdit(e) {
+  const r = e.range;
+  if (r.getSheet().getName() !== SHEET || r.getColumn() !== TRACKING_COL || r.getRow() < 2 || r.getNumColumns() > 1) return;
+  const code = String(r.getValue()).trim();
+  if (!code) return;
+  r.setRichTextValue(SpreadsheetApp.newRichTextValue().setText(code)
+    .setLinkUrl("https://donhang.ghn.vn/?order_code=" + encodeURIComponent(code)).build());
 }
 
 // Creates + styles the sheet the first time an order arrives; later calls just return it.

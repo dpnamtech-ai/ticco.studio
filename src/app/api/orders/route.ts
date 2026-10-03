@@ -74,7 +74,7 @@ const cell = (v: string) => (/^[=+\-@\t\r]/.test(v) ? `'${v}` : v);
 
 async function sendToSheet(code: string, o: OrderInput, lines: PricedLine[], subtotal: number, shipping: number, total: number) {
   const url = process.env.ORDER_SHEET_URL;
-  if (!url) return false;
+  if (!url) return null;
   try {
     // Apps Script answers a POST with a redirect to the result; fetch follows it.
     const res = await fetch(url, {
@@ -91,12 +91,13 @@ async function sendToSheet(code: string, o: OrderInput, lines: PricedLine[], sub
       }),
       signal: AbortSignal.timeout(15_000),
     });
-    const out = (await res.json().catch(() => null)) as { ok?: boolean } | null;
+    const out = (await res.json().catch(() => null)) as { ok?: boolean; code?: string } | null;
     if (!out?.ok) console.error("[orders] sheet rejected", res.status, out);
-    return Boolean(out?.ok);
+    // The sheet numbers orders TC00001, TC00002… and returns the code it wrote; an older script returns none.
+    return out?.ok ? (out.code && /^TC\d+$/.test(out.code) ? out.code : code) : null;
   } catch (e) {
     console.error("[orders] sheet error", e);
-    return false;
+    return null;
   }
 }
 
@@ -158,11 +159,14 @@ export async function POST(req: Request) {
   const subtotal = lines.reduce((s, l) => s + l.price * l.qty, 0);
   const shipping = shippingFor(subtotal);
   const total = subtotal + shipping;
-  const code = makeOrderCode();
+  // Sheet first: it hands out the sequential code. Sheet down → random fallback code, DB/email still record it.
+  // ponytail: a sheet timeout AFTER writing leaves the row with TC000NN but the customer/email with the fallback code.
+  const sheetCode = await sendToSheet(makeOrderCode(), order, lines, subtotal, shipping, total);
+  const sheeted = sheetCode !== null;
+  const code = sheetCode ?? makeOrderCode();
 
-  const [stored, sheeted, emailed] = await Promise.all([
+  const [stored, emailed] = await Promise.all([
     saveOrder(code, order, lines, subtotal, shipping, total),
-    sendToSheet(code, order, lines, subtotal, shipping, total),
     sendShopEmail(code, order, lines, subtotal, shipping, total),
   ]);
   // Never tell the customer "đặt hàng thành công" (and show the QR) for an order the shop has no record of.

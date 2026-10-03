@@ -111,7 +111,8 @@ export default function CheckoutClient() {
       const data = await res.json();
       if (!res.ok) {
         setErrors(data.fields ?? {});
-        setFormError(data.error ?? "Không gửi được đơn, vui lòng thử lại.");
+        // errors.items has no input of its own: show its text instead of the generic "kiểm tra lại thông tin"
+        setFormError(data.fields?.items ?? data.error ?? "Không gửi được đơn, vui lòng thử lại.");
         return;
       }
       const order: Placed = { code: data.code, subtotal: data.subtotal, shipping: data.shipping, total: data.total };

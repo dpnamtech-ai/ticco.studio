@@ -30,6 +30,9 @@ export function makeOrderCode() {
   return `TC${t}${r}`;
 }
 
+// Per-line quantity cap, shared by the cart (clamps) and the server (rejects) so a cart can never hold an unorderable line.
+export const MAX_QTY = 99;
+
 const PHONE_RE = /^(0|\+84)\d{9}$/;
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -69,8 +72,8 @@ export function validateOrder(raw: unknown): ValidationResult {
   for (const it of items) {
     const o = (it && typeof it === "object" ? it : {}) as Record<string, unknown>;
     const qty = Number(o.qty);
-    if (typeof o.id !== "string" || !o.id || !Number.isInteger(qty) || qty < 1 || qty > 20) {
-      errors.items = "Sản phẩm trong giỏ không hợp lệ";
+    if (typeof o.id !== "string" || !o.id || !Number.isInteger(qty) || qty < 1 || qty > MAX_QTY) {
+      errors.items = `Mỗi sản phẩm đặt tối đa ${MAX_QTY} cái, cần nhiều hơn bạn nhắn Tíc Cơ nhé`;
       break;
     }
     value.items.push({ id: o.id.slice(0, 80), variant: str(o.variant, 80), qty });

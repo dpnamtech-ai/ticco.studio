@@ -1,6 +1,7 @@
 "use client";
 
 import { createContext, useContext, useEffect, useState, ReactNode } from "react";
+import { MAX_QTY } from "@/lib/checkout";
 
 export interface CartItem {
   id: string;
@@ -63,10 +64,10 @@ export function CartProvider({ children }: { children: ReactNode }) {
       const existing = prev.find((i) => i.id === item.id && i.variant === item.variant);
       if (existing) {
         return prev.map((i) =>
-          i.id === item.id && i.variant === item.variant ? { ...i, qty: i.qty + qty } : i
+          i.id === item.id && i.variant === item.variant ? { ...i, qty: Math.min(i.qty + qty, MAX_QTY) } : i
         );
       }
-      return [...prev, { ...item, qty }];
+      return [...prev, { ...item, qty: Math.min(qty, MAX_QTY) }];
     });
     setIsDrawerOpen(true);
   };
@@ -75,7 +76,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
     setItems((prev) =>
       qty <= 0
         ? prev.filter((i) => !(i.id === id && i.variant === variant))
-        : prev.map((i) => (i.id === id && i.variant === variant ? { ...i, qty } : i))
+        : prev.map((i) => (i.id === id && i.variant === variant ? { ...i, qty: Math.min(qty, MAX_QTY) } : i))
     );
   };
 
