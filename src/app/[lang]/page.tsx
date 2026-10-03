@@ -8,15 +8,22 @@ import ProductCard from "@/components/ProductCard";
 import { getProducts } from "@/lib/products";
 import Reveal from "@/components/Reveal";
 import { HOME_CATEGORY, figmaCardProps } from "@/data/figma-cards";
+import { getLang } from "@/lib/lang";
+import { alternatesFor, localize } from "@/lib/i18n";
+import { t } from "@/lib/t";
 
-export const metadata: Metadata = {
-  title: "Tíc Cơ — Sổ tay, túi tote, sticker & quà tặng thương hiệu Việt",
-  description: "Sổ tay, túi tote, sticker, postcard, móc khoá Đần và quà tặng đầy cá tính từ thương hiệu Việt Tíc Cơ. Giao toàn quốc, free ship đơn từ 500k.",
-  alternates: { canonical: "/" },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const lang = await getLang();
+  return {
+    title: t("Tíc Cơ — Sổ tay, túi tote, sticker & quà tặng thương hiệu Việt", lang),
+    description: t("Sổ tay, túi tote, sticker, postcard, móc khoá Đần và quà tặng đầy cá tính từ thương hiệu Việt Tíc Cơ. Giao toàn quốc, free ship đơn từ 500k.", lang),
+    alternates: alternatesFor("/", lang),
+  };
+}
 
 export default async function Home() {
   const products = await getProducts();
+  const lang = await getLang();
 
   return (
     <>
@@ -34,7 +41,7 @@ export default async function Home() {
             <div className="absolute inset-x-0 bg-[var(--color-purple)]" style={{ top: "0.234cqw", height: "max(6.250cqw, 44px)" }} />
             {/* Figma 2026-09-29: "NHỮNG THỨ CHÚNG TÔI CÓ!" at x71, 5px above the old text box */}
             <h2 className="absolute font-semibold uppercase text-white whitespace-nowrap" style={{ left: "5.547cqw", top: "-0.391cqw", fontSize: "max(15px, 1.5625cqw)", lineHeight: "max(7.031cqw, calc(44px + 0.468cqw))", letterSpacing: "-0.0625cqw" }}>
-              Những thứ chúng tôi có!
+              {t("Những thứ chúng tôi có!", lang)}
             </h2>
           </div>
           </Reveal>
@@ -53,10 +60,10 @@ export default async function Home() {
 
           <div className="text-center mt-8 lg:mt-0">
             <Link
-              href="/san-pham"
+              href={localize("/san-pham", lang)}
               className="inline-block lg:text-[2.344cqw] lg:leading-[7.031cqw] lg:tracking-[-0.094cqw] text-[30px] font-medium uppercase text-[var(--color-purple)] underline decoration-2 underline-offset-[1.1cqw] hover:opacity-80"
             >
-              Tất cả sản phẩm
+              {t("Tất cả sản phẩm", lang)}
             </Link>
           </div>
         </div>

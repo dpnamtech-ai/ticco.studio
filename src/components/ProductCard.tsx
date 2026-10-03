@@ -5,6 +5,9 @@ import Image from "next/image";
 import { motion, useInView } from "framer-motion";
 import type { Crop } from "@/lib/shop";
 import { fillStyle, zoomSizes } from "@/lib/figmaCrop";
+import { useLang, useT } from "@/components/LangSwitch";
+import { localize } from "@/lib/i18n";
+import { vnd } from "@/lib/shopFigma";
 
 // Figma product-name copy (uppercase, with the design's own line breaks) for the compact cards.
 const FIGMA_NAMES: Record<string, string> = {
@@ -43,13 +46,15 @@ interface ProductCardProps {
 }
 
 export default function ProductCard({ id, name, priceFrom, image, index = 0, soldOut = false, bundleItems, nameClassName = "", displayName, compact = false, crop, priceLabel }: ProductCardProps) {
+  const lang = useLang();
+  const t = useT();
   const [loaded, setLoaded] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
   const seen = useInView(ref, { once: true, margin: "0px 0px -10% 0px" });
 
   return (
     <motion.a
-      href={`/san-pham/${id}`}
+      href={localize(`/san-pham/${id}`, lang)}
       initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "0px 0px -10% 0px" }}
@@ -68,7 +73,7 @@ export default function ProductCard({ id, name, priceFrom, image, index = 0, sol
             <div className={`absolute inset-0 transition-transform ${compact ? "duration-300 group-hover:scale-110" : "duration-500 group-hover:scale-105"}`}>
               <Image
                 src={image}
-                alt={name}
+                alt={t(name)}
                 fill
                 className={`transition-opacity duration-700 ${loaded ? "opacity-100" : "opacity-0"}`}
                 onLoad={() => setLoaded(true)}
@@ -90,16 +95,16 @@ export default function ProductCard({ id, name, priceFrom, image, index = 0, sol
         )}
         {soldOut && compact && (
           <span className="absolute top-2 left-2 bg-[var(--color-ink)] text-white text-[10px] font-bold uppercase tracking-wide px-2 py-1 rounded">
-            Hết hàng
+            {t("Hết hàng")}
           </span>
         )}
       </div>
       <div className="text-center">
         <h3 className={compact ? `text-[15px] leading-[19px] lg:text-[1.172cqw] lg:leading-[1.484cqw] font-normal tracking-[-0.6px] lg:tracking-[-0.047cqw] text-[#323133] whitespace-pre-line ${nameClassName}` : `text-sm leading-5 lg:text-[1.328cqw] lg:leading-[1.484cqw] font-medium tracking-[-0.5px] lg:tracking-[-0.094cqw] text-black lg:whitespace-nowrap lg:-mx-[3.125cqw] ${nameClassName}`}>
-          {compact ? displayName ?? FIGMA_NAMES[id] ?? name.toUpperCase() : name}
+          {compact ? t(displayName ?? FIGMA_NAMES[id] ?? name.toUpperCase()) : t(name)}
         </h3>
         <p className={compact ? "text-xs leading-5 lg:text-[0.9375cqw] lg:leading-[1.5625cqw] font-light tracking-[-0.48px] lg:tracking-[-0.0375cqw] text-[#8b8989]" : "text-xs leading-5 lg:text-[1.016cqw] lg:leading-[1.484cqw] lg:mt-[0.078cqw] font-light tracking-[-0.4px] lg:tracking-[-0.07cqw] text-black"}>
-          {priceLabel ?? (priceFrom > 0 ? `${priceFrom.toLocaleString("vi-VN")} VNĐ` : "Liên hệ")}
+          {priceLabel ? t(priceLabel) : vnd(priceFrom, lang)}
         </p>
       </div>
     </motion.a>

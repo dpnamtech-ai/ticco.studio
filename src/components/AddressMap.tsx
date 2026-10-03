@@ -1,10 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useT } from "@/components/LangSwitch";
 
 // Live Google Maps preview of the address being typed (embed needs no API key), so the customer can
 // confirm the pin. Skeleton only: swap for Places Autocomplete + a draggable pin once a Maps key is added.
 export default function AddressMap({ query }: { query: string }) {
+  const t = useT();
   const [debounced, setDebounced] = useState("");
 
   useEffect(() => {
@@ -15,7 +17,7 @@ export default function AddressMap({ query }: { query: string }) {
   if (debounced.length < 8) {
     return (
       <div className="flex aspect-[16/7] items-center justify-center rounded-lg border border-dashed border-[var(--color-ink)]/25 bg-white/60 px-4 text-center text-sm text-[var(--color-ink)]/55">
-        Nhập địa chỉ để xem vị trí trên bản đồ
+        {t("Nhập địa chỉ để xem vị trí trên bản đồ")}
       </div>
     );
   }
@@ -23,7 +25,7 @@ export default function AddressMap({ query }: { query: string }) {
   return (
     <div className="overflow-hidden rounded-lg border border-[var(--color-ink)]/15">
       <iframe
-        title="Bản đồ địa chỉ giao hàng"
+        title={t("Bản đồ địa chỉ giao hàng")}
         src={`https://www.google.com/maps?q=${q}&output=embed`}
         className="block aspect-[16/7] w-full"
         loading="lazy"
@@ -35,7 +37,7 @@ export default function AddressMap({ query }: { query: string }) {
         rel="noopener noreferrer"
         className="block bg-white px-4 py-2 text-sm font-semibold text-[var(--color-purple)] hover:underline"
       >
-        Mở trong Google Maps ↗
+        {t("Mở trong Google Maps ↗")}
       </a>
     </div>
   );

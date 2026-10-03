@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { cropFillStyle, zoomSizes, type ImageTransform } from "@/lib/figmaCrop";
+import { useT } from "@/components/LangSwitch";
 
 interface ProjectCardProps {
   title: string;
@@ -31,6 +32,7 @@ export default function ProjectCard({
   crop,
   href,
 }: ProjectCardProps) {
+  const t = useT();
   const linkClass = onOrange
     ? "text-white/90 hover:text-white"
     : "text-[var(--color-ink)]/70 hover:text-[var(--color-ink)]";
@@ -59,11 +61,11 @@ export default function ProjectCard({
       {!compact && (
         <div className="flex gap-6 text-sm">
           <a href={productHref} className={linkClass}>
-            › Xem sản phẩm
+            {t("› Xem sản phẩm")}
           </a>
           {articleHref && articleHref !== "#" && (
             <a href={articleHref} className={linkClass}>
-              › Đọc thêm về dự án
+              {t("› Đọc thêm về dự án")}
             </a>
           )}
         </div>

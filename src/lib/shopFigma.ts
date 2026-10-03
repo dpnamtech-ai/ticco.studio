@@ -1,4 +1,6 @@
 import data from "@/data/shopFigma.json";
+import { DEFAULT_LANG, type Lang } from "@/lib/i18n";
+import { t } from "@/lib/t";
 import type { Product } from "./products";
 import type { Crop } from "./shop";
 
@@ -37,7 +39,9 @@ const entries = data.products as unknown as Record<string, Entry>;
 export const layoutBottom = (L: FigmaLayout) =>
   Math.max(...[...L.gallery, L.cta, L.specs, ...(L.extraImg ? [L.extraImg] : [])].map((b) => b[1] + b[3]));
 
-export const vnd = (n: number) => (n > 0 ? `${n.toLocaleString("vi-VN")} VNĐ` : "Liên hệ");
+// "265.000 VNĐ" / "265,000 VND"; 0 = price on request.
+export const vnd = (n: number, lang: Lang = DEFAULT_LANG) =>
+  n > 0 ? (lang === "en" ? `${n.toLocaleString("en-US")} VND` : `${n.toLocaleString("vi-VN")} VNĐ`) : t("Liên hệ", lang);
 
 // Must match layoutSig() in scripts/figma-demo-shop.mjs.
 const layoutSig = (p: Product) =>

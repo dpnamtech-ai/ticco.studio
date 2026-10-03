@@ -14,3 +14,9 @@ export function localize(path: string, lang: Lang) {
 
 // The current page's path without its language prefix, for the EN/VN switch.
 export const stripLang = (pathname: string) => pathname.replace(/^\/(en|vi)(?=\/|$)/, "") || "/";
+
+// <head> alternates for a page: canonical in its own language + hreflang links to both versions.
+export const alternatesFor = (path: string, lang: Lang) => ({
+  canonical: localize(path, lang),
+  languages: { vi: path, en: localize(path, "en"), "x-default": path },
+});

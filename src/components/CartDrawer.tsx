@@ -5,9 +5,14 @@ import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { X } from "lucide-react";
 import { useCart, variantNote } from "@/context/CartContext";
+import { useLang, useT } from "@/components/LangSwitch";
+import { localize } from "@/lib/i18n";
+import { vnd } from "@/lib/shopFigma";
 
 export default function CartDrawer() {
   const { items, updateQty, removeItem, subtotal, isDrawerOpen, closeDrawer } = useCart();
+  const lang = useLang();
+  const t = useT();
 
   return (
     <AnimatePresence>
@@ -30,22 +35,22 @@ export default function CartDrawer() {
         >
             <div className="flex items-center justify-between px-6 py-5 border-b border-[var(--color-ink)]/10">
               <h2 className="font-[family-name:var(--font-heading)] text-xl font-bold text-[var(--color-purple)]">
-                Mua đi bạn ơi! {items.length > 0 && `(${items.length})`}
+                {t("Mua đi bạn ơi!")} {items.length > 0 && `(${items.length})`}
               </h2>
-              <button onClick={closeDrawer} aria-label="Đóng giỏ hàng" className="text-[var(--color-ink)]/60 hover:text-[var(--color-ink)]">
+              <button onClick={closeDrawer} aria-label={t("Đóng giỏ hàng")} className="text-[var(--color-ink)]/60 hover:text-[var(--color-ink)]">
                 <X size={22} />
               </button>
             </div>
 
             {items.length === 0 ? (
               <div className="flex-1 flex flex-col items-center justify-center px-6 text-center">
-                <p className="text-[var(--color-ink)]/60 mb-4">Giỏ hàng đang trống</p>
+                <p className="text-[var(--color-ink)]/60 mb-4">{t("Giỏ hàng đang trống")}</p>
                 <Link
-                  href="/san-pham"
+                  href={localize("/san-pham", lang)}
                   onClick={closeDrawer}
                   className="text-[var(--color-orange)] font-semibold hover:underline"
                 >
-                  Xem sản phẩm →
+                  {t("Xem sản phẩm →")}
                 </Link>
               </div>
             ) : (
@@ -65,13 +70,13 @@ export default function CartDrawer() {
                           {item.image && <Image src={item.image} alt="" fill sizes="64px" className="object-cover" />}
                         </div>
                         <div className="flex-1 min-w-0">
-                          <p className="font-semibold text-sm leading-snug text-[var(--color-ink)] line-clamp-2">{item.name}</p>
-                          {variantNote(item) && <p className="text-xs text-[var(--color-ink)]/50 truncate">{variantNote(item)}</p>}
+                          <p className="font-semibold text-sm leading-snug text-[var(--color-ink)] line-clamp-2">{t(item.name)}</p>
+                          {variantNote(item) && <p className="text-xs text-[var(--color-ink)]/50 truncate">{t(variantNote(item))}</p>}
                           <div className="flex items-center gap-2 mt-2">
                             <button
                               onClick={() => updateQty(item.id, item.variant, item.qty - 1)}
                               className="w-6 h-6 rounded-full border border-[var(--color-ink)]/20 hover:bg-[var(--color-ink)]/5 text-xs"
-                              aria-label="Giảm số lượng"
+                              aria-label={t("Giảm số lượng")}
                             >
                               −
                             </button>
@@ -79,7 +84,7 @@ export default function CartDrawer() {
                             <button
                               onClick={() => updateQty(item.id, item.variant, item.qty + 1)}
                               className="w-6 h-6 rounded-full border border-[var(--color-ink)]/20 hover:bg-[var(--color-ink)]/5 text-xs"
-                              aria-label="Tăng số lượng"
+                              aria-label={t("Tăng số lượng")}
                             >
                               +
                             </button>
@@ -87,13 +92,13 @@ export default function CartDrawer() {
                         </div>
                         <div className="text-right shrink-0">
                           <p className="text-sm font-semibold text-[var(--color-ink)]">
-                            {(item.price * item.qty).toLocaleString("vi-VN")} VNĐ
+                            {vnd(item.price * item.qty, lang)}
                           </p>
                           <button
                             onClick={() => removeItem(item.id, item.variant)}
                             className="text-[10px] text-[var(--color-ink)]/40 hover:text-[var(--color-orange)] mt-1"
                           >
-                            Xoá
+                            {t("Xoá")}
                           </button>
                         </div>
                       </motion.div>
@@ -103,22 +108,22 @@ export default function CartDrawer() {
 
                 <div className="border-t border-[var(--color-ink)]/10 px-6 py-5">
                   <div className="flex justify-between items-center mb-4">
-                    <p className="font-semibold text-[var(--color-ink)]">Tạm tính</p>
+                    <p className="font-semibold text-[var(--color-ink)]">{t("Tạm tính")}</p>
                     <motion.p
                       key={subtotal}
                       initial={{ scale: 1.15 }}
                       animate={{ scale: 1 }}
                       className="text-xl font-bold text-[var(--color-purple)]"
                     >
-                      {subtotal.toLocaleString("vi-VN")} VNĐ
+                      {vnd(subtotal, lang)}
                     </motion.p>
                   </div>
                   <Link
-                    href="/gio-hang"
+                    href={localize("/gio-hang", lang)}
                     onClick={closeDrawer}
                     className="block text-center w-full bg-[var(--color-purple)] text-white font-semibold py-3.5 rounded-lg uppercase text-sm tracking-wide hover:bg-[var(--color-ink)] transition-colors"
                   >
-                    Xem giỏ hàng đầy đủ
+                    {t("Xem giỏ hàng đầy đủ")}
                   </Link>
                 </div>
               </>

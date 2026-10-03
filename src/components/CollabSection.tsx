@@ -5,6 +5,8 @@ import Reveal from "@/components/Reveal";
 import { projects } from "@/data/content";
 import ProjectCard from "./ProjectCard";
 import type { ImageTransform } from "@/lib/figmaCrop";
+import { useLang, useT } from "@/components/LangSwitch";
+import { localize } from "@/lib/i18n";
 
 // Exact 3 items + order shown in the Figma "trang-chu" frame's "du-an-collab" row.
 const HOMEPAGE_IDS = ["freezedom-thu-roi-nghi-di", "neenee-dau-doi-mu-chan-vao-doi", "le-hoi-doc-lap"];
@@ -33,6 +35,8 @@ const FIGMA_IMAGES: Record<string, { src: string; crop: ImageTransform }> = {
 };
 
 export default function CollabSection() {
+  const lang = useLang();
+  const t = useT();
   const featured = HOMEPAGE_IDS.map((id) => projects.find((p) => p.id === id)).filter(
     (p): p is NonNullable<typeof p> => Boolean(p)
   );
@@ -40,7 +44,7 @@ export default function CollabSection() {
   return (
     <section className="bg-[var(--color-orange)] [container-type:inline-size]">
       <div className="bg-[var(--color-purple)] text-white h-[80px] lg:h-[6.25cqw] flex items-center pl-6 lg:pl-[6.328cqw] text-[20px] lg:text-[1.5625cqw] font-semibold tracking-[-0.8px] uppercase">
-        <Reveal variant="mask" duration={0.9} className="lg:leading-[7.031cqw]">Dự án chung tay hợp tác</Reveal>
+        <Reveal variant="mask" duration={0.9} className="lg:leading-[7.031cqw]">{t("Dự án chung tay hợp tác")}</Reveal>
       </div>
 
       <div className=" [container-type:inline-size]">
@@ -48,16 +52,16 @@ export default function CollabSection() {
       <div className="lg:w-[84.766cqw] mx-auto lg:ml-[7.188cqw] px-6 lg:px-0 pt-[26px] lg:pt-[2.031cqw] pb-[108px] lg:pb-[8.047cqw]">
         <div className="flex justify-end mb-[10px] lg:mb-0">
           <Link
-            href="/kham-pha"
+            href={localize("/kham-pha", lang)}
             className="text-[20px] lg:text-[1.5625cqw] lg:leading-[7.031cqw] lg:tracking-[-0.0625cqw] font-semibold uppercase text-white hover:underline"
           >
-            Xem chi tiết &gt;
+            {t("Xem chi tiết >")}
           </Link>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 lg:gap-x-[6.172cqw] lg:mt-[0.313cqw]">
           {featured.map((project, i) => (
-            <ProjectCard key={project.id} title={FIGMA_TITLES[project.id] ?? project.title} image={FIGMA_IMAGES[project.id]?.src ?? project.image} crop={FIGMA_IMAGES[project.id]?.crop} index={i} href={project.articleHref} compact onOrange />
+            <ProjectCard key={project.id} title={t(FIGMA_TITLES[project.id] ?? project.title)} image={FIGMA_IMAGES[project.id]?.src ?? project.image} crop={FIGMA_IMAGES[project.id]?.crop} index={i} href={localize(project.articleHref, lang)} compact onOrange />
           ))}
         </div>
       </div>

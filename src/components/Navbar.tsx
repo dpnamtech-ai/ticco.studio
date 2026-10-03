@@ -8,7 +8,7 @@ import { Search, ShoppingCart, Menu, X, ChevronDown } from "lucide-react";
 import { navLinks, brand } from "@/data/content";
 import { useCart } from "@/context/CartContext";
 import SearchDrawer from "@/components/SearchDrawer";
-import LangSwitch, { useLang, usePagePath } from "@/components/LangSwitch";
+import LangSwitch, { useLang, usePagePath, useT } from "@/components/LangSwitch";
 import { localize } from "@/lib/i18n";
 
 type NavLink = (typeof navLinks)[number];
@@ -16,6 +16,7 @@ type NavLink = (typeof navLinks)[number];
 // Desktop item; "Khám phá" opens a sub-menu on hover/focus that jumps to a section of /kham-pha.
 function NavItem({ link, active }: { link: NavLink; active: boolean }) {
   const lang = useLang();
+  const t = useT();
   return (
     <li className="relative group md:h-[calc(27*var(--u))] flex items-center">
       <Link
@@ -23,7 +24,7 @@ function NavItem({ link, active }: { link: NavLink; active: boolean }) {
         aria-current={active ? "page" : undefined}
         className={`hover-underline flex items-center hover:opacity-80 transition-opacity ${active ? "is-active font-extrabold" : ""}`}
       >
-        {link.label}
+        {t(link.label)}
       </Link>
       {"children" in link && link.children && (
         // pt-2 is an invisible bridge so the pointer can travel from the item to the card without closing it
@@ -32,7 +33,7 @@ function NavItem({ link, active }: { link: NavLink; active: boolean }) {
             {link.children.map((c) => (
               <li key={c.href}>
                 <Link href={localize(c.href, lang)} className="block whitespace-nowrap px-5 py-2.5 transition-colors hover:bg-[var(--color-orange)]/15">
-                  {c.label}
+                  {t(c.label)}
                 </Link>
               </li>
             ))}
@@ -51,6 +52,7 @@ export default function Navbar() {
   const [searchOpen, setSearchOpen] = useState(false);
   const { totalItems, openDrawer } = useCart();
   const lang = useLang();
+  const t = useT();
   // without the /en prefix, so active states and sections work the same in both languages
   const pathname = usePagePath();
   // which collapsible section of the mobile menu is open
@@ -89,10 +91,10 @@ export default function Navbar() {
           {/* Figma "Frame 5" X1153-1219: search 21px (#fef7ff) + cart art 36x36, gap 9 */}
           <div className="hidden md:flex items-center gap-[calc(9*var(--u))] md:absolute md:right-[calc(61*var(--u))] md:top-1/2 md:-translate-y-1/2">
             <LangSwitch variant="short" className="mr-[calc(8*var(--u))] text-[calc(12*var(--u))] font-semibold leading-none" />
-            <button onClick={() => setSearchOpen(true)} aria-label="Tìm kiếm" className="text-[#fef7ff] hover:opacity-80 transition-opacity">
+            <button onClick={() => setSearchOpen(true)} aria-label={t("Tìm kiếm")} className="text-[#fef7ff] hover:opacity-80 transition-opacity">
               <Search size={21} className="size-[calc(21*var(--u))]" />
             </button>
-            <button onClick={openDrawer} aria-label="Giỏ hàng" className="relative hover:opacity-80 transition-opacity">
+            <button onClick={openDrawer} aria-label={t("Giỏ hàng")} className="relative hover:opacity-80 transition-opacity">
               <Image src="/images/figma/f7cee81a817a7fd43fa1390005911ca6d22bbadf.webp" alt="" width={108} height={108} className="size-[calc(36*var(--u))]" />
               <AnimatePresence>
                 {totalItems > 0 && (
@@ -114,10 +116,10 @@ export default function Navbar() {
           </div>
 
           {/* Mobile: search + cart (with count) + burger, always in the bar */}
-          <button onClick={() => { setMenuOpen(false); setSearchOpen(true); }} aria-label="Tìm kiếm" className="md:hidden ml-auto">
+          <button onClick={() => { setMenuOpen(false); setSearchOpen(true); }} aria-label={t("Tìm kiếm")} className="md:hidden ml-auto">
             <Search size={22} />
           </button>
-          <button onClick={openDrawer} aria-label="Giỏ hàng" className="md:hidden relative">
+          <button onClick={openDrawer} aria-label={t("Giỏ hàng")} className="md:hidden relative">
             <ShoppingCart size={23} />
             {totalItems > 0 && (
               <span className="absolute -top-1.5 -right-2 flex h-[18px] min-w-[18px] items-center justify-center rounded-full bg-[var(--color-purple)] px-1 text-[11px] font-bold leading-none text-white">
@@ -160,12 +162,12 @@ export default function Navbar() {
                         aria-current={isActive(link.href) ? "page" : undefined}
                         className={`font-[family-name:var(--font-heading)] text-2xl font-bold ${isActive(link.href) ? "underline underline-offset-8 decoration-2" : ""}`}
                       >
-                        {link.label}
+                        {t(link.label)}
                       </Link>
                       {kids && (
                         <button
                           type="button"
-                          aria-label={`${open ? "Thu gọn" : "Mở"} ${link.label}`}
+                          aria-label={`${t(open ? "Thu gọn" : "Mở")} ${t(link.label)}`}
                           aria-expanded={open}
                           onClick={() => setExpanded(open ? null : link.href)}
                           className="-mr-2 p-2"
@@ -179,7 +181,7 @@ export default function Navbar() {
                         {kids.map((c) => (
                           <li key={c.href}>
                             <Link href={localize(c.href, lang)} onClick={() => setMenuOpen(false)}>
-                              {c.label}
+                              {t(c.label)}
                             </Link>
                           </li>
                         ))}

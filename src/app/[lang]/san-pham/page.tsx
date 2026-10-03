@@ -6,6 +6,9 @@ import Reveal from "@/components/Reveal";
 import { getProducts } from "@/lib/products";
 import { SHOP_CATEGORIES, paginate, shopCategory, shopListing } from "@/lib/shop";
 import { figmaDisplay, figmaListing } from "@/lib/shopFigma";
+import { getLang } from "@/lib/lang";
+import { alternatesFor, localize } from "@/lib/i18n";
+import { t } from "@/lib/t";
 
 const cq = (px: number) => `${Math.round((px / 12.8) * 1e4) / 1e4}cqw`;
 const GRID_X = 61; // frame x/y where the card area starts (divider at Y176 + 54)
@@ -30,10 +33,11 @@ export async function generateMetadata({ searchParams }: { searchParams: SearchP
   const sp = await searchParams;
   const tab = shopCategory(one(sp["danh-muc"]));
   const page = Number(one(sp.trang) ?? 1);
+  const lang = await getLang();
   return {
-    alternates: { canonical: href(tab.slug, page > 1 ? page : 1) },
-    title: tab.slug === "tat-ca" ? "Tất cả sản phẩm Tíc Cơ — sổ tay, túi, sticker, quà tặng" : `${tab.label} — Sản phẩm Tíc Cơ`,
-    description: "Toàn bộ sản phẩm Tíc Cơ: văn phòng phẩm, in ấn, túi xách, thời trang, phụ kiện đời sống.",
+    alternates: alternatesFor(href(tab.slug, page > 1 ? page : 1), lang),
+    title: tab.slug === "tat-ca" ? t("Tất cả sản phẩm Tíc Cơ — sổ tay, túi, sticker, quà tặng", lang) : `${t(tab.label, lang)} ${t("— Sản phẩm Tíc Cơ", lang)}`,
+    description: t("Toàn bộ sản phẩm Tíc Cơ: văn phòng phẩm, in ấn, túi xách, thời trang, phụ kiện đời sống.", lang),
   };
 }
 
@@ -41,6 +45,9 @@ export async function generateMetadata({ searchParams }: { searchParams: SearchP
 // Desktop values are Figma px / 12.8 (1280px frame = 100cqw).
 export default async function SanPhamPage({ searchParams }: { searchParams: SearchParams }) {
   const sp = await searchParams;
+  const lang = await getLang();
+  const T = (s: string) => t(s, lang);
+  const link = (slug: string, page = 1) => localize(href(slug, page), lang);
   const tab = shopCategory(one(sp["danh-muc"]));
   const all = shopListing(await getProducts(), tab.slug);
   const { items, page, pages } = paginate(all, Number(one(sp.trang) ?? 1));
@@ -61,22 +68,22 @@ export default async function SanPhamPage({ searchParams }: { searchParams: Sear
       <div className=" [container-type:inline-size]">
       <div className={`px-4 lg:px-0 lg:pl-[4.766cqw] pt-6 lg:pt-[3.047cqw] pb-12 ${FL ? "lg:pb-(--pb)" : "lg:pb-[4.609cqw]"}`} style={vars}>
         {/* Figma 2026-09-29 dropped the visible "Danh mục sản phẩm" title; the tabs sit 39px under the navbar. */}
-        <h1 className="sr-only">Danh mục sản phẩm</h1>
+        <h1 className="sr-only">{T("Danh mục sản phẩm")}</h1>
 
         <Reveal variant="up" duration={1}>
-          <nav aria-label="Danh mục sản phẩm" className="lg:w-[91.094cqw]">
+          <nav aria-label={T("Danh mục sản phẩm")} className="lg:w-[91.094cqw]">
             <ul className="flex flex-wrap gap-x-5 gap-y-2 lg:relative lg:h-[1.484cqw] text-sm lg:text-[1.5625cqw] leading-5 lg:leading-[1.484cqw] tracking-[-0.5px] lg:tracking-[-0.094cqw] uppercase">
               {SHOP_CATEGORIES.map((c, i) => {
                 const active = c.slug === tab.slug;
                 return (
                   <li key={c.slug} className="lg:absolute lg:left-(--x)" style={{ "--x": `${TAB_X[i] / 12.8}cqw` } as CSSProperties}>
                     <Link
-                      href={href(c.slug)}
+                      href={link(c.slug)}
                       aria-current={c.slug === tab.slug ? "page" : undefined}
                       className={`lg:block whitespace-nowrap transition-colors hover:text-[#53129e] ${active ? "font-extrabold text-[#53129e]" : "font-medium text-black"}`}
                       style={active && FL?.tabColor ? { color: FL.tabColor } : undefined}
                     >
-                      {c.label}
+                      {T(c.label)}
                     </Link>
                   </li>
                 );
@@ -100,25 +107,25 @@ export default async function SanPhamPage({ searchParams }: { searchParams: Sear
             );
           })}
         </div>
-        {items.length === 0 && <p className="mt-8 text-center text-[var(--color-ink)]/60">Chưa có sản phẩm trong danh mục này.</p>}
+        {items.length === 0 && <p className="mt-8 text-center text-[var(--color-ink)]/60">{T("Chưa có sản phẩm trong danh mục này.")}</p>}
 
         {pages > 1 && (
-          <nav aria-label="Chọn trang" className={`mt-12 ${FL ? "lg:mt-0" : "lg:mt-[4.688cqw]"} lg:w-[90.703cqw] flex justify-center`}>
+          <nav aria-label={T("Chọn trang")} className={`mt-12 ${FL ? "lg:mt-0" : "lg:mt-[4.688cqw]"} lg:w-[90.703cqw] flex justify-center`}>
             <ul className="flex items-center">
               <li className="mr-[11px] lg:mr-[0.859cqw]">
-                {page > 1 ? <Link href={href(tab.slug, page - 1)} rel="prev" className={wide}>Trước</Link> : <span className={`${wide} opacity-40`} aria-disabled="true">Trước</span>}
+                {page > 1 ? <Link href={link(tab.slug, page - 1)} rel="prev" className={wide}>{T("Trước")}</Link> : <span className={`${wide} opacity-40`} aria-disabled="true">{T("Trước")}</span>}
               </li>
               {Array.from({ length: pages }, (_, i) => i + 1).map((n) => (
                 <li key={n} className={n > 1 ? "ml-[5px] lg:ml-[0.391cqw]" : undefined}>
                   {n === page ? (
                     <span className={`${num} !bg-[#53129e] ring-2 ring-[#53129e] ring-offset-2 ring-offset-[#f5f5f5]`} aria-current="page">{n}</span>
                   ) : (
-                    <Link href={href(tab.slug, n)} className={num} aria-label={`Trang ${n}`}>{n}</Link>
+                    <Link href={link(tab.slug, n)} className={num} aria-label={`${T("Trang")} ${n}`}>{n}</Link>
                   )}
                 </li>
               ))}
               <li className="ml-[11px] lg:ml-[0.859cqw]">
-                {page < pages ? <Link href={href(tab.slug, page + 1)} rel="next" className={wide}>Sau</Link> : <span className={`${wide} opacity-40`} aria-disabled="true">Sau</span>}
+                {page < pages ? <Link href={link(tab.slug, page + 1)} rel="next" className={wide}>{T("Sau")}</Link> : <span className={`${wide} opacity-40`} aria-disabled="true">{T("Sau")}</span>}
               </li>
             </ul>
           </nav>

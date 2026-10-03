@@ -3,6 +3,9 @@ import { notFound } from "next/navigation";
 import FigmaCanvas from "@/components/FigmaCanvas";
 import { figmaPages } from "@/data/project-pages";
 import { projects } from "@/data/content";
+import { getLang } from "@/lib/lang";
+import { alternatesFor } from "@/lib/i18n";
+import { t } from "@/lib/t";
 
 // One page per project, each laid out from its own Figma DEMO frame "du-an-*" (see scripts/gen-project-pages.mjs).
 const DESCRIPTIONS: Record<string, string> = {
@@ -23,12 +26,13 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
   const title = projects.find((p) => p.id === slug)?.title;
-  return title ? { title: `${title} — Tíc Cơ`, description: DESCRIPTIONS[slug], alternates: { canonical: `/kham-pha/${slug}` } } : {};
+  const lang = await getLang();
+  return title ? { title: `${t(title, lang)} — Tíc Cơ`, description: t(DESCRIPTIONS[slug], lang), alternates: alternatesFor(`/kham-pha/${slug}`, lang) } : {};
 }
 
 export default async function ProjectPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const page = DESCRIPTIONS[slug] && figmaPages[slug];
   if (!page) notFound();
-  return <FigmaCanvas page={page} />;
+  return <FigmaCanvas page={page} lang={await getLang()} />;
 }

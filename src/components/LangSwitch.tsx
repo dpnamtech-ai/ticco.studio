@@ -2,6 +2,7 @@
 
 import { useParams, usePathname } from "next/navigation";
 import { DEFAULT_LANG, LANGS, isLang, localize, stripLang, type Lang } from "@/lib/i18n";
+import { t } from "@/lib/t";
 
 // Current language from the [lang] route segment (proxy rewrites unprefixed URLs to /vi/...).
 export function useLang(): Lang {
@@ -22,7 +23,7 @@ export default function LangSwitch({ variant, className = "", onSwitch }: { vari
   const lang = useLang();
   const path = usePagePath();
   return (
-    <div className={`flex items-center ${className}`} aria-label="Ngôn ngữ / Language">
+    <div className={`flex items-center ${className}`} aria-label={t("Ngôn ngữ / Language", lang)}>
       {LANGS.map((l, i) => (
         <span key={l} className="flex items-center">
           {i > 0 && <span aria-hidden className="mx-[0.4em] opacity-60">·</span>}
@@ -49,4 +50,10 @@ export default function LangSwitch({ variant, className = "", onSwitch }: { vari
       ))}
     </div>
   );
+}
+
+// Client-side translator for the current page's language: const t = useT(); t("Giỏ hàng")
+export function useT() {
+  const lang = useLang();
+  return (s: string) => t(s, lang);
 }

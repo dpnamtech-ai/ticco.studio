@@ -13,7 +13,8 @@ import { CartProvider } from "@/context/CartContext";
 import { SITE_URL, SOCIALS } from "@/lib/site";
 import { getProducts } from "@/lib/products";
 import { notFound } from "next/navigation";
-import { LANGS, isLang } from "@/lib/i18n";
+import { DEFAULT_LANG, LANGS, isLang } from "@/lib/i18n";
+import { t } from "@/lib/t";
 import { brand } from "@/data/content";
 
 // Figma specifies "Be Vietnam" (the original family), not "Be Vietnam Pro" —
@@ -38,7 +39,11 @@ const beVietnam = localFont({
   ],
 });
 
-export const metadata: Metadata = {
+export async function generateMetadata({ params }: LayoutProps<"/[lang]">): Promise<Metadata> {
+  const { lang: l } = await params;
+  const lang = isLang(l) ? l : DEFAULT_LANG;
+  const T = (s: string) => t(s, lang);
+  return {
   metadataBase: new URL(SITE_URL),
   applicationName: "Tíc Cơ",
   // Search Console / Bing Webmaster ownership: paste each tool's verification code into these Vercel env vars.
@@ -49,21 +54,22 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true, googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1 } },
   twitter: { card: "summary_large_image" },
   title: {
-    default: "Tíc Cơ — Đời dễ ợt, vợt Tíc Cơ",
+    default: T("Tíc Cơ — Đời dễ ợt, vợt Tíc Cơ"),
     template: "%s",
   },
-  description:
-    "Tíc Cơ — thương hiệu Việt bán sổ tay, túi, in ấn và quà tặng nhỏ đầy cá tính, lấy cảm hứng từ chất liệu đời thường.",
-  keywords: ["Tíc Cơ", "ticco studio", "sổ tay", "văn phòng phẩm", "túi tote", "sticker", "postcard", "quà tặng", "quà sinh nhật", "móc khoá", "mascot Đần", "thương hiệu Việt"],
+  description: T("Tíc Cơ — thương hiệu Việt bán sổ tay, túi, in ấn và quà tặng nhỏ đầy cá tính, lấy cảm hứng từ chất liệu đời thường."),
+  keywords: ["Tíc Cơ", "ticco studio", "sổ tay", "văn phòng phẩm", "túi tote", "sticker", "postcard", "quà tặng", "quà sinh nhật", "móc khoá", "mascot Đần", "thương hiệu Việt"].map(T),
   openGraph: {
     siteName: "Tíc Cơ",
-    locale: "vi_VN",
-    title: "Tíc Cơ — Đời dễ ợt, vợt Tíc Cơ",
-    description: "Sổ tay, túi, in ấn và những món đồ nhỏ đầy cá tính.",
+    locale: lang === "en" ? "en_US" : "vi_VN",
+    alternateLocale: lang === "en" ? "vi_VN" : "en_US",
+    title: T("Tíc Cơ — Đời dễ ợt, vợt Tíc Cơ"),
+    description: T("Sổ tay, túi, in ấn và những món đồ nhỏ đầy cá tính."),
     type: "website",
     images: ["/images/hero-basket.png"],
   },
-};
+  };
+}
 
 // Both languages are prerendered; any other /xx/ segment is a 404.
 export const dynamicParams = false;
@@ -87,7 +93,7 @@ export default async function RootLayout({ children, params }: LayoutProps<"/[la
         alternateName: ["Tíc Cơ Studios", "ticco.studios"],
         url: SITE_URL,
         logo: `${SITE_URL}/images/logo-tic-co.png`,
-        description: brand.mission.split("\n")[0],
+        description: t(brand.mission.split("\n")[0], lang),
         foundingDate: "2024",
         email: brand.email,
         sameAs: SOCIALS,
@@ -98,7 +104,7 @@ export default async function RootLayout({ children, params }: LayoutProps<"/[la
         "@id": `${SITE_URL}/#website`,
         url: SITE_URL,
         name: "Tíc Cơ",
-        inLanguage: "vi-VN",
+        inLanguage: lang === "en" ? "en" : "vi-VN",
         publisher: { "@id": `${SITE_URL}/#org` },
         potentialAction: { "@type": "SearchAction", target: `${SITE_URL}/tim-kiem?q={search_term_string}`, "query-input": "required name=search_term_string" },
       },

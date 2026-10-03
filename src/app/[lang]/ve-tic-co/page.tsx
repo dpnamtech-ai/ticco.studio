@@ -3,12 +3,18 @@ import Image from "next/image";
 import { aboutPage } from "@/data/content";
 import Reveal from "@/components/Reveal";
 import { cropFillStyle } from "@/lib/figmaCrop";
+import { getLang } from "@/lib/lang";
+import { alternatesFor } from "@/lib/i18n";
+import { t } from "@/lib/t";
 
-export const metadata: Metadata = {
-  title: "Về Tíc Cơ — Thương hiệu Việt vui, nghệ, gần gũi",
-  alternates: { canonical: "/ve-tic-co" },
-  description: "Tíc Cơ là thương hiệu Việt với các sản phẩm tiêu dùng sáng tạo, lấy cảm hứng từ chất liệu đời thường, do người trẻ Việt thiết kế.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const lang = await getLang();
+  return {
+    title: t("Về Tíc Cơ — Thương hiệu Việt vui, nghệ, gần gũi", lang),
+    alternates: alternatesFor("/ve-tic-co", lang),
+    description: t("Tíc Cơ là thương hiệu Việt với các sản phẩm tiêu dùng sáng tạo, lấy cảm hứng từ chất liệu đời thường, do người trẻ Việt thiết kế.", lang),
+  };
+}
 
 // Figma DEMO "ve-Tic-Co" (671:162). Figma px -> cqw of the full-width section (1280px = 100cqw); both sections
 // run edge to edge (blobs touch X0 / X1280, photo bleeds), so the container is the viewport, not a 1280 cap.
@@ -25,36 +31,39 @@ const GROUPS = [
 ] as const;
 
 // "banner" words (600 100/58 ls -6), relative to the banner top (Figma Y706). `r` = right-aligned box, stored as
-// distance from the right edge (1280 - (x + w)).
+// distance from the right edge (1280 - (x + w)). `en`: the English line re-written word for word into the same 9 slots
+// ("art in the every day / we all have taste"), short words so they fit the boxes at 100px.
 const WORDS = [
-  { t: "nghệ", l: 26, y: 34 },
-  { t: "một", l: 26, y: 119 },
-  { t: "cách", l: 26, y: 201 },
-  { t: "đời", r: 936, y: 384 },
-  { t: "thường", r: 936, y: 453 },
-  { t: "ai", r: 46, y: 207 },
-  { t: "cũng", r: 46, y: 269 },
-  { t: "có", r: 46, y: 383 },
-  { t: "gu", r: 46, y: 449 },
+  { t: "nghệ", en: "art", l: 26, y: 34 },
+  { t: "một", en: "in", l: 26, y: 119 },
+  { t: "cách", en: "the", l: 26, y: 201 },
+  { t: "đời", en: "every", r: 936, y: 384 },
+  { t: "thường", en: "day", r: 936, y: 453 },
+  { t: "ai", en: "we", r: 46, y: 207 },
+  { t: "cũng", en: "all", r: 46, y: 269 },
+  { t: "có", en: "have", r: 46, y: 383 },
+  { t: "gu", en: "taste", r: 46, y: 449 },
 ];
 
 const BLOB_BG = "linear-gradient(180deg, #6625b1 0%, #1f0938 100%)";
 
-export default function VeTicCoPage() {
+export default async function VeTicCoPage() {
+  const lang = await getLang();
+  const T = (s: string) => t(s, lang);
   return (
     <>
       <section className="relative overflow-hidden text-white bg-gradient-to-b from-[#e66107] to-[#c15106] [container-type:inline-size]">
         {/* < md: stacked cards (the Figma geometry needs a desktop width to be readable) */}
         <div className="md:hidden px-6 py-10 flex flex-col gap-6">
           <p role="heading" aria-level={1} className="text-right text-[56px] leading-[52px] font-bold tracking-[-0.06em] uppercase">
-            Về
+            {T("Về")}
             <br />
             Tíc Cơ!
           </p>
           {GROUPS.map((g, i) => (
             <div key={i} className="rounded-t-[50%_40px] p-6 pt-10 text-[18px] leading-[23px] tracking-[-0.05em] text-justify space-y-[23px]" style={{ background: BLOB_BG }}>
               {g.paras.map((p) => (
-                <p key={p}>{p}</p>
+                <p key={p}>{T(p)}</p>
               ))}
             </div>
           ))}
@@ -64,7 +73,7 @@ export default function VeTicCoPage() {
         <div className="hidden md:block relative" style={{ height: cq(658) }}>
           <Reveal variant="mask" duration={1.1} style={box(490, 71, 300)}>
             <h1 className="text-right font-bold uppercase" style={{ fontSize: cq(72), lineHeight: cq(66), letterSpacing: cq(-4.32) }}>
-              Về
+              {T("Về")}
               <br />
               Tíc Cơ!
             </h1>
@@ -76,7 +85,7 @@ export default function VeTicCoPage() {
               <div className="text-justify" style={{ ...box(g.tx, 0, g.tw), fontSize: cq(20), lineHeight: cq(25), letterSpacing: cq(-1) }}>
                 {g.paras.map((p, j) => (
                   <p key={p} style={{ marginTop: j ? cq(25) : 0 }}>
-                    {p}
+                    {T(p)}
                   </p>
                 ))}
               </div>
@@ -106,7 +115,7 @@ export default function VeTicCoPage() {
                 className="absolute whitespace-nowrap"
                 style={{ top: cq(w.y), ...(w.r == null ? { left: cq(w.l) } : { right: cq(w.r) }) }}
               >
-                {w.t}{" "}
+                {lang === "en" ? w.en : w.t}{" "}
               </span>
             ))}
           </p>

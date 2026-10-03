@@ -11,6 +11,9 @@ import type { Crop } from "@/lib/shop";
 import { fillStyle, zoomSizes } from "@/lib/figmaCrop";
 import { layoutBottom, type Box, type FigmaLayout } from "@/lib/shopFigma";
 import { priceFor } from "@/lib/shop";
+import { useLang, useT } from "@/components/LangSwitch";
+import { localize } from "@/lib/i18n";
+import { vnd } from "@/lib/shopFigma";
 
 interface ProductDetailProps {
   id: string;
@@ -72,6 +75,9 @@ export default function ProductDetail({
   bundleItems,
   layout: L,
 }: ProductDetailProps) {
+  // display only: cart lines, option values and links keep the Vietnamese catalog values (orders, ?chon=, sibling maps)
+  const lang = useLang();
+  const t = useT();
   const own = variantLinks && Object.keys(variantLinks).find((label) => variantLinks[label] === id);
   const [selected, setSelected] = useState(own ?? variants[0] ?? "Mặc định");
   const [added, setAdded] = useState(false);
@@ -106,7 +112,7 @@ export default function ProductDetail({
   const [first, ...smalls] = gallery;
   const main = gallery[variantImages?.[selected] ?? 0] ?? first;
   const wide = smalls.length > 4;
-  const specText = specs.join("\n") + (note ? `${specs.length ? "\n\n" : ""}Lưu ý:\n${note}` : "");
+  const specText = specs.join("\n") + (note ? `${specs.length ? "\n\n" : ""}${t("Lưu ý:")}\n${note}` : "");
   const abs = L ? "lg:absolute lg:left-(--x) lg:top-(--y) lg:w-(--w)" : "";
   const flow = (cls: string) => (L ? "lg:mt-0" : cls); // desktop spacing of the flow layout; positioned boxes need none
   const body = "text-sm lg:text-[1.094cqw] leading-5 lg:leading-[1.563cqw] font-light tracking-[-0.3px] lg:tracking-[-0.055cqw] text-black whitespace-pre-line";
@@ -123,7 +129,7 @@ export default function ProductDetail({
     >
       <Reveal variant="curtain" duration={1.3} className={`order-1 ${L ? abs : "lg:order-none lg:col-start-1 lg:row-start-1"}`} style={at(L?.gallery[0])}>
         <div ref={mainRef} className="relative aspect-[550/689] bg-[#d9d9d9] overflow-hidden scroll-mt-20" style={L && box(L.gallery[0])}>
-          {main && <Image key={main.src} src={main.src} alt={selected === variants[0] ? name : `${name} - ${selected}`} fill priority className={fade} onLoad={onLoad} sizes={zoomSizes("(max-width: 1024px) 100vw, 43vw", main)} style={fillStyle(main)} />}
+          {main && <Image key={main.src} src={main.src} alt={selected === variants[0] ? t(name) : `${t(name)} - ${t(selected)}`} fill priority className={fade} onLoad={onLoad} sizes={zoomSizes("(max-width: 1024px) 100vw, 43vw", main)} style={fillStyle(main)} />}
         </div>
       </Reveal>
 
@@ -140,7 +146,7 @@ export default function ProductDetail({
               style={L && { ...at(L.gallery[i + 1]), ...box(L.gallery[i + 1]) }}
             >
               <div className="absolute inset-0 transition-transform duration-500 group-hover:scale-105">
-                <Image src={img.src} alt={`${name} — ảnh ${i + 2}`} fill className={fade} onLoad={onLoad} style={fillStyle(img)} sizes={zoomSizes("(max-width: 1024px) 50vw, 22vw", img)} />
+                <Image src={img.src} alt={`${t(name)} ${t("— ảnh")} ${i + 2}`} fill className={fade} onLoad={onLoad} style={fillStyle(img)} sizes={zoomSizes("(max-width: 1024px) 50vw, 22vw", img)} />
               </div>
             </Reveal>
           ))}
@@ -169,19 +175,19 @@ export default function ProductDetail({
 
         {bundleItems && bundleItems.length > 0 && (
           <div className="mt-6">
-            <p className="text-sm font-semibold text-black/70 mb-3">Bộ này gồm (bấm để xem/mua riêng):</p>
+            <p className="text-sm font-semibold text-black/70 mb-3">{t("Bộ này gồm (bấm để xem/mua riêng):")}</p>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
               {bundleItems.map((item) => (
-                <Link key={item.id} href={`/san-pham/${item.id}`} className="group block border border-black/10 rounded-lg overflow-hidden hover:border-[#53129e] transition-colors">
+                <Link key={item.id} href={localize(`/san-pham/${item.id}`, lang)} className="group block border border-black/10 rounded-lg overflow-hidden hover:border-[#53129e] transition-colors">
                   <div className="relative aspect-square bg-[#d9d9d9]">
-                    {item.image && <Image src={item.image} alt={item.name} fill className="object-cover" sizes="150px" />}
+                    {item.image && <Image src={item.image} alt={t(item.name)} fill className="object-cover" sizes="150px" />}
                   </div>
                   <div className="p-2">
                     <p className="text-xs font-medium line-clamp-2">
                       {item.qty > 1 ? `${item.qty}x ` : ""}
-                      {item.name}
+                      {t(item.name)}
                     </p>
-                    <p className="text-xs text-black/50">{item.priceFrom > 0 ? `${item.priceFrom.toLocaleString("vi-VN")} VNĐ` : "Liên hệ"}</p>
+                    <p className="text-xs text-black/50">{vnd(item.priceFrom, lang)}</p>
                   </div>
                 </Link>
               ))}
@@ -205,10 +211,10 @@ export default function ProductDetail({
                     style={b && L?.options && at(b, L.options.box[0], L.options.box[1])}
                   >
                     {target && target !== id ? (
-                      <Link href={`/san-pham/${target}`} className={option}><span className={label}>{v}</span></Link>
+                      <Link href={localize(`/san-pham/${target}`, lang)} className={option}><span className={label}>{t(v)}</span></Link>
                     ) : (
                       <button type="button" onClick={() => pick(v)} aria-pressed={selected === v} className={`${option} ${selected === v ? picked : ""}`}>
-                        <span className={label}>{v}</span>
+                        <span className={label}>{t(v)}</span>
                       </button>
                     )}
                   </li>
@@ -232,11 +238,11 @@ export default function ProductDetail({
               <AnimatePresence mode="wait">
                 {added ? (
                   <motion.span key="added" initial={{ opacity: 0, scale: 0.5 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.5 }} className="flex items-center gap-2 text-white">
-                    <Check size={18} /> Đã thêm
+                    <Check size={18} /> {t("Đã thêm")}
                   </motion.span>
                 ) : (
                   <motion.span key="idle" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-                    Thêm vào giỏ hàng
+                    {t("Thêm vào giỏ hàng")}
                   </motion.span>
                 )}
               </AnimatePresence>
@@ -258,7 +264,7 @@ export default function ProductDetail({
             </Reveal>
             <Reveal variant="up" delay={0.3} className={`mt-4 ${flow("lg:mt-[1.953cqw]")} ${abs}`} style={at(L?.extraImg)}>
               <div className="relative w-full max-w-[394px] lg:max-w-none lg:w-[30.781cqw] overflow-hidden" style={{ aspectRatio: `${extra.w} / ${extra.h}` }}>
-                <Image src={extra.src} alt={`${name} — ${extra.label}`} fill className={fade} onLoad={onLoad} style={fillStyle(extra)} sizes={zoomSizes("(max-width: 1024px) 100vw, 31vw", extra)} />
+                <Image src={extra.src} alt={`${t(name)} — ${extra.label}`} fill className={fade} onLoad={onLoad} style={fillStyle(extra)} sizes={zoomSizes("(max-width: 1024px) 100vw, 31vw", extra)} />
               </div>
             </Reveal>
           </>

@@ -1,4 +1,6 @@
 import { getProducts } from "@/lib/products";
+import { DEFAULT_LANG, localize, type Lang } from "@/lib/i18n";
+import { t, tx } from "@/lib/t";
 import { figmaPages } from "@/data/project-pages";
 import { projects } from "@/data/content";
 import type { FigLeaf } from "@/components/FigmaCanvas";
@@ -27,21 +29,21 @@ function pageTexts(slug: string) {
 
 export const cleanQuery = (raw: string | string[] | null | undefined) => (Array.isArray(raw) ? raw[0] : raw)?.trim().slice(0, 80) ?? "";
 
-export async function search(q: string) {
+export async function search(q: string, lang: Lang = DEFAULT_LANG) {
   if (!q) return { products: [], content: [] };
   const hit = matcher(q);
   // Products: name matches only; the description is a fallback when no name matches
   // (otherwise "áo" also lists every product whose blurb mentions a shirt).
-  const all = await getProducts();
+  const all = tx(await getProducts(), lang);
   const byName = all.filter((p) => hit(p.name));
   const products = byName.length ? byName : all.filter((p) => hit(plain(p.description)));
   const content = Object.keys(figmaPages).flatMap((slug) => {
-    const title = slug === "kham-pha" ? "Khám phá - Dự án vui" : (projects.find((p) => p.id === slug)?.title ?? slug);
-    const texts = pageTexts(slug);
+    const title = t(slug === "kham-pha" ? "Khám phá - Dự án vui" : (projects.find((p) => p.id === slug)?.title ?? slug), lang);
+    const texts = pageTexts(slug).map((s) => t(s, lang));
     const found = [title, ...texts].find(hit);
     // Title itself matched: show the page's first real sentence instead of an empty line (looked like missing meta).
     const intro = () => texts.find((t) => t.length > 40 && t !== title) ?? "";
-    return found ? [{ slug, title, snippet: found === title ? intro() : found, href: slug === "kham-pha" ? "/kham-pha" : `/kham-pha/${slug}` }] : [];
+    return found ? [{ slug, title, snippet: found === title ? intro() : found, href: localize(slug === "kham-pha" ? "/kham-pha" : `/kham-pha/${slug}`, lang) }] : [];
   });
   return { products, content };
 }

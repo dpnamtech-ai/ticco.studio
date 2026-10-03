@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { useLang, useT } from "@/components/LangSwitch";
 
 /*
   Matches the "trang-chu" Figma frame's hero-section (X0 Y51 W1283 H592):
@@ -11,13 +12,15 @@ import Image from "next/image";
   section, from the Figma file JSON.
 */
 export default function HeroSection() {
+  const lang = useLang();
+  const t = useT();
   return (
     <section className="relative w-full bg-[var(--color-orange)] text-white">
       <div className="relative aspect-[1283/592] overflow-hidden [container-type:inline-size]">
         <div className="absolute inset-y-0 right-0" style={{ width: "56.27%" }}>
           <Image
             src="/images/hero-basket.png"
-            alt="Giỏ đồ Tíc Cơ"
+            alt={t("Giỏ đồ Tíc Cơ")}
             fill
             priority
            
@@ -28,7 +31,7 @@ export default function HeroSection() {
 
         <Image
           src="/images/hero-caption.png"
-          alt="Nghề một cách đời thường"
+          alt={t("Nghề một cách đời thường")}
           width={684}
           height={546}
           className="absolute"
@@ -42,9 +45,9 @@ export default function HeroSection() {
           className="absolute font-[family-name:var(--font-heading)] font-bold uppercase leading-[1.0588] tracking-[-0.04em] whitespace-nowrap"
           style={{ left: "4.68%", top: "13.51%", width: "33.12%", fontSize: "max(26px, 6.625cqw)" }}
         >
-          Đời dễ ợt
+          {t("Đời dễ ợt")}
           <br />
-          Vợt Tíc Cơ
+          {t("Vợt Tíc Cơ")}
         </motion.h1>
 
         {/* Figma "Frame 6": bracketed subtext incl. Big Caslon ( ), exported as art */}
@@ -57,16 +60,17 @@ export default function HeroSection() {
         >
           <Image
             src="/images/hero-subtext.png"
-            alt="Chúng tôi có bán sản phẩm để bạn tìm thấy niềm vui trong mọi điều đời thường!"
+            alt={t("Chúng tôi có bán sản phẩm để bạn tìm thấy niềm vui trong mọi điều đời thường!")}
             width={2592}
             height={816}
             sizes="26vw"
-            className="w-full h-auto max-lg:hidden"
+            // the art has the Vietnamese lettering baked in: English shows the live-text line at every width instead
+            className={`w-full h-auto max-lg:hidden ${lang === "en" ? "lg:hidden" : ""}`}
           />
           {/* phones: the art's lettering would be ~4px tall, so the same line as live text in ( ) */}
-          <p className="lg:hidden flex items-center gap-1 text-[11px] leading-[1.3] font-medium uppercase">
+          <p className={`${lang === "en" ? "lg:text-[1.25cqw]" : "lg:hidden"} flex items-center gap-1 text-[11px] leading-[1.3] font-medium uppercase`}>
             <span aria-hidden className="font-[family-name:Georgia,serif] text-[46px] font-thin leading-none opacity-90">(</span>
-            <span>Chúng tôi có bán sản phẩm để bạn tìm thấy niềm vui trong mọi điều đời thường!</span>
+            <span>{t("Chúng tôi có bán sản phẩm để bạn tìm thấy niềm vui trong mọi điều đời thường!")}</span>
             <span aria-hidden className="font-[family-name:Georgia,serif] text-[46px] font-thin leading-none opacity-90">)</span>
           </p>
         </motion.div>

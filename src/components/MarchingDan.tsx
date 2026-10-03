@@ -1,6 +1,8 @@
 import Image from "next/image";
 import { mascotPage } from "@/data/content";
 import { cropFillStyle, zoomSizes, type ImageTransform } from "@/lib/figmaCrop";
+import { getLang } from "@/lib/lang";
+import { t } from "@/lib/t";
 
 /*
   Figma DEMO "tinh-than-Dan" (671:218 frame, 1280x664 visible from y=703), rebuilt from its layers:
@@ -46,7 +48,9 @@ const CAPTIONS = [
   { box: [169, 193, 147, 68], tr: 310, ty: 193 },
 ] as const;
 
-export default function MarchingDan({ alt }: { alt: string }) {
+export default async function MarchingDan({ alt }: { alt: string }) {
+  const lang = await getLang();
+  const T = (s: string) => t(s, lang);
   return (
     <div className="[container-type:inline-size]">
       <div className="relative w-full aspect-[1280/664] overflow-clip bg-[#e5e5e5]" role="img" aria-label={alt}>
@@ -86,7 +90,7 @@ export default function MarchingDan({ alt }: { alt: string }) {
                 className="absolute whitespace-pre"
                 style={{ top: cq(c.ty), ...("tr" in c ? { right: cq(1280 - c.tr), textAlign: "right" } : { left: cq(c.tx) }) }}
               >
-                {mascotPage.traits.captions[i]}
+                {T(mascotPage.traits.captions[i])}
               </p>
             </div>
           ))}
@@ -97,15 +101,15 @@ export default function MarchingDan({ alt }: { alt: string }) {
           className="absolute text-center font-semibold text-[var(--color-purple)] whitespace-nowrap max-lg:hidden"
           style={{ left: cq(335), top: cq(553), width: cq(611), fontSize: cq(27), lineHeight: cq(30), letterSpacing: cq(-1.89) }}
         >
-          {mascotPage.traits.tagline}
+          {T(mascotPage.traits.tagline)}
         </p>
       </div>
       {/* phones: the tags are ~7px inside the scaled scene, so list them below as readable chips */}
       <div className="lg:hidden bg-[#e5e5e5] px-6 pb-8 -mt-px text-center">
         <ul className="flex flex-wrap justify-center gap-2 text-[13px] font-semibold text-white">
-          {mascotPage.traits.captions.map((c) => <li key={c} className="bg-[#e85f08] px-2.5 py-1">{c.replace(/\n/g, " ")}</li>)}
+          {mascotPage.traits.captions.map((c) => <li key={c} className="bg-[#e85f08] px-2.5 py-1">{T(c).replace(/\n/g, " ")}</li>)}
         </ul>
-        <p className="mt-4 text-[15px] font-semibold text-[var(--color-purple)]">{mascotPage.traits.tagline}</p>
+        <p className="mt-4 text-[15px] font-semibold text-[var(--color-purple)]">{T(mascotPage.traits.tagline)}</p>
       </div>
     </div>
   );

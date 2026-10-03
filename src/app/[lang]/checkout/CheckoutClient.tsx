@@ -5,6 +5,9 @@ import { useEffect, useId, useState } from "react";
 import { useCart } from "@/context/CartContext";
 import AddressMap from "@/components/AddressMap";
 import { FREE_SHIP_MIN, shippingFor } from "@/lib/checkout";
+import { useLang, useT } from "@/components/LangSwitch";
+import { localize } from "@/lib/i18n";
+import { vnd as vndOf } from "@/lib/shopFigma";
 
 // Shop QR poster + the account printed on it (for customers who transfer by hand); change both together.
 const QR_SRC = "/images/qr-thanh-toan.jpg";
@@ -12,17 +15,18 @@ const ACCOUNT = { bank: "Techcombank", number: "19037100037019" }; // PHAM KHANH
 
 type Placed = { code: string; subtotal: number; shipping: number; total: number };
 const STORE_KEY = "ticco-last-order";
-const vnd = (n: number) => `${n.toLocaleString("vi-VN")} VNĐ`;
 
 // addrFormat: "moi" = 2025 (tỉnh -> xã), "cu" = before 1/7/2025 (tỉnh -> quận/huyện -> xã); customer picks.
 const empty = { name: "", phone: "", email: "", addrFormat: "moi", province: "", district: "", ward: "", address: "", note: "", website: "" };
 
+// label/error arrive in Vietnamese (field errors come from the server); shown in the page language
 function Field({ label, error, children }: { label: string; error?: string; children: React.ReactNode }) {
+  const t = useT();
   return (
     <label className="block">
-      <span className="mb-1 block text-sm font-semibold text-[var(--color-ink)]">{label}</span>
+      <span className="mb-1 block text-sm font-semibold text-[var(--color-ink)]">{t(label)}</span>
       {children}
-      {error && <span className="mt-1 block text-sm text-red-600">{error}</span>}
+      {error && <span className="mt-1 block text-sm text-red-600">{t(error)}</span>}
     </label>
   );
 }
@@ -31,10 +35,11 @@ const input =
   "w-full rounded-lg border border-[var(--color-ink)]/20 bg-white px-4 py-3 text-base outline-none transition-colors focus:border-[var(--color-purple)]";
 
 function CopyRow({ label, value, shown = value }: { label: string; value: string; shown?: string }) {
+  const t = useT();
   const [done, setDone] = useState(false);
   return (
     <div className="flex items-center justify-between gap-3 border-b border-[var(--color-ink)]/10 py-2 text-sm">
-      <span className="whitespace-nowrap text-[var(--color-ink)]/60">{label}</span>
+      <span className="whitespace-nowrap text-[var(--color-ink)]/60">{t(label)}</span>
       <span className="flex items-center gap-2 text-right font-semibold">
         {shown}
         <button
@@ -46,7 +51,7 @@ function CopyRow({ label, value, shown = value }: { label: string; value: string
           }}
           className="rounded border border-[var(--color-purple)]/40 px-2 py-0.5 text-xs text-[var(--color-purple)]"
         >
-          {done ? "Đã chép" : "Chép"}
+          {t(done ? "Đã chép" : "Chép")}
         </button>
       </span>
     </div>
@@ -55,6 +60,9 @@ function CopyRow({ label, value, shown = value }: { label: string; value: string
 
 export default function CheckoutClient() {
   const { items, subtotal, clearCart } = useCart();
+  const lang = useLang();
+  const t = useT();
+  const vnd = (n: number) => vndOf(n, lang);
   const [form, setForm] = useState(empty);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [formError, setFormError] = useState("");
@@ -102,13 +110,13 @@ export default function CheckoutClient() {
       const res = await fetch("/api/orders", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...form, items: items.map((i) => ({ id: i.id, variant: i.variant, qty: i.qty })) }),
+        body: JSON.stringify({ ...form, lang, items: items.map((i) => ({ id: i.id, variant: i.variant, qty: i.qty })) }),
       });
       const data = await res.json();
       if (!res.ok) {
         setErrors(data.fields ?? {});
         // errors.items has no input of its own: show its text instead of the generic "kiểm tra lại thông tin"
-        setFormError(data.fields?.items ?? data.error ?? "Không gửi được đơn, vui lòng thử lại.");
+        setFormError(t(data.fields?.items ?? data.error ?? "Không gửi được đơn, vui lòng thử lại."));
         return;
       }
       const order: Placed = { code: data.code, subtotal: data.subtotal, shipping: data.shipping, total: data.total };
@@ -117,7 +125,7 @@ export default function CheckoutClient() {
       clearCart();
       window.scrollTo({ top: 0 });
     } catch {
-      setFormError("Mất kết nối, vui lòng thử lại.");
+      setFormError(t("Mất kết nối, vui lòng thử lại."));
     } finally {
       setSending(false);
     }
@@ -129,9 +137,9 @@ export default function CheckoutClient() {
   if (placed && items.length === 0) {
     return (
       <section className="mx-auto max-w-4xl px-6 py-12">
-        <h1 className="mb-2 font-[family-name:var(--font-heading)] text-3xl font-bold text-[var(--color-purple)]">Đặt hàng thành công</h1>
+        <h1 className="mb-2 font-[family-name:var(--font-heading)] text-3xl font-bold text-[var(--color-purple)]">{t("Đặt hàng thành công")}</h1>
         <p className="mb-8 text-[var(--color-ink)]/75">
-          Cảm ơn bạn! Vui lòng chuyển khoản để Tíc Cơ xác nhận đơn <b>{placed.code}</b>. Tíc Cơ sẽ liên hệ qua số điện thoại bạn đã nhập.
+          {t("Cảm ơn bạn! Vui lòng chuyển khoản để Tíc Cơ xác nhận đơn")} <b>{placed.code}</b>{t(". Tíc Cơ sẽ liên hệ qua số điện thoại bạn đã nhập.")}
         </p>
 
         {/* Shop's own static poster QR (client's file, shown uncropped): it carries no amount/note, so those two
@@ -139,18 +147,18 @@ export default function CheckoutClient() {
         <div className="grid items-start gap-8 md:grid-cols-[minmax(0,360px)_1fr]">
           <div className="mx-auto w-full max-w-[360px]">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={QR_SRC} alt="Mã QR chuyển khoản Tíc Cơ (Techcombank)" width={1878} height={2560} className="h-auto w-full rounded-lg bg-white shadow-sm" />
+            <img src={QR_SRC} alt={t("Mã QR chuyển khoản Tíc Cơ (Techcombank)")} width={1878} height={2560} className="h-auto w-full rounded-lg bg-white shadow-sm" />
             <a
               href={QR_SRC}
               download="tic-co-qr-chuyen-khoan.jpg"
               className="mt-3 block rounded-lg border-2 border-[var(--color-purple)] py-3 text-center font-semibold text-[var(--color-purple)] md:hidden"
             >
-              Lưu ảnh QR để quét trong app ngân hàng
+              {t("Lưu ảnh QR để quét trong app ngân hàng")}
             </a>
           </div>
           <div>
             <div className="rounded-lg border-2 border-[var(--color-orange)] bg-[var(--color-orange)]/5 p-4">
-              <p className="mb-2 text-sm font-semibold text-[var(--color-orange)]">Mã QR không tự điền, bạn nhập đúng 2 dòng này:</p>
+              <p className="mb-2 text-sm font-semibold text-[var(--color-orange)]">{t("Mã QR không tự điền, bạn nhập đúng 2 dòng này:")}</p>
               <CopyRow label="Số tiền" value={String(placed.total)} shown={vnd(placed.total)} />
               <CopyRow label="Nội dung" value={placed.code} />
             </div>
@@ -158,13 +166,13 @@ export default function CheckoutClient() {
               <CopyRow label={`STK ${ACCOUNT.bank}`} value={ACCOUNT.number} />
             </div>
             <p className="mt-4 text-sm text-[var(--color-ink)]/60">
-              Tạm tính {vnd(placed.subtotal)} · Ship {placed.shipping ? vnd(placed.shipping) : "miễn phí"} · <b>Tổng {vnd(placed.total)}</b>
+              {t("Tạm tính")} {vnd(placed.subtotal)} · Ship {placed.shipping ? vnd(placed.shipping) : t("miễn phí")} · <b>{t("Tổng")} {vnd(placed.total)}</b>
             </p>
           </div>
         </div>
 
-        <Link href="/san-pham" className="mt-10 inline-block font-semibold text-[var(--color-orange)] hover:underline">
-          ← Tiếp tục xem sản phẩm
+        <Link href={localize("/san-pham", lang)} className="mt-10 inline-block font-semibold text-[var(--color-orange)] hover:underline">
+          {t("← Tiếp tục xem sản phẩm")}
         </Link>
       </section>
     );
@@ -173,9 +181,9 @@ export default function CheckoutClient() {
   if (items.length === 0) {
     return (
       <section className="mx-auto max-w-3xl px-6 py-24 text-center">
-        <h1 className="mb-4 font-[family-name:var(--font-heading)] text-3xl font-bold text-[var(--color-purple)]">Giỏ hàng trống</h1>
-        <Link href="/san-pham" className="font-semibold text-[var(--color-orange)] hover:underline">
-          Xem sản phẩm →
+        <h1 className="mb-4 font-[family-name:var(--font-heading)] text-3xl font-bold text-[var(--color-purple)]">{t("Giỏ hàng trống")}</h1>
+        <Link href={localize("/san-pham", lang)} className="font-semibold text-[var(--color-orange)] hover:underline">
+          {t("Xem sản phẩm →")}
         </Link>
       </section>
     );
@@ -185,7 +193,7 @@ export default function CheckoutClient() {
   return (
     <section className="mx-auto grid max-w-5xl gap-10 px-6 py-12 md:grid-cols-[1fr_340px]">
       <form onSubmit={submit} noValidate className="space-y-5">
-        <h1 className="font-[family-name:var(--font-heading)] text-3xl font-bold text-[var(--color-purple)]">Thông tin nhận hàng</h1>
+        <h1 className="font-[family-name:var(--font-heading)] text-3xl font-bold text-[var(--color-purple)]">{t("Thông tin nhận hàng")}</h1>
 
         <div className="grid gap-5 sm:grid-cols-2">
           <Field label="Họ và tên" error={errors.name}>
@@ -201,7 +209,7 @@ export default function CheckoutClient() {
 
         {/* Since 1/7/2025 Vietnam has 2 levels: 34 tỉnh/thành -> phường/xã (no quận/huyện). Old 3-level kept for customers used to it. */}
         <fieldset className="flex flex-wrap gap-x-6 gap-y-2 text-sm">
-          <legend className="mb-1 block text-sm font-semibold text-[var(--color-ink)]">Kiểu địa chỉ</legend>
+          <legend className="mb-1 block text-sm font-semibold text-[var(--color-ink)]">{t("Kiểu địa chỉ")}</legend>
           {[
             ["moi", "Địa chỉ mới (từ 1/7/2025)"],
             ["cu", "Địa chỉ cũ (có quận/huyện)"],
@@ -219,7 +227,7 @@ export default function CheckoutClient() {
                 }}
                 className="accent-[var(--color-purple)]"
               />
-              {label}
+              {t(label)}
             </label>
           ))}
         </fieldset>
@@ -228,7 +236,7 @@ export default function CheckoutClient() {
             <Combobox
               value={form.province}
               options={provinces}
-              placeholder="Gõ để tìm, vd: ha noi"
+              placeholder={t("Gõ để tìm, vd: ha noi")}
               autoComplete="address-level1"
               onChange={(v) => {
                 setForm((f) => (f.province === v ? f : { ...f, province: v, district: "", ward: "" }));
@@ -241,7 +249,7 @@ export default function CheckoutClient() {
               <Combobox
                 value={form.district}
                 options={districts}
-                placeholder={form.province ? "Gõ để tìm quận/huyện" : "Chọn tỉnh/thành trước"}
+                placeholder={t(form.province ? "Gõ để tìm quận/huyện" : "Chọn tỉnh/thành trước")}
                 autoComplete="address-level2"
                 onChange={(v) => {
                   setForm((f) => (f.district === v ? f : { ...f, district: v, ward: "" }));
@@ -254,7 +262,7 @@ export default function CheckoutClient() {
             <Combobox
               value={form.ward}
               options={wards}
-              placeholder={(oldFmt ? form.district : form.province) ? "Gõ để tìm phường/xã" : oldFmt ? "Chọn quận/huyện trước" : "Chọn tỉnh/thành trước"}
+              placeholder={t((oldFmt ? form.district : form.province) ? "Gõ để tìm phường/xã" : oldFmt ? "Chọn quận/huyện trước" : "Chọn tỉnh/thành trước")}
               onChange={(v) => {
                 setForm((f) => ({ ...f, ward: v }));
                 setErrors((er) => ({ ...er, ward: "" }));
@@ -282,29 +290,29 @@ export default function CheckoutClient() {
           disabled={sending}
           className="w-full rounded-lg bg-[var(--color-purple)] py-4 text-sm font-semibold uppercase tracking-wide text-white transition-colors hover:bg-[var(--color-ink)] disabled:opacity-60"
         >
-          {sending ? "Đang gửi…" : "Đặt hàng và nhận mã chuyển khoản"}
+          {t(sending ? "Đang gửi…" : "Đặt hàng và nhận mã chuyển khoản")}
         </button>
       </form>
 
       <aside className="h-fit rounded-lg bg-white p-5 shadow-sm">
-        <h2 className="mb-3 font-semibold text-[var(--color-purple)]">Đơn hàng của bạn</h2>
+        <h2 className="mb-3 font-semibold text-[var(--color-purple)]">{t("Đơn hàng của bạn")}</h2>
         <ul className="divide-y divide-[var(--color-ink)]/10 text-sm">
           {items.map((i) => (
             <li key={`${i.id}-${i.variant}`} className="flex justify-between gap-3 py-2">
               <span>
-                {i.name} <span className="text-[var(--color-ink)]/50">({i.variant}) × {i.qty}</span>
+                {t(i.name)} <span className="text-[var(--color-ink)]/50">({t(i.variant)}) × {i.qty}</span>
               </span>
               <span className="font-semibold">{vnd(i.price * i.qty)}</span>
             </li>
           ))}
         </ul>
         <dl className="mt-4 space-y-1 border-t border-[var(--color-ink)]/15 pt-3 text-sm">
-          <div className="flex justify-between"><dt>Tạm tính</dt><dd>{vnd(subtotal)}</dd></div>
-          <div className="flex justify-between"><dt>Phí ship</dt><dd>{shipping ? vnd(shipping) : "Miễn phí"}</dd></div>
+          <div className="flex justify-between"><dt>{t("Tạm tính")}</dt><dd>{vnd(subtotal)}</dd></div>
+          <div className="flex justify-between"><dt>{t("Phí ship")}</dt><dd>{shipping ? vnd(shipping) : t("Miễn phí")}</dd></div>
           {shipping > 0 && (
-            <p className="text-xs text-[var(--color-ink)]/55">Mua thêm {vnd(FREE_SHIP_MIN - subtotal)} để được miễn phí ship.</p>
+            <p className="text-xs text-[var(--color-ink)]/55">{t("Mua thêm")} {vnd(FREE_SHIP_MIN - subtotal)} {t("để được miễn phí ship.")}</p>
           )}
-          <div className="flex justify-between pt-2 text-base font-bold text-[var(--color-purple)]"><dt>Tổng</dt><dd>{vnd(total)}</dd></div>
+          <div className="flex justify-between pt-2 text-base font-bold text-[var(--color-purple)]"><dt>{t("Tổng")}</dt><dd>{vnd(total)}</dd></div>
         </dl>
       </aside>
     </section>

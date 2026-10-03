@@ -5,9 +5,13 @@ import Link from "next/link";
 import type { Product } from "@/lib/products";
 import ProductCard from "./ProductCard";
 import { HOME_FEATURED, figmaCardProps } from "@/data/figma-cards";
+import { useLang, useT } from "@/components/LangSwitch";
+import { localize } from "@/lib/i18n";
 
 
 export default function FeaturedProducts({ products }: { products: Product[] }) {
+  const lang = useLang();
+  const t = useT();
   return (
     <section id="products">
       {/* -mt at every width: the bar starts 10 Figma px down, so the hero must overlap that strip or it shows as a white line */}
@@ -18,15 +22,15 @@ export default function FeaturedProducts({ products }: { products: Product[] }) 
           <div className="relative" style={{ height: "max(7.422cqw, calc(44px + 1.563cqw))" }}>
             <div className="absolute inset-x-0 bg-[var(--color-purple)]" style={{ top: "0.781cqw", height: "max(5.859cqw, 44px)" }} />
             <h2 className="absolute font-semibold uppercase text-white whitespace-nowrap" style={{ left: "7.578cqw", top: "0.312cqw", fontSize: "max(15px, 1.5625cqw)", lineHeight: "max(7.031cqw, calc(44px + 0.938cqw))", letterSpacing: "-0.0625cqw" }}>
-              Chú ý! Sản phẩm đáng chú ý!
+              {t("Chú ý! Sản phẩm đáng chú ý!")}
             </h2>
           </div>
         </Reveal>
         <Link
-          href="/san-pham"
+          href={localize("/san-pham", lang)}
           className="hidden lg:block absolute lg:left-[78.828cqw] lg:top-[6.641cqw] lg:text-[1.5625cqw] font-semibold uppercase text-[var(--color-purple)] hover:underline"
         >
-          Tất cả sản phẩm &gt;
+          {t("Tất cả sản phẩm >")}
         </Link>
       </div>
 

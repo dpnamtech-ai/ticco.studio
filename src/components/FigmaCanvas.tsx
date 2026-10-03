@@ -4,6 +4,8 @@ import { Fragment, type CSSProperties, type ReactNode } from "react";
 import Reveal from "@/components/Reveal";
 import ScatterText from "@/components/ScatterText";
 import { cropFillStyle, zoomSizes, type ImageTransform } from "@/lib/figmaCrop";
+import { DEFAULT_LANG, localize, type Lang } from "@/lib/i18n";
+import { tx } from "@/lib/t";
 
 /*
   Renders a Figma frame laid out by src/data/project-pages.ts (generated from the DEMO file).
@@ -176,7 +178,9 @@ function Leaf({ l, o, hover, inCard }: { l: FigLeaf; o: number; hover?: boolean;
   return <Shape b={l} o={o} />;
 }
 
-export default function FigmaCanvas({ page }: { page: FigPage }) {
+// lang: texts/alts come translated (tx keeps image paths, links and #colours), card links stay in the language.
+export default function FigmaCanvas({ page: source, lang = DEFAULT_LANG }: { page: FigPage; lang?: Lang }) {
+  const page = tx(source, lang);
   return (
     <div className="[container-type:inline-size]">
       <div className="relative overflow-hidden lg:h-[var(--H)]" style={{ "--H": cq(page.h) } as Vars}>
@@ -200,7 +204,7 @@ export default function FigmaCanvas({ page }: { page: FigPage }) {
                 const kids = it.items.map((c) => <Leaf key={c.id} l={c} o={cOrd(c)} hover={Boolean(it.href) && c.k === "text"} inCard />);
                 const style = { "--o": ord(it) } as Vars;
                 return it.href ? (
-                  <Link key={it.id} href={it.href} className={`${cls} group`} style={style} {...(/^https?:/.test(it.href) && { target: "_blank", rel: "noopener noreferrer" })}>
+                  <Link key={it.id} href={localize(it.href, lang)} className={`${cls} group`} style={style} {...(/^https?:/.test(it.href) && { target: "_blank", rel: "noopener noreferrer" })}>
                     {kids}
                   </Link>
                 ) : (

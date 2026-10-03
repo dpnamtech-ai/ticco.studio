@@ -7,7 +7,10 @@ import ProductDetail from "@/components/ProductDetail";
 import ProductCard from "@/components/ProductCard";
 import Reveal from "@/components/Reveal";
 import { suggestionsFor, variantImagesFor, variantLinksForProduct } from "@/lib/shop";
-import { figmaDisplay, layoutBottom } from "@/lib/shopFigma";
+import { figmaDisplay, layoutBottom, vnd } from "@/lib/shopFigma";
+import { getLang } from "@/lib/lang";
+import { alternatesFor, localize } from "@/lib/i18n";
+import { t, tx } from "@/lib/t";
 
 const cq = (px: number) => `${Math.round((px / 12.8) * 1e4) / 1e4}cqw`;
 const FOOTER_H = 337; // Figma footer height; everything above it in the frame belongs to this page
@@ -26,14 +29,17 @@ export async function generateMetadata({
   const { slug } = await params;
   const product = await getProduct(slug);
   if (!product) return {};
-  const price = product.priceFrom > 0 ? `${product.priceFrom.toLocaleString("vi-VN")}đ` : "";
-  const blurb = plainText(product.description, 120);
+  const lang = await getLang();
+  const T = (s: string) => t(s, lang);
+  const name = T(product.name);
+  const price = product.priceFrom > 0 ? (lang === "en" ? vnd(product.priceFrom, lang) : `${product.priceFrom.toLocaleString("vi-VN")}đ`) : "";
+  const blurb = plainText(T(product.description), 120);
   return {
-    title: `${product.name}${price ? ` — ${price}` : ""} | Tíc Cơ`,
-    description: blurb ? `${blurb}${price ? ` Giá ${price}.` : ""}` : `${product.name} của Tíc Cơ — ${product.category}.`,
-    keywords: [product.name, product.category, "Tíc Cơ", "quà tặng", "thương hiệu Việt"],
-    alternates: { canonical: `/san-pham/${product.id}` },
-    openGraph: { type: "website", title: product.name, images: product.image ? [product.image] : undefined },
+    title: `${name}${price ? ` — ${price}` : ""} ${T("| Tíc Cơ")}`,
+    description: blurb ? `${blurb}${price ? ` ${T("Giá")} ${price}.` : ""}` : `${name} ${T("của Tíc Cơ —")} ${T(product.category)}.`,
+    keywords: [name, T(product.category), "Tíc Cơ", T("quà tặng"), T("thương hiệu Việt")],
+    alternates: alternatesFor(`/san-pham/${product.id}`, lang),
+    openGraph: { type: "website", title: name, images: product.image ? [product.image] : undefined },
   };
 }
 
@@ -44,6 +50,8 @@ export default async function ProductPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
+  const lang = await getLang();
+  const T = (s: string) => t(s, lang);
   const products = await getProducts();
   const product = products.find((p) => p.id === slug);
   if (!product) notFound();
@@ -66,18 +74,18 @@ export default async function ProductPage({
     "--pb": cq(L.frameH - FOOTER_H - L.cards[1] - CARD_H),
   } as CSSProperties);
 
-  const url = abs(`/san-pham/${product.id}`);
+  const url = abs(localize(`/san-pham/${product.id}`, lang));
   const productJsonLd = {
     "@context": "https://schema.org",
     "@graph": [
       {
         "@type": "Product",
         "@id": `${url}#product`,
-        name: product.name,
+        name: T(product.name),
         sku: product.id,
         url,
-        category: product.category,
-        description: plainText(product.description, 500),
+        category: T(product.category),
+        description: plainText(T(product.description), 500),
         image: [product.image, ...(product.thumbnails ?? [])].filter((s): s is string => Boolean(s)).map(abs),
         brand: { "@type": "Brand", name: "Tíc Cơ" },
         ...(product.priceFrom > 0 && {
@@ -88,16 +96,16 @@ export default async function ProductPage({
             price: product.priceFrom,
             itemCondition: "https://schema.org/NewCondition",
             availability: product.soldOut ? "https://schema.org/OutOfStock" : "https://schema.org/InStock",
-            seller: { "@id": `${abs("/")}#org` },
+            seller: { "@id": `${abs(localize("/", lang))}#org` },
           },
         }),
       },
       {
         "@type": "BreadcrumbList",
         itemListElement: [
-          { "@type": "ListItem", position: 1, name: "Trang chủ", item: abs("/") },
-          { "@type": "ListItem", position: 2, name: "Sản phẩm", item: abs("/san-pham") },
-          { "@type": "ListItem", position: 3, name: product.name, item: url },
+          { "@type": "ListItem", position: 1, name: T("Trang chủ"), item: abs(localize("/", lang)) },
+          { "@type": "ListItem", position: 2, name: T("Sản phẩm"), item: abs(localize("/san-pham", lang)) },
+          { "@type": "ListItem", position: 3, name: T(product.name), item: url },
         ],
       },
     ],
@@ -116,20 +124,20 @@ export default async function ProductPage({
           id={product.id}
           name={product.name}
           priceFrom={product.priceFrom}
-          title={f.title}
-          priceLabel={f.detailPrice}
+          title={T(f.title)}
+          priceLabel={T(f.detailPrice)}
           description={
-            product.description ||
-            `${product.name} là sản phẩm thuộc dòng ${product.category} của Tíc Cơ — thiết kế đơn giản, dùng được hàng ngày.`
+            T(product.description) ||
+            `${T(product.name)} ${T("là sản phẩm thuộc dòng")} ${T(product.category)} ${T("của Tíc Cơ — thiết kế đơn giản, dùng được hàng ngày.")}`
           }
           variants={product.variants ?? []}
           variantLinks={variantLinksForProduct(product.id, product.variantOptions)}
           variantImages={variantImagesFor(product.id, product.variantOptions)}
           variantOptions={product.variantOptions}
-          specs={product.specs ?? []}
-          note={product.note}
+          specs={(product.specs ?? []).map(T)}
+          note={product.note && T(product.note)}
           gallery={f.gallery}
-          extra={f.extra}
+          extra={tx(f.extra, lang)}
           soldOut={product.soldOut}
           bundleItems={bundleItems}
           layout={L}
@@ -139,7 +147,7 @@ export default async function ProductPage({
           <section aria-labelledby="goi-y" className={`mt-12 ${L ? "lg:mt-(--st) lg:ml-(--sx)" : "lg:mt-[4.453cqw]"}`}>
             <Reveal variant="up">
               <h2 id="goi-y" className="text-lg lg:text-[1.5625cqw] leading-10 lg:leading-[7.031cqw] font-semibold tracking-[-0.8px] lg:tracking-[-0.0625cqw] text-[#53129e]">
-                CÓ THỂ BẠN THÍCH:
+                {T("CÓ THỂ BẠN THÍCH:")}
               </h2>
             </Reveal>
             <div className={`mt-3 ${L ? "lg:mt-(--ct)" : "lg:-mt-[0.703cqw]"} grid grid-cols-2 lg:grid-cols-[repeat(4,19.766cqw)] gap-x-4 lg:gap-x-[1.953cqw] gap-y-8`}>

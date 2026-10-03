@@ -3,6 +3,7 @@ import { getProducts } from "@/lib/products";
 import { priceFor } from "@/lib/shop";
 import { supabaseAdmin } from "@/lib/supabase/server";
 import { makeOrderCode, shippingFor, validateOrder, type OrderInput } from "@/lib/checkout";
+import { t } from "@/lib/t";
 
 // POST /api/orders - validates the form, re-prices the cart from the catalog (never trusts client prices),
 // stores the order (Supabase, when configured) and emails the shop. Payment itself is a bank transfer
@@ -138,6 +139,8 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Dữ liệu không hợp lệ" }, { status: 400 });
   }
 
+  // Messages with a product name in them are written per language here; fixed ones are translated by the checkout page.
+  const en = (body as Record<string, unknown>)?.lang === "en";
   const parsed = validateOrder(body);
   if (!parsed.ok) return NextResponse.json({ error: "Vui lòng kiểm tra lại thông tin", fields: parsed.errors }, { status: 422 });
   const order = parsed.value;
@@ -147,11 +150,11 @@ export async function POST(req: Request) {
   const lines: PricedLine[] = [];
   for (const it of order.items) {
     const p = catalog.get(it.id);
-    if (!p) return NextResponse.json({ error: `Sản phẩm không tồn tại: ${it.id}` }, { status: 422 });
-    if (p.soldOut) return NextResponse.json({ error: `"${p.name}" đã hết hàng` }, { status: 422 });
+    if (!p) return NextResponse.json({ error: en ? `Product not found: ${it.id}` : `Sản phẩm không tồn tại: ${it.id}` }, { status: 422 });
+    if (p.soldOut) return NextResponse.json({ error: en ? `"${t(p.name, "en")}" is sold out` : `"${p.name}" đã hết hàng` }, { status: 422 });
     // stock 0 = "not tracked" (the column defaults to 0), so only enforce it once an admin has entered a count.
     if (!p.bundleItems?.length && (p.stock ?? 0) > 0 && it.qty > p.stock!) {
-      return NextResponse.json({ error: `"${p.name}" chỉ còn ${p.stock} sản phẩm` }, { status: 422 });
+      return NextResponse.json({ error: en ? `Only ${p.stock} left of "${t(p.name, "en")}"` : `"${p.name}" chỉ còn ${p.stock} sản phẩm` }, { status: 422 });
     }
     lines.push({ id: p.id, name: p.name, variant: it.variant, qty: it.qty, price: priceFor(p, it.variant) });
   }
