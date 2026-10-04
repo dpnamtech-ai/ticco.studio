@@ -13,8 +13,8 @@ const SECRET = "doi-chuoi-nay";
 const SHEET = "Đơn hàng";
 const TZ = "Asia/Ho_Chi_Minh";
 
-const STATUSES = ["Chờ chuyển khoản", "Đã thanh toán", "Đã gửi hàng", "Hoàn tất", "Huỷ"];
-const STATUS_COLORS = { "Chờ chuyển khoản": "#fff4cc", "Đã thanh toán": "#d9f2e3", "Đã gửi hàng": "#dbe8ff", "Hoàn tất": "#e6e6e6", "Huỷ": "#fde0e0" };
+const STATUSES = ["Chờ chuyển khoản", "COD - chờ gửi hàng", "Đã thanh toán", "Đã gửi hàng", "Hoàn tất", "Huỷ"];
+const STATUS_COLORS = { "Chờ chuyển khoản": "#fff4cc", "COD - chờ gửi hàng": "#ffe2c4", "Đã thanh toán": "#d9f2e3", "Đã gửi hàng": "#dbe8ff", "Hoàn tất": "#e6e6e6", "Huỷ": "#fde0e0" };
 // [header, width px]
 const COLUMNS = [
   ["Thời gian", 130], ["Mã đơn", 115], ["Trạng thái", 150], ["Khách hàng", 150], ["SĐT", 110], ["Email", 170],
@@ -49,7 +49,7 @@ function doPost(e) {
     const c = o.customer;
     const items = o.items.map((l) => `${l.qty} × ${l.name}${l.variant ? ` (${l.variant})` : ""} — ${fmt_(l.price * l.qty)}`).join("\n");
     const row = [
-      new Date(), o.code, STATUSES[0], c.name, `'${c.phone}`, c.email || "",
+      new Date(), o.code, c.payment === "cod" ? STATUSES[1] : STATUSES[0], c.name, `'${c.phone}`, c.email || "",
       [c.address, c.ward, c.district, c.province].filter(String).join(", "), items,
       o.items.reduce((s, l) => s + l.qty, 0), o.subtotal, o.shipping, o.total, c.note || "", "", "",
     ];

@@ -1,7 +1,7 @@
-# Regression — 2026-10-04 05:45 UTC
+# Regression — 2026-10-04 05:51 UTC
 
 Target: http://localhost:3100 (local, full incl. orders on a mock Sheet)
-Result: **83/83 pass**
+Result: **85/85 pass**
 
 | | ID | Case | Chi tiết |
 |---|---|---|---|
@@ -82,6 +82,8 @@ Result: **83/83 pass**
 | ✅ | ORD-02 | Tải lại trang sau khi đặt vẫn thấy thông tin chuyển khoản |  |
 | ✅ | ORD-03 | Đặt xong, mua tiếp, vào checkout -> form đơn MỚI (không kẹt ở đơn cũ) (BUG-009) |  |
 | ✅ | ORD-04 | Miễn phí ship khi đơn >= 500k |  |
+| ✅ | ORD-05 | COD: Sheet nhận đơn ghi [COD] + payment=cod |  |
+| ✅ | ORD-06 | COD trên form: màn đặt xong báo thu tiền khi giao, không hiện mã QR |  |
 | ✅ | SEC-05 | Giá giả gửi từ client bị bỏ qua (server tự tính) |  |
 | ✅ | SEC-06 | Chèn công thức vào Sheet bị vô hiệu (= + - @ -> chữ thường) |  |
 | ✅ | SEC-07 | XSS trong tên/ghi chú: giao diện không chạy script |  |

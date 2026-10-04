@@ -45,10 +45,11 @@ async function sendShopEmail(code: string, o: OrderInput, lines: PricedLine[], s
     <h2>Đơn hàng mới ${esc(code)}</h2>
     <p><b>${esc(o.name)}</b> · ${esc(o.phone)}${o.email ? ` · ${esc(o.email)}` : ""}</p>
     <p>${esc([o.address, o.ward, o.district, o.province].join(", "))}</p>
+    <p><b>${o.payment === "cod" ? "Thanh toán khi nhận hàng (COD)" : "Chuyển khoản trước"}</b></p>
     ${o.note ? `<p>Ghi chú: ${esc(o.note)}</p>` : ""}
     <table cellpadding="6" style="border-collapse:collapse" border="1"><tr><th>Sản phẩm</th><th>SL</th><th>Thành tiền</th></tr>${rows}</table>
     <p>Tạm tính: ${vnd(subtotal)}<br>Phí ship: ${vnd(shipping)}<br><b>Tổng: ${vnd(total)}</b></p>
-    <p>Khách chuyển khoản với nội dung <b>${esc(code)}</b>. Đối chiếu sao kê để xác nhận.</p>`;
+    ${o.payment === "cod" ? `<p>Gọi khách xác nhận rồi gửi hàng thu hộ <b>${vnd(total)}</b>.</p>` : `<p>Khách chuyển khoản với nội dung <b>${esc(code)}</b>. Đối chiếu sao kê để xác nhận.</p>`}`;
   try {
     const res = await fetch("https://api.resend.com/emails", {
       method: "POST",
@@ -84,7 +85,12 @@ async function sendToSheet(code: string, o: OrderInput, lines: PricedLine[], sub
       body: JSON.stringify({
         secret: process.env.ORDER_SHEET_SECRET,
         code,
-        customer: Object.fromEntries(Object.entries(o).filter(([k]) => k !== "items").map(([k, v]) => [k, cell(String(v))])),
+        // COD also goes into the note, so it shows even before the sheet script with the COD status is deployed
+        customer: Object.fromEntries(
+          Object.entries({ ...o, note: o.payment === "cod" ? `[COD] ${o.note}`.trim() : o.note })
+            .filter(([k]) => k !== "items")
+            .map(([k, v]) => [k, cell(String(v))]),
+        ),
         items: lines.map((l) => ({ ...l, name: cell(l.name), variant: cell(l.variant) })),
         subtotal,
         shipping,
@@ -109,12 +115,12 @@ async function saveOrder(code: string, o: OrderInput, lines: PricedLine[], subto
       .from("orders")
       .insert({
         code,
-        customer: { name: o.name, phone: o.phone, email: o.email, province: o.province, district: o.district, ward: o.ward, address: o.address, note: o.note },
+        customer: { name: o.name, phone: o.phone, email: o.email, province: o.province, district: o.district, ward: o.ward, address: o.address, note: o.note, payment: o.payment },
         items: lines,
         subtotal,
         shipping,
         total,
-        status: "pending_payment",
+        status: o.payment === "cod" ? "pending_cod" : "pending_payment",
       });
     if (error) console.error("[orders] supabase insert failed", error.message);
     return !error;

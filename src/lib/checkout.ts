@@ -16,6 +16,8 @@ export type OrderInput = {
   ward: string;
   address: string;
   note: string;
+  /** "bank" = transfer first (QR after ordering), "cod" = pay the courier on delivery */
+  payment: "bank" | "cod";
   items: OrderItemInput[];
 };
 
@@ -55,6 +57,7 @@ export function validateOrder(raw: unknown): ValidationResult {
     ward: str(r.ward, 80),
     address: str(r.address, 200),
     note: str(r.note, 500),
+    payment: r.payment === "cod" ? "cod" : "bank",
     items: [],
   };
 

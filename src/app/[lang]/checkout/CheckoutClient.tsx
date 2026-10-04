@@ -13,11 +13,11 @@ import { vnd as vndOf } from "@/lib/shopFigma";
 const QR_SRC = "/images/qr-thanh-toan.jpg";
 const ACCOUNT = { bank: "Techcombank", number: "19037100037019" }; // PHAM KHANH LY
 
-type Placed = { code: string; subtotal: number; shipping: number; total: number };
+type Placed = { code: string; subtotal: number; shipping: number; total: number; payment?: "bank" | "cod" };
 const STORE_KEY = "ticco-last-order";
 
 // addrFormat: "moi" = 2025 (tỉnh -> xã), "cu" = before 1/7/2025 (tỉnh -> quận/huyện -> xã); customer picks.
-const empty = { name: "", phone: "", email: "", addrFormat: "moi", province: "", district: "", ward: "", address: "", note: "", website: "" };
+const empty = { name: "", phone: "", email: "", addrFormat: "moi", province: "", district: "", ward: "", address: "", note: "", payment: "bank", website: "" };
 
 // label/error arrive in Vietnamese (field errors come from the server); shown in the page language
 function Field({ label, error, children }: { label: string; error?: string; children: React.ReactNode }) {
@@ -119,7 +119,7 @@ export default function CheckoutClient() {
         setFormError(t(data.fields?.items ?? data.error ?? "Không gửi được đơn, vui lòng thử lại."));
         return;
       }
-      const order: Placed = { code: data.code, subtotal: data.subtotal, shipping: data.shipping, total: data.total };
+      const order: Placed = { code: data.code, subtotal: data.subtotal, shipping: data.shipping, total: data.total, payment: form.payment as Placed["payment"] };
       sessionStorage.setItem(STORE_KEY, JSON.stringify(order));
       setPlaced(order);
       clearCart();
@@ -134,6 +134,28 @@ export default function CheckoutClient() {
   // ---- Step 2: pay by bank transfer (static shop QR) ----
   // Placing an order empties the cart, so a non-empty cart means the customer started a NEW order after
   // this one: show the form again instead of trapping them on the old payment screen.
+  // Cash on delivery: no QR, the shop calls to confirm and the courier collects the total.
+  if (placed && items.length === 0 && placed.payment === "cod") {
+    return (
+      <section className="mx-auto max-w-2xl px-6 py-12">
+        <h1 className="mb-2 font-[family-name:var(--font-heading)] text-3xl font-bold text-[var(--color-purple)]">{t("Đặt hàng thành công")}</h1>
+        <p className="mb-6 text-[var(--color-ink)]/75">
+          {t("Cảm ơn bạn! Tíc Cơ đã nhận đơn")} <b>{placed.code}</b>{t(" và sẽ gọi xác nhận qua số điện thoại bạn đã nhập trước khi gửi hàng.")}
+        </p>
+        <div className="rounded-lg border-2 border-[var(--color-orange)] bg-[var(--color-orange)]/5 p-4">
+          <p className="text-sm font-semibold text-[var(--color-orange)]">{t("Thanh toán khi nhận hàng (COD)")}</p>
+          <p className="mt-1 text-2xl font-bold text-[var(--color-purple)]">{vnd(placed.total)}</p>
+          <p className="mt-1 text-sm text-[var(--color-ink)]/60">
+            {t("Tạm tính")} {vnd(placed.subtotal)} · Ship {placed.shipping ? vnd(placed.shipping) : t("miễn phí")}. {t("Bạn trả số tiền này cho người giao hàng.")}
+          </p>
+        </div>
+        <Link href={localize("/san-pham", lang)} className="mt-10 inline-block font-semibold text-[var(--color-orange)] hover:underline">
+          {t("← Tiếp tục xem sản phẩm")}
+        </Link>
+      </section>
+    );
+  }
+
   if (placed && items.length === 0) {
     return (
       <section className="mx-auto max-w-4xl px-6 py-12">
@@ -285,12 +307,32 @@ export default function CheckoutClient() {
 
         {formError && <p role="alert" className="rounded-lg bg-red-50 px-4 py-3 text-sm text-red-700">{formError}</p>}
 
+        <fieldset className="space-y-2 text-sm">
+          <legend className="mb-1 block text-sm font-semibold text-[var(--color-ink)]">{t("Hình thức thanh toán")}</legend>
+          {[
+            ["bank", "Chuyển khoản trước (quét mã QR sau khi đặt)"],
+            ["cod", "Thanh toán khi nhận hàng (COD)"],
+          ].map(([v, label]) => (
+            <label key={v} className="flex cursor-pointer items-center gap-2">
+              <input
+                type="radio"
+                name="payment"
+                value={v}
+                checked={form.payment === v}
+                onChange={() => setForm((f) => ({ ...f, payment: v }))}
+                className="accent-[var(--color-purple)]"
+              />
+              {t(label)}
+            </label>
+          ))}
+        </fieldset>
+
         <button
           type="submit"
           disabled={sending}
           className="w-full rounded-lg bg-[var(--color-purple)] py-4 text-sm font-semibold uppercase tracking-wide text-white transition-colors hover:bg-[var(--color-ink)] disabled:opacity-60"
         >
-          {t(sending ? "Đang gửi…" : "Đặt hàng và nhận mã chuyển khoản")}
+          {t(sending ? "Đang gửi…" : form.payment === "cod" ? "Đặt hàng" : "Đặt hàng và nhận mã chuyển khoản")}
         </button>
       </form>
 

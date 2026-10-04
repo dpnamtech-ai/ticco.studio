@@ -615,6 +615,22 @@ if (LOCAL) {
     const r = await (await order({ ...customer, items: [item({ variant: "BST 5 tấm", qty: 5 })] })).json();
     return expect(r.subtotal === 600000 && r.shipping === 0 && r.total === 600000, JSON.stringify(r));
   });
+  await test("ORD-05", "COD: Sheet nhận đơn ghi [COD] + payment=cod", async () => {
+    sheet.rows.length = 0;
+    const r = await order({ ...customer, payment: "cod", note: "giao giờ HC", items: [item()] });
+    const c = sheet.rows.at(-1)?.customer ?? {};
+    return expect(r.status === 200 && c.payment === "cod" && c.note === "[COD] giao giờ HC", `status=${r.status} ${JSON.stringify(c)}`);
+  });
+  await test("ORD-06", "COD trên form: màn đặt xong báo thu tiền khi giao, không hiện mã QR", async () => {
+    await seed(one);
+    await go("/checkout");
+    await fillCheckout(customer);
+    await page.click('input[name="payment"][value="cod"]');
+    await submitCheckout();
+    await page.waitForFunction(() => /Đặt hàng thành công|Chưa gửi được|thử lại/.test(document.body.innerText), { timeout: 20000 });
+    const qr = await page.$('img[src*="qr-thanh-toan"]');
+    return expect((await bodyHas("Thanh toán khi nhận hàng (COD)")) && !qr, `qr=${!!qr}`);
+  });
   await test("SEC-05", "Giá giả gửi từ client bị bỏ qua (server tự tính)", async () => {
     const r = await (await order({ ...customer, items: [{ ...item(), price: 1, priceFrom: 1 }], subtotal: 1, total: 1 })).json();
     return expect(r.subtotal === 30000 && r.total === 60000, JSON.stringify(r));
