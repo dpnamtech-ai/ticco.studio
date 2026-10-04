@@ -64,10 +64,10 @@ const FX = {
   "976:132": ["slide-l", 1], "976:133": ["slide-l", 3],
   "976:651": ["pop", 0], "976:652": ["pop", 1], "976:653": ["pop", 2],
   "976:648": ["bob", 0], "976:649": ["bob", 1], "976:650": ["bob", 2],
-  "976:644": ["fill"], "976:669": ["fill"], "976:688": ["fill"],
+  "976:644": ["fill"], "976:116": ["fill"], "976:669": ["fill"], "976:688": ["fill"],
   "976:680": ["slide-l", 0], "976:681": ["slide-r", 1], "976:682": ["slide-l", 2],
 };
-const FLY = new Set(["976:79", "976:82", "976:116", "976:629", "976:637", "976:638", "976:639"]);
+const FLY = new Set(["976:79", "976:82", "976:629", "976:637", "976:638", "976:639"]);
 // a vector the designer drew as an ellipse (ve-Tic-Co-mobile blob caps): a shape, not a text highlight
 const isEllipse = (l) => l.type === "VECTOR" && /^Ellipse/.test(l.name);
 const overlaps = (a, b) => a.x < b.x + b.w && a.x + a.w > b.x && a.y < b.y + b.h && a.y + a.h > b.y;

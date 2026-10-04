@@ -1,10 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { brand } from "@/data/content";
 import Reveal from "@/components/Reveal";
-import { ScatterGroup } from "@/components/Scatter";
-import { ScatterWords } from "@/components/scatterWords";
+import ScrollFillText from "@/components/ScrollFillText";
 import { useLang, useT } from "@/components/LangSwitch";
 import { localize } from "@/lib/i18n";
 
@@ -32,19 +30,9 @@ const MISSION_LINES = [
 function MissionText({ className, style }: { className?: string; style?: React.CSSProperties }) {
   const t = useT();
   return (
-    // words fly in scattered and assemble when the block scrolls into view (client's reference video, as on /mascot-dan)
-    <ScatterGroup className={`flex flex-col ${className}`} style={style}>
-      <p className="sr-only">{t(brand.mission)}</p>
-      {MISSION_LINES.map((l, i) =>
-        l ? (
-          <span key={i} aria-hidden className="block">
-            <ScatterWords text={t(l)} seed={20 + i} />
-          </span>
-        ) : (
-          <div key={i} aria-hidden className="h-[1lh]" />
-        ),
-      )}
-    </ScatterGroup>
+    // letters light up one by one as the block scrolls up (client's "hiệu ứng trượt chữ" video, as the mascot banners);
+    // the Figma line breaks are kept ("" = paragraph gap)
+    <ScrollFillText text={MISSION_LINES.map((l) => (l ? t(l) : "")).join("\n")} className={`whitespace-pre-line ${className}`} style={style} />
   );
 }
 

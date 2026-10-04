@@ -6574,7 +6574,7 @@ export const figmaMobile: Record<string, FigPage> = {
       "align": "c",
       "color": "#ffffff",
       "tag": "p",
-      "fx": "fly"
+      "fx": "fill"
      },
      {
       "k": "card",
