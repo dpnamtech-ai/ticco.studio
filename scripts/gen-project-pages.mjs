@@ -153,7 +153,10 @@ function build(cfg, W = 1280) {
         if (Math.abs(tr[0][1]) > 1e-3 || Math.abs(tr[1][0]) > 1e-3) warn.push(`${n.id} "${n.name}" skewed/rotated crop approximated (off-diagonal ${tr[0][1].toFixed(3)}, ${tr[1][0].toFixed(3)})`);
         i.crop = [[r4(tr[0][0]), 0, r4(tr[0][2])], [0, r4(tr[1][1]), r4(tr[1][2])]];
       } else if (l.image.scaleMode !== "FILL") warn.push(`${n.id} scaleMode ${l.image.scaleMode}`);
-      if (l.rot) i.rot = l.rot;
+      // Figma reports a horizontally flipped layer as rotation 180 (REST has no flip flag): that's a mirror, not upside
+      // down (same as the desktop MarchingDan / BUG-017)
+      if (Math.abs(Math.abs(l.rot ?? 0) - 180) < 0.5) i.mirror = true;
+      else if (l.rot) i.rot = l.rot;
       if (FX[n.id]) [i.fx, i.n] = FX[n.id];
       return i;
     }

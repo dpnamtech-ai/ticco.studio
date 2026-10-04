@@ -28,7 +28,7 @@ export type FigText = Box & {
   /** id to jump to (e.g. /kham-pha/x#le-hoi-doc-lap); fx "scatter" = words fly in on scroll (ScatterText) */
   anchor?: string;
 };
-export type FigImg = Box & { k: "img"; src: string; alt: string; crop?: ImageTransform; rot?: number };
+export type FigImg = Box & { k: "img"; src: string; alt: string; crop?: ImageTransform; rot?: number; mirror?: boolean };
 export type FigBox = Box & { k: "box"; bg: string; radius?: string | number; kind?: "line" | "dot" };
 export type FigLeaf = FigText | FigImg | FigBox;
 export type FigCard = { k: "card"; id: string; href?: string; items: FigLeaf[] };
@@ -150,7 +150,7 @@ function Img({ i, o, inCard }: { i: FigImg; o: number; inCard?: boolean }) {
   );
   return (
     <Reveal variant="curtain" duration={1.3} className={`${POS} ${inCard ? "max-lg:w-full" : mw(i.w)}`} style={pos(i, o)}>
-      <div className="relative overflow-hidden" style={{ aspectRatio: `${i.w}/${i.h}` }}>
+      <div className={`relative overflow-hidden ${i.mirror ? "-scale-x-100" : ""}`} style={{ aspectRatio: `${i.w}/${i.h}` }}>
         {i.rot ? (
           // Figma rotates the whole image layer; the layer's own box is the bounding box turned back
           <div
@@ -246,7 +246,7 @@ function FixedCanvas({ page, lang }: { page: FigPage; lang: Lang }) {
       if (l.fx === "fill")
         return (
           <div key={l.id} style={at(l)}>
-            <ScrollFillText text={l.text} className={`m-0 whitespace-pre-line ${align}`} style={style} />
+            <ScrollFillText text={l.text} className={`m-0 ${l.nowrap ? "whitespace-pre" : "whitespace-pre-line"} ${align}`} style={style} />
           </div>
         );
       const Wrap = l.fx === "fly" ? ScatterGroup : Reveal;
@@ -276,7 +276,7 @@ function FixedCanvas({ page, lang }: { page: FigPage; lang: Lang }) {
           style={l.crop ? { objectFit: "fill", ...cropFillStyle(l.crop) } : { objectFit: "cover" }} />
       );
       const pic = (
-        <div className="relative overflow-hidden" style={{ aspectRatio: `${l.w}/${l.h}` }}>
+        <div className={`relative overflow-hidden ${l.mirror ? "-scale-x-100" : ""}`} style={{ aspectRatio: `${l.w}/${l.h}` }}>
           {l.rot ? (
             <div className="absolute left-1/2 top-1/2 overflow-hidden" style={{ width: `${(l.h / l.w) * 100}%`, aspectRatio: `${l.h}/${l.w}`, transform: `translate(-50%,-50%) rotate(${-l.rot}deg)` }}>{img}</div>
           ) : (

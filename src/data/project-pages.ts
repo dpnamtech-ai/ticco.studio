@@ -8484,7 +8484,7 @@ export const figmaMobile: Record<string, FigPage> = {
         0.2895
        ]
       ],
-      "rot": 180,
+      "mirror": true,
       "fx": "pop",
       "n": 2
      },
@@ -8735,7 +8735,7 @@ export const figmaMobile: Record<string, FigPage> = {
           0
          ]
         ],
-        "rot": 180,
+        "mirror": true,
         "fx": "slide-r",
         "n": 1
        },
