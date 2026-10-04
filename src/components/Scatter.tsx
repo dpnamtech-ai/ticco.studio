@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react";
 
 // Plays the ScatterWords words in (adds .sw-in) once the group scrolls into view; see scatterWords.tsx.
-export function ScatterGroup({ children, className }: { children: React.ReactNode; className?: string }) {
+export function ScatterGroup({ children, className, style }: { children: React.ReactNode; className?: string; style?: React.CSSProperties }) {
   const ref = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const el = ref.current;
@@ -21,7 +21,7 @@ export function ScatterGroup({ children, className }: { children: React.ReactNod
     return () => io.disconnect();
   }, []);
   return (
-    <div ref={ref} className={className}>
+    <div ref={ref} className={className} style={style}>
       {children}
     </div>
   );

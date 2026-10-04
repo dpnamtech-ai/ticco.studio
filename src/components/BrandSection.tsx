@@ -3,6 +3,8 @@
 import { motion } from "framer-motion";
 import { brand } from "@/data/content";
 import Reveal from "@/components/Reveal";
+import { ScatterGroup } from "@/components/Scatter";
+import { ScatterWords } from "@/components/scatterWords";
 import { useLang, useT } from "@/components/LangSwitch";
 import { localize } from "@/lib/i18n";
 
@@ -30,19 +32,19 @@ const MISSION_LINES = [
 function MissionText({ className, style }: { className?: string; style?: React.CSSProperties }) {
   const t = useT();
   return (
-    // flex column: the masks' py-2/-my-2 would otherwise collapse between lines and add 8px to every line
-    <div className={`flex flex-col ${className}`} style={style}>
+    // words fly in scattered and assemble when the block scrolls into view (client's reference video, as on /mascot-dan)
+    <ScatterGroup className={`flex flex-col ${className}`} style={style}>
       <p className="sr-only">{t(brand.mission)}</p>
       {MISSION_LINES.map((l, i) =>
         l ? (
-          <Reveal key={i} variant="mask" duration={1} delay={i * 0.09}>
-            <span aria-hidden className="block">{t(l)}</span>
-          </Reveal>
+          <span key={i} aria-hidden className="block">
+            <ScatterWords text={t(l)} seed={20 + i} />
+          </span>
         ) : (
           <div key={i} aria-hidden className="h-[1lh]" />
         ),
       )}
-    </div>
+    </ScatterGroup>
   );
 }
 
