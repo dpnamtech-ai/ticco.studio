@@ -6617,7 +6617,9 @@ export const figmaMobile: Record<string, FigPage> = {
       "y": 1425,
       "w": 107,
       "h": 10,
-      "bg": "#e5ff00"
+      "bg": "#e5ff00",
+      "fx": "slide-r",
+      "n": 0
      },
      {
       "k": "text",
@@ -6634,6 +6636,8 @@ export const figmaMobile: Record<string, FigPage> = {
       "align": "r",
       "color": "#53129e",
       "tag": "p",
+      "fx": "slide-r",
+      "n": 0,
       "nowrap": true,
       "bubble": "#e5ff00"
      },
@@ -6644,7 +6648,9 @@ export const figmaMobile: Record<string, FigPage> = {
       "y": 1413,
       "w": 92,
       "h": 9,
-      "bg": "#e5ff00"
+      "bg": "#e5ff00",
+      "fx": "slide-r",
+      "n": 1
      },
      {
       "k": "text",
@@ -6661,6 +6667,8 @@ export const figmaMobile: Record<string, FigPage> = {
       "align": "r",
       "color": "#53129e",
       "tag": "p",
+      "fx": "slide-r",
+      "n": 1,
       "nowrap": true,
       "bubble": "#e5ff00"
      },
@@ -6671,7 +6679,9 @@ export const figmaMobile: Record<string, FigPage> = {
       "y": 1400,
       "w": 88,
       "h": 9,
-      "bg": "#e5ff00"
+      "bg": "#e5ff00",
+      "fx": "slide-r",
+      "n": 2
      },
      {
       "k": "text",
@@ -6688,6 +6698,8 @@ export const figmaMobile: Record<string, FigPage> = {
       "align": "r",
       "color": "#53129e",
       "tag": "p",
+      "fx": "slide-r",
+      "n": 2,
       "nowrap": true,
       "bubble": "#e5ff00"
      },
@@ -6722,7 +6734,8 @@ export const figmaMobile: Record<string, FigPage> = {
         0.2883
        ]
       ],
-      "rot": 7.66
+      "rot": 7.66,
+      "fx": "spin"
      },
      {
       "k": "card",
@@ -6773,6 +6786,8 @@ export const figmaMobile: Record<string, FigPage> = {
       "align": "l",
       "color": "#ffffff",
       "tag": "p",
+      "fx": "slide-l",
+      "n": 1,
       "nowrap": true
      },
      {
@@ -6790,6 +6805,8 @@ export const figmaMobile: Record<string, FigPage> = {
       "align": "l",
       "color": "#ffffff",
       "tag": "p",
+      "fx": "slide-l",
+      "n": 3,
       "nowrap": true
      }
     ],
@@ -8328,6 +8345,7 @@ export const figmaMobile: Record<string, FigPage> = {
       "align": "c",
       "color": "#e5ff00",
       "tag": "p",
+      "fx": "fill",
       "nowrap": true
      }
     ],
@@ -8366,7 +8384,9 @@ export const figmaMobile: Record<string, FigPage> = {
         0.4615,
         0.3584
        ]
-      ]
+      ],
+      "fx": "pop",
+      "n": 0
      },
      {
       "k": "text",
@@ -8422,7 +8442,9 @@ export const figmaMobile: Record<string, FigPage> = {
         0.4859,
         0.3496
        ]
-      ]
+      ],
+      "fx": "pop",
+      "n": 1
      },
      {
       "k": "text",
@@ -8462,7 +8484,9 @@ export const figmaMobile: Record<string, FigPage> = {
         0.2895
        ]
       ],
-      "rot": 180
+      "rot": 180,
+      "fx": "pop",
+      "n": 2
      },
      {
       "k": "text",
@@ -8502,7 +8526,9 @@ export const figmaMobile: Record<string, FigPage> = {
         0.3425,
         0.3792
        ]
-      ]
+      ],
+      "fx": "bob",
+      "n": 0
      },
      {
       "k": "img",
@@ -8524,7 +8550,9 @@ export const figmaMobile: Record<string, FigPage> = {
         0.3678,
         0.3576
        ]
-      ]
+      ],
+      "fx": "bob",
+      "n": 1
      },
      {
       "k": "img",
@@ -8546,7 +8574,9 @@ export const figmaMobile: Record<string, FigPage> = {
         0.3678,
         0.3576
        ]
-      ]
+      ],
+      "fx": "bob",
+      "n": 2
      },
      {
       "k": "text",
@@ -8596,6 +8626,7 @@ export const figmaMobile: Record<string, FigPage> = {
       "align": "c",
       "color": "#ffffff",
       "tag": "p",
+      "fx": "fill",
       "nowrap": true
      }
     ],
@@ -8647,7 +8678,9 @@ export const figmaMobile: Record<string, FigPage> = {
           0.4126,
           0.3761
          ]
-        ]
+        ],
+        "fx": "slide-l",
+        "n": 0
        },
        {
         "k": "text",
@@ -8702,7 +8735,9 @@ export const figmaMobile: Record<string, FigPage> = {
           0
          ]
         ],
-        "rot": 180
+        "rot": 180,
+        "fx": "slide-r",
+        "n": 1
        },
        {
         "k": "text",
@@ -8768,7 +8803,9 @@ export const figmaMobile: Record<string, FigPage> = {
         0.472,
         0.304
        ]
-      ]
+      ],
+      "fx": "slide-l",
+      "n": 2
      },
      {
       "k": "text",
@@ -8818,6 +8855,7 @@ export const figmaMobile: Record<string, FigPage> = {
       "align": "c",
       "color": "#ffffff",
       "tag": "p",
+      "fx": "fill",
       "nowrap": true
      }
     ],

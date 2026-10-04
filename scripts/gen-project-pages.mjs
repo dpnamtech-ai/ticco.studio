@@ -55,6 +55,18 @@ const MARK_PARTS = {
 // Event copy that plays the word-scatter effect on scroll (client reference video, see ScatterText)
 const SCATTER = new Set([]); // layer ids, e.g. "671:560"
 // Phone-frame copy that flies in scattered and assembles (fx "fly", the effect the desktop hero / mission / mascot use)
+// The desktop pages' other motion, on the same things in the phone frames (FigmaCanvas FixedCanvas renders these):
+// spin = Đần in the basket turning, pop = the 3 big Đần pop in then float, bob = the marching chains, fill = letters light
+// up on scroll, slide-l / slide-r = slide in from the left / right (desktop Reveal), n = stagger index.
+const FX = {
+  "976:129": ["spin"],
+  "976:120": ["slide-r", 0], "976:121": ["slide-r", 0], "976:123": ["slide-r", 1], "976:124": ["slide-r", 1], "976:126": ["slide-r", 2], "976:127": ["slide-r", 2],
+  "976:132": ["slide-l", 1], "976:133": ["slide-l", 3],
+  "976:651": ["pop", 0], "976:652": ["pop", 1], "976:653": ["pop", 2],
+  "976:648": ["bob", 0], "976:649": ["bob", 1], "976:650": ["bob", 2],
+  "976:644": ["fill"], "976:669": ["fill"], "976:688": ["fill"],
+  "976:680": ["slide-l", 0], "976:681": ["slide-r", 1], "976:682": ["slide-l", 2],
+};
 const FLY = new Set(["976:79", "976:82", "976:116", "976:629", "976:637", "976:638", "976:639"]);
 // a vector the designer drew as an ellipse (ve-Tic-Co-mobile blob caps): a shape, not a text highlight
 const isEllipse = (l) => l.type === "VECTOR" && /^Ellipse/.test(l.name);
@@ -122,6 +134,7 @@ function build(cfg, W = 1280) {
       if (W === 1280 && anchor) (cfg.anchorText ??= {})[norm(l.text)] = anchor;
       if (SCATTER.has(n.id)) t.fx = "scatter";
       if (FLY.has(n.id)) t.fx = "fly";
+      if (FX[n.id]) [t.fx, t.n] = FX[n.id];
       if (auto === "WIDTH_AND_HEIGHT" || lines === Math.round(l.h / f.lineHeight) - lead) t.nowrap = true;
       if (l.opacity != null) t.op = r(l.opacity);
       // text sitting on a solid vector (speech bubble / highlight) keeps that colour behind it on mobile
@@ -141,6 +154,7 @@ function build(cfg, W = 1280) {
         i.crop = [[r4(tr[0][0]), 0, r4(tr[0][2])], [0, r4(tr[1][1]), r4(tr[1][2])]];
       } else if (l.image.scaleMode !== "FILL") warn.push(`${n.id} scaleMode ${l.image.scaleMode}`);
       if (l.rot) i.rot = l.rot;
+      if (FX[n.id]) [i.fx, i.n] = FX[n.id];
       return i;
     }
     if (l.type === "LINE" && l.stroke) return { k: "box", ...box, h: l.stroke.weight, bg: l.stroke.color, kind: "line" };
@@ -148,6 +162,7 @@ function build(cfg, W = 1280) {
     if (l.type === "VECTOR" && !isEllipse(l) && l.color && !l.gradient && (parent?.children || []).some((c) => L[c.id]?.type === "TEXT" && overlaps(l, L[c.id]))) return null;
     if (l.color || l.gradient) {
       const b = { k: "box", ...box, bg: l.gradient ? css(l.gradient) : l.color };
+      if (FX[n.id]) [b.fx, b.n] = FX[n.id];
       if (l.type === "ELLIPSE" || isEllipse(l)) b.radius = "50%";
       else if (l.type === "VECTOR") b.radius = Math.min(l.h / 2, 24); // speech bubble / highlight blob, approximated
       if (l.w <= 30 && l.type === "ELLIPSE") b.kind = "dot";

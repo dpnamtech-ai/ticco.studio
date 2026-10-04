@@ -4,6 +4,7 @@ import { Fragment, type CSSProperties, type ReactNode } from "react";
 import Reveal from "@/components/Reveal";
 import { ScatterGroup } from "@/components/Scatter";
 import { ScatterWords } from "@/components/scatterWords";
+import ScrollFillText from "@/components/ScrollFillText";
 import ScatterText from "@/components/ScatterText";
 import { cropFillStyle, zoomSizes, type ImageTransform } from "@/lib/figmaCrop";
 import { DEFAULT_LANG, localize, type Lang } from "@/lib/i18n";
@@ -15,14 +16,17 @@ import { t, tx } from "@/lib/t";
   Below lg: sections become padded, wrapping flex columns (section colour as background), layers flow in reading
   order (y, then x); small photos/cards go two per row, background rectangles and decorative shapes are dropped.
 */
-type Box = { id: string; x: number; y: number; w: number; h: number };
+// Motion on a layer (phone frames, see gen-project-pages FX/FLY): scatter = scroll fly-through, fly = words fly in and
+// assemble, spin, pop (pop in + float), bob (marching), fill (letters light up on scroll), slide-l / slide-r; n = stagger.
+type Fx = "scatter" | "fly" | "spin" | "pop" | "bob" | "fill" | "slide-l" | "slide-r";
+type Box = { id: string; x: number; y: number; w: number; h: number; fx?: Fx; n?: number };
 export type FigText = Box & {
   k: "text"; text: string; size: number; lh: number; ls: number; wt: number; align: "l" | "c" | "r" | "j";
   color: string; tag: "h1" | "h2" | "p"; nowrap?: boolean; op?: number; bubble?: string;
   /** highlight colour drawn behind each line (Figma highlight vector); markParts = only these runs */
   mark?: string; markParts?: string[];
   /** id to jump to (e.g. /kham-pha/x#le-hoi-doc-lap); fx "scatter" = words fly in on scroll (ScatterText) */
-  anchor?: string; fx?: "scatter" | "fly";
+  anchor?: string;
 };
 export type FigImg = Box & { k: "img"; src: string; alt: string; crop?: ImageTransform; rot?: number };
 export type FigBox = Box & { k: "box"; bg: string; radius?: string | number; kind?: "line" | "dot" };
@@ -229,16 +233,29 @@ function fitText(page: FigPage, lang: Lang): FigPage {
 function FixedCanvas({ page, lang }: { page: FigPage; lang: Lang }) {
   const u = (px: number) => `${+(px / 3.9).toFixed(4)}cqw`;
   const at = (b: Box): CSSProperties => ({ position: "absolute", left: u(b.x), top: u(b.y), width: u(b.w) });
+  // entrance of a layer: its slide direction when it has one, else the default for its kind
+  const enter = (l: Box, base: "blur" | "curtain") =>
+    l.fx === "slide-l" || l.fx === "slide-r"
+      ? { variant: l.fx === "slide-l" ? ("left" as const) : ("right" as const), delay: (l.n ?? 0) * 0.15, duration: 0.9 }
+      : { variant: base, duration: base === "curtain" ? 1.3 : 1.1 };
   const leaf = (l: FigLeaf, hover = false) => {
     if (l.k === "text") {
       const Tag = l.tag;
+      const style = { color: l.color, opacity: l.op, fontWeight: l.wt, letterSpacing: `${l.ls}em`, fontSize: u(l.size), lineHeight: l.lh, background: l.bubble, "--mk": l.lh } as Vars;
+      const align = { l: "text-left", c: "text-center", r: "text-right", j: "text-justify" }[l.align];
+      if (l.fx === "fill")
+        return (
+          <div key={l.id} style={at(l)}>
+            <ScrollFillText text={l.text} className={`m-0 whitespace-pre-line ${align}`} style={style} />
+          </div>
+        );
       const Wrap = l.fx === "fly" ? ScatterGroup : Reveal;
       return (
-        <Wrap key={l.id} variant={l.fx ? "up" : "blur"} duration={l.fx ? 0.01 : 1.1} style={at(l)}>
+        <Wrap key={l.id} {...(l.fx === "scatter" || l.fx === "fly" ? { variant: "up" as const, duration: 0.01 } : enter(l, "blur"))} style={at(l)}>
           {l.anchor && <div id={l.anchor} aria-hidden className="absolute top-0 scroll-mt-16" />}
           <Tag
-            style={{ color: l.color, opacity: l.op, fontWeight: l.wt, letterSpacing: `${l.ls}em`, fontSize: u(l.size), lineHeight: l.lh, background: l.bubble, "--mk": l.lh } as Vars}
-            className={`m-0 ${l.nowrap ? "whitespace-pre" : "whitespace-pre-line"} ${{ l: "text-left", c: "text-center", r: "text-right", j: "text-justify" }[l.align]} ${hover ? "transition-transform duration-500 group-active:translate-x-1" : ""}`}
+            style={style}
+            className={`m-0 ${l.nowrap ? "whitespace-pre" : "whitespace-pre-line"} ${align} ${hover ? "transition-transform duration-500 group-active:translate-x-1" : ""}`}
           >
             {l.fx === "scatter" ? (
               <ScatterText text={l.text} />
@@ -258,19 +275,32 @@ function FixedCanvas({ page, lang }: { page: FigPage; lang: Lang }) {
         <Image src={l.src} alt={l.alt} fill loading={l.y < 900 ? "eager" : "lazy"} sizes={zoomSizes(`${Math.ceil((l.w / 390) * 100)}vw`, l.crop)}
           style={l.crop ? { objectFit: "fill", ...cropFillStyle(l.crop) } : { objectFit: "cover" }} />
       );
-      return (
-        <Reveal key={l.id} variant="curtain" duration={1.3} style={at(l)}>
-          <div className="relative overflow-hidden" style={{ aspectRatio: `${l.w}/${l.h}` }}>
-            {l.rot ? (
-              <div className="absolute left-1/2 top-1/2 overflow-hidden" style={{ width: `${(l.h / l.w) * 100}%`, aspectRatio: `${l.h}/${l.w}`, transform: `translate(-50%,-50%) rotate(${-l.rot}deg)` }}>{img}</div>
-            ) : (
-              img
-            )}
+      const pic = (
+        <div className="relative overflow-hidden" style={{ aspectRatio: `${l.w}/${l.h}` }}>
+          {l.rot ? (
+            <div className="absolute left-1/2 top-1/2 overflow-hidden" style={{ width: `${(l.h / l.w) * 100}%`, aspectRatio: `${l.h}/${l.w}`, transform: `translate(-50%,-50%) rotate(${-l.rot}deg)` }}>{img}</div>
+          ) : (
+            img
+          )}
+        </div>
+      );
+      // same CSS animations as the desktop BrandSection (turning Đần) and MarchingDan (.dan-pop/.dan-float, .bob)
+      if (l.fx === "spin") return <div key={l.id} style={at(l)}><div className="animate-[spin_3s_linear_infinite]">{pic}</div></div>;
+      if (l.fx === "pop")
+        return (
+          <div key={l.id} className="dan-pop" style={at(l)}>
+            <div className="dan-float" style={{ animationDelay: `${-(l.n ?? 0) * 0.9}s` }}>{pic}</div>
           </div>
+        );
+      if (l.fx === "bob") return <div key={l.id} className="bob" style={{ ...at(l), animationDelay: `${-(l.n ?? 0) * 0.13}s` }}>{pic}</div>;
+      return (
+        <Reveal key={l.id} {...enter(l, "curtain")} style={at(l)}>
+          {pic}
         </Reveal>
       );
     }
-    return <div key={l.id} aria-hidden style={{ ...at(l), height: u(l.h), background: l.bg, borderRadius: typeof l.radius === "number" ? u(l.radius) : l.radius }} />;
+    const shape = <div aria-hidden style={{ height: u(l.h), background: l.bg, borderRadius: typeof l.radius === "number" ? u(l.radius) : l.radius }} />;
+    return l.fx ? <Reveal key={l.id} {...enter(l, "blur")} style={at(l)}>{shape}</Reveal> : <div key={l.id} style={at(l)}>{shape}</div>;
   };
   return (
     <div className="[container-type:inline-size]">
