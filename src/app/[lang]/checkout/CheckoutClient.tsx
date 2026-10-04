@@ -115,6 +115,8 @@ export default function CheckoutClient() {
       const data = await res.json();
       if (!res.ok) {
         setErrors(data.fields ?? {});
+        // BUG-024: on a phone the message sits by the button, far below the field to fix: bring the first one into view
+        requestAnimationFrame(() => document.querySelector("form .text-red-600")?.closest("label")?.scrollIntoView({ behavior: "smooth", block: "center" }));
         // errors.items has no input of its own: show its text instead of the generic "kiểm tra lại thông tin"
         setFormError(t(data.fields?.items ?? data.error ?? "Không gửi được đơn, vui lòng thử lại."));
         return;
@@ -344,7 +346,7 @@ export default function CheckoutClient() {
               <span>
                 {t(i.name)} <span className="text-[var(--color-ink)]/50">({t(i.variant)}) × {i.qty}</span>
               </span>
-              <span className="font-semibold">{vnd(i.price * i.qty)}</span>
+              <span className="whitespace-nowrap font-semibold">{vnd(i.price * i.qty)}</span>
             </li>
           ))}
         </ul>

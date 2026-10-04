@@ -29,6 +29,13 @@ Mức độ: **P0** mất tiền/mất đơn/lộ dữ liệu · **P1** chặn k
 | BUG-019 | 30/09 | P2 | Menu mobile dài, chữ to, nút "Giỏ hàng" to ở cuối trông vụng; thanh trên không có icon giỏ | Menu liệt kê hết mục con; giỏ chỉ vào được qua menu | Mục con thu gọn (mở sẵn mục đang xem), chữ nhỏ hơn, icon giỏ + số trên thanh | MOB-04, MOB-05 | ✅ |
 | BUG-020 | 30/09 | P1 | Checkout phải gõ tay tỉnh/quận/phường, dễ sai; còn ô Quận/Huyện dù VN đã bỏ cấp huyện từ 1/7/2025 | Ô nhập tự do | Ô chọn có tìm nhanh (gõ không dấu), 34 tỉnh + 3321 phường/xã (`public/data/vn-dia-gioi.json`), bỏ Quận/Huyện | CO-ADDR | ✅ |
 | BUG-021 | 30/09 | P1 | Admin: nhập giá `1.5e3` được nhận thành 15.000đ | `Number()` hiểu số mũ sau khi bỏ dấu chấm | Giá chỉ nhận chữ số (+ dấu phân cách nghìn) | ADM-12 | ✅ (bắt bởi test trước khi lên prod) |
+| BUG-022 | 03/10 | P1 | Hiệu ứng mobile mất khi chuyển sang khung Figma mobile (Đần xoay, Đần nảy/lơ lửng, dải chữ sáng dần) | Bộ vẽ khung mobile chỉ vẽ tĩnh | Gắn hiệu ứng desktop vào layer tương ứng (FX trong gen-project-pages) | ảnh 2 khung hình | ✅ 5fc1f28 |
+| BUG-023 | 04/10 | P1 | Mascot mobile: Đần cầm laptop + nâng tạ lộn ngược | Figma ghi lật ngang = "xoay 180°" | Xoay 180° vẽ thành lật gương | ảnh | ✅ dea6743 |
+| BUG-024 | 05/10 | P2 | Mobile checkout: bấm đặt khi thiếu thông tin, báo lỗi ở cạnh nút, không thấy ô sai | Không cuộn tới ô lỗi | Cuộn tới ô lỗi đầu tiên | VAL-12 | ✅ |
+| BUG-025 | 05/10 | P3 | Mobile checkout: giá "280.000 VNĐ" bẻ 2 dòng | Không nowrap | whitespace-nowrap | CO-02 | ✅ |
+| BUG-026 | 05/10 | P3 | Ô tìm kiếm có 2 nút × (trình duyệt + web) | Nút xoá mặc định của input search | Ẩn nút của trình duyệt | SRC-08 | ✅ |
+| BUG-027 | 05/10 | P1 | (khách) Mascot mobile chữ thường; Freezedom tô nền cả đoạn; Chúc Tết xuống dòng khác mẫu; khoảng trắng Mình Trong Nhà; đường kẻ Neenee | id layer mobile khác desktop; thiếu font Be Vietnam Pro; khung không footer; làm tròn px | UPPER, MARK_PARTS mobile, font Pro, cắt chiều cao, dải +1px | ui-audit | ✅ dc053fd |
+| QA-GAP-02 | 05/10 | — | Bộ test cũ không đo giao diện mobile so với Figma, không đi như khách mới | — | Thêm 4 lớp: ui-audit (Figma, 5 khổ), crawl khách mới, infra-check, i18n-check — xem MASTER-TEST-PLAN | — | ✅ |
 | QA-GAP-01 | 30/09 | — | 75/75 pass nhưng lọt BUG-017/018: bộ test chỉ kiểm chức năng, **không so hình với Figma** | Thiếu tầng kiểm tra hình ảnh | Thêm `scripts/visual-diff.mjs` (so ảnh chụp trang với render Figma, báo vùng lệch) + review ảnh chụp mobile mỗi lần deploy | VIS-* | Đang làm |
 
 ## Còn mở (cần cấu hình/nội dung, không phải lỗi code)

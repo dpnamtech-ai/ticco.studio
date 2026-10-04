@@ -32,7 +32,7 @@ export default async function TimKiemPage({ searchParams }: { searchParams: Sear
           autoFocus
           placeholder={T("Tìm sản phẩm, dự án…")}
           aria-label={T("Từ khoá tìm kiếm")}
-          className="w-full rounded-lg border border-[var(--color-ink)]/20 bg-white px-4 py-3 text-base outline-none focus:border-[var(--color-purple)]"
+          className="w-full rounded-lg border border-[var(--color-ink)]/20 bg-white px-4 py-3 text-base outline-none focus:border-[var(--color-purple)] [&::-webkit-search-cancel-button]:appearance-none"
         />
         <button className="rounded-lg bg-[var(--color-purple)] px-6 font-semibold text-white hover:opacity-90">{T("Tìm")}</button>
       </form>

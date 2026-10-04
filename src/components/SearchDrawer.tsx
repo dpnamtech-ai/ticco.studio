@@ -78,7 +78,8 @@ export default function SearchDrawer({ open, onClose }: { open: boolean; onClose
               autoFocus
               placeholder={tr("Tìm sản phẩm, dự án…")}
               aria-label={tr("Từ khoá tìm kiếm")}
-              className="w-full bg-transparent py-1 text-base outline-none"
+              // BUG-026: hide the browser's own clear (×) next to our close button
+              className="w-full bg-transparent py-1 text-base outline-none [&::-webkit-search-cancel-button]:appearance-none"
             />
             <button type="button" onClick={onClose} aria-label={tr("Đóng tìm kiếm")} className="text-[var(--color-ink)]/60 hover:text-[var(--color-ink)]">
               <X size={22} />

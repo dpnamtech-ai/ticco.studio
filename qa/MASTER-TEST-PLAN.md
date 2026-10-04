@@ -3,29 +3,24 @@
 Chạy **trước mỗi lần deploy** (local) và **sau mỗi lần deploy** (prod). Bug mới → ghi `qa/BUGS.md` + thêm
 1 test cùng mã vào `scripts/regression.mjs` (test phải FAIL trên bản lỗi, PASS sau khi sửa).
 
-## Cách chạy
+## Cách chạy — 4 lớp, mỗi lớp nhìn từ một góc khác (cập nhật 05/10)
+
+| Lớp | Lệnh | Bắt được gì | Khi nào |
+|---|---|---|---|
+| 1. Chức năng | `node scripts/regression.mjs` (local, Sheet GIẢ) · `node scripts/regression.mjs https://ticcostudios.com` (prod, chỉ đọc) | đặt hàng/COD, giá, giỏ, bảo mật, spam, các bug cũ | trước + sau mỗi deploy |
+| 2. Giao diện vs Figma | `node scripts/ui-audit.mjs [url]` → `qa/ui-audit.md` | mọi trang × 360/390/430/1280/1920: kéo ngang, chữ ra ngoài màn, ảnh hỏng; chữ Figma **xuống dòng nhiều hơn thiết kế**, dòng dài hơn khung, **chồng nhau** chỗ Figma không chồng (mỗi chữ Figma mang `data-fig` = khung thiết kế) | trước + sau mỗi deploy |
+| 3. Khách mới vào | `node scripts/site-crawl.mjs <thư-mục-ảnh> [url]` | trình duyệt sạch, iPhone + PC: đi hết mọi link, lỗi JS/console, 404, file hỏng; hành trình mua (menu → danh mục → SP → chọn mẫu → giỏ → số lượng → checkout trống → tìm kiếm → EN → chính sách) | sau mỗi deploy |
+| 4. Hạ tầng | `node scripts/infra-check.mjs` → `qa/infra-check.md` | SSL còn hạn, http→https, www, header bảo mật, /vi→/, 404, admin đóng, sitemap 2 ngôn ngữ, robots, llms, icon, OG/link preview, canonical/hreflang, API chặn sai, tìm kiếm, tốc độ | sau mỗi deploy + định kỳ |
+| + EN | `node scripts/i18n-check.mjs [url]` | bản tiếng Anh không còn chữ Việt | khi đổi nội dung |
+| + Đơn thật | đặt 1 đơn CK + 1 COD trên prod, tên "TEST … - xoá" | Apps Script/Sheet thật (local chỉ có Sheet giả) | khi đổi checkout/Sheet |
+
+Quy trình bug: lỗi tìm được → `qa/BUGS.md` (mã BUG-xxx, nguyên nhân, cách sửa, test bắt nó) → sửa → chạy lại cả 4 lớp →
+deploy → chạy lớp 1-4 trên prod. Ảnh soát bằng mắt vẫn bắt buộc cho phần tử mới (lớp 2 đo hình học, không đo màu/ảnh đúng-sai).
 
 ```bash
-# 1. Local, đầy đủ (kể cả đặt hàng thật vào Sheet GIẢ — không ghi gì vào Sheet thật)
-NEXT_PUBLIC_SUPABASE_URL= npx next build
-node scripts/regression.mjs                         # -> qa/regression-last-run.md
-
-# 2. Prod sau deploy (chỉ đọc: mọi request đặt hàng nó gửi đều là request sai, server phải từ chối)
-node scripts/regression.mjs https://ticcostudio.vercel.app
-
-# 3. Admin (quy tắc bảo vệ dữ liệu: ai là admin, dòng biến thể, lọc HTML mô tả)
-npx tsx scripts/test-admin.ts
-
-# 4. Soát bằng mắt (BẮT BUỘC, xem "Giới hạn" bên dưới)
-#    Mở từng trang ở bảng V trên điện thoại thật hoặc Chrome 390px + màn 1280px, đặt cạnh Figma DEMO.
+NEXT_PUBLIC_SUPABASE_URL= npx next build && npx next start -p 3200   # bản local để chạy lớp 2 trước deploy
+node scripts/ui-audit.mjs http://localhost:3200
 ```
-
-## ⚠️ Giới hạn — đọc trước khi tin con số "pass"
-
-Bộ tự động kiểm **chức năng và các lỗi giao diện đã từng gặp**. Nó **không** so toàn bộ hình với Figma.
-Ví dụ thật (30/09): 77/77 pass nhưng Đần nâng tạ bị lật gương (BUG-017) và dải tím mobile lơ lửng
-(BUG-018) — chỉ phát hiện khi nhìn. Vì vậy **mục V (soát bằng mắt) là bắt buộc**, không được bỏ vì "test xanh".
-Muốn tự động hoá phần này cần ảnh render Figma mới của 59 frame DEMO (xem "Việc tiếp theo").
 
 ## Phạm vi & ca kiểm thử
 

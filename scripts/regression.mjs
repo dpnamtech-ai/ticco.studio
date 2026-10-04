@@ -568,6 +568,42 @@ for (const [id, name, body, want] of [
 ]) {
   await test(id, name, async () => { const r = await order(body); return expect(r.status === want, `status=${r.status} ${(await r.text()).slice(0, 120)}`); });
 }
+await test("VAL-12", "Mobile: bấm đặt khi form trống -> trang cuộn tới ô lỗi đầu tiên (BUG-024)", async () => {
+  await mobile();
+  await go("/");
+  await setCart([{ id: PC, name: "x", variant: "Lao động", price: 30000, qty: 1 }]);
+  await go("/checkout");
+  await page.evaluate(() => scrollTo(0, document.body.scrollHeight));
+  await submitCheckout();
+  await sleep(2500);
+  const r = await page.evaluate(() => { const e = document.querySelector("form .text-red-600")?.closest("label")?.getBoundingClientRect(); return e ? e.top >= 0 && e.bottom <= innerHeight : null; });
+  await desktop();
+  return expect(r === true, `first error field in view: ${r}`);
+});
+await test("CO-02", "Mobile: giá trong tóm tắt đơn không bị bẻ 2 dòng (BUG-025)", async () => {
+  await mobile();
+  await go("/");
+  await setCart([{ id: "khan-bandana-van-su-tuy-minh", name: "Bandana Vạn Sự Tuỳ Mình", variant: "Tím", price: 140000, qty: 2 }]);
+  await go("/checkout");
+  // count the text's line boxes (the span itself stretches to the row height, so its height says nothing)
+  const lines = await page.evaluate(() => [...document.querySelectorAll("li span.font-semibold")].filter((e) => /VNĐ/.test(e.textContent)).map((e) => { const r = document.createRange(); r.selectNodeContents(e); return new Set([...r.getClientRects()].map((x) => Math.round(x.top))).size; }));
+  await desktop();
+  return expect(lines.length > 0 && lines.every((n) => n === 1), JSON.stringify(lines));
+});
+await test("SRC-08", "Ô tìm kiếm không có nút xoá thứ hai của trình duyệt (BUG-026)", async () => {
+  await go("/tim-kiem?q=dan");
+  // Chrome won't report computed styles of ::-webkit-* pseudo elements: check that a loaded rule hides it on this input
+  const a = await page.evaluate(() => {
+    const i = document.querySelector('input[type="search"]');
+    const all = (rules) => [...rules].flatMap((r) => [r, ...(r.cssRules ? all(r.cssRules) : [])]); // Tailwind nests rules in @layer
+    for (const sheet of document.styleSheets) for (const rule of all(sheet.cssRules ?? [])) {
+      const sel = rule.selectorText ?? "";
+      if (sel.includes("::-webkit-search-cancel-button") && /appearance:\s*none/.test(rule.cssText) && i.matches(sel.replace(/::-webkit-search-cancel-button/g, ""))) return true;
+    }
+    return false;
+  });
+  return expect(a, "no rule hides the browser's clear button");
+});
 await test("SEC-04", "GET /api/orders không được phép (405)", async () => expect((await fetch(`${BASE}/api/orders`)).status === 405, "not 405"));
 await test("VAL-11", "Form báo lỗi SĐT sai ngay dưới ô nhập", async () => {
   await go("/");

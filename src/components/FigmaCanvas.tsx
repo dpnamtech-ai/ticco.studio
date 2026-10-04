@@ -18,6 +18,10 @@ import { t, tx } from "@/lib/t";
 */
 // Motion on a layer (phone frames, see gen-project-pages FX/FLY): scatter = scroll fly-through, fly = words fly in and
 // assemble, spin, pop (pop in + float), bob (marching), fill (letters light up on scroll), slide-l / slide-r; n = stagger.
+// QA hook (scripts/ui-audit.mjs): each Figma text carries its design box "frame,x,y,w,h,lineHeightPx,nowrap", so the
+// audit can measure the rendered text against the design at any screen width.
+const figAttr = (t: FigText, frame: number) => `${frame},${t.x},${t.y},${t.w},${t.h},${+(t.size * t.lh).toFixed(2)},${t.nowrap ? 1 : 0}`;
+
 type Fx = "scatter" | "fly" | "spin" | "pop" | "bob" | "fill" | "slide-l" | "slide-r";
 type Box = { id: string; x: number; y: number; w: number; h: number; fx?: Fx; n?: number };
 export type FigText = Box & {
@@ -114,6 +118,7 @@ function Text({ t, o, hover }: { t: FigText; o: number; hover?: boolean }) {
     <Reveal variant={t.fx ? "up" : "blur"} duration={t.fx ? 0.01 : 1.1} className={`${POS} max-lg:w-full`} style={pos(t, o)}>
       <Tag
         style={style}
+        data-fig={figAttr(t, 1280)}
         className={`flex flex-col ${ITEMS[t.align]} m-0 [--mk:var(--lhm)] lg:[--mk:var(--lh)] text-[length:var(--fsm)] leading-[var(--lhm)] lg:text-[length:var(--fs)] lg:leading-[var(--lh)] ${
           t.bubble ? `max-lg:w-fit max-lg:bg-[var(--bub)] max-lg:px-4 max-lg:py-3 max-lg:rounded-2xl ${t.align === "c" ? "max-lg:mx-auto" : ""}` : ""
         } ${hover ? "transition-transform duration-500 ease-out lg:group-hover:translate-x-[0.9cqw]" : ""}`}
@@ -222,7 +227,10 @@ function fitText(page: FigPage, lang: Lang): FigPage {
       // (not paragraphs: a blank line in the Vietnamese means paragraphs, which the translation keeps its own way)
       if (n > 1 && !text.includes("\n") && !l.text.includes("\n\n")) text = balance(text, n);
       const setLines = l.nowrap || l.h <= l.size * l.lh * (n + 0.5) || (n === 1 && len(l.text) < 60);
-      const r = setLines ? longest(l.text) / longest(text) : Math.sqrt(len(l.text) / len(text));
+      // BUG-028: a translation set in more lines than the source must also fit the box height (EN mascot callouts
+      // overlapped); BUG-029: paragraphs get 5% slack, the area estimate ran one line long
+      const tall = n / Math.max(n, text.split("\n").length);
+      const r = Math.min(tall, setLines ? longest(l.text) / longest(text) : Math.sqrt(len(l.text) / len(text)) * 0.95);
       return { ...l, text, size: l.size * Math.min(1, r) };
     }
     return Object.fromEntries(Object.entries(o).map(([k, x]) => [k, fit(x)]));
@@ -248,7 +256,7 @@ function FixedCanvas({ page, lang }: { page: FigPage; lang: Lang }) {
       if (l.fx === "fill")
         return (
           <div key={l.id} style={at(l)}>
-            <ScrollFillText text={l.text} className={`m-0 ${l.nowrap ? "whitespace-pre" : "whitespace-pre-line"} ${align}`} style={style} />
+            <ScrollFillText data-fig={figAttr(l, 390)} text={l.text} className={`m-0 ${l.nowrap ? "whitespace-pre" : "whitespace-pre-line"} ${align}`} style={style} />
           </div>
         );
       const Wrap = l.fx === "fly" ? ScatterGroup : Reveal;
@@ -257,6 +265,7 @@ function FixedCanvas({ page, lang }: { page: FigPage; lang: Lang }) {
           {l.anchor && <div id={l.anchor} aria-hidden className="absolute top-0 scroll-mt-16" />}
           <Tag
             style={style}
+            data-fig={figAttr(l, 390)}
             className={`m-0 ${l.nowrap ? "whitespace-pre" : "whitespace-pre-line"} ${align} ${hover ? "transition-transform duration-500 group-active:translate-x-1" : ""}`}
           >
             {l.fx === "scatter" ? (

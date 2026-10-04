@@ -1,7 +1,7 @@
-# Regression — 2026-10-04 18:46 UTC
+# Regression — 2026-10-04 19:46 UTC
 
 Target: http://localhost:3100 (local, full incl. orders on a mock Sheet)
-Result: **85/85 pass**
+Result: **88/88 pass**
 
 | | ID | Case | Chi tiết |
 |---|---|---|---|
@@ -76,6 +76,9 @@ Result: **85/85 pass**
 | ✅ | VAL-08 | 31 dòng hàng -> 422 |  |
 | ✅ | VAL-09 | Sản phẩm hết hàng -> 422 |  |
 | ✅ | VAL-10 | Email sai -> 422 |  |
+| ✅ | VAL-12 | Mobile: bấm đặt khi form trống -> trang cuộn tới ô lỗi đầu tiên (BUG-024) |  |
+| ✅ | CO-02 | Mobile: giá trong tóm tắt đơn không bị bẻ 2 dòng (BUG-025) |  |
+| ✅ | SRC-08 | Ô tìm kiếm không có nút xoá thứ hai của trình duyệt (BUG-026) |  |
 | ✅ | SEC-04 | GET /api/orders không được phép (405) |  |
 | ✅ | VAL-11 | Form báo lỗi SĐT sai ngay dưới ô nhập |  |
 | ✅ | ORD-01 | Đặt hàng: màn tổng quan + mã đơn + tổng đúng; Sheet nhận giá đúng dù giỏ bị sửa giá |  |
