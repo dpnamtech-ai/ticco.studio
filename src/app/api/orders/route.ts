@@ -74,7 +74,17 @@ async function sendShopEmail(code: string, o: OrderInput, lines: PricedLine[], s
 // a leading apostrophe makes the cell plain text and is not shown.
 const cell = (v: string) => (/^[=+\-@\t\r]/.test(v) ? `'${v}` : v);
 
+// Apps Script now and then answers with an error page instead of its JSON (seen live 2026-10-04: a COD order failed,
+// the same order went through seconds later). One retry; if the first write did land, the shop sees a duplicate row,
+// which beats losing the order.
 async function sendToSheet(code: string, o: OrderInput, lines: PricedLine[], subtotal: number, shipping: number, total: number) {
+  const first = await sendToSheetOnce(code, o, lines, subtotal, shipping, total);
+  if (first !== null || !process.env.ORDER_SHEET_URL) return first;
+  await new Promise((r) => setTimeout(r, 1500));
+  return sendToSheetOnce(code, o, lines, subtotal, shipping, total);
+}
+
+async function sendToSheetOnce(code: string, o: OrderInput, lines: PricedLine[], subtotal: number, shipping: number, total: number) {
   const url = process.env.ORDER_SHEET_URL;
   if (!url) return null;
   try {
