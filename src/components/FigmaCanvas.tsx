@@ -27,6 +27,8 @@ export type FigText = Box & {
   mark?: string; markParts?: string[];
   /** id to jump to (e.g. /kham-pha/x#le-hoi-doc-lap); fx "scatter" = words fly in on scroll (ScatterText) */
   anchor?: string;
+  /** set in Be Vietnam Pro in Figma (wider than the site's Be Vietnam) */
+  pro?: boolean;
 };
 export type FigImg = Box & { k: "img"; src: string; alt: string; crop?: ImageTransform; rot?: number; mirror?: boolean };
 export type FigBox = Box & { k: "box"; bg: string; radius?: string | number; kind?: "line" | "dot" };
@@ -100,7 +102,7 @@ function markLine(t: FigText) {
 function Text({ t, o, hover }: { t: FigText; o: number; hover?: boolean }) {
   const Tag = t.tag;
   const style: Vars = {
-    color: t.color, opacity: t.op, fontWeight: t.wt, letterSpacing: `${t.ls}em`,
+    fontFamily: t.pro ? "var(--font-be-vietnam-pro)" : undefined, color: t.color, opacity: t.op, fontWeight: t.wt, letterSpacing: `${t.ls}em`,
     "--fs": cq(t.size), "--fsm": `${mSize(t.size)}px`, "--lh": t.lh, "--lhm": Math.min(Math.max(t.lh, 1.2), 1.6), "--bub": t.bubble ?? "transparent",
   };
   return (
@@ -241,7 +243,7 @@ function FixedCanvas({ page, lang }: { page: FigPage; lang: Lang }) {
   const leaf = (l: FigLeaf, hover = false) => {
     if (l.k === "text") {
       const Tag = l.tag;
-      const style = { color: l.color, opacity: l.op, fontWeight: l.wt, letterSpacing: `${l.ls}em`, fontSize: u(l.size), lineHeight: l.lh, background: l.bubble, "--mk": l.lh } as Vars;
+      const style = { fontFamily: l.pro ? "var(--font-be-vietnam-pro)" : undefined, color: l.color, opacity: l.op, fontWeight: l.wt, letterSpacing: `${l.ls}em`, fontSize: u(l.size), lineHeight: l.lh, background: l.bubble, "--mk": l.lh } as Vars;
       const align = { l: "text-left", c: "text-center", r: "text-right", j: "text-justify" }[l.align];
       if (l.fx === "fill")
         return (
@@ -299,7 +301,8 @@ function FixedCanvas({ page, lang }: { page: FigPage; lang: Lang }) {
         </Reveal>
       );
     }
-    const shape = <div aria-hidden style={{ height: u(l.h), background: l.bg, borderRadius: typeof l.radius === "number" ? u(l.radius) : l.radius }} />;
+    // full-width bands get 1px extra so rounding never leaves a hairline of page background between them
+    const shape = <div aria-hidden style={{ height: l.w >= 380 ? `calc(${u(l.h)} + 1px)` : u(l.h), background: l.bg, borderRadius: typeof l.radius === "number" ? u(l.radius) : l.radius }} />;
     return l.fx ? <Reveal key={l.id} {...enter(l, "blur")} style={at(l)}>{shape}</Reveal> : <div key={l.id} style={at(l)}>{shape}</div>;
   };
   return (

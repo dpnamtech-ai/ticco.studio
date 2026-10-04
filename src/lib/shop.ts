@@ -46,7 +46,8 @@ const ORDER: Record<ShopSlug, string[]> = {
   ],
   "tui-xach": ["tui-song-cu-khoi", "tui-vung-vang", "tote-xoi-loi-voi-doi", "tui-ngu-du", "tui-thuyen"],
   "thoi-trang": ["gile-yen-tam", "ao-phong-thoai-mai", "khan-bandana-van-su-tuy-minh", "mu-tai-beo-ha-ha", "mu-luoi-trai-cha-sao"],
-  "phu-kien-doi-song": ["bst-dan-sinh-ton", "lot-coc-ra-khoi", "keychain-nguoi-viet-yeu-nuoc", "keychain-uoc-duoc-lam-con-cho", "keychain-khong-so-cuoc-doi"],
+  // client 2026-10-05: the 3 Đần Sinh Tồn keychains shown on their own here, ahead of the set
+  "phu-kien-doi-song": ["dan-sinh-ton-01", "dan-sinh-ton-02", "dan-sinh-ton-03", "bst-dan-sinh-ton", "lot-coc-ra-khoi", "keychain-nguoi-viet-yeu-nuoc", "keychain-uoc-duoc-lam-con-cho", "keychain-khong-so-cuoc-doi"],
 };
 
 // Catalog products Figma doesn't list: single items of a collection (reached via its option buttons)
@@ -125,7 +126,8 @@ type Listable = { id: string; category: string };
 /** Products of one tab in display order: the Figma order first, then anything else (new /admin products) in catalog order. */
 export function shopListing<T extends Listable>(products: T[], slug: string): T[] {
   const tab = shopCategory(slug);
-  const inTab = products.filter((p) => !UNLISTED.has(p.id) && (tab.category === null || p.category === tab.category));
+  const listed = (id: string) => !UNLISTED.has(id) || ORDER[tab.slug].includes(id); // a tab may list a collection's singles
+  const inTab = products.filter((p) => listed(p.id) && (tab.category === null || p.category === tab.category));
   const rank = (id: string) => {
     const i = ORDER[tab.slug].indexOf(id);
     return i < 0 ? Infinity : i;

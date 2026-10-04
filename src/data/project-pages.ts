@@ -47,6 +47,7 @@ export const figmaPages: Record<string, FigPage> = {
       "align": "l",
       "color": "#f55f00",
       "tag": "h1",
+      "pro": true,
       "nowrap": true
      },
      {
@@ -64,6 +65,7 @@ export const figmaPages: Record<string, FigPage> = {
       "align": "r",
       "color": "#ffffff",
       "tag": "p",
+      "pro": true,
       "nowrap": true
      }
     ]
@@ -105,6 +107,7 @@ export const figmaPages: Record<string, FigPage> = {
       "align": "c",
       "color": "#55149f",
       "tag": "p",
+      "pro": true,
       "nowrap": true,
       "bubble": "#e5ff00"
      },
@@ -127,6 +130,7 @@ export const figmaPages: Record<string, FigPage> = {
         "align": "l",
         "color": "#ffffff",
         "tag": "h2",
+        "pro": true,
         "nowrap": true
        },
        {
@@ -143,7 +147,8 @@ export const figmaPages: Record<string, FigPage> = {
         "wt": 300,
         "align": "r",
         "color": "#ffffff",
-        "tag": "p"
+        "tag": "p",
+        "pro": true
        },
        {
         "k": "box",
@@ -177,6 +182,7 @@ export const figmaPages: Record<string, FigPage> = {
         "align": "l",
         "color": "#ffffff",
         "tag": "h2",
+        "pro": true,
         "nowrap": true
        },
        {
@@ -193,7 +199,8 @@ export const figmaPages: Record<string, FigPage> = {
         "wt": 300,
         "align": "r",
         "color": "#ffffff",
-        "tag": "p"
+        "tag": "p",
+        "pro": true
        },
        {
         "k": "box",
@@ -227,6 +234,7 @@ export const figmaPages: Record<string, FigPage> = {
         "align": "l",
         "color": "#ffffff",
         "tag": "h2",
+        "pro": true,
         "nowrap": true
        },
        {
@@ -243,7 +251,8 @@ export const figmaPages: Record<string, FigPage> = {
         "wt": 300,
         "align": "r",
         "color": "#ffffff",
-        "tag": "p"
+        "tag": "p",
+        "pro": true
        },
        {
         "k": "box",
@@ -277,6 +286,7 @@ export const figmaPages: Record<string, FigPage> = {
         "align": "l",
         "color": "#ffffff",
         "tag": "h2",
+        "pro": true,
         "nowrap": true
        },
        {
@@ -293,7 +303,8 @@ export const figmaPages: Record<string, FigPage> = {
         "wt": 300,
         "align": "r",
         "color": "#ffffff",
-        "tag": "p"
+        "tag": "p",
+        "pro": true
        }
       ],
       "href": "/kham-pha/minh-trong-nha-nha-trong-nuoc"
@@ -339,6 +350,7 @@ export const figmaPages: Record<string, FigPage> = {
       "align": "c",
       "color": "#c15106",
       "tag": "p",
+      "pro": true,
       "nowrap": true,
       "bubble": "#e5ff00"
      },
@@ -361,6 +373,7 @@ export const figmaPages: Record<string, FigPage> = {
         "align": "l",
         "color": "#ffffff",
         "tag": "h2",
+        "pro": true,
         "nowrap": true
        },
        {
@@ -378,6 +391,7 @@ export const figmaPages: Record<string, FigPage> = {
         "align": "r",
         "color": "#ffffff",
         "tag": "p",
+        "pro": true,
         "nowrap": true
        },
        {
@@ -412,6 +426,7 @@ export const figmaPages: Record<string, FigPage> = {
         "align": "l",
         "color": "#ffffff",
         "tag": "h2",
+        "pro": true,
         "nowrap": true
        },
        {
@@ -429,6 +444,7 @@ export const figmaPages: Record<string, FigPage> = {
         "align": "r",
         "color": "#ffffff",
         "tag": "p",
+        "pro": true,
         "nowrap": true
        }
       ],
@@ -475,6 +491,7 @@ export const figmaPages: Record<string, FigPage> = {
       "align": "c",
       "color": "#53129e",
       "tag": "p",
+      "pro": true,
       "nowrap": true,
       "bubble": "#e5ff00"
      },
@@ -497,6 +514,7 @@ export const figmaPages: Record<string, FigPage> = {
         "align": "l",
         "color": "#ffffff",
         "tag": "h2",
+        "pro": true,
         "nowrap": true
        },
        {
@@ -513,7 +531,8 @@ export const figmaPages: Record<string, FigPage> = {
         "wt": 300,
         "align": "r",
         "color": "#ffffff",
-        "tag": "p"
+        "tag": "p",
+        "pro": true
        },
        {
         "k": "box",
@@ -547,6 +566,7 @@ export const figmaPages: Record<string, FigPage> = {
         "align": "l",
         "color": "#ffffff",
         "tag": "h2",
+        "pro": true,
         "nowrap": true
        },
        {
@@ -564,6 +584,7 @@ export const figmaPages: Record<string, FigPage> = {
         "align": "r",
         "color": "#ffffff",
         "tag": "p",
+        "pro": true,
         "nowrap": true
        }
       ],
@@ -627,6 +648,7 @@ export const figmaPages: Record<string, FigPage> = {
        "align": "r",
        "color": "#ffffff",
        "tag": "h2",
+       "pro": true,
        "nowrap": true
       },
       {
@@ -643,7 +665,8 @@ export const figmaPages: Record<string, FigPage> = {
        "wt": 600,
        "align": "r",
        "color": "#ffffff",
-       "tag": "p"
+       "tag": "p",
+       "pro": true
       }
      ],
      "bg": "#e66107"
@@ -685,6 +708,7 @@ export const figmaPages: Record<string, FigPage> = {
        "align": "c",
        "color": "#55149f",
        "tag": "p",
+       "pro": true,
        "nowrap": true,
        "bubble": "#e5ff00"
       },
@@ -707,6 +731,7 @@ export const figmaPages: Record<string, FigPage> = {
          "align": "l",
          "color": "#ffffff",
          "tag": "p",
+         "pro": true,
          "nowrap": true
         },
         {
@@ -723,7 +748,8 @@ export const figmaPages: Record<string, FigPage> = {
          "wt": 300,
          "align": "l",
          "color": "#ffffff",
-         "tag": "p"
+         "tag": "p",
+         "pro": true
         },
         {
          "k": "box",
@@ -757,6 +783,7 @@ export const figmaPages: Record<string, FigPage> = {
          "align": "l",
          "color": "#ffffff",
          "tag": "p",
+         "pro": true,
          "nowrap": true
         },
         {
@@ -773,7 +800,8 @@ export const figmaPages: Record<string, FigPage> = {
          "wt": 300,
          "align": "l",
          "color": "#ffffff",
-         "tag": "p"
+         "tag": "p",
+         "pro": true
         },
         {
          "k": "box",
@@ -807,6 +835,7 @@ export const figmaPages: Record<string, FigPage> = {
          "align": "l",
          "color": "#ffffff",
          "tag": "p",
+         "pro": true,
          "nowrap": true
         },
         {
@@ -824,6 +853,7 @@ export const figmaPages: Record<string, FigPage> = {
          "align": "l",
          "color": "#ffffff",
          "tag": "p",
+         "pro": true,
          "nowrap": true
         },
         {
@@ -858,6 +888,7 @@ export const figmaPages: Record<string, FigPage> = {
          "align": "l",
          "color": "#ffffff",
          "tag": "p",
+         "pro": true,
          "nowrap": true
         },
         {
@@ -875,6 +906,7 @@ export const figmaPages: Record<string, FigPage> = {
          "align": "l",
          "color": "#ffffff",
          "tag": "p",
+         "pro": true,
          "nowrap": true
         }
        ],
@@ -921,6 +953,7 @@ export const figmaPages: Record<string, FigPage> = {
        "align": "c",
        "color": "#55149f",
        "tag": "p",
+       "pro": true,
        "nowrap": true,
        "bubble": "#e5ff00"
       },
@@ -943,6 +976,7 @@ export const figmaPages: Record<string, FigPage> = {
          "align": "l",
          "color": "#ffffff",
          "tag": "p",
+         "pro": true,
          "nowrap": true
         },
         {
@@ -960,6 +994,7 @@ export const figmaPages: Record<string, FigPage> = {
          "align": "l",
          "color": "#ffffff",
          "tag": "p",
+         "pro": true,
          "nowrap": true
         },
         {
@@ -994,6 +1029,7 @@ export const figmaPages: Record<string, FigPage> = {
          "align": "l",
          "color": "#ffffff",
          "tag": "p",
+         "pro": true,
          "nowrap": true
         },
         {
@@ -1011,6 +1047,7 @@ export const figmaPages: Record<string, FigPage> = {
          "align": "l",
          "color": "#ffffff",
          "tag": "p",
+         "pro": true,
          "nowrap": true
         }
        ],
@@ -1057,6 +1094,7 @@ export const figmaPages: Record<string, FigPage> = {
        "align": "c",
        "color": "#55149f",
        "tag": "p",
+       "pro": true,
        "nowrap": true,
        "bubble": "#e5ff00"
       },
@@ -1079,6 +1117,7 @@ export const figmaPages: Record<string, FigPage> = {
          "align": "l",
          "color": "#ffffff",
          "tag": "p",
+         "pro": true,
          "nowrap": true
         },
         {
@@ -1095,7 +1134,8 @@ export const figmaPages: Record<string, FigPage> = {
          "wt": 300,
          "align": "l",
          "color": "#ffffff",
-         "tag": "p"
+         "tag": "p",
+         "pro": true
         },
         {
          "k": "box",
@@ -1129,6 +1169,7 @@ export const figmaPages: Record<string, FigPage> = {
          "align": "l",
          "color": "#ffffff",
          "tag": "p",
+         "pro": true,
          "nowrap": true
         },
         {
@@ -1146,6 +1187,7 @@ export const figmaPages: Record<string, FigPage> = {
          "align": "l",
          "color": "#ffffff",
          "tag": "p",
+         "pro": true,
          "nowrap": true
         }
        ],
@@ -1189,6 +1231,7 @@ export const figmaPages: Record<string, FigPage> = {
       "align": "l",
       "color": "#ffffff",
       "tag": "h1",
+      "pro": true,
       "nowrap": true
      },
      {
@@ -1206,6 +1249,7 @@ export const figmaPages: Record<string, FigPage> = {
       "align": "r",
       "color": "#ffffff",
       "tag": "p",
+      "pro": true,
       "nowrap": true
      }
     ],
@@ -1270,7 +1314,8 @@ export const figmaPages: Record<string, FigPage> = {
         "wt": 400,
         "align": "l",
         "color": "#ffffff",
-        "tag": "h2"
+        "tag": "h2",
+        "pro": true
        },
        {
         "k": "img",
@@ -1308,7 +1353,8 @@ export const figmaPages: Record<string, FigPage> = {
         "wt": 300,
         "align": "l",
         "color": "#ffffff",
-        "tag": "p"
+        "tag": "p",
+        "pro": true
        }
       ]
      },
@@ -1326,7 +1372,8 @@ export const figmaPages: Record<string, FigPage> = {
       "wt": 400,
       "align": "l",
       "color": "#ffffff",
-      "tag": "h2"
+      "tag": "h2",
+      "pro": true
      },
      {
       "k": "card",
@@ -1357,6 +1404,7 @@ export const figmaPages: Record<string, FigPage> = {
         "align": "c",
         "color": "#ffffff",
         "tag": "p",
+        "pro": true,
         "nowrap": true
        }
       ]
@@ -1390,6 +1438,7 @@ export const figmaPages: Record<string, FigPage> = {
         "align": "c",
         "color": "#ffffff",
         "tag": "p",
+        "pro": true,
         "nowrap": true
        }
       ]
@@ -1423,6 +1472,7 @@ export const figmaPages: Record<string, FigPage> = {
         "align": "c",
         "color": "#ffffff",
         "tag": "p",
+        "pro": true,
         "nowrap": true
        }
       ]
@@ -1461,7 +1511,8 @@ export const figmaPages: Record<string, FigPage> = {
         "wt": 400,
         "align": "l",
         "color": "#ffffff",
-        "tag": "h2"
+        "tag": "h2",
+        "pro": true
        },
        {
         "k": "img",
@@ -1500,6 +1551,7 @@ export const figmaPages: Record<string, FigPage> = {
         "align": "r",
         "color": "#ffffff",
         "tag": "p",
+        "pro": true,
         "nowrap": true
        }
       ]
@@ -1519,6 +1571,7 @@ export const figmaPages: Record<string, FigPage> = {
       "align": "l",
       "color": "#ffffff",
       "tag": "h2",
+      "pro": true,
       "anchor": "le-hoi-doc-lap",
       "nowrap": true
      },
@@ -1536,7 +1589,8 @@ export const figmaPages: Record<string, FigPage> = {
       "wt": 300,
       "align": "r",
       "color": "#ffffff",
-      "tag": "p"
+      "tag": "p",
+      "pro": true
      },
      {
       "k": "img",
@@ -1649,6 +1703,7 @@ export const figmaPages: Record<string, FigPage> = {
        "align": "l",
        "color": "#ffffff",
        "tag": "h2",
+       "pro": true,
        "nowrap": true
       },
       {
@@ -1666,6 +1721,7 @@ export const figmaPages: Record<string, FigPage> = {
        "align": "r",
        "color": "#ffffff",
        "tag": "p",
+       "pro": true,
        "nowrap": true
       }
      ],
@@ -1726,7 +1782,8 @@ export const figmaPages: Record<string, FigPage> = {
        "wt": 400,
        "align": "l",
        "color": "#ffffff",
-       "tag": "p"
+       "tag": "p",
+       "pro": true
       },
       {
        "k": "img",
@@ -1764,7 +1821,8 @@ export const figmaPages: Record<string, FigPage> = {
        "wt": 300,
        "align": "l",
        "color": "#ffffff",
-       "tag": "p"
+       "tag": "p",
+       "pro": true
       },
       {
        "k": "text",
@@ -1780,7 +1838,8 @@ export const figmaPages: Record<string, FigPage> = {
        "wt": 400,
        "align": "l",
        "color": "#ffffff",
-       "tag": "p"
+       "tag": "p",
+       "pro": true
       },
       {
        "k": "card",
@@ -1811,6 +1870,7 @@ export const figmaPages: Record<string, FigPage> = {
          "align": "c",
          "color": "#ffffff",
          "tag": "p",
+         "pro": true,
          "nowrap": true
         }
        ]
@@ -1844,6 +1904,7 @@ export const figmaPages: Record<string, FigPage> = {
          "align": "c",
          "color": "#ffffff",
          "tag": "p",
+         "pro": true,
          "nowrap": true
         }
        ]
@@ -1877,6 +1938,7 @@ export const figmaPages: Record<string, FigPage> = {
          "align": "c",
          "color": "#ffffff",
          "tag": "p",
+         "pro": true,
          "nowrap": true
         }
        ]
@@ -1915,7 +1977,8 @@ export const figmaPages: Record<string, FigPage> = {
          "wt": 400,
          "align": "l",
          "color": "#ffffff",
-         "tag": "p"
+         "tag": "p",
+         "pro": true
         },
         {
          "k": "img",
@@ -1954,6 +2017,7 @@ export const figmaPages: Record<string, FigPage> = {
          "align": "l",
          "color": "#ffffff",
          "tag": "p",
+         "pro": true,
          "nowrap": true
         }
        ]
@@ -1973,6 +2037,7 @@ export const figmaPages: Record<string, FigPage> = {
        "align": "l",
        "color": "#ffffff",
        "tag": "p",
+       "pro": true,
        "anchor": "le-hoi-doc-lap",
        "nowrap": true
       },
@@ -1990,7 +2055,8 @@ export const figmaPages: Record<string, FigPage> = {
        "wt": 300,
        "align": "l",
        "color": "#ffffff",
-       "tag": "p"
+       "tag": "p",
+       "pro": true
       },
       {
        "k": "img",
@@ -2105,6 +2171,7 @@ export const figmaPages: Record<string, FigPage> = {
       "align": "l",
       "color": "#b00808",
       "tag": "h1",
+      "pro": true,
       "nowrap": true
      },
      {
@@ -2122,6 +2189,7 @@ export const figmaPages: Record<string, FigPage> = {
       "align": "r",
       "color": "#b00808",
       "tag": "p",
+      "pro": true,
       "nowrap": true
      },
      {
@@ -2171,6 +2239,7 @@ export const figmaPages: Record<string, FigPage> = {
       "align": "l",
       "color": "#ffffff",
       "tag": "p",
+      "pro": true,
       "mark": "#b00808"
      },
      {
@@ -2188,6 +2257,7 @@ export const figmaPages: Record<string, FigPage> = {
       "align": "r",
       "color": "#ffffff",
       "tag": "p",
+      "pro": true,
       "mark": "#b00808"
      }
     ],
@@ -2235,6 +2305,7 @@ export const figmaPages: Record<string, FigPage> = {
       "align": "l",
       "color": "#fea0c9",
       "tag": "h2",
+      "pro": true,
       "nowrap": true
      }
     ]
@@ -2267,6 +2338,7 @@ export const figmaPages: Record<string, FigPage> = {
       "align": "j",
       "color": "#ffffff",
       "tag": "p",
+      "pro": true,
       "mark": "#b00808"
      },
      {
@@ -2284,6 +2356,7 @@ export const figmaPages: Record<string, FigPage> = {
       "align": "c",
       "color": "#b00808",
       "tag": "h2",
+      "pro": true,
       "nowrap": true
      },
      {
@@ -2300,7 +2373,8 @@ export const figmaPages: Record<string, FigPage> = {
       "wt": 300,
       "align": "c",
       "color": "#000000",
-      "tag": "p"
+      "tag": "p",
+      "pro": true
      },
      {
       "k": "box",
@@ -2599,6 +2673,7 @@ export const figmaPages: Record<string, FigPage> = {
        "align": "l",
        "color": "#b00808",
        "tag": "h2",
+       "pro": true,
        "nowrap": true
       },
       {
@@ -2616,6 +2691,7 @@ export const figmaPages: Record<string, FigPage> = {
        "align": "r",
        "color": "#b00808",
        "tag": "p",
+       "pro": true,
        "nowrap": true
       },
       {
@@ -2666,6 +2742,7 @@ export const figmaPages: Record<string, FigPage> = {
        "align": "l",
        "color": "#fea0c9",
        "tag": "p",
+       "pro": true,
        "nowrap": true
       },
       {
@@ -2705,6 +2782,7 @@ export const figmaPages: Record<string, FigPage> = {
        "align": "l",
        "color": "#ffffff",
        "tag": "p",
+       "pro": true,
        "mark": "#b00808"
       },
       {
@@ -2722,6 +2800,7 @@ export const figmaPages: Record<string, FigPage> = {
        "align": "r",
        "color": "#ffffff",
        "tag": "p",
+       "pro": true,
        "mark": "#b00808"
       }
      ],
@@ -2755,6 +2834,7 @@ export const figmaPages: Record<string, FigPage> = {
        "align": "j",
        "color": "#ffffff",
        "tag": "p",
+       "pro": true,
        "mark": "#b00808"
       },
       {
@@ -2772,6 +2852,7 @@ export const figmaPages: Record<string, FigPage> = {
        "align": "c",
        "color": "#b00808",
        "tag": "p",
+       "pro": true,
        "nowrap": true
       },
       {
@@ -2788,7 +2869,8 @@ export const figmaPages: Record<string, FigPage> = {
        "wt": 300,
        "align": "c",
        "color": "#000000",
-       "tag": "p"
+       "tag": "p",
+       "pro": true
       },
       {
        "k": "box",
@@ -3089,6 +3171,7 @@ export const figmaPages: Record<string, FigPage> = {
       "align": "l",
       "color": "#ffffff",
       "tag": "h1",
+      "pro": true,
       "nowrap": true
      },
      {
@@ -3106,6 +3189,7 @@ export const figmaPages: Record<string, FigPage> = {
       "align": "r",
       "color": "#ffffff",
       "tag": "p",
+      "pro": true,
       "nowrap": true
      }
     ],
@@ -3166,7 +3250,8 @@ export const figmaPages: Record<string, FigPage> = {
       "wt": 400,
       "align": "l",
       "color": "#ffffff",
-      "tag": "h2"
+      "tag": "h2",
+      "pro": true
      },
      {
       "k": "text",
@@ -3182,7 +3267,8 @@ export const figmaPages: Record<string, FigPage> = {
       "wt": 300,
       "align": "l",
       "color": "#ffffff",
-      "tag": "p"
+      "tag": "p",
+      "pro": true
      },
      {
       "k": "text",
@@ -3198,7 +3284,8 @@ export const figmaPages: Record<string, FigPage> = {
       "wt": 400,
       "align": "l",
       "color": "#ffffff",
-      "tag": "h2"
+      "tag": "h2",
+      "pro": true
      },
      {
       "k": "img",
@@ -3347,6 +3434,7 @@ export const figmaPages: Record<string, FigPage> = {
        "align": "l",
        "color": "#ffffff",
        "tag": "h2",
+       "pro": true,
        "nowrap": true
       },
       {
@@ -3364,6 +3452,7 @@ export const figmaPages: Record<string, FigPage> = {
        "align": "r",
        "color": "#ffffff",
        "tag": "p",
+       "pro": true,
        "nowrap": true
       }
      ],
@@ -3424,7 +3513,8 @@ export const figmaPages: Record<string, FigPage> = {
        "wt": 400,
        "align": "l",
        "color": "#ffffff",
-       "tag": "p"
+       "tag": "p",
+       "pro": true
       },
       {
        "k": "text",
@@ -3440,7 +3530,8 @@ export const figmaPages: Record<string, FigPage> = {
        "wt": 300,
        "align": "l",
        "color": "#ffffff",
-       "tag": "p"
+       "tag": "p",
+       "pro": true
       },
       {
        "k": "text",
@@ -3456,7 +3547,8 @@ export const figmaPages: Record<string, FigPage> = {
        "wt": 400,
        "align": "l",
        "color": "#ffffff",
-       "tag": "p"
+       "tag": "p",
+       "pro": true
       },
       {
        "k": "img",
@@ -3607,6 +3699,7 @@ export const figmaPages: Record<string, FigPage> = {
       "align": "l",
       "color": "#ffffff",
       "tag": "h1",
+      "pro": true,
       "nowrap": true
      },
      {
@@ -3623,7 +3716,8 @@ export const figmaPages: Record<string, FigPage> = {
       "wt": 400,
       "align": "r",
       "color": "#ffffff",
-      "tag": "p"
+      "tag": "p",
+      "pro": true
      },
      {
       "k": "text",
@@ -3640,6 +3734,7 @@ export const figmaPages: Record<string, FigPage> = {
       "align": "r",
       "color": "#ffffff",
       "tag": "p",
+      "pro": true,
       "nowrap": true
      }
     ],
@@ -3705,6 +3800,7 @@ export const figmaPages: Record<string, FigPage> = {
         "align": "c",
         "color": "#ffffff",
         "tag": "p",
+        "pro": true,
         "nowrap": true
        },
        {
@@ -3743,7 +3839,8 @@ export const figmaPages: Record<string, FigPage> = {
         "wt": 300,
         "align": "l",
         "color": "#ffffff",
-        "tag": "p"
+        "tag": "p",
+        "pro": true
        }
       ]
      },
@@ -3761,7 +3858,8 @@ export const figmaPages: Record<string, FigPage> = {
       "wt": 300,
       "align": "l",
       "color": "#ffffff",
-      "tag": "p"
+      "tag": "p",
+      "pro": true
      },
      {
       "k": "card",
@@ -3792,6 +3890,7 @@ export const figmaPages: Record<string, FigPage> = {
         "align": "c",
         "color": "#ffffff",
         "tag": "p",
+        "pro": true,
         "nowrap": true
        }
       ],
@@ -3826,6 +3925,7 @@ export const figmaPages: Record<string, FigPage> = {
         "align": "c",
         "color": "#ffffff",
         "tag": "p",
+        "pro": true,
         "nowrap": true
        }
       ],
@@ -3860,17 +3960,18 @@ export const figmaPages: Record<string, FigPage> = {
         "align": "c",
         "color": "#ffffff",
         "tag": "p",
+        "pro": true,
         "nowrap": true
        }
       ],
-      "href": "https://www.instagram.com/p/C_Vh3yZPY3L/?img_index=1"
+      "href": "https://www.instagram.com/p/C_NyYfPvNzL/?img_index=1"
      }
     ],
     "bg": "#b51515"
    }
   ],
   "mobile": {
-   "h": 2427,
+   "h": 2111,
    "sections": [
     {
      "id": "979:730",
@@ -3900,6 +4001,7 @@ export const figmaPages: Record<string, FigPage> = {
        "align": "l",
        "color": "#ffffff",
        "tag": "h2",
+       "pro": true,
        "nowrap": true
       },
       {
@@ -3916,7 +4018,8 @@ export const figmaPages: Record<string, FigPage> = {
        "wt": 400,
        "align": "r",
        "color": "#ffffff",
-       "tag": "p"
+       "tag": "p",
+       "pro": true
       },
       {
        "k": "text",
@@ -3933,6 +4036,7 @@ export const figmaPages: Record<string, FigPage> = {
        "align": "l",
        "color": "#ffffff",
        "tag": "p",
+       "pro": true,
        "nowrap": true
       }
      ],
@@ -3998,6 +4102,7 @@ export const figmaPages: Record<string, FigPage> = {
          "align": "c",
          "color": "#ffffff",
          "tag": "p",
+         "pro": true,
          "nowrap": true
         },
         {
@@ -4036,7 +4141,8 @@ export const figmaPages: Record<string, FigPage> = {
          "wt": 300,
          "align": "l",
          "color": "#ffffff",
-         "tag": "p"
+         "tag": "p",
+         "pro": true
         }
        ]
       },
@@ -4054,7 +4160,8 @@ export const figmaPages: Record<string, FigPage> = {
        "wt": 300,
        "align": "l",
        "color": "#ffffff",
-       "tag": "p"
+       "tag": "p",
+       "pro": true
       },
       {
        "k": "card",
@@ -4085,6 +4192,7 @@ export const figmaPages: Record<string, FigPage> = {
          "align": "c",
          "color": "#ffffff",
          "tag": "p",
+         "pro": true,
          "nowrap": true
         }
        ],
@@ -4119,6 +4227,7 @@ export const figmaPages: Record<string, FigPage> = {
          "align": "c",
          "color": "#ffffff",
          "tag": "p",
+         "pro": true,
          "nowrap": true
         }
        ],
@@ -4153,10 +4262,11 @@ export const figmaPages: Record<string, FigPage> = {
          "align": "c",
          "color": "#ffffff",
          "tag": "p",
+         "pro": true,
          "nowrap": true
         }
        ],
-       "href": "https://www.instagram.com/p/C_Vh3yZPY3L/?img_index=1"
+       "href": "https://www.instagram.com/p/C_NyYfPvNzL/?img_index=1"
       }
      ],
      "bg": "#b51515"
@@ -4195,6 +4305,7 @@ export const figmaPages: Record<string, FigPage> = {
       "align": "l",
       "color": "#ffffff",
       "tag": "h1",
+      "pro": true,
       "nowrap": true
      },
      {
@@ -4212,6 +4323,7 @@ export const figmaPages: Record<string, FigPage> = {
       "align": "l",
       "color": "#ffffff",
       "tag": "h2",
+      "pro": true,
       "nowrap": true
      },
      {
@@ -4229,6 +4341,7 @@ export const figmaPages: Record<string, FigPage> = {
       "align": "r",
       "color": "#ffffff",
       "tag": "h2",
+      "pro": true,
       "nowrap": true
      },
      {
@@ -4246,6 +4359,7 @@ export const figmaPages: Record<string, FigPage> = {
       "align": "r",
       "color": "#ffffff",
       "tag": "p",
+      "pro": true,
       "nowrap": true
      }
     ],
@@ -4311,6 +4425,7 @@ export const figmaPages: Record<string, FigPage> = {
         "align": "c",
         "color": "#ffffff",
         "tag": "p",
+        "pro": true,
         "nowrap": true
        },
        {
@@ -4339,7 +4454,8 @@ export const figmaPages: Record<string, FigPage> = {
       "wt": 400,
       "align": "l",
       "color": "#ffffff",
-      "tag": "h2"
+      "tag": "h2",
+      "pro": true
      },
      {
       "k": "text",
@@ -4356,6 +4472,7 @@ export const figmaPages: Record<string, FigPage> = {
       "align": "l",
       "color": "#270350",
       "tag": "h2",
+      "pro": true,
       "nowrap": true
      },
      {
@@ -4373,6 +4490,7 @@ export const figmaPages: Record<string, FigPage> = {
       "align": "l",
       "color": "#ffffff",
       "tag": "p",
+      "pro": true,
       "mark": "#270350",
       "markParts": [
        "01 sổ tay Nghỉ Đi từ Tíc Cơ",
@@ -4421,6 +4539,7 @@ export const figmaPages: Record<string, FigPage> = {
         "align": "c",
         "color": "#ffffff",
         "tag": "p",
+        "pro": true,
         "nowrap": true
        }
       ],
@@ -4511,6 +4630,7 @@ export const figmaPages: Record<string, FigPage> = {
         "align": "l",
         "color": "#ffffff",
         "tag": "h2",
+        "pro": true,
         "nowrap": true
        },
        {
@@ -4528,6 +4648,7 @@ export const figmaPages: Record<string, FigPage> = {
         "align": "l",
         "color": "#ffffff",
         "tag": "p",
+        "pro": true,
         "nowrap": true
        },
        {
@@ -4545,6 +4666,7 @@ export const figmaPages: Record<string, FigPage> = {
         "align": "c",
         "color": "#270350",
         "tag": "h2",
+        "pro": true,
         "nowrap": true
        },
        {
@@ -4562,6 +4684,7 @@ export const figmaPages: Record<string, FigPage> = {
         "align": "c",
         "color": "#270350",
         "tag": "p",
+        "pro": true,
         "nowrap": true
        },
        {
@@ -4602,7 +4725,8 @@ export const figmaPages: Record<string, FigPage> = {
       "wt": 400,
       "align": "l",
       "color": "#ffffff",
-      "tag": "p"
+      "tag": "p",
+      "pro": true
      },
      {
       "k": "card",
@@ -4645,6 +4769,7 @@ export const figmaPages: Record<string, FigPage> = {
         "align": "l",
         "color": "#ffffff",
         "tag": "h2",
+        "pro": true,
         "nowrap": true
        }
       ]
@@ -4668,6 +4793,7 @@ export const figmaPages: Record<string, FigPage> = {
         "align": "r",
         "color": "#ffffff",
         "tag": "h2",
+        "pro": true,
         "nowrap": true
        },
        {
@@ -4735,6 +4861,7 @@ export const figmaPages: Record<string, FigPage> = {
         "align": "l",
         "color": "#ffffff",
         "tag": "h2",
+        "pro": true,
         "nowrap": true
        }
       ]
@@ -4753,7 +4880,8 @@ export const figmaPages: Record<string, FigPage> = {
       "wt": 400,
       "align": "l",
       "color": "#ffffff",
-      "tag": "p"
+      "tag": "p",
+      "pro": true
      }
     ],
     "bg": "#ac8bc3",
@@ -4800,6 +4928,7 @@ export const figmaPages: Record<string, FigPage> = {
       "align": "c",
       "color": "#ffffff",
       "tag": "h2",
+      "pro": true,
       "nowrap": true
      }
     ]
@@ -4836,6 +4965,7 @@ export const figmaPages: Record<string, FigPage> = {
        "align": "l",
        "color": "#ffffff",
        "tag": "h2",
+       "pro": true,
        "nowrap": true
       },
       {
@@ -4853,6 +4983,7 @@ export const figmaPages: Record<string, FigPage> = {
        "align": "l",
        "color": "#ffffff",
        "tag": "p",
+       "pro": true,
        "nowrap": true
       },
       {
@@ -4870,6 +5001,7 @@ export const figmaPages: Record<string, FigPage> = {
        "align": "r",
        "color": "#ffffff",
        "tag": "p",
+       "pro": true,
        "nowrap": true
       },
       {
@@ -4887,6 +5019,7 @@ export const figmaPages: Record<string, FigPage> = {
        "align": "r",
        "color": "#ffffff",
        "tag": "p",
+       "pro": true,
        "nowrap": true
       }
      ],
@@ -4948,6 +5081,7 @@ export const figmaPages: Record<string, FigPage> = {
        "align": "c",
        "color": "#ffffff",
        "tag": "p",
+       "pro": true,
        "nowrap": true
       },
       {
@@ -4974,7 +5108,8 @@ export const figmaPages: Record<string, FigPage> = {
        "wt": 400,
        "align": "l",
        "color": "#ffffff",
-       "tag": "p"
+       "tag": "p",
+       "pro": true
       },
       {
        "k": "text",
@@ -4991,6 +5126,7 @@ export const figmaPages: Record<string, FigPage> = {
        "align": "l",
        "color": "#270350",
        "tag": "p",
+       "pro": true,
        "nowrap": true
       },
       {
@@ -5008,7 +5144,13 @@ export const figmaPages: Record<string, FigPage> = {
        "align": "l",
        "color": "#ffffff",
        "tag": "p",
-       "mark": "#270350"
+       "pro": true,
+       "mark": "#270350",
+       "markParts": [
+        "01 sổ tay Nghỉ Đi từ Tíc Cơ",
+        "02 hộp kem trong collection Thu Rồi",
+        "từ Freezedom."
+       ]
       },
       {
        "k": "card",
@@ -5051,6 +5193,7 @@ export const figmaPages: Record<string, FigPage> = {
          "align": "c",
          "color": "#ffffff",
          "tag": "p",
+         "pro": true,
          "nowrap": true
         }
        ],
@@ -5141,6 +5284,7 @@ export const figmaPages: Record<string, FigPage> = {
          "align": "l",
          "color": "#ffffff",
          "tag": "p",
+         "pro": true,
          "nowrap": true
         },
         {
@@ -5158,6 +5302,7 @@ export const figmaPages: Record<string, FigPage> = {
          "align": "l",
          "color": "#ffffff",
          "tag": "p",
+         "pro": true,
          "nowrap": true
         },
         {
@@ -5175,6 +5320,7 @@ export const figmaPages: Record<string, FigPage> = {
          "align": "c",
          "color": "#270350",
          "tag": "p",
+         "pro": true,
          "nowrap": true
         },
         {
@@ -5192,6 +5338,7 @@ export const figmaPages: Record<string, FigPage> = {
          "align": "c",
          "color": "#270350",
          "tag": "p",
+         "pro": true,
          "nowrap": true
         },
         {
@@ -5232,7 +5379,8 @@ export const figmaPages: Record<string, FigPage> = {
        "wt": 300,
        "align": "l",
        "color": "#ffffff",
-       "tag": "p"
+       "tag": "p",
+       "pro": true
       },
       {
        "k": "card",
@@ -5275,6 +5423,7 @@ export const figmaPages: Record<string, FigPage> = {
          "align": "l",
          "color": "#ffffff",
          "tag": "p",
+         "pro": true,
          "nowrap": true
         }
        ]
@@ -5298,6 +5447,7 @@ export const figmaPages: Record<string, FigPage> = {
          "align": "r",
          "color": "#ffffff",
          "tag": "p",
+         "pro": true,
          "nowrap": true
         },
         {
@@ -5365,6 +5515,7 @@ export const figmaPages: Record<string, FigPage> = {
          "align": "l",
          "color": "#ffffff",
          "tag": "p",
+         "pro": true,
          "nowrap": true
         }
        ]
@@ -5383,7 +5534,8 @@ export const figmaPages: Record<string, FigPage> = {
        "wt": 300,
        "align": "l",
        "color": "#ffffff",
-       "tag": "p"
+       "tag": "p",
+       "pro": true
       }
      ],
      "bg": "#ac8bc3",
@@ -5430,6 +5582,7 @@ export const figmaPages: Record<string, FigPage> = {
        "align": "c",
        "color": "#ffffff",
        "tag": "p",
+       "pro": true,
        "nowrap": true
       }
      ]
@@ -5468,6 +5621,7 @@ export const figmaPages: Record<string, FigPage> = {
       "align": "l",
       "color": "#ffffff",
       "tag": "h1",
+      "pro": true,
       "nowrap": true
      },
      {
@@ -5485,6 +5639,7 @@ export const figmaPages: Record<string, FigPage> = {
       "align": "r",
       "color": "#ffffff",
       "tag": "h2",
+      "pro": true,
       "nowrap": true
      },
      {
@@ -5502,6 +5657,7 @@ export const figmaPages: Record<string, FigPage> = {
       "align": "r",
       "color": "#ffffff",
       "tag": "p",
+      "pro": true,
       "nowrap": true
      }
     ],
@@ -5555,6 +5711,7 @@ export const figmaPages: Record<string, FigPage> = {
         "align": "c",
         "color": "#ffffff",
         "tag": "p",
+        "pro": true,
         "nowrap": true
        },
        {
@@ -5596,6 +5753,7 @@ export const figmaPages: Record<string, FigPage> = {
       "align": "l",
       "color": "#ffffff",
       "tag": "h2",
+      "pro": true,
       "nowrap": true
      },
      {
@@ -5639,6 +5797,7 @@ export const figmaPages: Record<string, FigPage> = {
         "align": "c",
         "color": "#ffffff",
         "tag": "p",
+        "pro": true,
         "nowrap": true
        },
        {
@@ -5656,6 +5815,7 @@ export const figmaPages: Record<string, FigPage> = {
         "align": "l",
         "color": "#ffffff",
         "tag": "p",
+        "pro": true,
         "op": 0.77
        },
        {
@@ -5673,6 +5833,7 @@ export const figmaPages: Record<string, FigPage> = {
         "align": "l",
         "color": "#ffffff",
         "tag": "p",
+        "pro": true,
         "nowrap": true
        }
       ],
@@ -5719,6 +5880,7 @@ export const figmaPages: Record<string, FigPage> = {
         "align": "c",
         "color": "#ffffff",
         "tag": "p",
+        "pro": true,
         "nowrap": true
        },
        {
@@ -5736,6 +5898,7 @@ export const figmaPages: Record<string, FigPage> = {
         "align": "l",
         "color": "#ffffff",
         "tag": "p",
+        "pro": true,
         "op": 0.77
        },
        {
@@ -5753,6 +5916,7 @@ export const figmaPages: Record<string, FigPage> = {
         "align": "r",
         "color": "#ffffff",
         "tag": "p",
+        "pro": true,
         "nowrap": true
        }
       ],
@@ -5793,6 +5957,7 @@ export const figmaPages: Record<string, FigPage> = {
        "align": "l",
        "color": "#ffffff",
        "tag": "h2",
+       "pro": true,
        "nowrap": true
       },
       {
@@ -5810,6 +5975,7 @@ export const figmaPages: Record<string, FigPage> = {
        "align": "r",
        "color": "#ffffff",
        "tag": "p",
+       "pro": true,
        "nowrap": true
       },
       {
@@ -5827,6 +5993,7 @@ export const figmaPages: Record<string, FigPage> = {
        "align": "r",
        "color": "#ffffff",
        "tag": "p",
+       "pro": true,
        "nowrap": true
       }
      ],
@@ -5892,6 +6059,7 @@ export const figmaPages: Record<string, FigPage> = {
          "align": "c",
          "color": "#ffffff",
          "tag": "p",
+         "pro": true,
          "nowrap": true
         },
         {
@@ -5933,6 +6101,7 @@ export const figmaPages: Record<string, FigPage> = {
        "align": "l",
        "color": "#ffffff",
        "tag": "p",
+       "pro": true,
        "nowrap": true
       },
       {
@@ -5976,6 +6145,7 @@ export const figmaPages: Record<string, FigPage> = {
          "align": "c",
          "color": "#ffffff",
          "tag": "p",
+         "pro": true,
          "nowrap": true
         },
         {
@@ -5993,6 +6163,7 @@ export const figmaPages: Record<string, FigPage> = {
          "align": "l",
          "color": "#ffffff",
          "tag": "p",
+         "pro": true,
          "op": 0.77
         },
         {
@@ -6010,6 +6181,7 @@ export const figmaPages: Record<string, FigPage> = {
          "align": "l",
          "color": "#ffffff",
          "tag": "p",
+         "pro": true,
          "nowrap": true
         }
        ],
@@ -6056,6 +6228,7 @@ export const figmaPages: Record<string, FigPage> = {
          "align": "c",
          "color": "#ffffff",
          "tag": "p",
+         "pro": true,
          "nowrap": true
         },
         {
@@ -6073,6 +6246,7 @@ export const figmaPages: Record<string, FigPage> = {
          "align": "l",
          "color": "#ffffff",
          "tag": "p",
+         "pro": true,
          "op": 0.77
         },
         {
@@ -6090,6 +6264,7 @@ export const figmaPages: Record<string, FigPage> = {
          "align": "r",
          "color": "#ffffff",
          "tag": "p",
+         "pro": true,
          "nowrap": true
         }
        ],
@@ -8337,8 +8512,8 @@ export const figmaMobile: Record<string, FigPage> = {
       "y": 703,
       "w": 353,
       "h": 78,
-      "text": "Vô tri nhưng\nkhông vô nghĩa,\nĐần là Đần thôi!",
-      "size": 18,
+      "text": "VÔ TRI NHƯNG\nKHÔNG VÔ NGHĨA,\nĐẦN LÀ ĐẦN THÔI!",
+      "size": 15.48,
       "lh": 1.28,
       "ls": -0.08,
       "wt": 600,
@@ -8618,8 +8793,8 @@ export const figmaMobile: Record<string, FigPage> = {
       "y": 1549,
       "w": 288,
       "h": 65,
-      "text": "Đần là quản gia của Tíc Cơ,\nđại diện thay mặt chúng tôi truyền tải\nthông tin đến bạn!",
-      "size": 18,
+      "text": "ĐẦN LÀ QUẢN GIA CỦA TÍC CƠ,\nĐẠI DIỆN THAY MẶT CHÚNG TÔI TRUYỀN TẢI\nTHÔNG TIN ĐẾN BẠN!",
+      "size": 15.48,
       "lh": 1.06,
       "ls": -0.05,
       "wt": 600,

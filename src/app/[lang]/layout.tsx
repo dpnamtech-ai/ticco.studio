@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { Be_Vietnam_Pro } from "next/font/google";
 import "../globals.css";
 import DanCursor from "@/components/DanCursor";
 import DanRain from "@/components/DanRain";
@@ -39,6 +40,10 @@ const beVietnam = localFont({
   ],
 });
 
+// Some Figma texts (project pages, phone frames) are set in Be Vietnam Pro: same name, wider letters. Used where the
+// Figma layer says so (FigText.pro), so line breaks and weight match the design.
+const beVietnamPro = Be_Vietnam_Pro({ variable: "--font-be-vietnam-pro", subsets: ["latin", "vietnamese"], weight: ["300", "400", "500", "600"], display: "swap" });
+
 export async function generateMetadata({ params }: LayoutProps<"/[lang]">): Promise<Metadata> {
   const { lang: l } = await params;
   const lang = isLang(l) ? l : DEFAULT_LANG;
@@ -53,18 +58,21 @@ export async function generateMetadata({ params }: LayoutProps<"/[lang]">): Prom
   },
   robots: { index: true, follow: true, googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1 } },
   twitter: { card: "summary_large_image" },
+  // the client's round logo (design/logo-tic-co-tron.png) as tab / home-screen icon
+  icons: { icon: [{ url: "/favicon-48.png", sizes: "48x48" }, { url: "/icon-192.png", sizes: "192x192" }, { url: "/icon-512.png", sizes: "512x512" }], apple: "/apple-touch-icon.png" },
   title: {
-    default: T("Tíc Cơ — Đời dễ ợt, vợt Tíc Cơ"),
+    default: "Tíc Cơ",
     template: "%s",
   },
-  description: T("Tíc Cơ — thương hiệu Việt bán sổ tay, túi, in ấn và quà tặng nhỏ đầy cá tính, lấy cảm hứng từ chất liệu đời thường."),
+  // link previews (Zalo, Messenger, Facebook): client's own wording, 2026-10-05
+  description: T("Thương hiệu Việt với các sản phẩm tiêu dùng sáng tạo lấy cảm hứng từ chất liệu đời thường, do người trẻ Việt thiết kế."),
   keywords: ["Tíc Cơ", "ticco studio", "sổ tay", "văn phòng phẩm", "túi tote", "sticker", "postcard", "quà tặng", "quà sinh nhật", "móc khoá", "mascot Đần", "thương hiệu Việt"].map(T),
   openGraph: {
     siteName: "Tíc Cơ",
     locale: lang === "en" ? "en_US" : "vi_VN",
     alternateLocale: lang === "en" ? "vi_VN" : "en_US",
-    title: T("Tíc Cơ — Đời dễ ợt, vợt Tíc Cơ"),
-    description: T("Sổ tay, túi, in ấn và những món đồ nhỏ đầy cá tính."),
+    title: "Tíc Cơ",
+    description: T("Thương hiệu Việt với các sản phẩm tiêu dùng sáng tạo lấy cảm hứng từ chất liệu đời thường, do người trẻ Việt thiết kế."),
     type: "website",
     images: ["/images/hero-basket.png"],
   },
@@ -112,7 +120,7 @@ export default async function RootLayout({ children, params }: LayoutProps<"/[la
   };
 
   return (
-    <html lang={lang} className={beVietnam.variable} suppressHydrationWarning>
+    <html lang={lang} className={`${beVietnam.variable} ${beVietnamPro.variable}`} suppressHydrationWarning>
       <body className="grain">
         <script
           type="application/ld+json"

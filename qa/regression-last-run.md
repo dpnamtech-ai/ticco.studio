@@ -1,4 +1,4 @@
-# Regression — 2026-10-04 17:51 UTC
+# Regression — 2026-10-04 18:46 UTC
 
 Target: http://localhost:3100 (local, full incl. orders on a mock Sheet)
 Result: **85/85 pass**

@@ -33,7 +33,7 @@ const PAGES = [
     links: {
       "735:173": "https://www.instagram.com/p/C_QXPIePuEk/?img_index=1",
       "735:174": "https://www.instagram.com/p/C_Vh3yZPY3L/?img_index=1",
-      "735:175": "https://www.instagram.com/p/C_Vh3yZPY3L/?img_index=1", // TODO client: same link as 735:174, waiting for the ông's post
+      "735:175": "https://www.instagram.com/p/C_NyYfPvNzL/?img_index=1",
     },
   },
   { slug: "freezedom-thu-roi-nghi-di", file: "du-an-Thu-roi-nghi-di", mobile: "du-an-Thu-Roi-Nghi-Di-mobile", alt: "Tíc Cơ x Freezedom: Thu Rồi Nghỉ Đi", links: { "735:179": "/san-pham/so-nghi-di" }, anchors: { "735:190": "pop-up-event" }, mobileAnchors: { "979:972": "pop-up-event" } },
@@ -51,6 +51,7 @@ const warn = [];
 // Highlight vectors that cover only part of their text: the highlighted runs (the vector outline isn't in the cache).
 const MARK_PARTS = {
   "732:34": ["01 sổ tay Nghỉ Đi từ Tíc Cơ", "02 hộp kem trong collection Thu Rồi", "từ Freezedom."],
+  "979:924": ["01 sổ tay Nghỉ Đi từ Tíc Cơ", "02 hộp kem trong collection Thu Rồi", "từ Freezedom."], // same copy, phone frame
 };
 // Event copy that plays the word-scatter effect on scroll (client reference video, see ScatterText)
 const SCATTER = new Set([]); // layer ids, e.g. "671:560"
@@ -67,6 +68,8 @@ const FX = {
   "976:644": ["fill"], "976:116": ["fill"], "976:669": ["fill"], "976:688": ["fill"],
   "976:680": ["slide-l", 0], "976:681": ["slide-r", 1], "976:682": ["slide-l", 2],
 };
+// Phone-frame copy set in capitals on the site (the desktop banners are CSS uppercase; client asked for the same)
+const UPPER = new Set(["976:644", "976:669"]);
 const FLY = new Set(["976:79", "976:82", "976:629", "976:637", "976:638", "976:639"]);
 // a vector the designer drew as an ellipse (ve-Tic-Co-mobile blob caps): a shape, not a text highlight
 const isEllipse = (l) => l.type === "VECTOR" && /^Ellipse/.test(l.name);
@@ -118,6 +121,9 @@ function build(cfg, W = 1280) {
       const lead = text.match(/^\n*/)[0].length;
       y += lead * lh;
       text = text.trim();
+      // capitals run wider than the frame's mixed-case copy: smaller so the lines still fit their box
+      const upper = UPPER.has(n.id);
+      if (upper) text = text.toUpperCase();
       // Figma trick: tiny line-height + blank lines as spacing -> one real line-height
       if (lh < f.size * 0.8 && text.includes("\n\n")) { text = text.replace(/\n\n/g, "\n"); lh *= 2; }
       if (f.case && f.case !== "ORIGINAL") warn.push(`${n.id} textCase ${f.case}`);
@@ -129,6 +135,8 @@ function build(cfg, W = 1280) {
         tag: !h1Done && f.size >= 80 ? "h1" : f.size >= 36 ? "h2" : "p",
       };
       if (t.tag === "h1") h1Done = true;
+      if (upper) t.size = r(t.size * 0.86);
+      if (f.family === "Be Vietnam Pro") t.pro = true;
       const anchor = anchorOf(n);
       if (anchor) t.anchor = anchor;
       if (W === 1280 && anchor) (cfg.anchorText ??= {})[norm(l.text)] = anchor;
@@ -216,7 +224,10 @@ function build(cfg, W = 1280) {
       if (W === 1280 && anchor) (cfg.anchorName ??= {})[s.name] = anchor;
       return sec;
     });
-  return { h: H, sections };
+  // a frame without a footer group (du-an-Minh-Trong-Nha mobile) ends at its last layer, not at the frame bottom
+  const bottom = (x) => (Array.isArray(x) ? Math.max(0, ...x.map(bottom)) : x?.k === "card" ? bottom(x.items) : x ? x.y + x.h : 0);
+  const end = footer ? H : Math.min(H, Math.ceil(Math.max(...sections.map((s) => bottom(s.items)))));
+  return { h: end, sections };
 }
 const r4 = (v) => Math.round(v * 10000) / 10000;
 

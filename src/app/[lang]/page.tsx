@@ -17,8 +17,10 @@ import { figmaMobile } from "@/data/project-pages";
 export async function generateMetadata(): Promise<Metadata> {
   const lang = await getLang();
   return {
-    title: t("Tíc Cơ — Sổ tay, túi tote, sticker & quà tặng thương hiệu Việt", lang),
-    description: t("Sổ tay, túi tote, sticker, postcard, móc khoá Đần và quà tặng đầy cá tính từ thương hiệu Việt Tíc Cơ. Giao toàn quốc, free ship đơn từ 500k.", lang),
+    // tab + link preview, client's wording (2026-10-05)
+    title: "Tíc Cơ",
+    description: t("Thương hiệu Việt với các sản phẩm tiêu dùng sáng tạo lấy cảm hứng từ chất liệu đời thường, do người trẻ Việt thiết kế.", lang),
+    openGraph: { title: "Tíc Cơ", description: t("Thương hiệu Việt với các sản phẩm tiêu dùng sáng tạo lấy cảm hứng từ chất liệu đời thường, do người trẻ Việt thiết kế.", lang), url: lang === "en" ? "/en" : "/", images: ["/images/hero-basket.png"] },
     alternates: alternatesFor("/", lang),
   };
 }
