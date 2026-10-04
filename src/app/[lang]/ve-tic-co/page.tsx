@@ -6,6 +6,8 @@ import { cropFillStyle } from "@/lib/figmaCrop";
 import { getLang } from "@/lib/lang";
 import { alternatesFor } from "@/lib/i18n";
 import { t } from "@/lib/t";
+import { FigmaMobile } from "@/components/FigmaCanvas";
+import { figmaMobile } from "@/data/project-pages";
 
 export async function generateMetadata(): Promise<Metadata> {
   const lang = await getLang();
@@ -52,6 +54,9 @@ export default async function VeTicCoPage() {
   const T = (s: string) => t(s, lang);
   return (
     <>
+      {/* phones: the client's mobile Figma frame; this markup is the desktop design */}
+      <FigmaMobile page={figmaMobile["ve-tic-co"]} lang={lang} />
+      <div className="max-lg:hidden">
       <section className="relative overflow-hidden text-white bg-gradient-to-b from-[#e66107] to-[#c15106] [container-type:inline-size]">
         {/* < md: stacked cards (the Figma geometry needs a desktop width to be readable) */}
         <div className="md:hidden px-6 py-10 flex flex-col gap-6">
@@ -122,6 +127,7 @@ export default async function VeTicCoPage() {
         </Reveal>
         </div>
       </section>
+      </div>
     </>
   );
 }

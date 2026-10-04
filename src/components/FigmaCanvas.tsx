@@ -2,6 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { Fragment, type CSSProperties, type ReactNode } from "react";
 import Reveal from "@/components/Reveal";
+import { ScatterGroup } from "@/components/Scatter";
+import { ScatterWords } from "@/components/scatterWords";
 import ScatterText from "@/components/ScatterText";
 import { cropFillStyle, zoomSizes, type ImageTransform } from "@/lib/figmaCrop";
 import { DEFAULT_LANG, localize, type Lang } from "@/lib/i18n";
@@ -20,14 +22,14 @@ export type FigText = Box & {
   /** highlight colour drawn behind each line (Figma highlight vector); markParts = only these runs */
   mark?: string; markParts?: string[];
   /** id to jump to (e.g. /kham-pha/x#le-hoi-doc-lap); fx "scatter" = words fly in on scroll (ScatterText) */
-  anchor?: string; fx?: "scatter";
+  anchor?: string; fx?: "scatter" | "fly";
 };
 export type FigImg = Box & { k: "img"; src: string; alt: string; crop?: ImageTransform; rot?: number };
 export type FigBox = Box & { k: "box"; bg: string; radius?: string | number; kind?: "line" | "dot" };
 export type FigLeaf = FigText | FigImg | FigBox;
 export type FigCard = { k: "card"; id: string; href?: string; items: FigLeaf[] };
 export type FigSection = { id: string; y: number; bg?: string; anchor?: string; items: (FigLeaf | FigCard)[] };
-export type FigPage = { h: number; sections: FigSection[] };
+export type FigPage = { h: number; sections: FigSection[]; /** the client's phone frame (390 wide), drawn below lg */ mobile?: FigPage };
 
 const cq = (px: number) => `${+(px / 12.8).toFixed(4)}cqw`;
 type Vars = CSSProperties & Record<`--${string}`, string | number>;
@@ -222,8 +224,103 @@ function fitText(page: FigPage, lang: Lang): FigPage {
   return fit(page) as FigPage;
 }
 
+// The client's own phone design (Figma "*-mobile" frames, 390 wide): every layer at its frame position, scaled with
+// the screen width (390px = 100cqw), like the desktop canvas does with 1280.
+function FixedCanvas({ page, lang }: { page: FigPage; lang: Lang }) {
+  const u = (px: number) => `${+(px / 3.9).toFixed(4)}cqw`;
+  const at = (b: Box): CSSProperties => ({ position: "absolute", left: u(b.x), top: u(b.y), width: u(b.w) });
+  const leaf = (l: FigLeaf, hover = false) => {
+    if (l.k === "text") {
+      const Tag = l.tag;
+      const Wrap = l.fx === "fly" ? ScatterGroup : Reveal;
+      return (
+        <Wrap key={l.id} variant={l.fx ? "up" : "blur"} duration={l.fx ? 0.01 : 1.1} style={at(l)}>
+          {l.anchor && <div id={l.anchor} aria-hidden className="absolute top-0 scroll-mt-16" />}
+          <Tag
+            style={{ color: l.color, opacity: l.op, fontWeight: l.wt, letterSpacing: `${l.ls}em`, fontSize: u(l.size), lineHeight: l.lh, background: l.bubble, "--mk": l.lh } as Vars}
+            className={`m-0 ${l.nowrap ? "whitespace-pre" : "whitespace-pre-line"} ${{ l: "text-left", c: "text-center", r: "text-right", j: "text-justify" }[l.align]} ${hover ? "transition-transform duration-500 group-active:translate-x-1" : ""}`}
+          >
+            {l.fx === "scatter" ? (
+              <ScatterText text={l.text} />
+            ) : l.fx === "fly" ? (
+              <ScatterWords text={l.text} seed={l.y} />
+            ) : l.mark ? (
+              l.text.split("\n").map((line, i, a) => <Fragment key={i}>{markLine(l)?.(line) ?? line}{i < a.length - 1 && <br />}</Fragment>)
+            ) : (
+              l.text
+            )}
+          </Tag>
+        </Wrap>
+      );
+    }
+    if (l.k === "img") {
+      const img = (
+        <Image src={l.src} alt={l.alt} fill loading={l.y < 900 ? "eager" : "lazy"} sizes={zoomSizes(`${Math.ceil((l.w / 390) * 100)}vw`, l.crop)}
+          style={l.crop ? { objectFit: "fill", ...cropFillStyle(l.crop) } : { objectFit: "cover" }} />
+      );
+      return (
+        <Reveal key={l.id} variant="curtain" duration={1.3} style={at(l)}>
+          <div className="relative overflow-hidden" style={{ aspectRatio: `${l.w}/${l.h}` }}>
+            {l.rot ? (
+              <div className="absolute left-1/2 top-1/2 overflow-hidden" style={{ width: `${(l.h / l.w) * 100}%`, aspectRatio: `${l.h}/${l.w}`, transform: `translate(-50%,-50%) rotate(${-l.rot}deg)` }}>{img}</div>
+            ) : (
+              img
+            )}
+          </div>
+        </Reveal>
+      );
+    }
+    return <div key={l.id} aria-hidden style={{ ...at(l), height: u(l.h), background: l.bg, borderRadius: typeof l.radius === "number" ? u(l.radius) : l.radius }} />;
+  };
+  return (
+    <div className="[container-type:inline-size]">
+      <div className="relative overflow-hidden" style={{ height: u(page.h) }}>
+        {page.sections.map((s) => (
+          <Fragment key={s.id}>
+            {s.anchor && <div id={s.anchor} aria-hidden className="absolute scroll-mt-16" style={{ top: u(s.y) }} />}
+            {s.items.map((it) => {
+              if (it.k !== "card") return leaf(it);
+              const kids = it.items.map((c) => leaf(c, Boolean(it.href) && c.k === "text"));
+              return it.href ? (
+                <Link key={it.id} href={localize(it.href, lang)} className="group contents" {...(/^https?:/.test(it.href) && { target: "_blank", rel: "noopener noreferrer" })}>
+                  {kids}
+                </Link>
+              ) : (
+                <Fragment key={it.id}>{kids}</Fragment>
+              );
+            })}
+          </Fragment>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// Phone layout (Figma frame) of a hand-coded page: drawn below lg, the page's own markup stays for lg+.
+export function FigmaMobile({ page, lang = DEFAULT_LANG }: { page: FigPage; lang?: Lang }) {
+  return (
+    <div className="lg:hidden">
+      <FixedCanvas page={lang === DEFAULT_LANG ? page : tx(fitText(page, lang), lang)} lang={lang} />
+    </div>
+  );
+}
+
 // lang: texts/alts come translated (tx keeps image paths, links and #colours), card links stay in the language.
+// page.mobile (the client's phone frame) replaces the flowed phone layout below lg when the page has one.
 export default function FigmaCanvas({ page: source, lang = DEFAULT_LANG }: { page: FigPage; lang?: Lang }) {
+  if (source.mobile) {
+    const { mobile, ...desktop } = source;
+    return (
+      <>
+        <div className="lg:hidden">
+          <FixedCanvas page={lang === DEFAULT_LANG ? mobile : tx(fitText(mobile, lang), lang)} lang={lang} />
+        </div>
+        <div className="max-lg:hidden">
+          <FigmaCanvas page={desktop} lang={lang} />
+        </div>
+      </>
+    );
+  }
   const page = lang === DEFAULT_LANG ? source : tx(fitText(source, lang), lang);
   return (
     <div className="[container-type:inline-size]">

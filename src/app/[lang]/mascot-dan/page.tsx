@@ -14,6 +14,8 @@ import { MASCOT_GRID, figmaCardProps } from "@/data/figma-cards";
 import { getLang } from "@/lib/lang";
 import { alternatesFor, localize } from "@/lib/i18n";
 import { t } from "@/lib/t";
+import { FigmaMobile } from "@/components/FigmaCanvas";
+import { figmaMobile } from "@/data/project-pages";
 
 // Figma hero callouts [x, y, w, text] (desktop positions in Figma px)
 const HERO_CALLOUTS = [
@@ -44,6 +46,9 @@ export default async function MascotDanPage() {
   const products = await getProducts();
   return (
     <>
+      {/* phones: the client's mobile Figma frame; this markup is the desktop design */}
+      <FigmaMobile page={figmaMobile["mascot-dan"]} lang={lang} />
+      <div className="max-lg:hidden">
       {/* Figma "hero section" (visible 1280x532 from Y51), rebuilt from its layers; Figma px -> cqw */}
       {/* headline + callouts fly in word by word and assemble (client's reference video), see Scatter.tsx */}
       <section className="relative w-full bg-[#f2f1f1]">
@@ -183,6 +188,7 @@ export default async function MascotDanPage() {
         </div>
         </div>
       </section>
+      </div>
     </>
   );
 }

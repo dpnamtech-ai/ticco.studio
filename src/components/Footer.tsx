@@ -43,7 +43,7 @@ export default async function Footer() {
   );
   const links = (
     <>
-      <p className="mb-5 md:mb-[1.484cqw]">{T("Gặp Tíc Cơ nhiều hơn tại:")}</p>
+      <p className="mb-[calc(8*var(--m))] md:mb-[1.484cqw]">{T("Gặp Tíc Cơ nhiều hơn tại:")}</p>
       {social.map(([name, handle, href]) => (
         <p key={name}>
           {name}:{" "}
@@ -57,18 +57,20 @@ export default async function Footer() {
 
   return (
     <footer id="contact" className="relative text-white" style={{ background: "var(--color-purple)" }}>
-      {/* mobile: stacked */}
-      <div className="md:hidden px-6 py-12 text-base leading-[19px] space-y-8">
-        <p className="text-[35px] leading-[35px] font-medium uppercase">
+      {/* phones: the 390 mobile Figma footer (316 tall), scaled with the screen width via --m */}
+      <div className="md:hidden relative h-[calc(316*var(--m))]">
+        <p className="absolute left-[calc(27*var(--m))] top-[calc(54*var(--m))] text-[calc(20*var(--m))] leading-[calc(22*var(--m))] font-medium uppercase">
           Tíc Cơ
           <br />
           {T("hân hoan")}
           <br />
           {T("chào bạn!")}
         </p>
-        <p>{contact}</p>
-        <p>{since}</p>
-        <div>{links}</div>
+        <div className="absolute right-[calc(29*var(--m))] top-[calc(118*var(--m))] text-right text-[calc(8*var(--m))] leading-[calc(8*var(--m))] space-y-[calc(24*var(--m))] [&_p]:whitespace-nowrap">
+          <p>{contact}</p>
+          <p>{since}</p>
+          <div>{links}</div>
+        </div>
       </div>
 
       {/* md+: Figma layout, scaled with width */}

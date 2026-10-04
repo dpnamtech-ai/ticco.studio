@@ -3,6 +3,8 @@
 /* Figma px -> screen px for the fixed-size chrome (promo bar, navbar): 1px up to a 1280 viewport, then grows with the
    page like the content (cqw of the full-width page), so nothing is capped and color bands always reach both edges. */
 :root { --u: max(1px, calc(100vw / 1280)); }
+/* phones: 1px of the client's 390-wide mobile Figma frames (header, footer) */
+:root { --m: calc(100vw / 390); }
 
 @theme inline {
   --color-cream: #F2F1F1;

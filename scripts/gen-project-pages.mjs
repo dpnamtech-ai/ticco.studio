@@ -6,7 +6,7 @@ import { readFileSync, writeFileSync } from "node:fs";
 
 const PAGES = [
   {
-    slug: "kham-pha", file: "kham-pha", alt: "Dự án vui — Tíc Cơ",
+    slug: "kham-pha", file: "kham-pha", mobile: "kham-pha-mobile", alt: "Dự án vui — Tíc Cơ",
     anchors: { "671:459": "du-an-rieng", "671:479": "du-an-hop-tac", "671:491": "su-kien" },
     // rows (title + description + rule) link to the project pages
     links: {
@@ -18,17 +18,17 @@ const PAGES = [
     },
   },
   // anchors may name a section or a single text layer (the event heading sits mid-section)
-  { slug: "nguoi-viet-van-dong", file: "du-an-Nguoi-Viet-Van-Dong", alt: "Người Việt Vận Động — Tíc Cơ", anchors: { "671:560": "le-hoi-doc-lap" } },
+  { slug: "nguoi-viet-van-dong", file: "du-an-Nguoi-Viet-Van-Dong", mobile: "du-an-Nguoi-Viet-Van-Dong-mobile", alt: "Người Việt Vận Động — Tíc Cơ", anchors: { "671:560": "le-hoi-doc-lap" } },
   {
-    slug: "chuc-tet-nhau-that-su", file: "du-an-Chuc-Tet-Nhau-That-Su", alt: "Chúc Tết Nhau Thật Sự — Tíc Cơ",
+    slug: "chuc-tet-nhau-that-su", file: "du-an-Chuc-Tet-Nhau-That-Su", mobile: "du-an-Chuc-Tet-Nhau-That-Su-mobile", alt: "Chúc Tết Nhau Thật Sự — Tíc Cơ",
     links: {
       "863:71": "/san-pham/gile-yen-tam", "863:72": "/san-pham/than-chu-nam-moi-2026",
       "863:76": "/san-pham/sticker-09-chuc-nhau-that-su", "863:80": "/san-pham/li-xi-2026",
     },
   },
-  { slug: "lam-moi-doi-di", file: "du-an-Lam-Moi-Doi-Di", alt: "Làm Mới Đời Đi — Tíc Cơ" },
+  { slug: "lam-moi-doi-di", file: "du-an-Lam-Moi-Doi-Di", mobile: "du-an-Lam-Moi-Doi-DI-mobile", alt: "Làm Mới Đời Đi — Tíc Cơ" },
   {
-    slug: "minh-trong-nha-nha-trong-nuoc", file: "du-an-Minh-trong-nha-Nha-trong-nuoc", alt: "Mình Trong Nhà, Nhà Trong Nước — Tíc Cơ",
+    slug: "minh-trong-nha-nha-trong-nuoc", file: "du-an-Minh-trong-nha-Nha-trong-nuoc", mobile: "du-an-Minh-Trong-Nha-Nha-Trong-Nuoc-mobile", alt: "Mình Trong Nhà, Nhà Trong Nước — Tíc Cơ",
     // "Đọc thêm về ..." cards -> the client's Instagram posts (em bé / phụ nữ giao thời / ông cựu chiến binh)
     links: {
       "735:173": "https://www.instagram.com/p/C_QXPIePuEk/?img_index=1",
@@ -36,16 +36,15 @@ const PAGES = [
       "735:175": "https://www.instagram.com/p/C_Vh3yZPY3L/?img_index=1", // TODO client: same link as 735:174, waiting for the ông's post
     },
   },
-  { slug: "freezedom-thu-roi-nghi-di", file: "du-an-Thu-roi-nghi-di", alt: "Tíc Cơ x Freezedom: Thu Rồi Nghỉ Đi", links: { "735:179": "/san-pham/so-nghi-di" }, anchors: { "735:190": "pop-up-event" } },
+  { slug: "freezedom-thu-roi-nghi-di", file: "du-an-Thu-roi-nghi-di", mobile: "du-an-Thu-Roi-Nghi-Di-mobile", alt: "Tíc Cơ x Freezedom: Thu Rồi Nghỉ Đi", links: { "735:179": "/san-pham/so-nghi-di" }, anchors: { "735:190": "pop-up-event" }, mobileAnchors: { "979:972": "pop-up-event" } },
   {
-    slug: "neenee-dau-doi-mu-chan-vao-doi", file: "du-an-Dau-doi-mu-chan-vao-doi", alt: "Tíc Cơ x Neenee: Đầu đội mũ, Chân vào đời",
+    slug: "neenee-dau-doi-mu-chan-vao-doi", file: "du-an-Dau-doi-mu-chan-vao-doi", mobile: "du-an-Dau-Doi-Troi-Chan-Dap-Datmobile", alt: "Tíc Cơ x Neenee: Đầu đội mũ, Chân vào đời",
     links: { "735:299": "/san-pham/bst-dau-doi-mu-chan-vao-doi", "735:300": "/san-pham/bst-dau-doi-mu-chan-vao-doi" },
   },
 ];
 
 const file = JSON.parse(readFileSync(".figma-cache/file.json", "utf8"));
 const find = (n, id) => { if (n.id === id) return n; for (const c of n.children || []) { const f = find(c, id); if (f) return f; } };
-const TOP = 51; // promo bar + navbar rows, rendered by the site layout
 const r = (v) => Math.round(v * 100) / 100;
 const css = (g) => `linear-gradient(180deg,${g.stops[0][0]},${g.stops[1][0]})`; // every DEMO gradient is top→bottom, 2 effective stops
 const warn = [];
@@ -55,16 +54,46 @@ const MARK_PARTS = {
 };
 // Event copy that plays the word-scatter effect on scroll (client reference video, see ScatterText)
 const SCATTER = new Set([]); // layer ids, e.g. "671:560"
+// Phone-frame copy that flies in scattered and assembles (fx "fly", the effect the desktop hero / mission / mascot use)
+const FLY = new Set(["976:79", "976:82", "976:116", "976:629", "976:637", "976:638", "976:639"]);
+// a vector the designer drew as an ellipse (ve-Tic-Co-mobile blob caps): a shape, not a text highlight
+const isEllipse = (l) => l.type === "VECTOR" && /^Ellipse/.test(l.name);
 const overlaps = (a, b) => a.x < b.x + b.w && a.x + a.w > b.x && a.y < b.y + b.h && a.y + a.h > b.y;
 
-function build(cfg) {
+// Product cards (photo + name + price) link to their product: name -> id from src/data/figma-cards.ts.
+const PRODUCT_BY_NAME = Object.fromEntries(
+  [...readFileSync("src/data/figma-cards.ts", "utf8").matchAll(/id: "([^"]+)"[^}]*?name: "([^"]+)"/g)].map(([, id, name]) => [name.replace(/\\n/g, " ").replace(/\s+/g, " ").trim().toLowerCase(), `/san-pham/${id}`]),
+);
+// longest name first, anywhere in the card (some cards list the price above the name)
+const BY_LENGTH = Object.entries(PRODUCT_BY_NAME).sort(([a], [b]) => b.length - a.length);
+const cardLink = (cfg, text) => (cfg.productCards ? BY_LENGTH.find(([name]) => text.includes(name))?.[1] : undefined);
+
+// Same text whatever the line breaks / spacing: how desktop links and anchors are found again in the phone frame.
+const norm = (s) => s.replace(/\s+/g, " ").trim().toLowerCase();
+
+// cfg.file = the frame; W = its width (1280 desktop, 390 phone). The phone frames reuse the desktop links/anchors,
+// matched by group name or by the group's text (cfg.linkText / cfg.anchorText / cfg.anchorName, filled by desktop).
+function build(cfg, W = 1280) {
   const demo = JSON.parse(readFileSync(`.figma-cache/demo/${cfg.file}.json`, "utf8"));
   const L = Object.fromEntries(demo.layers.map((l) => [l.id, l]));
   const frame = find(file.document, demo.id);
   const footer = frame.children.find((c) => c.name === "footer");
-  const H = L[footer.id].y - TOP;
+  const bar = demo.layers.find((l) => l.name === "thanh-chon"); // nested inside the hero frame on trang-chu-mobile
+  // y = 0 at the top of the page content. Desktop: the first section's top (the Figma header there changed height over
+  // time; the site's own navbar is fixed), phones: below the frame's navbar row.
+  const TOP = W === 1280
+    ? Math.min(...frame.children.filter((c) => c.visible !== false && L[c.id] && !["headline", "thanh-chon", "footer"].includes(c.name)).map((c) => L[c.id].y))
+    : bar ? bar.y + bar.h : 0;
+  const H = (footer ? L[footer.id].y : L[frame.id]?.h ?? frame.absoluteBoundingBox.height) - TOP;
+  const textOf = (n) => norm(leaves(n).filter((c) => L[c.id].type === "TEXT").map((c) => L[c.id].text).join(" "));
+  const hrefOf = (n) => cfg.links?.[n.id] ?? (W !== 1280 && cfg.linkText?.[textOf(n)]) ?? (leaves(n).filter((c) => L[c.id].image).length === 1 ? cardLink(cfg, textOf(n)) : undefined);
+  const anchorOf = (n) =>
+    cfg.anchors?.[n.id] ?? (W !== 1280 ? cfg.anchorName?.[n.name] ?? (L[n.id]?.type === "TEXT" ? cfg.anchorText?.[norm(L[n.id].text)] : undefined) : undefined);
   let h1Done = false;
-  const skip = (n) => n.visible === false || !L[n.id];
+  // site chrome (promo bar + navbar at the top of the frame, footer) is drawn by the layout. Nested too (trang-chu-mobile
+  // keeps them inside its hero frame), but only up top: mid-page section bars are also named "headline".
+  const skip = (n) =>
+    n.visible === false || !L[n.id] || n.name === "footer" || (["headline", "thanh-chon"].includes(n.name) && L[n.id].y < 60);
   const leaves = (n) => (skip(n) ? [] : n.children && n.type !== "BOOLEAN_OPERATION" ? n.children.flatMap(leaves) : [n]);
 
   const leaf = (n, parent) => {
@@ -88,12 +117,15 @@ function build(cfg) {
         tag: !h1Done && f.size >= 80 ? "h1" : f.size >= 36 ? "h2" : "p",
       };
       if (t.tag === "h1") h1Done = true;
-      if (cfg.anchors?.[n.id]) t.anchor = cfg.anchors[n.id];
+      const anchor = anchorOf(n);
+      if (anchor) t.anchor = anchor;
+      if (W === 1280 && anchor) (cfg.anchorText ??= {})[norm(l.text)] = anchor;
       if (SCATTER.has(n.id)) t.fx = "scatter";
+      if (FLY.has(n.id)) t.fx = "fly";
       if (auto === "WIDTH_AND_HEIGHT" || lines === Math.round(l.h / f.lineHeight) - lead) t.nowrap = true;
       if (l.opacity != null) t.op = r(l.opacity);
       // text sitting on a solid vector (speech bubble / highlight) keeps that colour behind it on mobile
-      const bub = (parent?.children || []).map((c) => L[c.id]).find((v) => (v?.type === "VECTOR" || v?.type === "RECTANGLE") && v.color && !v.image && v.w < 1270 && overlaps(v, l));
+      const bub = (parent?.children || []).map((c) => L[c.id]).find((v) => (v?.type === "VECTOR" || v?.type === "RECTANGLE") && !isEllipse(v) && v.color && !v.image && v.w < W - 10 && overlaps(v, l));
       // a solid vector behind text is a line-by-line highlight in the design (drawn as text background, see FigmaCanvas)
       if (bub?.type === "VECTOR") {
         t.mark = bub.color;
@@ -113,10 +145,10 @@ function build(cfg) {
     }
     if (l.type === "LINE" && l.stroke) return { k: "box", ...box, h: l.stroke.weight, bg: l.stroke.color, kind: "line" };
     // highlight vector behind a text: the text draws it (t.mark)
-    if (l.type === "VECTOR" && l.color && !l.gradient && (parent?.children || []).some((c) => L[c.id]?.type === "TEXT" && overlaps(l, L[c.id]))) return null;
+    if (l.type === "VECTOR" && !isEllipse(l) && l.color && !l.gradient && (parent?.children || []).some((c) => L[c.id]?.type === "TEXT" && overlaps(l, L[c.id]))) return null;
     if (l.color || l.gradient) {
       const b = { k: "box", ...box, bg: l.gradient ? css(l.gradient) : l.color };
-      if (l.type === "ELLIPSE") b.radius = "50%";
+      if (l.type === "ELLIPSE" || isEllipse(l)) b.radius = "50%";
       else if (l.type === "VECTOR") b.radius = Math.min(l.h / 2, 24); // speech bubble / highlight blob, approximated
       if (l.w <= 30 && l.type === "ELLIPSE") b.kind = "dot";
       if (l.effects) warn.push(`${n.id} "${n.name}" effects (${l.effects.map((e) => e.type).join("+")}) not reproduced`);
@@ -130,7 +162,8 @@ function build(cfg) {
   // A nested group with one photo + its caption(s) becomes a "card": kept together (and linkable) on mobile.
   const node = (n, parent) => {
     if (skip(n)) return [];
-    const href = cfg.links?.[n.id];
+    const href = hrefOf(n);
+    if (W === 1280 && href) (cfg.linkText ??= {})[textOf(n)] = href;
     if (n.type === "GROUP" || n.type === "FRAME") {
       const ls = leaves(n);
       const imgs = ls.filter((c) => L[c.id].image).length;
@@ -146,6 +179,9 @@ function build(cfg) {
       return n.children.flatMap((c) => node(c, n));
     }
     const it = leaf(n, parent);
+    // a lone text that is a button in the design ("TẤT CẢ SẢN PHẨM >", "> LÀM QUEN VỚI ĐẦN!")
+    const textHref = it?.k === "text" && cfg.textLinks?.[norm(it.text)];
+    if (textHref) return [{ k: "card", id: n.id, href: textHref, items: [it] }];
     return it ? [it] : [];
   };
   const leavesWithParent = (n, p) => (skip(n) ? [] : n.children && n.type !== "BOOLEAN_OPERATION" ? n.children.flatMap((c) => leavesWithParent(c, n)) : [[n, p]]);
@@ -154,24 +190,53 @@ function build(cfg) {
     .filter((c) => !skip(c) && !["headline", "thanh-chon", "footer"].includes(c.name))
     .map((s) => {
       const items = s.children ? s.children.flatMap((c) => node(c, s)) : node(s, frame);
-      const bgBox = items.find((i) => i.k === "box" && !i.kind && i.w >= 1270);
+      const bgBox = items.find((i) => i.k === "box" && !i.kind && i.w >= W - 10);
       const sec = { id: s.id, y: L[s.id].y - TOP, items };
       if (bgBox) sec.bg = bgBox.bg;
-      if (cfg.anchors?.[s.id]) sec.anchor = cfg.anchors[s.id];
+      const anchor = anchorOf(s);
+      if (anchor) sec.anchor = anchor;
+      if (W === 1280 && anchor) (cfg.anchorName ??= {})[s.name] = anchor;
       return sec;
     });
   return { h: H, sections };
 }
 const r4 = (v) => Math.round(v * 10000) / 10000;
 
-const out = Object.fromEntries(PAGES.map((p) => [p.slug, build(p)]));
+// Pages hand-coded on desktop (src/app/[lang]/page.tsx, ve-tic-co, mascot-dan) that take the client's phone frame as is.
+const MOBILE_ONLY = [
+  {
+    slug: "trang-chu", file: "trang-chu-mobile", alt: "Tíc Cơ", productCards: true,
+    textLinks: {
+      "tất cả sản phẩm >": "/san-pham", "tất cả sản phẩm": "/san-pham", "> hiểu hơn về tíc cơ!": "/ve-tic-co",
+      "> làm quen với đần!": "/mascot-dan", "xem chi tiết >": "/kham-pha",
+    },
+    linkText: {
+      "freezedom x tíc cơ: thu rồi nghỉ đi": "/kham-pha/freezedom-thu-roi-nghi-di",
+      "nee nee x tíc cơ: bst mũ - đầu đội trời, chân đạp đất": "/kham-pha/neenee-dau-doi-mu-chan-vao-doi",
+      "tíc cơ tại khu vực trải nghiệm lễ hội độc lập": "/kham-pha/nguoi-viet-van-dong#le-hoi-doc-lap",
+    },
+  },
+  { slug: "ve-tic-co", file: "ve-Tic-Co-mobile", alt: "Về Tíc Cơ" },
+  { slug: "mascot-dan", file: "mascot-Dan-mobile", alt: "Mascot Đần", productCards: true, textLinks: { "xem thêm sản phẩm tíc cơ! >": "/san-pham" } },
+];
+const mobileOnly = Object.fromEntries(MOBILE_ONLY.map((p) => [p.slug, build(p, 390)]));
+
+const out = Object.fromEntries(PAGES.map((p) => {
+  const page = build(p);
+  // mobileAnchors: phone-frame layers the desktop anchor can't be matched to by name/text
+  if (p.mobile) page.mobile = build({ ...p, file: p.mobile, anchors: { ...p.anchors, ...p.mobileAnchors } }, 390);
+  return [p.slug, page];
+}));
 writeFileSync(
   "src/data/project-pages.ts",
   `// GENERATED by scripts/gen-project-pages.mjs from the Figma "Thiết kế DEMO" frames — edit the script, not this file.
-// Coordinates are Figma px on the 1280px frame, y measured from below the navbar (frame y - 51).
+// Coordinates are Figma px on the 1280px frame (mobile: the 390px phone frame), y measured from below the navbar.
 import type { FigPage } from "@/components/FigmaCanvas";
 
 export const figmaPages: Record<string, FigPage> = ${JSON.stringify(out, null, 1)};
+
+// Phone layouts of the hand-coded pages (trang-chu, ve-tic-co, mascot-dan), drawn below lg by <FigmaMobile>.
+export const figmaMobile: Record<string, FigPage> = ${JSON.stringify(mobileOnly, null, 1)};
 `
 );
 console.log("wrote src/data/project-pages.ts");

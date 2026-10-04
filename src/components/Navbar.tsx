@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { Search, ShoppingCart, Menu, X, ChevronDown } from "lucide-react";
+import { Search, X, ChevronDown } from "lucide-react";
 import { navLinks, brand } from "@/data/content";
 import { useCart } from "@/context/CartContext";
 import SearchDrawer from "@/components/SearchDrawer";
@@ -74,10 +74,10 @@ export default function Navbar() {
       <nav className="sticky top-0 z-50 bg-[var(--color-orange)] text-white">
         {/* md+: Figma "thanh-chon" (2026-09-29) — logo left (X35, 83x25), the 4 items centred as one group
             with 46px gaps and no dropdown chevrons; Be Vietnam 600 13/19, no letter-spacing. */}
-        <div className="relative max-w-[1280px] md:max-w-[calc(1280*var(--u))] mx-auto px-6 h-16 md:h-[calc(27*var(--u))] flex items-center justify-between gap-6 md:justify-center md:gap-0">
+        <div className="relative max-w-[1280px] md:max-w-[calc(1280*var(--u))] mx-auto px-[calc(21*var(--m))] md:px-6 h-[calc(32*var(--m))] md:h-[calc(27*var(--u))] flex items-center justify-between gap-6 md:justify-center md:gap-0">
           {/* Wordmark */}
           <Link href={localize("/", lang)} aria-label={brand.shortName} className="shrink-0 md:absolute md:left-[calc(35*var(--u))] md:top-1/2 md:-translate-y-1/2">
-            <Image src="/images/logo-tic-co.png" alt={brand.shortName} width={2731} height={837} sizes="(min-width: 768px) 125px, 72px" priority className="w-[72px] md:w-[calc(83*var(--u))] h-auto" />
+            <Image src="/images/logo-tic-co.png" alt={brand.shortName} width={2731} height={837} sizes="(min-width: 768px) 125px, 72px" priority className="w-[calc(47*var(--m))] md:w-[calc(83*var(--u))] h-auto" />
           </Link>
 
           {/* Desktop nav */}
@@ -115,24 +115,27 @@ export default function Navbar() {
             </button>
           </div>
 
-          {/* Mobile: search + cart (with count) + burger, always in the bar */}
-          <button onClick={() => { setMenuOpen(false); setSearchOpen(true); }} aria-label={t("Tìm kiếm")} className="md:hidden ml-auto">
-            <Search size={22} />
+          {/* Mobile: search + cart (with count) + burger, always in the bar. Sizes/gaps = the 390 mobile Figma frames
+              (search 17, cart art 29, burger 12x8); p + negative margin widens the tap area without moving the icons. */}
+          <button onClick={() => { setMenuOpen(false); setSearchOpen(true); }} aria-label={t("Tìm kiếm")} className="md:hidden ml-auto -m-2 p-2">
+            <Search className="size-[calc(17*var(--m))]" />
           </button>
-          <button onClick={openDrawer} aria-label={t("Giỏ hàng")} className="md:hidden relative">
-            <ShoppingCart size={23} />
+          <button onClick={openDrawer} aria-label={t("Giỏ hàng")} className="md:hidden relative ml-[calc(3*var(--m))] -my-2 py-2">
+            <Image src="/images/figma/f7cee81a817a7fd43fa1390005911ca6d22bbadf.webp" alt="" width={108} height={108} className="size-[calc(29*var(--m))]" />
             {totalItems > 0 && (
-              <span className="absolute -top-1.5 -right-2 flex h-[18px] min-w-[18px] items-center justify-center rounded-full bg-[var(--color-purple)] px-1 text-[11px] font-bold leading-none text-white">
+              <span className="absolute top-0 -right-[calc(5*var(--m))] flex h-[15px] min-w-[15px] items-center justify-center rounded-full bg-[var(--color-purple)] px-1 text-[10px] font-bold leading-none text-white">
                 {totalItems}
               </span>
             )}
           </button>
-          <button
-            className="md:hidden"
-            onClick={() => setMenuOpen(!menuOpen)}
-            aria-label="Menu"
-          >
-            {menuOpen ? <X size={24} /> : <Menu size={24} />}
+          <button className="md:hidden ml-[calc(7*var(--m))] -m-2 p-2" onClick={() => setMenuOpen(!menuOpen)} aria-label="Menu">
+            {menuOpen ? (
+              <X className="size-[calc(14*var(--m))]" />
+            ) : (
+              <span aria-hidden className="flex w-[calc(12*var(--m))] flex-col gap-[calc(3*var(--m))]">
+                {[0, 1, 2].map((i) => <span key={i} className="block h-px bg-current" />)}
+              </span>
+            )}
           </button>
         </div>
       </nav>
@@ -143,7 +146,7 @@ export default function Navbar() {
       <AnimatePresence>
         {menuOpen && (
           <motion.div
-            className="fixed inset-0 z-40 overflow-y-auto bg-[var(--color-orange)] text-white flex flex-col pt-20 pb-10 px-8"
+            className="fixed inset-0 z-40 overflow-y-auto bg-[var(--color-orange)] text-white flex flex-col pt-[calc(50*var(--m)+24px)] pb-10 px-8"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}

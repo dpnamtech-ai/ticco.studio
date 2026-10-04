@@ -11,6 +11,8 @@ import { HOME_CATEGORY, figmaCardProps } from "@/data/figma-cards";
 import { getLang } from "@/lib/lang";
 import { alternatesFor, localize } from "@/lib/i18n";
 import { t } from "@/lib/t";
+import { FigmaMobile } from "@/components/FigmaCanvas";
+import { figmaMobile } from "@/data/project-pages";
 
 export async function generateMetadata(): Promise<Metadata> {
   const lang = await getLang();
@@ -27,6 +29,9 @@ export default async function Home() {
 
   return (
     <>
+      {/* phones: the client's mobile Figma frame; this markup is the desktop design */}
+      <FigmaMobile page={figmaMobile["trang-chu"]} lang={lang} />
+      <div className="max-lg:hidden">
       <HeroSection />
       <FeaturedProducts products={products} />
       <BrandSection />
@@ -71,6 +76,7 @@ export default async function Home() {
       </section>
 
       <CollabSection />
+      </div>
     </>
   );
 }

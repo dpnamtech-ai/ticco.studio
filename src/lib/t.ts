@@ -9,9 +9,18 @@ import { DEFAULT_LANG, type Lang } from "@/lib/i18n";
 const EN = en as Record<string, string>;
 const key = (s: string) => s.replace(/\s+/g, " ").trim();
 
+// Same copy typed in capitals (the phone Figma frames set "TẤT CẢ SẢN PHẨM >" where desktop uses CSS uppercase):
+// matched case-insensitively, and an all-caps source gets an all-caps translation.
+let LOWER: Record<string, string> | undefined;
+const lower = () => (LOWER ??= Object.fromEntries(Object.entries(EN).map(([k, v]) => [k.toLowerCase(), v])));
+
 export function t(s: string, lang: Lang): string {
   if (lang === DEFAULT_LANG || !s) return s;
-  return EN[key(s)] ?? s;
+  const k = key(s);
+  if (EN[k] !== undefined) return EN[k];
+  const v = lower()[k.toLowerCase()];
+  if (v === undefined) return s;
+  return k === k.toUpperCase() ? v.toUpperCase() : v;
 }
 
 // Deep-translates every string in plain data (products, Figma page texts, legal pages); non-strings and paths
