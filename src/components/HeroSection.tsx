@@ -1,7 +1,8 @@
 "use client";
 
-import { motion } from "framer-motion";
 import Image from "next/image";
+import { ScatterGroup } from "@/components/Scatter";
+import { ScatterWords } from "@/components/scatterWords";
 import { useLang, useT } from "@/components/LangSwitch";
 
 /*
@@ -11,6 +12,11 @@ import { useLang, useT } from "@/components/LangSwitch";
   has none here). Percentages are each element's box relative to this
   section, from the Figma file JSON.
 */
+const SUB = "Chúng tôi có bán sản phẩm để bạn tìm thấy niềm vui trong mọi điều đời thường!";
+// the Figma art's rows and word groups (each group pinned left / centre / right of its row)
+const SUB_ROWS = [["Chúng tôi", "có bán sản phẩm"], ["để bạn", "tìm thấy", "niềm vui"], ["trong mọi", "điều đời thường!"]];
+const PAREN = "font-[family-name:Georgia,serif] text-[46px] lg:text-[7.6cqw] font-thin leading-none opacity-90";
+
 export default function HeroSection() {
   const lang = useLang();
   const t = useT();
@@ -38,42 +44,45 @@ export default function HeroSection() {
           style={{ left: "88.15%", top: "74.05%", width: "19.4%", transform: "translate(-50%, -50%) rotate(5.22deg)" }}
         />
 
-        <motion.h1
-          initial={{ opacity: 0, x: -30 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          className="absolute font-[family-name:var(--font-heading)] font-bold uppercase leading-[1.0588] tracking-[-0.04em] whitespace-nowrap"
-          style={{ left: "4.68%", top: "13.51%", width: "33.12%", fontSize: "max(26px, 6.625cqw)" }}
-        >
-          {t("Đời dễ ợt")}
-          <br />
-          {t("Vợt Tíc Cơ")}
-        </motion.h1>
+        {/* headline + bracketed subtext: words fly in scattered and assemble on load (client reference video) */}
+        <ScatterGroup className="absolute inset-0">
+          <h1
+            className="absolute font-[family-name:var(--font-heading)] font-bold uppercase leading-[1.0588] tracking-[-0.04em] whitespace-nowrap"
+            // English lines are longer than the Figma copy: smaller so they stay on the orange half
+            style={{ left: "4.68%", top: "13.51%", width: "33.12%", fontSize: lang === "en" ? "max(22px, 5.4cqw)" : "max(26px, 6.625cqw)" }}
+          >
+            <ScatterWords text={t("Đời dễ ợt")} seed={60} />
+            <br />
+            <ScatterWords text={t("Vợt Tíc Cơ")} seed={61} />
+          </h1>
 
-        {/* Figma "Frame 6": bracketed subtext incl. Big Caslon ( ), exported as art */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-          className="absolute max-lg:!w-[39%] max-lg:!top-[50%]"
-          style={{ left: "4.365%", top: "60.98%", width: "25.25%" }}
-        >
-          <Image
-            src="/images/hero-subtext.png"
-            alt={t("Chúng tôi có bán sản phẩm để bạn tìm thấy niềm vui trong mọi điều đời thường!")}
-            width={2592}
-            height={816}
-            sizes="26vw"
-            // the art has the Vietnamese lettering baked in: English shows the live-text line at every width instead
-            className={`w-full h-auto max-lg:hidden ${lang === "en" ? "lg:hidden" : ""}`}
-          />
-          {/* phones: the art's lettering would be ~4px tall, so the same line as live text in ( ) */}
-          <p className={`${lang === "en" ? "lg:text-[1.25cqw]" : "lg:hidden"} flex items-center gap-1 text-[11px] leading-[1.3] font-medium uppercase`}>
-            <span aria-hidden className="font-[family-name:Georgia,serif] text-[46px] font-thin leading-none opacity-90">(</span>
-            <span>{t("Chúng tôi có bán sản phẩm để bạn tìm thấy niềm vui trong mọi điều đời thường!")}</span>
-            <span aria-hidden className="font-[family-name:Georgia,serif] text-[46px] font-thin leading-none opacity-90">)</span>
-          </p>
-        </motion.div>
+          {/* Figma "Frame 6": bracketed subtext, Big Caslon ( ). Rebuilt as live text (was a baked PNG) so its words can
+              scatter too: desktop VN keeps the art's spaced 3-row layout; phones and English run as one line. */}
+          <div
+            className="absolute max-lg:!w-[39%] max-lg:!top-[50%] flex items-center gap-1 lg:gap-[0.6cqw] font-medium uppercase"
+            style={{ left: "4.365%", top: "60.98%", width: "25.25%" }}
+          >
+            <p className="sr-only">{t(SUB)}</p>
+            <span aria-hidden className={PAREN}>(</span>
+            {lang === "vi" && (
+              <span aria-hidden className="max-lg:hidden flex-1 text-[1.17cqw] leading-[1.6] tracking-[-0.02em]">
+                {SUB_ROWS.map((row, r) => (
+                  <span key={r} className="flex justify-between">
+                    {row.map((w, i) => (
+                      <span key={i}>
+                        <ScatterWords text={w} seed={70 + r * 5 + i} />
+                      </span>
+                    ))}
+                  </span>
+                ))}
+              </span>
+            )}
+            <span aria-hidden className={`${lang === "vi" ? "lg:hidden" : "lg:text-[1.25cqw]"} flex-1 text-[11px] leading-[1.3]`}>
+              <ScatterWords text={t(SUB)} seed={90} />
+            </span>
+            <span aria-hidden className={PAREN}>)</span>
+          </div>
+        </ScatterGroup>
       </div>
     </section>
   );

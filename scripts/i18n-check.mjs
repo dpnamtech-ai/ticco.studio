@@ -11,7 +11,7 @@ const CHROME = process.env.CHROME_PATH || "C:/Program Files/Google/Chrome/Applic
 const REMOTE = process.argv[2];
 const BASE = (REMOTE || "http://localhost:3102").replace(/\/$/, "");
 // brand + mascot names, "Tết" (English copy keeps the festival's name) and partners' own names
-const ALLOWED = [/tíc cơ/gi, /đần/gi, /tết/gi, /Lớp học Hồng Xiêm/g];
+const ALLOWED = [/tíc cơ/gi, /^(tíc|cơ)$/gi, /đần/gi, /tết/gi, /Lớp học Hồng Xiêm/g]; // word effects split "Tíc" / "Cơ"
 // Vietnamese-only letters (plain a-z words like "Bandana" are fine in both languages)
 const VN = /[àáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]/i;
 const isVietnamese = (s) => VN.test(ALLOWED.reduce((t, re) => t.replace(re, ""), s));
