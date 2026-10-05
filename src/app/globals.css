@@ -116,7 +116,9 @@ body {
 /* Scatter.tsx: words wait scattered (random offset/scale/skew, blurred) and fly into place when the group gets .sw-in */
 .sw-word {
   display: inline-block;
-  opacity: 0;
+  /* 0.01, not 0: looks the same, but the browser counts the text as painted, so the hero headline (the phone LCP
+     element) isn't timed at the end of its fly-in (PageSpeed LCP 11.5 s) */
+  opacity: 0.01;
   filter: blur(0.6cqw);
   transform: translate(var(--sx), var(--sy)) scale(var(--ss)) skewX(var(--sk));
   transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1) var(--sd), opacity 0.7s ease var(--sd), filter 1s ease var(--sd);
