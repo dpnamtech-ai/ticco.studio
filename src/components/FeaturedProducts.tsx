@@ -28,7 +28,8 @@ export default function FeaturedProducts({ products }: { products: Product[] }) 
         </Reveal>
         <Link
           href={localize("/san-pham", lang)}
-          className="hidden lg:block absolute lg:left-[78.828cqw] lg:top-[6.641cqw] lg:text-[1.5625cqw] font-semibold uppercase text-[var(--color-purple)] hover:underline"
+          // Figma 671:63: box y715 with an 84px line height, so the text sits mid-box (was missing: it hugged the bar)
+          className="hidden lg:block absolute lg:left-[78.828cqw] lg:top-[6.641cqw] lg:text-[1.5625cqw] lg:leading-[6.563cqw] font-semibold uppercase text-[var(--color-purple)] hover:underline"
         >
           {t("Tất cả sản phẩm >")}
         </Link>

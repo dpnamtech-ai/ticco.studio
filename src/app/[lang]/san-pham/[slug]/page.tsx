@@ -8,6 +8,7 @@ import ProductCard from "@/components/ProductCard";
 import Reveal from "@/components/Reveal";
 import { suggestionsFor, variantImagesFor, variantLinksForProduct } from "@/lib/shop";
 import { figmaDisplay, layoutBottom, vnd } from "@/lib/shopFigma";
+import blurMap from "@/data/blur.json";
 import { getLang } from "@/lib/lang";
 import { alternatesFor, localize } from "@/lib/i18n";
 import { t, tx } from "@/lib/t";
@@ -48,6 +49,9 @@ const fitRatio = (source: string, shown: string) => {
   const r = source.replace(/\s+/g, "").length / shown.replace(/\s+/g, "").length;
   return r >= 1 ? 1 : source.includes("\n") ? Math.sqrt(r) : r;
 };
+
+// tiny blurred previews, read here (server) so the 50 KB map never reaches the browser bundle
+const BLUR = blurMap as Record<string, string>;
 
 // Figma san-pham-* frames. Desktop values are Figma px / 12.8 (1280px frame = 100cqw).
 export default async function ProductPage({
@@ -143,8 +147,8 @@ export default async function ProductPage({
           variantOptions={product.variantOptions}
           specs={(product.specs ?? []).map(T)}
           note={product.note && T(product.note)}
-          gallery={f.gallery}
-          extra={tx(f.extra, lang)}
+          gallery={f.gallery.map((g) => ({ ...g, blur: BLUR[g.src] }))}
+          extra={f.extra && { ...tx(f.extra, lang), blur: BLUR[f.extra.src] }}
           soldOut={product.soldOut}
           bundleItems={bundleItems}
           layout={L}

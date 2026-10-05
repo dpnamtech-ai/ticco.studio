@@ -50,7 +50,7 @@ export async function generateMetadata({ params }: LayoutProps<"/[lang]">): Prom
   const T = (s: string) => t(s, lang);
   return {
   metadataBase: new URL(SITE_URL),
-  applicationName: "Tíc Cơ",
+  applicationName: "Tíc Cơ Studios",
   // Search Console / Bing Webmaster ownership: paste each tool's verification code into these Vercel env vars.
   verification: {
     google: process.env.GOOGLE_SITE_VERIFICATION || undefined,
@@ -61,17 +61,17 @@ export async function generateMetadata({ params }: LayoutProps<"/[lang]">): Prom
   // the client's round logo (design/logo-tic-co-tron.png) as tab / home-screen icon
   icons: { icon: [{ url: "/favicon-48.png", sizes: "48x48" }, { url: "/icon-192.png", sizes: "192x192" }, { url: "/icon-512.png", sizes: "512x512" }], apple: "/apple-touch-icon.png" },
   title: {
-    default: "Tíc Cơ",
+    default: "Tíc Cơ Studios",
     template: "%s",
   },
   // link previews (Zalo, Messenger, Facebook): client's own wording, 2026-10-05
   description: T("Thương hiệu Việt với các sản phẩm tiêu dùng sáng tạo lấy cảm hứng từ chất liệu đời thường, do người trẻ Việt thiết kế."),
   keywords: ["Tíc Cơ", "ticco studio", "sổ tay", "văn phòng phẩm", "túi tote", "sticker", "postcard", "quà tặng", "quà sinh nhật", "móc khoá", "mascot Đần", "thương hiệu Việt"].map(T),
   openGraph: {
-    siteName: "Tíc Cơ",
+    siteName: "Tíc Cơ Studios",
     locale: lang === "en" ? "en_US" : "vi_VN",
     alternateLocale: lang === "en" ? "vi_VN" : "en_US",
-    title: "Tíc Cơ",
+    title: "Tíc Cơ Studios",
     description: T("Thương hiệu Việt với các sản phẩm tiêu dùng sáng tạo lấy cảm hứng từ chất liệu đời thường, do người trẻ Việt thiết kế."),
     type: "website",
     images: ["/images/hero-basket.png"],
@@ -97,10 +97,11 @@ export default async function RootLayout({ children, params }: LayoutProps<"/[la
       {
         "@type": ["Organization", "OnlineStore"],
         "@id": `${SITE_URL}/#org`,
-        name: "Tíc Cơ",
-        alternateName: ["Tíc Cơ Studios", "ticco.studios"],
+        name: "Tíc Cơ Studios",
+        alternateName: ["Tíc Cơ", "ticco.studios"],
         url: SITE_URL,
-        logo: `${SITE_URL}/images/logo-tic-co.png`,
+        // square logo (Google needs >= 112px square for the brand logo)
+        logo: `${SITE_URL}/icon-512.png`,
         description: t(brand.mission.split("\n")[0], lang),
         foundingDate: "2024",
         email: brand.email,
@@ -111,7 +112,9 @@ export default async function RootLayout({ children, params }: LayoutProps<"/[la
         "@type": "WebSite",
         "@id": `${SITE_URL}/#website`,
         url: SITE_URL,
-        name: "Tíc Cơ",
+        // Google shows this as the site name above results (client: "Tíc Cơ Studios" only)
+        name: "Tíc Cơ Studios",
+        alternateName: ["Tíc Cơ", "ticcostudios.com"],
         inLanguage: lang === "en" ? "en" : "vi-VN",
         publisher: { "@id": `${SITE_URL}/#org` },
         potentialAction: { "@type": "SearchAction", target: `${SITE_URL}/tim-kiem?q={search_term_string}`, "query-input": "required name=search_term_string" },

@@ -37,9 +37,10 @@ interface ProductDetailProps {
   specs: string[];
   note?: string;
   /** Main image first, then the small ones, each with its Figma crop. */
-  gallery: Crop[];
+  /** blur: tiny preview data URL (added by the page from src/data/blur.json) */
+  gallery: (Crop & { blur?: string })[];
   /** Extra captioned image under the specs (Gile Yên Tâm size chart). */
-  extra?: Crop & { label: string; w: number; h: number };
+  extra?: Crop & { label: string; w: number; h: number; blur?: string };
   soldOut?: boolean;
   /** When this product is a combo: the standalone products it's made of, each still buyable on its own page. */
   bundleItems?: { id: string; name: string; image?: string; priceFrom: number; qty: number }[];
@@ -51,6 +52,13 @@ type Vars = CSSProperties & Record<`--${string}`, string>;
 // Full-quality photos are heavy: each one fades in from a soft blur once loaded, over the grey box, instead of popping in.
 const fade = "opacity-0 blur-[6px] transition-[opacity,filter] duration-700 ease-out data-[loaded=true]:opacity-100 data-[loaded=true]:blur-none";
 const onLoad = (e: React.SyntheticEvent<HTMLImageElement>) => (e.currentTarget.dataset.loaded = "true");
+// Under it, a ~300-byte blurred preview of the same photo, framed the same way (scripts/gen-blur.mjs): the box shows the
+// photo's colours at once instead of grey while the full-size file loads.
+function Preview({ c }: { c: Crop & { blur?: string } }) {
+  if (!c.blur) return null;
+  // eslint-disable-next-line @next/next/no-img-element
+  return <img src={c.blur} alt="" aria-hidden className="absolute inset-0 h-full w-full scale-110 blur-xl" style={fillStyle(c)} />;
+}
 const cq = (px: number) => `${Math.round((px / 12.8) * 1e4) / 1e4}cqw`;
 /** Desktop box at Figma frame coordinates, relative to (ox, oy); the page content starts at frame y 51. */
 const at = (b: Box | undefined, ox = 0, oy = 51): Vars | undefined =>
@@ -132,6 +140,7 @@ export default function ProductDetail({
     >
       <Reveal variant="curtain" duration={1.3} className={`order-1 ${L ? abs : "lg:order-none lg:col-start-1 lg:row-start-1"}`} style={at(L?.gallery[0])}>
         <div ref={mainRef} className="relative aspect-[550/689] bg-[#d9d9d9] overflow-hidden scroll-mt-20" style={L && box(L.gallery[0])}>
+          {main && <Preview key={`p-${main.src}`} c={main} />}
           {main && <Image key={main.src} src={main.src} alt={selected === variants[0] ? t(name) : `${t(name)} - ${t(selected)}`} fill priority className={fade} onLoad={onLoad} sizes={zoomSizes("(max-width: 1024px) 100vw, 43vw", main)} style={fillStyle(main)} />}
         </div>
       </Reveal>
@@ -149,6 +158,7 @@ export default function ProductDetail({
               style={L && { ...at(L.gallery[i + 1]), ...box(L.gallery[i + 1]) }}
             >
               <div className="absolute inset-0 transition-transform duration-500 group-hover:scale-105">
+                <Preview c={img} />
                 <Image src={img.src} alt={`${t(name)} ${t("— ảnh")} ${i + 2}`} fill className={fade} onLoad={onLoad} style={fillStyle(img)} sizes={zoomSizes("(max-width: 1024px) 50vw, 22vw", img)} />
               </div>
             </Reveal>
@@ -267,6 +277,7 @@ export default function ProductDetail({
             </Reveal>
             <Reveal variant="up" delay={0.3} className={`mt-4 ${flow("lg:mt-[1.953cqw]")} ${abs}`} style={at(L?.extraImg)}>
               <div className="relative w-full max-w-[394px] lg:max-w-none lg:w-[30.781cqw] overflow-hidden" style={{ aspectRatio: `${extra.w} / ${extra.h}` }}>
+                <Preview c={extra} />
                 <Image src={extra.src} alt={`${t(name)} — ${extra.label}`} fill className={fade} onLoad={onLoad} style={fillStyle(extra)} sizes={zoomSizes("(max-width: 1024px) 100vw, 31vw", extra)} />
               </div>
             </Reveal>

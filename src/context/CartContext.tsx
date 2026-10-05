@@ -52,6 +52,8 @@ export function CartProvider({ children, images = {} }: { children: ReactNode; i
       // ignore corrupted storage
     }
     setHydrated(true);
+    // the page is interactive: animations run normally again (see the slow-connection fallback in globals.css)
+    document.documentElement.classList.add("hydrated");
     // eslint-disable-next-line react-hooks/exhaustive-deps -- images is the server catalog, fixed for the page
   }, []);
 

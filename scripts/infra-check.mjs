@@ -49,7 +49,7 @@ for (const p of ["/favicon.ico", "/favicon-48.png", "/icon-512.png", "/apple-tou
   await check(`asset ${p}`, async () => { const r = await get(p); return { ok: r.status === 200 && /image/.test(r.headers.get("content-type") ?? ""), detail: `${r.status} ${r.headers.get("content-type")}` }; });
 
 const meta = (prop) => home.match(new RegExp(`<meta (?:property|name)="${prop}" content="([^"]*)"`))?.[1];
-await check("home <title> is 'Tíc Cơ'", () => ({ ok: /<title>Tíc Cơ<\/title>/.test(home), detail: home.match(/<title>[^<]*<\/title>/)?.[0] }));
+await check("home <title> is 'Tíc Cơ Studios' (client)", () => ({ ok: /<title>Tíc Cơ Studios<\/title>/.test(home), detail: home.match(/<title>[^<]*<\/title>/)?.[0] }));
 await check("link preview: og:title / og:description / og:image", async () => {
   const img = meta("og:image");
   const ok = meta("og:title") && meta("og:description")?.startsWith("Thương hiệu Việt") && img && (await get(img)).status === 200;

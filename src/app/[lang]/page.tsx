@@ -18,9 +18,9 @@ export async function generateMetadata(): Promise<Metadata> {
   const lang = await getLang();
   return {
     // tab + link preview, client's wording (2026-10-05)
-    title: "Tíc Cơ",
+    title: "Tíc Cơ Studios",
     description: t("Thương hiệu Việt với các sản phẩm tiêu dùng sáng tạo lấy cảm hứng từ chất liệu đời thường, do người trẻ Việt thiết kế.", lang),
-    openGraph: { title: "Tíc Cơ", description: t("Thương hiệu Việt với các sản phẩm tiêu dùng sáng tạo lấy cảm hứng từ chất liệu đời thường, do người trẻ Việt thiết kế.", lang), url: lang === "en" ? "/en" : "/", images: ["/images/hero-basket.png"] },
+    openGraph: { title: "Tíc Cơ Studios", description: t("Thương hiệu Việt với các sản phẩm tiêu dùng sáng tạo lấy cảm hứng từ chất liệu đời thường, do người trẻ Việt thiết kế.", lang), url: lang === "en" ? "/en" : "/", images: ["/images/hero-basket.png"] },
     alternates: alternatesFor("/", lang),
   };
 }

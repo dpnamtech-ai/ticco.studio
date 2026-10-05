@@ -56,7 +56,7 @@ export default function BrandSection() {
       >
         <Reveal variant="up" delay={0.2} className="w-full">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/images/brand/link-hieu-hon.png" alt={t("Hiểu hơn về Tíc Cơ!")} className="w-full h-auto" />
+          <img src="/images/brand/link-hieu-hon.png" alt={t("Hiểu hơn về Tíc Cơ!")} className="w-full h-auto" loading="lazy" decoding="async" />
         </Reveal>
       </a>
 
@@ -67,15 +67,15 @@ export default function BrandSection() {
           pushing badge-phong-khoang past the section's right edge and clipping the final "G"). */}
       <Reveal variant="right" delay={0} duration={0.9} className="absolute" style={{ left: "74.77%", top: "63.14%", width: "25.23%" }}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/images/brand/badge-niem-vui-gian-don.png" alt={t("Niềm vui giản đơn")} className="w-full h-auto" />
+        <img src="/images/brand/badge-niem-vui-gian-don.png" alt={t("Niềm vui giản đơn")} className="w-full h-auto" loading="lazy" decoding="async" />
       </Reveal>
       <Reveal variant="right" delay={0.15} duration={0.9} className="absolute" style={{ left: "78.59%", top: "58.29%", width: "21.41%" }}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/images/brand/badge-cham-chu-voi-doi.png" alt={t("Chăm chú với đời")} className="w-full h-auto" />
+        <img src="/images/brand/badge-cham-chu-voi-doi.png" alt={t("Chăm chú với đời")} className="w-full h-auto" loading="lazy" decoding="async" />
       </Reveal>
       <Reveal variant="right" delay={0.3} duration={0.9} className="absolute" style={{ left: "82.27%", top: "53.41%", width: "17.73%" }}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/images/brand/badge-phong-khoang.png" alt={t("Phóng khoáng")} className="w-full h-auto" />
+        <img src="/images/brand/badge-phong-khoang.png" alt={t("Phóng khoáng")} className="w-full h-auto" loading="lazy" decoding="async" />
       </Reveal>
 
       {/* Meet-Đần block: static yellow ellipse (Figma "Ellipse 1"), only the Đần-with-basket art
@@ -85,7 +85,7 @@ export default function BrandSection() {
         style={{ left: "40.53%", top: "53.9%", width: "19.25%", height: "33.54%" }}
       />
       <motion.img
-        src="/images/meet-dan-photo.png"
+        src="/images/meet-dan-photo.webp"
         alt="Mascot Đần"
         className="absolute"
         style={{ left: "40.84%", top: "55.24%", width: "18.78%", height: "31.1%", objectFit: "contain" }}
@@ -94,11 +94,11 @@ export default function BrandSection() {
       />
       <Reveal variant="left" delay={0.1} duration={0.9} className="absolute" style={{ left: "30.16%", top: "60.49%", width: "8.18%" }}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/images/brand/caption-dan.png" alt={t("sống đời sống cùng Đần")} className="w-full h-auto" />
+        <img src="/images/brand/caption-dan.png" alt={t("sống đời sống cùng Đần")} className="w-full h-auto" loading="lazy" decoding="async" />
       </Reveal>
       <Reveal variant="left" delay={0.3} duration={0.9} className="absolute" style={{ left: "30.16%", top: "72.56%", width: "8.03%" }}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/images/brand/caption-tic-co.png" alt={t("chủ nhà tiếp quản Tíc Cơ")} className="w-full h-auto" />
+        <img src="/images/brand/caption-tic-co.png" alt={t("chủ nhà tiếp quản Tíc Cơ")} className="w-full h-auto" loading="lazy" decoding="async" />
       </Reveal>
       <a
         href={localize("/mascot-dan", lang)}
@@ -107,7 +107,7 @@ export default function BrandSection() {
       >
         <Reveal variant="up" delay={0.2} className="w-full">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/images/brand/link-lam-quen.png" alt={t("Làm quen với Đần!")} className="w-full h-auto" />
+          <img src="/images/brand/link-lam-quen.png" alt={t("Làm quen với Đần!")} className="w-full h-auto" loading="lazy" decoding="async" />
         </Reveal>
       </a>
     </div>
@@ -118,7 +118,7 @@ export default function BrandSection() {
       <MissionText className="w-full text-center text-[17px] font-medium leading-snug tracking-[-0.03em] [text-wrap:balance]" />
       <a href={localize("/ve-tic-co", lang)} className="w-[62%]">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/images/brand/link-hieu-hon.png" alt={t("Hiểu hơn về Tíc Cơ!")} className="w-full h-auto" />
+        <img src="/images/brand/link-hieu-hon.png" alt={t("Hiểu hơn về Tíc Cơ!")} className="w-full h-auto" loading="lazy" decoding="async" />
       </a>
 
       <div className="w-full flex flex-col items-end gap-2 -mr-5">
@@ -129,7 +129,7 @@ export default function BrandSection() {
         ].map(([n, alt, w], i) => (
           <Reveal key={n} variant="right" delay={i * 0.1} className={w}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={`/images/brand/${n}.png`} alt={t(alt)} className="w-full h-auto" />
+            <img src={`/images/brand/${n}.png`} alt={t(alt)} className="w-full h-auto" loading="lazy" decoding="async" />
           </Reveal>
         ))}
       </div>
@@ -137,13 +137,13 @@ export default function BrandSection() {
       <div className="w-full flex items-center justify-center gap-4">
         <div className="w-[34%] flex flex-col gap-3">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/images/brand/caption-dan.png" alt={t("sống đời sống cùng Đần")} className="w-full h-auto" />
+          <img src="/images/brand/caption-dan.png" alt={t("sống đời sống cùng Đần")} className="w-full h-auto" loading="lazy" decoding="async" />
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/images/brand/caption-tic-co.png" alt={t("chủ nhà tiếp quản Tíc Cơ")} className="w-full h-auto" />
+          <img src="/images/brand/caption-tic-co.png" alt={t("chủ nhà tiếp quản Tíc Cơ")} className="w-full h-auto" loading="lazy" decoding="async" />
         </div>
         <div className="relative w-[52%] aspect-[247/275] rounded-[50%] bg-[var(--color-yellow)]">
           <motion.img
-            src="/images/meet-dan-photo.png"
+            src="/images/meet-dan-photo.webp"
             alt="Mascot Đần"
             className="absolute inset-[4%] w-[92%] h-[92%] object-contain"
             animate={{ rotate: 360 }}
@@ -153,7 +153,7 @@ export default function BrandSection() {
       </div>
       <a href={localize("/mascot-dan", lang)} className="w-[58%]">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/images/brand/link-lam-quen.png" alt={t("Làm quen với Đần!")} className="w-full h-auto" />
+        <img src="/images/brand/link-lam-quen.png" alt={t("Làm quen với Đần!")} className="w-full h-auto" loading="lazy" decoding="async" />
       </a>
     </section>
     </>

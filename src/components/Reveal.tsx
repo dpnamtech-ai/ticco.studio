@@ -83,6 +83,7 @@ export default function Reveal({
       <div ref={ref} className={outer} style={style}>
         <motion.div
           className={inner}
+          data-reveal=""
           initial={v.hidden}
           animate={inView ? v.show : v.hidden}
           transition={{ duration: small ? duration * 0.6 : duration, delay: small ? Math.min(delay * 0.4, 0.2) : delay, ease }}

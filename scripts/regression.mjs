@@ -362,7 +362,7 @@ await test("UI-07", "3 card dự án ở trang chủ link đúng trang dự án 
 });
 
 // ================= 4. Chi tiết sản phẩm =================
-const mainImg = () => page.evaluate(() => { const i = document.querySelector("main img"); return `${i.alt} | ${decodeURIComponent(i.currentSrc || i.src)}`; });
+const mainImg = () => page.evaluate(() => { const i = document.querySelector("main img:not([aria-hidden])"); return `${i.alt} | ${decodeURIComponent(i.currentSrc || i.src)}`; });
 for (const [pid, opt, frag] of [[PC, "Hạnh phúc là tự thân", "15be65ff"], ["khan-bandana-van-su-tuy-minh", "Tím", "8f4aeb95"], ["lot-coc-ra-khoi", "Xanh rêu", "01ea6ab7"]]) {
   await test("PD-01", `Chọn '${opt}' đổi ảnh chính (${pid}) (BUG-005)`, async () => {
     await go(`/san-pham/${pid}`);
@@ -379,7 +379,7 @@ await test("PD-04", "Điện thoại: bấm lựa chọn -> tự cuộn thấy �
   await sleep(400);
   await clickText("main button", "Tím");
   await sleep(1500);
-  const s = await page.evaluate(() => { const i = document.querySelector("main img"); const r = i.getBoundingClientRect(); return { visible: r.bottom > 80 && r.top < innerHeight, alt: i.alt, url: decodeURIComponent(location.search) }; });
+  const s = await page.evaluate(() => { const i = document.querySelector("main img:not([aria-hidden])"); const r = i.getBoundingClientRect(); return { visible: r.bottom > 80 && r.top < innerHeight, alt: i.alt, url: decodeURIComponent(location.search) }; });
   await go(`/san-pham/khan-bandana-van-su-tuy-minh?chon=${encodeURIComponent("Tím")}`);
   await sleep(800);
   const direct = await mainImg();
