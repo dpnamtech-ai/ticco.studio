@@ -5837,7 +5837,7 @@ export const figmaPages: Record<string, FigPage> = {
         "nowrap": true
        }
       ],
-      "href": "/san-pham/bst-dau-doi-mu-chan-vao-doi"
+      "href": "/san-pham/mu-luoi-trai-cha-sao"
      },
      {
       "k": "card",
@@ -5920,7 +5920,7 @@ export const figmaPages: Record<string, FigPage> = {
         "nowrap": true
        }
       ],
-      "href": "/san-pham/bst-dau-doi-mu-chan-vao-doi"
+      "href": "/san-pham/mu-tai-beo-ha-ha"
      }
     ],
     "bg": "#2c4425"
@@ -6185,7 +6185,7 @@ export const figmaPages: Record<string, FigPage> = {
          "nowrap": true
         }
        ],
-       "href": "/san-pham/bst-dau-doi-mu-chan-vao-doi"
+       "href": "/san-pham/mu-luoi-trai-cha-sao"
       },
       {
        "k": "card",
@@ -6268,7 +6268,7 @@ export const figmaPages: Record<string, FigPage> = {
          "nowrap": true
         }
        ],
-       "href": "/san-pham/bst-dau-doi-mu-chan-vao-doi"
+       "href": "/san-pham/mu-tai-beo-ha-ha"
       }
      ],
      "bg": "#2c4425"

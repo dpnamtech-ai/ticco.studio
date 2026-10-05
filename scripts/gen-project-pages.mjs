@@ -39,7 +39,8 @@ const PAGES = [
   { slug: "freezedom-thu-roi-nghi-di", file: "du-an-Thu-roi-nghi-di", mobile: "du-an-Thu-Roi-Nghi-Di-mobile", alt: "Tíc Cơ x Freezedom: Thu Rồi Nghỉ Đi", links: { "735:179": "/san-pham/so-nghi-di" }, anchors: { "735:190": "pop-up-event" }, mobileAnchors: { "979:972": "pop-up-event" } },
   {
     slug: "neenee-dau-doi-mu-chan-vao-doi", file: "du-an-Dau-doi-mu-chan-vao-doi", mobile: "du-an-Dau-Doi-Troi-Chan-Dap-Datmobile", alt: "Tíc Cơ x Neenee: Đầu đội mũ, Chân vào đời",
-    links: { "735:299": "/san-pham/bst-dau-doi-mu-chan-vao-doi", "735:300": "/san-pham/bst-dau-doi-mu-chan-vao-doi" },
+    // each hat card opens its own hat (was the photo-less pre-DEMO bundle page: a grey box)
+    links: { "735:299": "/san-pham/mu-luoi-trai-cha-sao", "735:300": "/san-pham/mu-tai-beo-ha-ha" },
   },
 ];
 

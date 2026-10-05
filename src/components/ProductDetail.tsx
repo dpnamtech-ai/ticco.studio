@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState, type CSSProperties } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useInView } from "framer-motion";
 import { Check } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 import Reveal from "@/components/Reveal";
@@ -52,6 +52,19 @@ type Vars = CSSProperties & Record<`--${string}`, string>;
 // Full-quality photos are heavy: each one fades in from a soft blur once loaded, over the grey box, instead of popping in.
 const fade = "opacity-0 blur-[6px] transition-[opacity,filter] duration-700 ease-out data-[loaded=true]:opacity-100 data-[loaded=true]:blur-none";
 const onLoad = (e: React.SyntheticEvent<HTMLImageElement>) => (e.currentTarget.dataset.loaded = "true");
+// Photos below the fold load before anyone scrolls to them, so their blur->sharp would play unseen: these sharpen
+// only once loaded AND on screen (client 06/10: "the 4 sub photos have no effect, only the main one").
+function SharpenIn({ delay = 0, ...img }: { src: string; alt: string; delay?: number; style?: CSSProperties; sizes?: string }) {
+  const box = useRef<HTMLSpanElement>(null);
+  const seen = useInView(box, { once: true, margin: "0px 0px -15% 0px" });
+  const [loaded, setLoaded] = useState(false);
+  return (
+    <span ref={box} className="absolute inset-0">
+      <Image {...img} alt={img.alt} fill className={fade} style={{ ...img.style, transitionDelay: `${delay}s` }} data-loaded={loaded && seen} onLoad={() => setLoaded(true)} />
+    </span>
+  );
+}
+
 // Under it, a ~300-byte blurred preview of the same photo, framed the same way (scripts/gen-blur.mjs): the box shows the
 // photo's colours at once instead of grey while the full-size file loads.
 function Preview({ c }: { c: Crop & { blur?: string } }) {
@@ -159,7 +172,7 @@ export default function ProductDetail({
             >
               <div className="absolute inset-0 transition-transform duration-500 group-hover:scale-105">
                 <Preview c={img} />
-                <Image src={img.src} alt={`${t(name)} ${t("— ảnh")} ${i + 2}`} fill className={fade} onLoad={onLoad} style={fillStyle(img)} sizes={zoomSizes("(max-width: 1024px) 50vw, 22vw", img)} />
+                <SharpenIn src={img.src} alt={`${t(name)} ${t("— ảnh")} ${i + 2}`} delay={i * 0.12} style={fillStyle(img)} sizes={zoomSizes("(max-width: 1024px) 50vw, 22vw", img)} />
               </div>
             </Reveal>
           ))}
