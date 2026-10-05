@@ -566,6 +566,9 @@ for (const [id, name, body, want] of [
   ["VAL-09", "Sản phẩm hết hàng -> 422", { ...customer, items: [item({ id: "so-nghi-di", variant: "" })] }, 422],
   ["VAL-10", "Email sai -> 422", { ...customer, email: "abc@", items: [item()] }, 422],
 ]) {
+  // A case expected to SUCCEED writes a real order: only locally (mock Sheet). On prod it would land in the shop's
+  // Sheet (VAL-06b did, 03-06/10: rows "Regression Test" 0900000000 x26).
+  if (want === 200 && !LOCAL) continue;
   await test(id, name, async () => { const r = await order(body); return expect(r.status === want, `status=${r.status} ${(await r.text()).slice(0, 120)}`); });
 }
 await test("VAL-12", "Mobile: bấm đặt khi form trống -> trang cuộn tới ô lỗi đầu tiên (BUG-024)", async () => {

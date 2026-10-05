@@ -35,6 +35,7 @@ Mức độ: **P0** mất tiền/mất đơn/lộ dữ liệu · **P1** chặn k
 | BUG-025 | 05/10 | P3 | Mobile checkout: giá "280.000 VNĐ" bẻ 2 dòng | Không nowrap | whitespace-nowrap | CO-02 | ✅ |
 | BUG-026 | 05/10 | P3 | Ô tìm kiếm có 2 nút × (trình duyệt + web) | Nút xoá mặc định của input search | Ẩn nút của trình duyệt | SRC-08 | ✅ |
 | BUG-027 | 05/10 | P1 | (khách) Mascot mobile chữ thường; Freezedom tô nền cả đoạn; Chúc Tết xuống dòng khác mẫu; khoảng trắng Mình Trong Nhà; đường kẻ Neenee | id layer mobile khác desktop; thiếu font Be Vietnam Pro; khung không footer; làm tròn px | UPPER, MARK_PARTS mobile, font Pro, cắt chiều cao, dải +1px | ui-audit | ✅ dc053fd |
+| BUG-030 | 06/10 | P1 | Regression chạy trên prod ghi đơn thật vào Sheet của shop (VAL-06b "Regression Test" 0900000000 ×26, ~10-15 dòng từ 03/10) | Case mong đợi 200 không bị chặn khi chạy prod | Case đặt hàng thành công chỉ chạy local (Sheet giả) | VAL-06b | ✅ |
 | QA-GAP-02 | 05/10 | — | Bộ test cũ không đo giao diện mobile so với Figma, không đi như khách mới | — | Thêm 4 lớp: ui-audit (Figma, 5 khổ), crawl khách mới, infra-check, i18n-check — xem MASTER-TEST-PLAN | — | ✅ |
 | QA-GAP-01 | 30/09 | — | 75/75 pass nhưng lọt BUG-017/018: bộ test chỉ kiểm chức năng, **không so hình với Figma** | Thiếu tầng kiểm tra hình ảnh | Thêm `scripts/visual-diff.mjs` (so ảnh chụp trang với render Figma, báo vùng lệch) + review ảnh chụp mobile mỗi lần deploy | VIS-* | Đang làm |
 
