@@ -619,6 +619,61 @@ await test("VAL-11", "Form báo lỗi SĐT sai ngay dưới ô nhập", async ()
   return expect(await bodyHas("Số điện thoại chưa đúng"), "no field error");
 });
 
+// ================= 7b. Lỗi khách báo 05-06/10 =================
+await test("BUG-031", "Về Tíc Cơ mobile: 3 khối chữ khác nhau, khối 3 là đoạn 'Châm ngôn…'", async () => {
+  await mobile();
+  await go("/ve-tic-co");
+  const t = await page.evaluate(() => [...document.querySelectorAll("[data-fig]")].filter((e) => e.offsetParent).map((e) => e.textContent.replace(/\s+/g, " ").trim()).filter((x) => x.length > 60));
+  await desktop();
+  return expect(t.length >= 3 && new Set(t).size === t.length && t.some((x) => x.startsWith("Châm ngôn")), JSON.stringify(t.map((x) => x.slice(0, 30))));
+});
+await test("BUG-032", "Trang chủ mobile: 3 nhãn vàng chỉ 1 khung (chữ không có nền riêng), EN cùng cỡ chữ", async () => {
+  await mobile();
+  const r = {};
+  for (const path of ["/", "/en"]) {
+    await go(path);
+    r[path] = await page.evaluate(() => [...document.querySelectorAll("[data-fig]")].filter((e) => e.offsetParent && /PHÓNG KHOÁNG|CHĂM CHÚ|NIỀM VUI GIẢN|FREE-SPIRITED|MINDFUL|SIMPLE JOYS/.test(e.textContent)).map((e) => [getComputedStyle(e).backgroundColor, parseFloat(getComputedStyle(e).fontSize)]));
+  }
+  await desktop();
+  const all = [...r["/"], ...r["/en"]];
+  const sizes = r["/en"].map((x) => x[1]);
+  return expect(all.length === 6 && all.every((x) => x[0] === "rgba(0, 0, 0, 0)") && Math.max(...sizes) / Math.min(...sizes) < 1.2, JSON.stringify(r));
+});
+await test("BUG-033", "Trang Neenee: 2 thẻ mũ mở đúng từng mũ, không còn link trang BST mũ không ảnh", async () => {
+  await go("/kham-pha/neenee-dau-doi-mu-chan-vao-doi");
+  const h = await page.evaluate(() => [...document.querySelectorAll("a[href*='/san-pham/']")].map((a) => a.getAttribute("href")));
+  return expect(h.some((x) => x.endsWith("mu-tai-beo-ha-ha")) && h.some((x) => x.endsWith("mu-luoi-trai-cha-sao")) && !h.some((x) => x.includes("bst-dau-doi-mu")), h.join(" "));
+});
+await test("BUG-034", "Ảnh phụ sản phẩm chỉ chuyển mờ->nét khi cuộn tới (mobile)", async () => {
+  await mobile();
+  await go("/san-pham/khan-bandana-van-su-tuy-minh");
+  await sleep(2500);
+  const before = await page.evaluate(() => [...document.querySelectorAll("main img[data-loaded]")].at(-1).dataset.loaded);
+  await page.evaluate(() => [...document.querySelectorAll("main img[data-loaded]")].at(-1).scrollIntoView({ block: "center" }));
+  await sleep(2500);
+  const after = await page.evaluate(() => [...document.querySelectorAll("main img[data-loaded]")].at(-1).dataset.loaded);
+  await desktop();
+  return expect(before === "false" && after === "true", `before=${before} after=${after}`);
+});
+await test("UI-08", "Logo navbar nét trên màn lớn retina (file >= 2x khung hiển thị)", async () => {
+  await page.setViewport({ width: 1920, height: 900, deviceScaleFactor: 2 });
+  await go("/");
+  const r = await page.evaluate(() => { const i = document.querySelector("nav img"); return { css: i.getBoundingClientRect().width, w: +(i.currentSrc.match(/w=(\d+)/)?.[1] ?? 0) }; });
+  await desktop();
+  return expect(r.w >= r.css * 2, JSON.stringify(r));
+});
+await test("UI-09", "Tiêu đề trang chủ 'Tíc Cơ Studios'; 'TẤT CẢ SẢN PHẨM >' nằm dưới thanh tím", async () => {
+  await go("/");
+  const r = await page.evaluate(() => {
+    const a = [...document.querySelectorAll("a")].find((x) => x.offsetParent && /^Tất cả sản phẩm >$/i.test(x.textContent.trim()));
+    const bar = [...document.querySelectorAll("h2")].find((x) => /Chú ý! Sản phẩm/i.test(x.textContent)).parentElement.querySelector("div");
+    const rg = document.createRange(); rg.selectNodeContents(a); // the glyphs (the link box is 84px tall, text centred)
+    const t = rg.getBoundingClientRect(), b = bar.getBoundingClientRect();
+    return { title: document.title, gap: Math.round(t.top - b.bottom) };
+  });
+  return expect(r.title === "Tíc Cơ Studios" && r.gap >= 10, JSON.stringify(r));
+});
+
 // ================= 8. Đặt hàng thật (chỉ local, Sheet giả) =================
 if (LOCAL) {
   const seed = async (lines) => { await go("/"); await page.evaluate((l) => { localStorage.setItem("ticco-cart", JSON.stringify(l)); sessionStorage.clear(); }, lines); };
