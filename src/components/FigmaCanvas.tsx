@@ -251,7 +251,7 @@ function FixedCanvas({ page, lang }: { page: FigPage; lang: Lang }) {
   const leaf = (l: FigLeaf, hover = false) => {
     if (l.k === "text") {
       const Tag = l.tag;
-      const style = { fontFamily: l.pro ? "var(--font-be-vietnam-pro)" : undefined, color: l.color, opacity: l.op, fontWeight: l.wt, letterSpacing: `${l.ls}em`, fontSize: u(l.size), lineHeight: l.lh, background: l.bubble, "--mk": l.lh } as Vars;
+      const style = { fontFamily: l.pro ? "var(--font-be-vietnam-pro)" : undefined, color: l.color, opacity: l.op, fontWeight: l.wt, letterSpacing: `${l.ls}em`, fontSize: u(l.size), lineHeight: l.lh, "--mk": l.lh } as Vars; // no l.bubble here: the phone frame draws that rectangle itself (twice = offset bars)
       const align = { l: "text-left", c: "text-center", r: "text-right", j: "text-justify" }[l.align];
       if (l.fx === "fill")
         return (

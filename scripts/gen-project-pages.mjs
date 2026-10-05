@@ -70,6 +70,9 @@ const FX = {
 };
 // Phone-frame copy set in capitals on the site (the desktop banners are CSS uppercase; client asked for the same)
 const UPPER = new Set(["976:644", "976:669"]);
+// Phone-frame text the Figma frame got wrong, taken from another layer (desktop frame) instead:
+// ve-Tic-Co-mobile block 3 repeats block 2's copy; the desktop's third block (671:197) is the mission paragraph.
+const TEXT_FROM = { "976:432": ["ve-Tic-Co", "671:197"] };
 const FLY = new Set(["976:79", "976:82", "976:629", "976:637", "976:638", "976:639"]);
 // a vector the designer drew as an ellipse (ve-Tic-Co-mobile blob caps): a shape, not a text highlight
 const isEllipse = (l) => l.type === "VECTOR" && /^Ellipse/.test(l.name);
@@ -116,7 +119,8 @@ function build(cfg, W = 1280) {
     const box = { id: n.id, x: l.x, y: l.y - TOP, w: l.w, h: l.h };
     if (l.type === "TEXT") {
       const f = l.font;
-      let text = l.text.replace(/[ \t]+\n/g, "\n");
+      const from = TEXT_FROM[n.id];
+      let text = (from ? JSON.parse(readFileSync(`.figma-cache/demo/${from[0]}.json`, "utf8")).layers.find((x) => x.id === from[1]).text : l.text).replace(/[ \t]+\n/g, "\n");
       let y = box.y, lh = f.lineHeight;
       const lead = text.match(/^\n*/)[0].length;
       y += lead * lh;

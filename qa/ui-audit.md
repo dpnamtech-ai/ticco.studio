@@ -1,4 +1,4 @@
-# UI audit — 2026-10-05 17:50 UTC
+# UI audit — 2026-10-05 18:59 UTC
 
 Target: http://localhost:3200 · 244 page×width checks · widths 360, 390, 430, 1280, 1920
 Result: **6 finding(s)**

@@ -8165,7 +8165,7 @@ export const figmaMobile: Record<string, FigPage> = {
       "y": 707,
       "w": 284,
       "h": 184,
-      "text": "Lấy cảm hứng từ chất liệu đời thường, chú tâm vào tinh thần và lối sống người Việt: câu chữ mẹ đẻ, tinh thần hào sảng, thái độ xởi lởi, lao động hăng say,..\n\nNhững điều bình thường và chân thật được ghi lại với một thái độ khác - vui, nghệ, gần gũi.",
+      "text": "Châm ngôn là làm mọi thứ với niềm vui giản đơn và sự tò mò với đời.\n\nTíc Cơ mong muốn lan toả lối sống phóng khoáng và tích cực, bước đi cùng bạn trong hành trình phát triển mình và khám phá cuộc sống hàng ngày theo những góc nhìn mới.",
       "size": 17,
       "lh": 1.18,
       "ls": -0.05,
