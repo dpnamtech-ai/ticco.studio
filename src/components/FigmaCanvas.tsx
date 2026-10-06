@@ -143,6 +143,15 @@ function Text({ t, o, hover }: { t: FigText; o: number; hover?: boolean }) {
   );
 }
 
+// Figma gives a rotated layer's bounding box; the image's own box (W×H turned by rot) is solved back from it. The old
+// "swap w and h" only held at 90°: at 5.22° (home phone caption) it made a tall box that cut the Ê's hat and the Đ's corner.
+function unrotated({ w, h, rot = 0 }: { w: number; h: number; rot?: number }): CSSProperties {
+  const c = Math.abs(Math.cos((rot * Math.PI) / 180)), s = Math.abs(Math.sin((rot * Math.PI) / 180));
+  const d = c * c - s * s; // ponytail: 0 at 45°, no layer is turned that way
+  const w0 = (w * c - h * s) / d, h0 = (h * c - w * s) / d;
+  return { width: `${(w0 / w) * 100}%`, aspectRatio: `${w0}/${h0}`, transform: `translate(-50%,-50%) rotate(${-rot}deg)` };
+}
+
 function Img({ i, o, inCard }: { i: FigImg; o: number; inCard?: boolean }) {
   const img = (
     // next/image serves a resized copy per screen width instead of the full Figma export
@@ -162,7 +171,7 @@ function Img({ i, o, inCard }: { i: FigImg; o: number; inCard?: boolean }) {
           // Figma rotates the whole image layer; the layer's own box is the bounding box turned back
           <div
             className="absolute left-1/2 top-1/2 overflow-hidden"
-            style={{ width: `${(i.h / i.w) * 100}%`, aspectRatio: `${i.h}/${i.w}`, transform: `translate(-50%,-50%) rotate(${-i.rot}deg)` }}
+            style={unrotated(i)}
           >
             {img}
           </div>
@@ -229,7 +238,9 @@ function fitText(page: FigPage, lang: Lang): FigPage {
       const setLines = l.nowrap || l.h <= l.size * l.lh * (n + 0.5) || (n === 1 && len(l.text) < 60);
       // BUG-028: a translation set in more lines than the source must also fit the box height (EN mascot callouts
       // overlapped); BUG-029: paragraphs get 5% slack, the area estimate ran one line long
-      const tall = n / Math.max(n, text.split("\n").length);
+      // rows as shown, not as typed: a one-line Vietnamese source can wrap to 2 rows in its box (EN mascot caption fell to 9px)
+      const rows = Math.max(n, Math.round(l.h / (l.size * l.lh)));
+      const tall = rows / Math.max(rows, text.split("\n").length);
       const r = Math.min(tall, setLines ? longest(l.text) / longest(text) : Math.sqrt(len(l.text) / len(text)) * 0.95);
       return { ...l, text, size: l.size * Math.min(1, r) };
     }
@@ -289,7 +300,7 @@ function FixedCanvas({ page, lang }: { page: FigPage; lang: Lang }) {
       const pic = (
         <div className={`relative overflow-hidden ${l.mirror ? "-scale-x-100" : ""}`} style={{ aspectRatio: `${l.w}/${l.h}` }}>
           {l.rot ? (
-            <div className="absolute left-1/2 top-1/2 overflow-hidden" style={{ width: `${(l.h / l.w) * 100}%`, aspectRatio: `${l.h}/${l.w}`, transform: `translate(-50%,-50%) rotate(${-l.rot}deg)` }}>{img}</div>
+            <div className="absolute left-1/2 top-1/2 overflow-hidden" style={unrotated(l)}>{img}</div>
           ) : (
             img
           )}

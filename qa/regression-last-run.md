@@ -1,7 +1,7 @@
-# Regression — 2026-10-06 17:44 UTC
+# Regression — 2026-10-06 17:51 UTC
 
 Target: http://localhost:3100 (local, full incl. orders on a mock Sheet)
-Result: **98/98 pass**
+Result: **100/100 pass**
 
 | | ID | Case | Chi tiết |
 |---|---|---|---|
@@ -87,6 +87,8 @@ Result: **98/98 pass**
 | ✅ | BUG-034 | Ảnh phụ sản phẩm chỉ chuyển mờ->nét khi cuộn tới (mobile) |  |
 | ✅ | BUG-035 | Phụ kiện đời sống: bỏ thẻ BST Đần Sinh Tồn, 3 móc khoá có '[BST ĐẦN SINH TỒN]', tên không đè nhau |  |
 | ✅ | BUG-038 | Tất cả sản phẩm + trang chủ: 3 móc khoá Đần tách lẻ thay thẻ BST cũ |  |
+| ✅ | BUG-039 | Trang chủ mobile: chữ 'NGHỆ MỘT CÁCH ĐỜI THƯỜNG' (ảnh xoay 5°) không bị khung cắt mất dấu Ê / góc chữ Đ |  |
+| ✅ | BUG-040 | Mascot EN mobile: 'I just want to live happy and healthy' cùng cỡ chữ bản VN (không lí nhí) |  |
 | ✅ | BUG-036 | Ảnh phụ sản phẩm: hiệu ứng mờ->nét đủ lâu để thấy (>= 1s, blur đậm) |  |
 | ✅ | BUG-037 | BST Đần Sinh Tồn: chữ nút lựa chọn nằm trọn trong nút, nút không ra ngoài màn (1024/1280/390) |  |
 | ✅ | UI-08 | Logo navbar nét trên màn lớn retina (file >= 2x khung hiển thị) |  |

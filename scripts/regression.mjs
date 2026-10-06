@@ -672,6 +672,25 @@ await test("BUG-038", "Tất cả sản phẩm + trang chủ: 3 móc khoá Đầ
   const home = await page.evaluate(() => ({ bst: !!document.querySelector('#products a[href$="/san-pham/bst-dan-sinh-ton"]'), one: !!document.querySelector('#products a[href$="/san-pham/dan-sinh-ton-01"]') }));
   return expect(!all.bst && all.singles === 3 && !home.bst && home.one, JSON.stringify({ all, home }));
 });
+await test("BUG-039", "Trang chủ mobile: chữ 'NGHỆ MỘT CÁCH ĐỜI THƯỜNG' (ảnh xoay 5°) không bị khung cắt mất dấu Ê / góc chữ Đ", async () => {
+  await mobile();
+  await go("/");
+  const r = await page.evaluate(() => {
+    const box = [...document.querySelectorAll("main div[style*='rotate(-5.22deg)']")].find((x) => x.offsetParent);
+    const b = box.getBoundingClientRect(); // a rotated box's bounding rect: inside its frame when the box is the image's own
+    const f = box.parentElement.getBoundingClientRect();
+    return { box: [Math.round(box.offsetWidth), Math.round(box.offsetHeight)], spill: Math.round(Math.max(f.left - b.left, b.right - f.right, f.top - b.top, b.bottom - f.bottom)) };
+  });
+  await desktop();
+  return expect(r.box[0] > r.box[1] && r.spill <= 1, JSON.stringify(r));
+});
+await test("BUG-040", "Mascot EN mobile: 'I just want to live happy and healthy' cùng cỡ chữ bản VN (không lí nhí)", async () => {
+  await mobile();
+  const size = async (path, re) => { await go(path); return page.evaluate((s) => parseFloat(getComputedStyle([...document.querySelectorAll("main *")].filter((x) => new RegExp(s).test(x.textContent) && x.offsetParent).at(-1)).fontSize), re); };
+  const vi = await size("/mascot-dan", "Mình cũng chỉ muốn sống vui"), en = await size("/en/mascot-dan", "I just want");
+  await desktop();
+  return expect(en >= vi * 0.85, `vi=${vi} en=${en}`);
+});
 await test("BUG-036", "Ảnh phụ sản phẩm: hiệu ứng mờ->nét đủ lâu để thấy (>= 1s, blur đậm)", async () => {
   await go("/san-pham/bst-dan-sinh-ton");
   const r = await page.evaluate(() => { const s = getComputedStyle([...document.querySelectorAll("main img[data-loaded]")].at(-1)); return { dur: s.transitionDuration, filter: s.filter }; });
