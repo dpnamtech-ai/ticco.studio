@@ -83,6 +83,9 @@ const overlaps = (a, b) => a.x < b.x + b.w && a.x + a.w > b.x && a.y < b.y + b.h
 const PRODUCT_BY_NAME = Object.fromEntries(
   [...readFileSync("src/data/figma-cards.ts", "utf8").matchAll(/id: "([^"]+)"[^}]*?name: "([^"]+)"/g)].map(([, id, name]) => [name.replace(/\\n/g, " ").replace(/\s+/g, " ").trim().toLowerCase(), `/san-pham/${id}`]),
 );
+// Client 07/10: Figma's "Đần Sinh Tồn" box-set cards show keychain 01 (its photo and price) and now say so.
+const RENAME = { "BỘ SƯU TẬP\nĐẦN SINH TỒN": "[BST ĐẦN SINH TỒN]\nMÓC KHOÁ 01\nĐẦN CỨ BÌNH TĨNH" };
+PRODUCT_BY_NAME["bộ sưu tập đần sinh tồn"] = "/san-pham/dan-sinh-ton-01";
 // longest name first, anywhere in the card (some cards list the price above the name)
 const BY_LENGTH = Object.entries(PRODUCT_BY_NAME).sort(([a], [b]) => b.length - a.length);
 const cardLink = (cfg, text) => (cfg.productCards ? BY_LENGTH.find(([name]) => text.includes(name))?.[1] : undefined);
@@ -126,6 +129,7 @@ function build(cfg, W = 1280) {
       const lead = text.match(/^\n*/)[0].length;
       y += lead * lh;
       text = text.trim();
+      text = RENAME[text] ?? text;
       // capitals run wider than the frame's mixed-case copy: smaller so the lines still fit their box
       const upper = UPPER.has(n.id);
       if (upper) text = text.toUpperCase();

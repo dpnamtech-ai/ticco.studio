@@ -19,7 +19,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...SHOP_CATEGORIES.filter((c) => c.slug !== "tat-ca").map((c) => `/san-pham?danh-muc=${c.slug}`),
     ...Object.keys(figmaPages).filter((k) => k !== "kham-pha").map((k) => `/kham-pha/${k}`),
     ...policies.map((p) => `/chinh-sach/${p.slug}`),
-    ...products.map((p) => `/san-pham/${p.id}`),
+    // a product with no photo (the pre-DEMO hat bundle, URL kept alive) is not worth indexing
+    ...products.filter((p) => p.image).map((p) => `/san-pham/${p.id}`),
   ];
 
   // every page in both languages, each entry pointing at its other-language version (hreflang)

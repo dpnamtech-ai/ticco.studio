@@ -691,6 +691,29 @@ await test("BUG-040", "Mascot EN mobile: 'I just want to live happy and healthy'
   await desktop();
   return expect(en >= vi * 0.85, `vi=${vi} en=${en}`);
 });
+await test("BUG-041", "Chi tiết sản phẩm desktop: tên ở 'Có thể bạn thích' không đè nhau; tiêu đề mũ không đè giá", async () => {
+  const hits = [];
+  for (const path of ["/san-pham/bst-dan-sinh-ton", "/san-pham/lot-coc-ra-khoi", "/san-pham/mu-tai-beo-ha-ha", "/en/san-pham/keychain-khong-so-cuoc-doi"]) {
+    await go(path);
+    hits.push(...(await page.evaluate((p) => {
+      const els = [...document.querySelectorAll("main h1, main h3, main h1 + * , main p")].filter((e) => e.offsetParent && e.textContent.trim());
+      const box = (e) => { const r = document.createRange(); r.selectNodeContents(e); return r.getBoundingClientRect(); };
+      const out = [];
+      els.forEach((a, i) => els.slice(i + 1).forEach((b) => {
+        if (a.contains(b) || b.contains(a)) return;
+        const x = box(a), y = box(b);
+        if (x.width && y.width && x.left < y.right - 1 && y.left < x.right - 1 && Math.min(x.bottom, y.bottom) - Math.max(x.top, y.top) > 0.35 * Math.min(x.height, y.height)) out.push(`${p}: "${a.textContent.trim().slice(0, 20)}" x "${b.textContent.trim().slice(0, 20)}"`);
+      }));
+      return out;
+    }, path)));
+  }
+  return expect(hits.length === 0, hits.slice(0, 4).join(" | ") || "ok");
+});
+await test("BUG-043", "Chính sách thanh toán: có COD, mã đơn mẫu đúng dạng TC00001", async () => {
+  await go("/chinh-sach/thanh-toan");
+  const t = await page.evaluate(() => document.querySelector("main").innerText);
+  return expect(/COD/.test(t) && t.includes("TC00001") && !t.includes("TC1AB23CD4"), t.slice(0, 120));
+});
 await test("BUG-036", "Ảnh phụ sản phẩm: hiệu ứng mờ->nét đủ lâu để thấy (>= 1s, blur đậm)", async () => {
   await go("/san-pham/bst-dan-sinh-ton");
   const r = await page.evaluate(() => { const s = getComputedStyle([...document.querySelectorAll("main img[data-loaded]")].at(-1)); return { dur: s.transitionDuration, filter: s.filter }; });

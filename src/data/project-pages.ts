@@ -6643,7 +6643,7 @@ export const figmaMobile: Record<string, FigPage> = {
         "w": 126,
         "h": 166,
         "src": "/images/figma/ef4ef25a6a8f4a710f9fd609c193d5f2f856275e.webp",
-        "alt": "BỘ SƯU TẬP ĐẦN SINH TỒN",
+        "alt": "[BST ĐẦN SINH TỒN] MÓC KHOÁ 01 ĐẦN CỨ BÌNH TĨNH",
         "crop": [
          [
           0.5875,
@@ -6664,15 +6664,14 @@ export const figmaMobile: Record<string, FigPage> = {
         "y": 1141,
         "w": 104,
         "h": 27,
-        "text": "BỘ SƯU TẬP\nĐẦN SINH TỒN",
+        "text": "[BST ĐẦN SINH TỒN]\nMÓC KHOÁ 01\nĐẦN CỨ BÌNH TĨNH",
         "size": 9.001538276672363,
         "lh": 1.4,
         "ls": -0.04,
         "wt": 400,
         "align": "c",
         "color": "#323133",
-        "tag": "p",
-        "nowrap": true
+        "tag": "p"
        },
        {
         "k": "text",
@@ -6692,7 +6691,7 @@ export const figmaMobile: Record<string, FigPage> = {
         "nowrap": true
        }
       ],
-      "href": "/san-pham/bst-dan-sinh-ton"
+      "href": "/san-pham/dan-sinh-ton-01"
      },
      {
       "k": "card",
@@ -7162,15 +7161,14 @@ export const figmaMobile: Record<string, FigPage> = {
         "y": 1994,
         "w": 104,
         "h": 27,
-        "text": "BỘ SƯU TẬP\nĐẦN SINH TỒN",
+        "text": "[BST ĐẦN SINH TỒN]\nMÓC KHOÁ 01\nĐẦN CỨ BÌNH TĨNH",
         "size": 8.964164733886719,
         "lh": 1.4,
         "ls": -0.04,
         "wt": 400,
         "align": "c",
         "color": "#323133",
-        "tag": "p",
-        "nowrap": true
+        "tag": "p"
        },
        {
         "k": "img",
@@ -7180,7 +7178,7 @@ export const figmaMobile: Record<string, FigPage> = {
         "w": 126,
         "h": 166,
         "src": "/images/figma/ef4ef25a6a8f4a710f9fd609c193d5f2f856275e.webp",
-        "alt": "BỘ SƯU TẬP ĐẦN SINH TỒN",
+        "alt": "[BST ĐẦN SINH TỒN] MÓC KHOÁ 01 ĐẦN CỨ BÌNH TĨNH",
         "crop": [
          [
           0.6345,
@@ -7212,7 +7210,7 @@ export const figmaMobile: Record<string, FigPage> = {
         "nowrap": true
        }
       ],
-      "href": "/san-pham/bst-dan-sinh-ton"
+      "href": "/san-pham/dan-sinh-ton-01"
      },
      {
       "k": "card",
@@ -9084,15 +9082,14 @@ export const figmaMobile: Record<string, FigPage> = {
         "y": 2488,
         "w": 107,
         "h": 28,
-        "text": "BỘ SƯU TẬP\nĐẦN SINH TỒN",
+        "text": "[BST ĐẦN SINH TỒN]\nMÓC KHOÁ 01\nĐẦN CỨ BÌNH TĨNH",
         "size": 9.216897010803223,
         "lh": 1.4,
         "ls": -0.04,
         "wt": 400,
         "align": "c",
         "color": "#323133",
-        "tag": "p",
-        "nowrap": true
+        "tag": "p"
        },
        {
         "k": "img",
@@ -9102,7 +9099,7 @@ export const figmaMobile: Record<string, FigPage> = {
         "w": 130,
         "h": 170,
         "src": "/images/figma/ef4ef25a6a8f4a710f9fd609c193d5f2f856275e.webp",
-        "alt": "BỘ SƯU TẬP ĐẦN SINH TỒN",
+        "alt": "[BST ĐẦN SINH TỒN] MÓC KHOÁ 01 ĐẦN CỨ BÌNH TĨNH",
         "crop": [
          [
           0.6345,
@@ -9134,7 +9131,7 @@ export const figmaMobile: Record<string, FigPage> = {
         "nowrap": true
        }
       ],
-      "href": "/san-pham/bst-dan-sinh-ton"
+      "href": "/san-pham/dan-sinh-ton-01"
      },
      {
       "k": "card",

@@ -37,8 +37,9 @@ export const policies: Policy[] = [
     slug: "thanh-toan",
     title: "Chính sách thanh toán",
     blocks: [
-      "Tíc Cơ nhận thanh toán bằng chuyển khoản ngân hàng.",
-      "- Sau khi đặt hàng, bạn nhận mã đơn (VD: TC1AB23CD4) cùng thông tin tài khoản và mã QR.\n- Chuyển đúng số tiền và ghi nội dung chuyển khoản = mã đơn.\n- Tíc Cơ đối chiếu và liên hệ xác nhận trong vòng [24 giờ làm việc].\n- Đơn chưa thanh toán sau [48 giờ] sẽ được huỷ.",
+      "Tíc Cơ nhận thanh toán bằng chuyển khoản ngân hàng hoặc thanh toán khi nhận hàng (COD).",
+      "Chọn COD: bạn trả tiền cho nhân viên giao hàng khi nhận hàng, không cần chuyển khoản trước. Các bước dưới đây dành cho chuyển khoản.",
+      "- Sau khi đặt hàng, bạn nhận mã đơn (VD: TC00001) cùng thông tin tài khoản và mã QR.\n- Chuyển đúng số tiền và ghi nội dung chuyển khoản = mã đơn.\n- Tíc Cơ đối chiếu và liên hệ xác nhận trong vòng [24 giờ làm việc].\n- Đơn chưa thanh toán sau [48 giờ] sẽ được huỷ.",
       "Tài khoản nhận: [Ngân hàng] · STK [...] · Chủ tài khoản [...]",
       "Tíc Cơ không bao giờ yêu cầu bạn cung cấp mật khẩu, mã OTP hay thông tin thẻ.",
     ],

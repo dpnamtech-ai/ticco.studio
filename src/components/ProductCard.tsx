@@ -100,7 +100,7 @@ export default function ProductCard({ id, name, priceFrom, image, index = 0, sol
         )}
       </div>
       <div className="text-center">
-        <h3 className={compact ? `text-[15px] leading-[19px] lg:text-[1.172cqw] lg:leading-[1.484cqw] font-normal tracking-[-0.6px] lg:tracking-[-0.047cqw] text-[#323133] whitespace-pre-line ${nameClassName}` : `text-sm leading-5 lg:text-[1.328cqw] lg:leading-[1.484cqw] font-medium tracking-[-0.5px] lg:tracking-[-0.094cqw] text-black ${displayName ? "whitespace-pre-line" : "lg:whitespace-nowrap lg:-mx-[3.125cqw]"} ${nameClassName}`}>
+        <h3 className={compact ? `text-[15px] leading-[19px] lg:text-[1.172cqw] lg:leading-[1.484cqw] font-normal tracking-[-0.6px] lg:tracking-[-0.047cqw] text-[#323133] whitespace-pre-line ${nameClassName}` : `text-sm leading-5 lg:text-[1.328cqw] lg:leading-[1.484cqw] font-medium tracking-[-0.5px] lg:tracking-[-0.094cqw] text-black ${displayName ? "whitespace-pre-line" : ""} ${nameClassName}`}>
           {compact ? t(displayName ?? FIGMA_NAMES[id] ?? name.toUpperCase()) : t(displayName ?? name)}
         </h3>
         <p className={compact ? "text-xs leading-5 lg:text-[0.9375cqw] lg:leading-[1.5625cqw] font-light tracking-[-0.48px] lg:tracking-[-0.0375cqw] text-[#8b8989]" : "text-xs leading-5 lg:text-[1.016cqw] lg:leading-[1.484cqw] lg:mt-[0.078cqw] font-light tracking-[-0.4px] lg:tracking-[-0.07cqw] text-black"}>

@@ -96,7 +96,7 @@ export default async function SanPhamPage({ searchParams }: { searchParams: Sear
         <div className={`mt-8 lg:mt-[4.219cqw] grid grid-cols-2 lg:grid-cols-4 gap-x-4 lg:gap-x-[2.734cqw] gap-y-8 lg:gap-y-[4.453cqw] lg:w-[90.703cqw] ${FL ? "lg:block lg:relative lg:h-(--gh)" : ""}`}>
           {items.map((p, i) => {
             const f = figmaDisplay(p);
-            const card = <ProductCard key={p.id} {...p} index={i % 4} crop={f.cardCrop} priceLabel={f.cardPrice} displayName={f.title.startsWith("[BST") ? f.title : undefined} />;
+            const card = <ProductCard key={p.id} {...p} index={i % 4} crop={f.cardCrop} priceLabel={f.cardPrice} displayName={f.title.startsWith("[BST") ? f.title.replace("] ", "]\n") : undefined} />;
             const c = FL?.cards[i];
             return c ? (
               <div key={p.id} className="lg:absolute lg:left-(--x) lg:top-(--y) lg:w-(--w)" style={{ "--x": cq(c[0] - GRID_X), "--y": cq(c[1] - GRID_Y), "--w": cq(264) } as CSSProperties}>

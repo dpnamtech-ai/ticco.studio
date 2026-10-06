@@ -234,8 +234,10 @@ function fitText(page: FigPage, lang: Lang): FigPage {
       let text = t(l.text, lang);
       if (text === l.text) return l;
       // (not paragraphs: a blank line in the Vietnamese means paragraphs, which the translation keeps its own way)
-      if (n > 1 && !text.includes("\n") && !l.text.includes("\n\n")) text = balance(text, n);
       const setLines = l.nowrap || l.h <= l.size * l.lh * (n + 0.5) || (n === 1 && len(l.text) < 60);
+      // only where the typed lines are the rows: a source that also wraps in its box would wrap each balanced line
+      // again (EN "Make Life New" left "that" alone on a row)
+      if (setLines && n > 1 && !text.includes("\n") && !l.text.includes("\n\n")) text = balance(text, n);
       // BUG-028: a translation set in more lines than the source must also fit the box height (EN mascot callouts
       // overlapped); BUG-029: paragraphs get 5% slack, the area estimate ran one line long
       // rows as shown, not as typed: a one-line Vietnamese source can wrap to 2 rows in its box (EN mascot caption fell to 9px)
