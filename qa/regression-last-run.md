@@ -1,7 +1,7 @@
-# Regression — 2026-10-05 21:15 UTC
+# Regression — 2026-10-06 17:28 UTC
 
 Target: http://localhost:3100 (local, full incl. orders on a mock Sheet)
-Result: **94/94 pass**
+Result: **97/97 pass**
 
 | | ID | Case | Chi tiết |
 |---|---|---|---|
@@ -85,6 +85,9 @@ Result: **94/94 pass**
 | ✅ | BUG-032 | Trang chủ mobile: 3 nhãn vàng chỉ 1 khung (chữ không có nền riêng), EN cùng cỡ chữ |  |
 | ✅ | BUG-033 | Trang Neenee: 2 thẻ mũ mở đúng từng mũ, không còn link trang BST mũ không ảnh |  |
 | ✅ | BUG-034 | Ảnh phụ sản phẩm chỉ chuyển mờ->nét khi cuộn tới (mobile) |  |
+| ✅ | BUG-035 | Phụ kiện đời sống: bỏ thẻ BST Đần Sinh Tồn, 3 móc khoá có '[BST ĐẦN SINH TỒN]', tên không đè nhau |  |
+| ✅ | BUG-036 | Ảnh phụ sản phẩm: hiệu ứng mờ->nét đủ lâu để thấy (>= 1s, blur đậm) |  |
+| ✅ | BUG-037 | BST Đần Sinh Tồn: chữ nút lựa chọn nằm trọn trong nút, nút không ra ngoài màn (1024/1280/390) |  |
 | ✅ | UI-08 | Logo navbar nét trên màn lớn retina (file >= 2x khung hiển thị) |  |
 | ✅ | UI-09 | Tiêu đề trang chủ 'Tíc Cơ Studios'; 'TẤT CẢ SẢN PHẨM >' nằm dưới thanh tím |  |
 | ✅ | ORD-01 | Đặt hàng: màn tổng quan + mã đơn + tổng đúng; Sheet nhận giá đúng dù giỏ bị sửa giá |  |

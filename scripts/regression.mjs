@@ -655,6 +655,34 @@ await test("BUG-034", "Ảnh phụ sản phẩm chỉ chuyển mờ->nét khi cu
   await desktop();
   return expect(before === "false" && after === "true", `before=${before} after=${after}`);
 });
+await test("BUG-035", "Phụ kiện đời sống: bỏ thẻ BST Đần Sinh Tồn, 3 móc khoá có '[BST ĐẦN SINH TỒN]', tên không đè nhau", async () => {
+  await go("/san-pham?danh-muc=phu-kien-doi-song");
+  const r = await page.evaluate(() => {
+    const names = [...document.querySelectorAll("main h3")];
+    const boxes = names.map((h) => { const rg = document.createRange(); rg.selectNodeContents(h); const b = rg.getBoundingClientRect(); return [b.left, b.right, b.top, b.bottom]; });
+    const overlap = boxes.some((a, i) => boxes.some((b, j) => i !== j && a[0] < b[1] && b[0] < a[1] && a[2] < b[3] && b[2] < a[3]));
+    return { bst: !!document.querySelector('main a[href$="/san-pham/bst-dan-sinh-ton"]'), tagged: names.filter((h) => h.innerText.startsWith("[BST ĐẦN SINH TỒN]\nMÓC KHOÁ")).length, overlap };
+  });
+  return expect(!r.bst && r.tagged === 3 && !r.overlap, JSON.stringify(r));
+});
+await test("BUG-036", "Ảnh phụ sản phẩm: hiệu ứng mờ->nét đủ lâu để thấy (>= 1s, blur đậm)", async () => {
+  await go("/san-pham/bst-dan-sinh-ton");
+  const r = await page.evaluate(() => { const s = getComputedStyle([...document.querySelectorAll("main img[data-loaded]")].at(-1)); return { dur: s.transitionDuration, filter: s.filter }; });
+  return expect(parseFloat(r.dur) >= 1 && /blur\((1[0-9]|[2-9]\d)/.test(r.filter), JSON.stringify(r));
+});
+await test("BUG-037", "BST Đần Sinh Tồn: chữ nút lựa chọn nằm trọn trong nút, nút không ra ngoài màn (1024/1280/390)", async () => {
+  const bad = [];
+  for (const w of [1024, 1280, 390]) {
+    await page.setViewport({ width: w, height: 900 });
+    await go("/san-pham/bst-dan-sinh-ton");
+    bad.push(...(await page.evaluate(() => [...document.querySelectorAll("main li > a, main li > button")].flatMap((e) => {
+      const b = e.getBoundingClientRect(), s = e.querySelector("span").getBoundingClientRect();
+      return s.left < b.left - 1 || s.right > b.right + 1 || b.right > innerWidth ? [`${innerWidth}:${e.textContent.trim()}`] : [];
+    }))));
+  }
+  await desktop();
+  return expect(bad.length === 0, bad.join(", ") || "ok");
+});
 await test("UI-08", "Logo navbar nét trên màn lớn retina (file >= 2x khung hiển thị)", async () => {
   await page.setViewport({ width: 1920, height: 900, deviceScaleFactor: 2 });
   await go("/");

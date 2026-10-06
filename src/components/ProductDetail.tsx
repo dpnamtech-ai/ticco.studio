@@ -51,16 +51,18 @@ interface ProductDetailProps {
 type Vars = CSSProperties & Record<`--${string}`, string>;
 // Full-quality photos are heavy: each one fades in from a soft blur once loaded, over the grey box, instead of popping in.
 const fade = "opacity-0 blur-[6px] transition-[opacity,filter] duration-700 ease-out data-[loaded=true]:opacity-100 data-[loaded=true]:blur-none";
+const sharpen = "opacity-0 blur-[16px] transition-[opacity,filter] duration-[1400ms] ease-out data-[loaded=true]:opacity-100 data-[loaded=true]:blur-none";
 const onLoad = (e: React.SyntheticEvent<HTMLImageElement>) => (e.currentTarget.dataset.loaded = "true");
 // Photos below the fold load before anyone scrolls to them, so their blur->sharp would play unseen: these sharpen
 // only once loaded AND on screen (client 06/10: "the 4 sub photos have no effect, only the main one").
 function SharpenIn({ delay = 0, ...img }: { src: string; alt: string; delay?: number; style?: CSSProperties; sizes?: string }) {
   const box = useRef<HTMLSpanElement>(null);
-  const seen = useInView(box, { once: true, margin: "0px 0px -15% 0px" });
+  const seen = useInView(box, { once: true, margin: "0px 0px -25% 0px" });
   const [loaded, setLoaded] = useState(false);
   return (
     <span ref={box} className="absolute inset-0">
-      <Image {...img} alt={img.alt} fill className={fade} style={{ ...img.style, transitionDelay: `${delay}s` }} data-loaded={loaded && seen} onLoad={() => setLoaded(true)} />
+      {/* small files load fast, so a 0.7s fade under the slide-up read as "no effect" (client 07/10): slower and blurrier */}
+      <Image {...img} alt={img.alt} fill className={sharpen} style={{ ...img.style, transitionDelay: `${0.3 + delay}s` }} data-loaded={loaded && seen} onLoad={() => setLoaded(true)} />
     </span>
   );
 }

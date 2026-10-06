@@ -47,9 +47,11 @@ const ORDER: Record<ShopSlug, string[]> = {
   "tui-xach": ["tui-song-cu-khoi", "tui-vung-vang", "tote-xoi-loi-voi-doi", "tui-ngu-du", "tui-thuyen"],
   "thoi-trang": ["gile-yen-tam", "ao-phong-thoai-mai", "khan-bandana-van-su-tuy-minh", "mu-tai-beo-ha-ha", "mu-luoi-trai-cha-sao"],
   // client 2026-10-05: the 3 Đần Sinh Tồn keychains shown on their own here, ahead of the set
-  "phu-kien-doi-song": ["dan-sinh-ton-01", "dan-sinh-ton-02", "dan-sinh-ton-03", "bst-dan-sinh-ton", "lot-coc-ra-khoi", "keychain-nguoi-viet-yeu-nuoc", "keychain-uoc-duoc-lam-con-cho", "keychain-khong-so-cuoc-doi"],
+  "phu-kien-doi-song": ["dan-sinh-ton-01", "dan-sinh-ton-02", "dan-sinh-ton-03", "lot-coc-ra-khoi", "keychain-nguoi-viet-yeu-nuoc", "keychain-uoc-duoc-lam-con-cho", "keychain-khong-so-cuoc-doi"],
 };
 
+// Client 07/10: the accessories tab shows the 3 single keychains, not the box set (still in "Tất cả" and on its own page).
+const HIDDEN_IN: Record<string, string[]> = { "phu-kien-doi-song": ["bst-dan-sinh-ton"] };
 // Catalog products Figma doesn't list: single items of a collection (reached via its option buttons)
 // and the pre-DEMO hat bundle (URL kept alive). Products added later from /admin are listed after the Figma ones.
 const UNLISTED = new Set([
@@ -127,7 +129,7 @@ type Listable = { id: string; category: string };
 export function shopListing<T extends Listable>(products: T[], slug: string): T[] {
   const tab = shopCategory(slug);
   const listed = (id: string) => !UNLISTED.has(id) || ORDER[tab.slug].includes(id); // a tab may list a collection's singles
-  const inTab = products.filter((p) => listed(p.id) && (tab.category === null || p.category === tab.category));
+  const inTab = products.filter((p) => listed(p.id) && !HIDDEN_IN[tab.slug]?.includes(p.id) && (tab.category === null || p.category === tab.category));
   const rank = (id: string) => {
     const i = ORDER[tab.slug].indexOf(id);
     return i < 0 ? Infinity : i;
