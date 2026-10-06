@@ -9,14 +9,14 @@ type FigmaCard = { id: string; img: string; m: ImageTransform; ar: number; name:
 export const HOME_FEATURED: FigmaCard[] = [
   { id: "so-can-ban", img: "26f455ea91307277bc01af1057c1e6a7e3ad7ad6", m: [[0.94144, 0, 0.04955], [0, 0.99826, 0.00087]], ar: 0.75451, name: "BỘ SƯU TẬP SỔ CĂN BẢN", price: "255.000 VNĐ" },
   { id: "tui-song-cu-khoi", img: "49ed335455d55ceb3c5617fba6bbb556634841e3", m: [[0.97582, 0, 0.02621], [0, 0.86231, 0.10436]], ar: 0.75451, name: "TÚI SỐNG CỪ KHÔI", price: "355.000 VNĐ" },
-  { id: "bst-dan-sinh-ton", img: "ef4ef25a6a8f4a710f9fd609c193d5f2f856275e", m: [[0.5875, -0.02424, 0.23522], [0.01234, 0.51541, 0.31492]], ar: 0.76173, name: "BỘ SƯU TẬP\nĐẦN SINH TỒN", price: "165.000 VNĐ" },
+  { id: "dan-sinh-ton-01", img: "ef4ef25a6a8f4a710f9fd609c193d5f2f856275e", m: [[0.5875, -0.02424, 0.23522], [0.01234, 0.51541, 0.31492]], ar: 0.76173, name: "[BST ĐẦN SINH TỒN]\nMÓC KHOÁ 01\nĐẦN CỨ BÌNH TĨNH", price: "165.000 VNĐ" },
   { id: "gile-yen-tam", img: "e3bb3efef65e3164986172913836d0c9834070d4", m: [[0.82609, 0, 0.05453], [0, 0.87603, 0.12433]], ar: 0.75451, name: "GILE YÊN TÂM", price: "540.000 VNĐ" },
 ];
 
 export const HOME_CATEGORY: FigmaCard[] = [
   { id: "box-set-tim-kiem-dieu-ky-dieu", img: "00ed240b6839f517b382232a87b0d82ff6a3a2b6", m: [[0.62563, 0, 0.21089], [0, 0.54962, 0.29728]], ar: 0.75812, name: "BOXSET TÌM KIẾM\nĐIỀU KỲ DIỆU", price: "200.000 VNĐ" },
   { id: "gile-yen-tam", img: "e3bb3efef65e3164986172913836d0c9834070d4", m: [[0.83399, 0, 0.05453], [0, 0.87603, 0.12433]], ar: 0.76173, name: "GILE YÊN TÂM", price: "540.000 VNĐ" },
-  { id: "bst-dan-sinh-ton", img: "ef4ef25a6a8f4a710f9fd609c193d5f2f856275e", m: [[0.6345, -0.02618, 0.21574], [0.01333, 0.55665, 0.28074]], ar: 0.76173, name: "BỘ SƯU TẬP\nĐẦN SINH TỒN", price: "165.000 VNĐ" },
+  { id: "dan-sinh-ton-01", img: "ef4ef25a6a8f4a710f9fd609c193d5f2f856275e", m: [[0.6345, -0.02618, 0.21574], [0.01333, 0.55665, 0.28074]], ar: 0.76173, name: "[BST ĐẦN SINH TỒN]\nMÓC KHOÁ 01\nĐẦN CỨ BÌNH TĨNH", price: "165.000 VNĐ" },
   { id: "so-can-ban", img: "26f455ea91307277bc01af1057c1e6a7e3ad7ad6", m: [[0.94144, 0, 0.04955], [0, 0.99826, 0.00087]], ar: 0.75451, name: "BỘ SƯU TẬP\nSỔ CĂN BẢN", price: "255.000 VNĐ" },
   { id: "tui-song-cu-khoi", img: "49ed335455d55ceb3c5617fba6bbb556634841e3", m: [[0.97582, 0, 0.02621], [0, 0.86231, 0.10436]], ar: 0.75451, name: "TÚI SỐNG CỪ KHÔI", price: "355.000 VNĐ" },
   { id: "sticker-07-dan-noi", img: "3d650bab8dc0f5d72c72283231dec776c2ca9ec8", m: [[0.70639, 0, 0.14548], [0, 0.62175, 0.21922]], ar: 0.75725, name: "SET STICKER 07:\nĐẦN NÓI", price: "65.000 VNĐ" },
@@ -29,7 +29,7 @@ export const HOME_CATEGORY: FigmaCard[] = [
 ];
 
 export const MASCOT_GRID: FigmaCard[] = [
-  { id: "bst-dan-sinh-ton", img: "ef4ef25a6a8f4a710f9fd609c193d5f2f856275e", m: [[0.6345, -0.02618, 0.21574], [0.01333, 0.55665, 0.28074]], ar: 0.76173, name: "BỘ SƯU TẬP\nĐẦN SINH TỒN", price: "165.000 VNĐ" },
+  { id: "dan-sinh-ton-01", img: "ef4ef25a6a8f4a710f9fd609c193d5f2f856275e", m: [[0.6345, -0.02618, 0.21574], [0.01333, 0.55665, 0.28074]], ar: 0.76173, name: "[BST ĐẦN SINH TỒN]\nMÓC KHOÁ 01\nĐẦN CỨ BÌNH TĨNH", price: "165.000 VNĐ" },
   { id: "sticker-07-dan-noi", img: "3d650bab8dc0f5d72c72283231dec776c2ca9ec8", m: [[0.70639, 0, 0.14548], [0, 0.62175, 0.21922]], ar: 0.75725, name: "SET STICKER 07:\nĐẦN NÓI", price: "65.000 VNĐ" },
   { id: "sticker-08-dan-lao-dong", img: "510012b54d1bcbd94cb9923ce3fcc0d95060d2e9", m: [[0.72002, 0, 0.14588], [0, 0.63527, 0.2064]], ar: 0.75451, name: "SET STICKER 08:\nĐẦN LAO ĐỘNG", price: "65.000 VNĐ" },
   { id: "sticker-09-chuc-nhau-that-su", img: "9113ff9c37a8a0d99474fc70aa5298d7b1f5f347", m: [[0.72393, 0, 0.13479], [0, 0.63741, 0.22871]], ar: 0.75725, name: "SET STICKER 09:\nCHÚC NHAU THẬT SỰ", price: "65.000 VNĐ" },

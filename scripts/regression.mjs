@@ -665,6 +665,13 @@ await test("BUG-035", "Phụ kiện đời sống: bỏ thẻ BST Đần Sinh T�
   });
   return expect(!r.bst && r.tagged === 3 && !r.overlap, JSON.stringify(r));
 });
+await test("BUG-038", "Tất cả sản phẩm + trang chủ: 3 móc khoá Đần tách lẻ thay thẻ BST cũ", async () => {
+  await go("/san-pham");
+  const all = await page.evaluate(() => ({ bst: !!document.querySelector('main a[href$="/san-pham/bst-dan-sinh-ton"]'), singles: [1, 2, 3].filter((n) => document.querySelector(`main a[href$="/san-pham/dan-sinh-ton-0${n}"]`)).length }));
+  await go("/");
+  const home = await page.evaluate(() => ({ bst: !!document.querySelector('#products a[href$="/san-pham/bst-dan-sinh-ton"]'), one: !!document.querySelector('#products a[href$="/san-pham/dan-sinh-ton-01"]') }));
+  return expect(!all.bst && all.singles === 3 && !home.bst && home.one, JSON.stringify({ all, home }));
+});
 await test("BUG-036", "Ảnh phụ sản phẩm: hiệu ứng mờ->nét đủ lâu để thấy (>= 1s, blur đậm)", async () => {
   await go("/san-pham/bst-dan-sinh-ton");
   const r = await page.evaluate(() => { const s = getComputedStyle([...document.querySelectorAll("main img[data-loaded]")].at(-1)); return { dur: s.transitionDuration, filter: s.filter }; });

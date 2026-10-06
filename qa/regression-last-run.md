@@ -1,7 +1,7 @@
-# Regression — 2026-10-06 17:28 UTC
+# Regression — 2026-10-06 17:44 UTC
 
 Target: http://localhost:3100 (local, full incl. orders on a mock Sheet)
-Result: **97/97 pass**
+Result: **98/98 pass**
 
 | | ID | Case | Chi tiết |
 |---|---|---|---|
@@ -86,6 +86,7 @@ Result: **97/97 pass**
 | ✅ | BUG-033 | Trang Neenee: 2 thẻ mũ mở đúng từng mũ, không còn link trang BST mũ không ảnh |  |
 | ✅ | BUG-034 | Ảnh phụ sản phẩm chỉ chuyển mờ->nét khi cuộn tới (mobile) |  |
 | ✅ | BUG-035 | Phụ kiện đời sống: bỏ thẻ BST Đần Sinh Tồn, 3 móc khoá có '[BST ĐẦN SINH TỒN]', tên không đè nhau |  |
+| ✅ | BUG-038 | Tất cả sản phẩm + trang chủ: 3 móc khoá Đần tách lẻ thay thẻ BST cũ |  |
 | ✅ | BUG-036 | Ảnh phụ sản phẩm: hiệu ứng mờ->nét đủ lâu để thấy (>= 1s, blur đậm) |  |
 | ✅ | BUG-037 | BST Đần Sinh Tồn: chữ nút lựa chọn nằm trọn trong nút, nút không ra ngoài màn (1024/1280/390) |  |
 | ✅ | UI-08 | Logo navbar nét trên màn lớn retina (file >= 2x khung hiển thị) |  |

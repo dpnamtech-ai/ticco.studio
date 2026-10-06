@@ -30,7 +30,7 @@ const STICKERS = [
 const ORDER: Record<ShopSlug, string[]> = {
   "tat-ca": [
     "tui-vung-vang", "khan-bandana-van-su-tuy-minh", "gile-yen-tam", "tui-song-cu-khoi",
-    "tote-xoi-loi-voi-doi", "bst-dan-sinh-ton", "lot-coc-ra-khoi", "con-dau-go-han-hoan",
+    "tote-xoi-loi-voi-doi", "dan-sinh-ton-01", "dan-sinh-ton-02", "dan-sinh-ton-03", "lot-coc-ra-khoi", "con-dau-go-han-hoan",
     "box-set-tim-kiem-dieu-ky-dieu", "so-can-ban", "bst-postcard-triet-ly-song-dan", STICKERS[0],
     ...STICKERS.slice(1),
     "postcard-nguoi-viet-yeu-nuoc", "postcard-gai-dep", "postcard-ban-hoi-toi-y-nghia-cuoc-doi", "tui-ngu-du",
@@ -50,8 +50,8 @@ const ORDER: Record<ShopSlug, string[]> = {
   "phu-kien-doi-song": ["dan-sinh-ton-01", "dan-sinh-ton-02", "dan-sinh-ton-03", "lot-coc-ra-khoi", "keychain-nguoi-viet-yeu-nuoc", "keychain-uoc-duoc-lam-con-cho", "keychain-khong-so-cuoc-doi"],
 };
 
-// Client 07/10: the accessories tab shows the 3 single keychains, not the box set (still in "Tất cả" and on its own page).
-const HIDDEN_IN: Record<string, string[]> = { "phu-kien-doi-song": ["bst-dan-sinh-ton"] };
+// Client 07/10: the box set is listed nowhere (the 3 keychains take its card in "Tất cả"); its page stays, reached from the keychains' "BST 3 box" button.
+const HIDDEN_IN: Record<string, string[]> = { "phu-kien-doi-song": ["bst-dan-sinh-ton"], "tat-ca": ["bst-dan-sinh-ton"] };
 // Catalog products Figma doesn't list: single items of a collection (reached via its option buttons)
 // and the pre-DEMO hat bundle (URL kept alive). Products added later from /admin are listed after the Figma ones.
 const UNLISTED = new Set([
