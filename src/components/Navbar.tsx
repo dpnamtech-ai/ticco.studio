@@ -77,7 +77,7 @@ export default function Navbar() {
         <div className="relative max-w-[1280px] md:max-w-[calc(1280*var(--u))] mx-auto px-[calc(21*var(--m))] md:px-6 h-[calc(32*var(--m))] md:h-[calc(27*var(--u))] flex items-center justify-between gap-6 md:justify-center md:gap-0">
           {/* Wordmark */}
           <Link href={localize("/", lang)} aria-label={brand.shortName} className="shrink-0 md:absolute md:left-[calc(35*var(--u))] md:top-1/2 md:-translate-y-1/2">
-            <Image src="/images/logo-tic-co.png" alt={brand.shortName} width={2731} height={837} sizes="(min-width: 768px) 7vw, 13vw" quality={100} priority className="w-[calc(47*var(--m))] md:w-[calc(83*var(--u))] h-auto" />
+            <Image src="/images/logo-tic-co.png" alt={brand.shortName} width={2731} height={837} sizes="(min-width: 768px) 7vw, 13vw" quality={90} priority className="w-[calc(47*var(--m))] md:w-[calc(83*var(--u))] h-auto" />
           </Link>
 
           {/* Desktop nav */}

@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState, type CSSProperties } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion, AnimatePresence, useInView } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Check } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 import Reveal from "@/components/Reveal";
@@ -49,24 +49,8 @@ interface ProductDetailProps {
 }
 
 type Vars = CSSProperties & Record<`--${string}`, string>;
-// Full-quality photos are heavy: each one fades in from a soft blur once loaded, over the grey box, instead of popping in.
-const fade = "opacity-0 blur-[6px] transition-[opacity,filter] duration-700 ease-out data-[loaded=true]:opacity-100 data-[loaded=true]:blur-none";
-const sharpen = "opacity-0 blur-[16px] transition-[opacity,filter] duration-[1400ms] ease-out data-[loaded=true]:opacity-100 data-[loaded=true]:blur-none";
-const onLoad = (e: React.SyntheticEvent<HTMLImageElement>) => (e.currentTarget.dataset.loaded = "true");
-// Photos below the fold load before anyone scrolls to them, so their blur->sharp would play unseen: these sharpen
-// only once loaded AND on screen (client 06/10: "the 4 sub photos have no effect, only the main one").
-function SharpenIn({ delay = 0, ...img }: { src: string; alt: string; delay?: number; style?: CSSProperties; sizes?: string }) {
-  const box = useRef<HTMLSpanElement>(null);
-  const seen = useInView(box, { once: true, margin: "0px 0px -25% 0px" });
-  const [loaded, setLoaded] = useState(false);
-  return (
-    <span ref={box} className="absolute inset-0">
-      {/* small files load fast, so a 0.7s fade under the slide-up read as "no effect" (client 07/10): slower and blurrier */}
-      <Image {...img} alt={img.alt} fill className={sharpen} style={{ ...img.style, transitionDelay: `${0.3 + delay}s` }} data-loaded={loaded && seen} onLoad={() => setLoaded(true)} />
-    </span>
-  );
-}
-
+// Product photos are the product, not decoration (client 08/10): no fade, no wait-for-scroll — every gallery photo loads
+// at once and paints over its blurred preview the moment it arrives, the same way every time.
 // Under it, a ~300-byte blurred preview of the same photo, framed the same way (scripts/gen-blur.mjs): the box shows the
 // photo's colours at once instead of grey while the full-size file loads.
 function Preview({ c }: { c: Crop & { blur?: string } }) {
@@ -153,30 +137,28 @@ export default function ProductDetail({
       className={L ? "flex flex-col lg:block lg:relative lg:h-(--wh)" : "flex flex-col lg:grid lg:grid-cols-[42.969cqw_35.781cqw] lg:gap-x-[7.109cqw] lg:gap-y-[4.453cqw] lg:items-start"}
       style={L ? ({ "--wh": cq(layoutBottom(L) - 51) } as Vars) : undefined}
     >
-      <Reveal variant="curtain" duration={1.3} className={`order-1 ${L ? abs : "lg:order-none lg:col-start-1 lg:row-start-1"}`} style={at(L?.gallery[0])}>
+      <div className={`order-1 ${L ? abs : "lg:order-none lg:col-start-1 lg:row-start-1"}`} style={at(L?.gallery[0])}>
         <div ref={mainRef} className="relative aspect-[550/689] bg-[#d9d9d9] overflow-hidden scroll-mt-20" style={L && box(L.gallery[0])}>
           {main && <Preview key={`p-${main.src}`} c={main} />}
-          {main && <Image key={main.src} src={main.src} alt={selected === variants[0] ? t(name) : `${t(name)} - ${t(selected)}`} fill priority className={fade} onLoad={onLoad} sizes={zoomSizes("(max-width: 1024px) 100vw, 43vw", main)} style={fillStyle(main)} />}
+          {main && <Image key={main.src} src={main.src} alt={selected === variants[0] ? t(name) : `${t(name)} - ${t(selected)}`} fill priority sizes={zoomSizes("(max-width: 1024px) 100vw, 43vw", main)} style={fillStyle(main)} />}
         </div>
-      </Reveal>
+      </div>
 
       {smalls.length > 0 && (
         <div
           className={`order-2 mt-3 grid grid-cols-2 gap-3 ${L ? "lg:contents" : `lg:order-none lg:mt-0 lg:gap-[0.938cqw] lg:row-start-2 lg:col-start-1 ${wide ? "lg:grid-cols-3 lg:col-span-2 lg:w-[65cqw]" : ""}`}`}
         >
           {smalls.map((img, i) => (
-            <Reveal
+            <div
               key={`${img.src}-${i}`}
-              variant="up"
-              delay={0.05 * i}
               className={`group relative aspect-[269/336] overflow-hidden bg-[#d9d9d9] ${abs}`}
               style={L && { ...at(L.gallery[i + 1]), ...box(L.gallery[i + 1]) }}
             >
               <div className="absolute inset-0 transition-transform duration-500 group-hover:scale-105">
                 <Preview c={img} />
-                <SharpenIn src={img.src} alt={`${t(name)} ${t("— ảnh")} ${i + 2}`} delay={i * 0.12} style={fillStyle(img)} sizes={zoomSizes("(max-width: 1024px) 50vw, 22vw", img)} />
+                <Image src={img.src} alt={`${t(name)} ${t("— ảnh")} ${i + 2}`} fill loading="eager" style={fillStyle(img)} sizes={zoomSizes("(max-width: 1024px) 50vw, 22vw", img)} />
               </div>
-            </Reveal>
+            </div>
           ))}
         </div>
       )}
@@ -293,7 +275,7 @@ export default function ProductDetail({
             <Reveal variant="up" delay={0.3} className={`mt-4 ${flow("lg:mt-[1.953cqw]")} ${abs}`} style={at(L?.extraImg)}>
               <div className="relative w-full max-w-[394px] lg:max-w-none lg:w-[30.781cqw] overflow-hidden" style={{ aspectRatio: `${extra.w} / ${extra.h}` }}>
                 <Preview c={extra} />
-                <Image src={extra.src} alt={`${t(name)} — ${extra.label}`} fill className={fade} onLoad={onLoad} style={fillStyle(extra)} sizes={zoomSizes("(max-width: 1024px) 100vw, 31vw", extra)} />
+                <Image src={extra.src} alt={`${t(name)} — ${extra.label}`} fill loading="eager" style={fillStyle(extra)} sizes={zoomSizes("(max-width: 1024px) 100vw, 31vw", extra)} />
               </div>
             </Reveal>
           </>

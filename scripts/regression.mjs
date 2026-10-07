@@ -644,16 +644,19 @@ await test("BUG-033", "Trang Neenee: 2 thẻ mũ mở đúng từng mũ, không 
   const h = await page.evaluate(() => [...document.querySelectorAll("a[href*='/san-pham/']")].map((a) => a.getAttribute("href")));
   return expect(h.some((x) => x.endsWith("mu-tai-beo-ha-ha")) && h.some((x) => x.endsWith("mu-luoi-trai-cha-sao")) && !h.some((x) => x.includes("bst-dau-doi-mu")), h.join(" "));
 });
-await test("BUG-034", "Ảnh phụ sản phẩm chỉ chuyển mờ->nét khi cuộn tới (mobile)", async () => {
-  await mobile();
-  await go("/san-pham/khan-bandana-van-su-tuy-minh");
-  await sleep(2500);
-  const before = await page.evaluate(() => [...document.querySelectorAll("main img[data-loaded]")].at(-1).dataset.loaded);
-  await page.evaluate(() => [...document.querySelectorAll("main img[data-loaded]")].at(-1).scrollIntoView({ block: "center" }));
-  await sleep(2500);
-  const after = await page.evaluate(() => [...document.querySelectorAll("main img[data-loaded]")].at(-1).dataset.loaded);
+await test("BUG-034", "Ảnh sản phẩm hiện đủ ngay khi mở trang, KHÔNG cần cuộn, không mờ/ẩn (client 08/10 đổi từ BUG-034/036 cũ)", async () => {
+  const bad = [];
+  for (const vp of ["mobile", "desktop"]) {
+    if (vp === "mobile") await mobile(); else await desktop();
+    await go("/san-pham/khan-bandana-van-su-tuy-minh");
+    await sleep(4000); // no scrolling at all
+    bad.push(...(await page.evaluate((vp) => [...document.querySelectorAll("main img:not([aria-hidden])")].filter((i) => i.closest('[class*="aspect-[550"], [class*="aspect-[269"]')).slice(0, 6).flatMap((i, k) => {
+      const cs = getComputedStyle(i);
+      return !i.complete || !i.naturalWidth || +cs.opacity < 0.99 || cs.filter !== "none" ? [`${vp}#${k}: complete=${i.complete} op=${cs.opacity} filter=${cs.filter}`] : [];
+    }), vp)));
+  }
   await desktop();
-  return expect(before === "false" && after === "true", `before=${before} after=${after}`);
+  return expect(bad.length === 0, bad.join(" | ") || "ok");
 });
 await test("BUG-035", "Phụ kiện đời sống: bỏ thẻ BST Đần Sinh Tồn, 3 móc khoá có '[BST ĐẦN SINH TỒN]', tên không đè nhau", async () => {
   await go("/san-pham?danh-muc=phu-kien-doi-song");
@@ -709,15 +712,58 @@ await test("BUG-041", "Chi tiết sản phẩm desktop: tên ở 'Có thể bạ
   }
   return expect(hits.length === 0, hits.slice(0, 4).join(" | ") || "ok");
 });
+await test("BUG-044", "Thẻ sản phẩm trên trang chủ/Mascot (VN+EN, 390+1280): tên không đè giá", async () => {
+  const hits = [];
+  for (const w of [390, 1280]) {
+    await page.setViewport({ width: w, height: 900 });
+    for (const path of ["/", "/en", "/mascot-dan", "/en/mascot-dan"]) {
+      await go(path);
+      hits.push(...(await page.evaluate((tag) => [...document.querySelectorAll('main a[href*="/san-pham/"]')].flatMap((a) => { // no visibility filter on the link: Figma cards are display:contents
+        const ps = [...a.querySelectorAll("p, h2, h3")].filter((e) => e.textContent.trim() && e.getClientRects().length);
+        const box = (e) => { const r = document.createRange(); r.selectNodeContents(e); return r.getBoundingClientRect(); };
+        const out = [];
+        ps.forEach((x, i) => ps.slice(i + 1).forEach((y) => {
+          if (x.contains(y) || y.contains(x)) return;
+          const p = box(x), q = box(y);
+          if (p.width && q.width && p.left < q.right - 1 && q.left < p.right - 1 && Math.min(p.bottom, q.bottom) - Math.max(p.top, q.top) > 0.35 * Math.min(p.height, q.height)) out.push(`${tag}: "${x.textContent.trim().slice(0, 18)}" x "${y.textContent.trim().slice(0, 18)}"`);
+        }));
+        return out;
+      }), `${w}${path}`)));
+    }
+  }
+  await desktop();
+  return expect(hits.length === 0, hits.slice(0, 4).join(" | ") || "ok");
+});
+await test("BUG-045", "Hero desktop VN (1024-1920): mọi chữ trong ngoặc ( ) nằm giữa 2 dấu ngoặc", async () => {
+  const bad = [];
+  for (const w of [1024, 1280, 1920]) {
+    await page.setViewport({ width: w, height: 900 });
+    await go("/");
+    await sleep(3000);
+    const r = await page.evaluate(() => {
+      const [open, close] = [...document.querySelectorAll("section span[aria-hidden]")].filter((s) => /^[()]$/.test(s.textContent.trim()) && s.offsetParent);
+      const words = [...open.parentElement.querySelectorAll(".sw-word")].filter((s) => s.offsetParent);
+      const L = open.getBoundingClientRect().right, R = close.getBoundingClientRect().left;
+      return words.filter((s) => { const b = s.getBoundingClientRect(); return b.left < L - 1 || b.right > R + 1; }).map((s) => s.textContent);
+    });
+    if (r.length) bad.push(`${w}: ${r.join(",")}`);
+  }
+  await desktop();
+  return expect(bad.length === 0, bad.join(" | ") || "ok");
+});
+await test("BUG-046", "Con trỏ Đần to theo màn hình (1920: >= 4% bề ngang), không cố định 56px", async () => {
+  await page.setViewport({ width: 1920, height: 1000 });
+  await go("/san-pham");
+  await page.mouse.move(600, 500);
+  await sleep(300);
+  const w = await page.evaluate(() => { const d = document.querySelector("div.fixed.pointer-events-none.z-\\[9999\\]"); return d ? d.getBoundingClientRect().width : 0; });
+  await desktop();
+  return expect(w >= 1920 * 0.04, `cursor ${w}px`);
+});
 await test("BUG-043", "Chính sách thanh toán: có COD, mã đơn mẫu đúng dạng TC00001", async () => {
   await go("/chinh-sach/thanh-toan");
   const t = await page.evaluate(() => document.querySelector("main").innerText);
   return expect(/COD/.test(t) && t.includes("TC00001") && !t.includes("TC1AB23CD4"), t.slice(0, 120));
-});
-await test("BUG-036", "Ảnh phụ sản phẩm: hiệu ứng mờ->nét đủ lâu để thấy (>= 1s, blur đậm)", async () => {
-  await go("/san-pham/bst-dan-sinh-ton");
-  const r = await page.evaluate(() => { const s = getComputedStyle([...document.querySelectorAll("main img[data-loaded]")].at(-1)); return { dur: s.transitionDuration, filter: s.filter }; });
-  return expect(parseFloat(r.dur) >= 1 && /blur\((1[0-9]|[2-9]\d)/.test(r.filter), JSON.stringify(r));
 });
 await test("BUG-037", "BST Đần Sinh Tồn: chữ nút lựa chọn nằm trọn trong nút, nút không ra ngoài màn (1024/1280/390)", async () => {
   const bad = [];

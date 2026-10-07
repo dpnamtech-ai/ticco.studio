@@ -14,8 +14,9 @@ const nextConfig: NextConfig = {
   },
   allowedDevOrigins: ["192.168.31.150"],
   images: {
-    // Client wants the sharpest images possible (slower loads accepted): every quality prop is coerced to 100.
-    qualities: [100],
+    // Was 100 ("sharpest, slower accepted"); 08/10 the client found product photos too slow to appear. 90 looks the
+    // same and is ~3x lighter (bandana main photo 1.26MB -> 460KB at 1920w). Every quality prop is coerced to this.
+    qualities: [90],
     remotePatterns: [
       {
         protocol: "https",

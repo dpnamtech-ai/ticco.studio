@@ -53,6 +53,7 @@ const layoutSig = (p: Product) =>
  * text or image is changed from /admin, the plain value / flow layout is used instead, so the design copy can
  * never show a stale price and absolutely positioned text can never overlap.
  */
+const TIGHT_CARD = new Set(["dan-sinh-ton-01", "dan-sinh-ton-02", "dan-sinh-ton-03"]);
 export function figmaDisplay(p: Product) {
   const f = entries[p.id];
   const priced = f && f.priceFrom === p.priceFrom ? f : undefined;
@@ -62,7 +63,9 @@ export function figmaDisplay(p: Product) {
     cardPrice: priced?.cardPrice ?? vnd(p.priceFrom),
     detailPrice: priced ? priced.detailPrice : p.priceFrom > 0 ? `${vnd(p.priceFrom)}/ ${p.unit}` : vnd(0),
     // guard f.card itself: a product with no image and no Figma entry would otherwise match undefined === undefined
-    cardCrop: f?.card && f.card.src === p.image ? f.card : undefined,
+    // the 3 Đần Sinh Tồn keychains have no Figma card: their cards use the main photo's framing (client 08/10 sent those
+    // crops), not the whole wide shot where Đần sits small in a corner
+    cardCrop: f?.card && f.card.src === p.image ? f.card : TIGHT_CARD.has(p.id) && f?.gallery[0]?.src === p.image ? f.gallery[0] : undefined,
     gallery: images.map((src, i) => (f?.gallery[i]?.src === src ? f.gallery[i] : { src })),
     extra: f?.extra,
     layout: f?.layout && !p.bundleItems?.length && f.layout.sig === layoutSig(p) ? f.layout : undefined,

@@ -103,7 +103,7 @@ function markLine(t: FigText) {
   };
 }
 
-function Text({ t, o, hover }: { t: FigText; o: number; hover?: boolean }) {
+function Text({ t, o, hover, flow }: { t: FigText; o: number; hover?: boolean; flow?: Flow }) {
   const Tag = t.tag;
   const style: Vars = {
     fontFamily: t.pro ? "var(--font-be-vietnam-pro)" : undefined, color: t.color, opacity: t.op, fontWeight: t.wt, letterSpacing: `${t.ls}em`,
@@ -115,7 +115,12 @@ function Text({ t, o, hover }: { t: FigText; o: number; hover?: boolean }) {
       // jump target: at the text's own spot on desktop, in its place in the flow on phones (the navbar is sticky)
       <div id={t.anchor} aria-hidden className={`${POS} max-lg:w-full scroll-mt-[calc(90*var(--u))] max-lg:scroll-mt-20`} style={pos(t, o)} />
     )}
-    <Reveal variant={t.fx ? "up" : "blur"} duration={t.fx ? 0.01 : 1.1} className={`${POS} max-lg:w-full`} style={pos(t, o)}>
+    <Reveal
+      variant={t.fx ? "up" : "blur"}
+      duration={t.fx ? 0.01 : 1.1}
+      className={`${flow ? "lg:relative lg:ml-[var(--ml)] lg:mt-[var(--mt)] lg:w-[var(--w)] max-lg:order-[var(--o)]" : POS} max-lg:w-full`}
+      style={{ ...pos(t, o), ...(flow && { "--ml": cq(flow.ml), "--mt": cq(flow.mt) }) }}
+    >
       <Tag
         style={style}
         data-fig={figAttr(t, 1280)}
@@ -194,8 +199,20 @@ function Shape({ b, o }: { b: FigBox; o: number }) {
   return <div aria-hidden className={`${POS} lg:h-[var(--h)] max-lg:hidden`} style={style} />;
 }
 
-function Leaf({ l, o, hover, inCard }: { l: FigLeaf; o: number; hover?: boolean; inCard?: boolean }) {
-  if (l.k === "text") return <Text t={l} o={o} hover={hover} />;
+// A card's copy (name, price…) stacks from its first line with Figma's gaps between lines, instead of each line at its
+// own fixed spot: a name that runs longer than the design (EN, client 08/10) pushes the price down rather than covering it.
+type Flow = { ml: number; mt: number };
+function stack(items: FigLeaf[]) {
+  const texts = items.filter((c): c is FigText => c.k === "text").sort((a, b) => a.y - b.y);
+  if (texts.length < 2) return undefined;
+  const x = Math.min(...texts.map((t) => t.x));
+  const w = Math.max(...texts.map((t) => t.x + t.w)) - x;
+  const flow = new Map<FigLeaf, Flow>(texts.map((t, i) => [t, { ml: t.x - x, mt: i ? Math.max(0, t.y - texts[i - 1].y - texts[i - 1].h) : 0 }]));
+  return { texts, x, y: texts[0].y, w, flow };
+}
+
+function Leaf({ l, o, hover, inCard, flow }: { l: FigLeaf; o: number; hover?: boolean; inCard?: boolean; flow?: Flow }) {
+  if (l.k === "text") return <Text t={l} o={o} hover={hover} flow={flow} />;
   if (l.k === "img") return <Img i={l} o={o} inCard={inCard} />;
   return <Shape b={l} o={o} />;
 }
@@ -261,20 +278,20 @@ function FixedCanvas({ page, lang }: { page: FigPage; lang: Lang }) {
     l.fx === "slide-l" || l.fx === "slide-r"
       ? { variant: l.fx === "slide-l" ? ("left" as const) : ("right" as const), delay: (l.n ?? 0) * 0.15, duration: 0.9 }
       : { variant: base, duration: base === "curtain" ? 1.3 : 1.1 };
-  const leaf = (l: FigLeaf, hover = false) => {
+  const leaf = (l: FigLeaf, hover = false, place?: CSSProperties) => {
     if (l.k === "text") {
       const Tag = l.tag;
       const style = { fontFamily: l.pro ? "var(--font-be-vietnam-pro)" : undefined, color: l.color, opacity: l.op, fontWeight: l.wt, letterSpacing: `${l.ls}em`, fontSize: u(l.size), lineHeight: l.lh, "--mk": l.lh } as Vars; // no l.bubble here: the phone frame draws that rectangle itself (twice = offset bars)
       const align = { l: "text-left", c: "text-center", r: "text-right", j: "text-justify" }[l.align];
       if (l.fx === "fill")
         return (
-          <div key={l.id} style={at(l)}>
+          <div key={l.id} style={place ?? at(l)}>
             <ScrollFillText data-fig={figAttr(l, 390)} text={l.text} className={`m-0 ${l.nowrap ? "whitespace-pre" : "whitespace-pre-line"} ${align}`} style={style} />
           </div>
         );
       const Wrap = l.fx === "fly" ? ScatterGroup : Reveal;
       return (
-        <Wrap key={l.id} {...(l.fx === "scatter" || l.fx === "fly" ? { variant: "up" as const, duration: 0.01 } : enter(l, "blur"))} style={at(l)}>
+        <Wrap key={l.id} {...(l.fx === "scatter" || l.fx === "fly" ? { variant: "up" as const, duration: 0.01 } : enter(l, "blur"))} style={place ?? at(l)}>
           {l.anchor && <div id={l.anchor} aria-hidden className="absolute top-0 scroll-mt-16" />}
           <Tag
             style={style}
@@ -335,7 +352,17 @@ function FixedCanvas({ page, lang }: { page: FigPage; lang: Lang }) {
             {s.anchor && <div id={s.anchor} aria-hidden className="absolute scroll-mt-16" style={{ top: u(s.y) }} />}
             {s.items.map((it) => {
               if (it.k !== "card") return leaf(it);
-              const kids = it.items.map((c) => leaf(c, Boolean(it.href) && c.k === "text"));
+              const st = stack(it.items);
+              const kids = it.items.filter((c) => !st?.flow.has(c)).map((c) => leaf(c, Boolean(it.href) && c.k === "text"));
+              if (st)
+                kids.push(
+                  <div key={`${it.id}-copy`} style={{ position: "absolute", left: u(st.x), top: u(st.y), width: u(st.w) }}>
+                    {st.texts.map((t) => {
+                      const f = st.flow.get(t)!;
+                      return leaf(t, Boolean(it.href), { position: "relative", marginLeft: u(f.ml), marginTop: u(f.mt), width: u(t.w) });
+                    })}
+                  </div>,
+                );
               return it.href ? (
                 <Link key={it.id} href={localize(it.href, lang)} className="group contents" {...(/^https?:/.test(it.href) && { target: "_blank", rel: "noopener noreferrer" })}>
                   {kids}
@@ -397,7 +424,15 @@ export default function FigmaCanvas({ page: source, lang = DEFAULT_LANG }: { pag
                 const cOrd = orderOf(it.items);
                 const img = it.items.find((c): c is FigImg => c.k === "img");
                 const cls = `lg:contents max-lg:flex max-lg:flex-col max-lg:gap-3 max-lg:order-[var(--o)] ${img ? mw(img.w) : "max-lg:w-full"}`;
-                const kids = it.items.map((c) => <Leaf key={c.id} l={c} o={cOrd(c)} hover={Boolean(it.href) && c.k === "text"} inCard />);
+                const st = stack(it.items);
+                const kids = it.items.filter((c) => !st?.flow.has(c)).map((c) => <Leaf key={c.id} l={c} o={cOrd(c)} hover={Boolean(it.href) && c.k === "text"} inCard />);
+                if (st)
+                  kids.push(
+                    // phones: "contents", the lines stay flex items of the card column in their reading order
+                    <div key={`${it.id}-copy`} className="max-lg:contents lg:absolute lg:left-[var(--x)] lg:top-[var(--y)] lg:w-[var(--w)]" style={{ "--x": cq(st.x), "--y": cq(st.y), "--w": cq(st.w) } as Vars}>
+                      {st.texts.map((t) => <Leaf key={t.id} l={t} o={cOrd(t)} hover={Boolean(it.href)} inCard flow={st.flow.get(t)} />)}
+                    </div>,
+                  );
                 const style = { "--o": ord(it) } as Vars;
                 return it.href ? (
                   <Link key={it.id} href={localize(it.href, lang)} className={`${cls} group`} style={style} {...(/^https?:/.test(it.href) && { target: "_blank", rel: "noopener noreferrer" })}>

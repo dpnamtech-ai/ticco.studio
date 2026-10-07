@@ -7,9 +7,9 @@ import { useEffect, useRef } from "react";
 // The art sits inside a 2560px transparent square (visible 18%-83%), so a 56px box shows a ~37px Đần.
 // Hotspot = tip of the raised finger (~24%, 15% of the square). Only on hover-capable fine pointers;
 // the native cursor is hidden (html.dan-cursor in globals.css) only after this mounts, so no-JS keeps the OS cursor.
-const SIZE = 56;
-const HOT_X = Math.round(SIZE * 0.24);
-const HOT_Y = Math.round(SIZE * 0.15);
+// The page scales with the viewport (cqw); a fixed 56px cursor looked tiny on big screens (client 08/10), so it
+// scales too: 56px at 1280 wide and up.
+const SIZE = "max(56px, 4.375vw)";
 
 export default function DanCursor() {
   const ref = useRef<HTMLDivElement>(null);
@@ -22,7 +22,8 @@ export default function DanCursor() {
 
     const move = (e: PointerEvent) => {
       if (e.pointerType !== "mouse") return;
-      el.style.transform = `translate3d(${e.clientX - HOT_X}px, ${e.clientY - HOT_Y}px, 0)`;
+      const s = el.offsetWidth;
+      el.style.transform = `translate3d(${e.clientX - s * 0.24}px, ${e.clientY - s * 0.15}px, 0)`;
       el.style.opacity = "1";
       el.dataset.hover = String(!!(e.target as Element).closest?.("a, button, [data-hover], [role=button]"));
     };
@@ -47,12 +48,12 @@ export default function DanCursor() {
       <Image
         src="/images/figma/d589ad7c701656373d6884e2905ee9267b4d2665.webp"
         alt=""
-        width={SIZE}
-        height={SIZE}
+        width={112}
+        height={112}
         loading="eager"
         draggable={false}
         className="h-full w-full transition-transform duration-150 group-data-[hover=true]:scale-125"
-        style={{ transformOrigin: `${HOT_X}px ${HOT_Y}px` }}
+        style={{ transformOrigin: "24% 15%" }}
       />
     </div>
   );

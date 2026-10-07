@@ -60,14 +60,16 @@ export default function HeroSection() {
               scatter too: desktop VN keeps the art's spaced 3-row layout; phones and English run as one line. */}
           <div
             className="absolute max-lg:!w-[39%] max-lg:!top-[50%] flex items-center gap-1 lg:gap-[0.6cqw] font-medium uppercase"
-            style={{ left: "4.365%", top: "60.98%", width: "25.25%" }}
+            // VN rows: Figma's width is a minimum, the ")" follows the longest row — a browser that sets these words wider
+            // (bigger font, minimum font size) pushed "có bán sản phẩm" out past the bracket (client 08/10)
+            style={{ left: "4.365%", top: "60.98%", [lang === "vi" ? "minWidth" : "width"]: "25.25%" }}
           >
             <p className="sr-only">{t(SUB)}</p>
             <span aria-hidden className={PAREN}>(</span>
             {lang === "vi" && (
               <span aria-hidden className="max-lg:hidden flex-1 text-[1.17cqw] leading-[1.6] tracking-[-0.02em]">
                 {SUB_ROWS.map((row, r) => (
-                  <span key={r} className="flex justify-between">
+                  <span key={r} className="flex justify-between gap-x-[1em] whitespace-nowrap">
                     {row.map((w, i) => (
                       <span key={i}>
                         <ScatterWords text={w} seed={70 + r * 5 + i} />
