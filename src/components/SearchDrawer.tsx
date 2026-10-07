@@ -70,7 +70,7 @@ export default function SearchDrawer({ open, onClose }: { open: boolean; onClose
           transition={{ type: "spring", damping: 32, stiffness: 300 }}
         >
           <form role="search" onSubmit={(e) => e.preventDefault()} className="flex items-center gap-3 border-b border-[var(--color-ink)]/10 px-5 py-4">
-            <Search size={20} className="shrink-0 text-[var(--color-purple)]" />
+            <Search size={20} className="size-[1.25rem] shrink-0 text-[var(--color-purple)]" />
             <input
               type="search"
               value={q}
@@ -82,7 +82,7 @@ export default function SearchDrawer({ open, onClose }: { open: boolean; onClose
               className="w-full bg-transparent py-1 text-base outline-none [&::-webkit-search-cancel-button]:appearance-none"
             />
             <button type="button" onClick={onClose} aria-label={tr("Đóng tìm kiếm")} className="text-[var(--color-ink)]/60 hover:text-[var(--color-ink)]">
-              <X size={22} />
+              <X size={22} className="size-[1.375rem]" />
             </button>
           </form>
 

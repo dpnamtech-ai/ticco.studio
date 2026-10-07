@@ -55,7 +55,7 @@ export default function GioHangClient() {
                   aria-label={t("Xoá")}
                   className="-mr-1 -mt-1 shrink-0 p-1 text-[var(--color-ink)]/40 hover:text-[var(--color-orange)]"
                 >
-                  <X size={18} />
+                  <X size={18} className="size-[1.125rem]" />
                 </button>
               </div>
               <div className="mt-auto flex items-center justify-between gap-3 pt-3">

@@ -169,7 +169,7 @@ export default function CheckoutClient() {
         {/* Shop's own static poster QR (client's file, shown uncropped): it carries no amount/note, so those two
             sit in a highlighted box the customer copies from. Phones can't scan their own screen -> save button. */}
         <div className="grid items-start gap-8 md:grid-cols-[minmax(0,360px)_1fr]">
-          <div className="mx-auto w-full max-w-[360px]">
+          <div className="mx-auto w-full max-w-[22.5rem]">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={QR_SRC} alt={t("Mã QR chuyển khoản Tíc Cơ (Techcombank)")} width={1878} height={2560} className="h-auto w-full rounded-lg bg-white shadow-sm" />
             <a

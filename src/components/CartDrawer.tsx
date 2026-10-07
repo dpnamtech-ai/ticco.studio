@@ -38,7 +38,7 @@ export default function CartDrawer() {
                 {t("Mua đi bạn ơi!")} {items.length > 0 && `(${items.length})`}
               </h2>
               <button onClick={closeDrawer} aria-label={t("Đóng giỏ hàng")} className="text-[var(--color-ink)]/60 hover:text-[var(--color-ink)]">
-                <X size={22} />
+                <X size={22} className="size-[1.375rem]" />
               </button>
             </div>
 
@@ -96,7 +96,7 @@ export default function CartDrawer() {
                           </p>
                           <button
                             onClick={() => removeItem(item.id, item.variant)}
-                            className="text-[10px] text-[var(--color-ink)]/40 hover:text-[var(--color-orange)] mt-1"
+                            className="text-[0.625rem] text-[var(--color-ink)]/40 hover:text-[var(--color-orange)] mt-1"
                           >
                             {t("Xoá")}
                           </button>

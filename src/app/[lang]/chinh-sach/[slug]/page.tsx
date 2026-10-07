@@ -43,7 +43,7 @@ export default async function PolicyPage({ params }: { params: Promise<{ slug: s
   const lang = await getLang();
   const T = (s: string) => t(s, lang);
   return (
-    <section className="mx-auto max-w-3xl px-6 py-12 text-[15px] leading-relaxed text-[var(--color-ink)]">
+    <section className="mx-auto max-w-3xl px-6 py-12 text-[0.9375rem] leading-relaxed text-[var(--color-ink)]">
       <h1 className="mb-6 font-[family-name:var(--font-heading)] text-3xl font-bold text-[var(--color-purple)]">{T(p.title)}</h1>
       <div className="space-y-4">
         {p.blocks.map((source, i) => {

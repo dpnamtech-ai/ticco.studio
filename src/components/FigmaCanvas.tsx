@@ -296,7 +296,9 @@ function FixedCanvas({ page, lang }: { page: FigPage; lang: Lang }) {
           <Tag
             style={style}
             data-fig={figAttr(l, 390)}
-            className={`m-0 ${l.nowrap ? "whitespace-pre" : "whitespace-pre-line"} ${align} ${hover ? "transition-transform duration-500 group-active:translate-x-1" : ""}`}
+            // runs of spaces are the designer's layout (home hero "(CHÚNG TÔI      CÓ BÁN SẢN PHẨM…)" set as 3 spaced rows):
+            // keep them and wrap at the box like Figma does; pre-line collapsed them into one run-on paragraph (client 08/10)
+            className={`m-0 ${l.nowrap ? "whitespace-pre" : / {3,}/.test(l.text) ? "whitespace-pre-wrap" : "whitespace-pre-line"} ${align} ${hover ? "transition-transform duration-500 group-active:translate-x-1" : ""}`}
           >
             {l.fx === "scatter" ? (
               <ScatterText text={l.text} />

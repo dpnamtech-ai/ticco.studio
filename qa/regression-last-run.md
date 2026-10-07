@@ -1,7 +1,7 @@
-# Regression — 2026-10-07 17:42 UTC
+# Regression — 2026-10-07 18:39 UTC
 
 Target: http://localhost:3100 (local, full incl. orders on a mock Sheet)
-Result: **106/106 pass**
+Result: **108/108 pass**
 
 | | ID | Case | Chi tiết |
 |---|---|---|---|
@@ -95,6 +95,8 @@ Result: **106/106 pass**
 | ✅ | BUG-046 | Con trỏ Đần to theo màn hình (1920: >= 4% bề ngang), không cố định 56px |  |
 | ✅ | UI-10 | Màn lớn (2560 vs 1280): thanh tiến trình, thanh chạy chữ, navbar, footer, link chính sách, con trỏ Đần to gấp ~2 (không kẹt px cố định) |  |
 | ✅ | BUG-048 | Bấm chuột (desktop) / chạm (mobile) bắn ra Đần, ảnh Đần tải được (q=100 từng trả 400) |  |
+| ✅ | BUG-049 | Hero MOBILE VN: chữ trong ngoặc là 3 hàng giãn như Figma (CHÚNG TÔI … CÓ BÁN SẢN PHẨM / ĐỂ BẠN … / TRONG MỌI …), không dồn thành 1 đoạn |  |
+| ✅ | UI-11 | Trang Tailwind (chính sách, giỏ hàng trượt) to theo màn hình: 2560 gấp ~2 lần 1280 |  |
 | ✅ | BUG-043 | Chính sách thanh toán: có COD, mã đơn mẫu đúng dạng TC00001 |  |
 | ✅ | BUG-037 | BST Đần Sinh Tồn: chữ nút lựa chọn nằm trọn trong nút, nút không ra ngoài màn (1024/1280/390) |  |
 | ✅ | UI-08 | Logo navbar nét trên màn lớn retina (file >= 2x khung hiển thị) |  |

@@ -248,7 +248,7 @@ export default function ProductDetail({
               <AnimatePresence mode="wait">
                 {added ? (
                   <motion.span key="added" initial={{ opacity: 0, scale: 0.5 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.5 }} className="flex items-center gap-2 text-white">
-                    <Check size={18} /> {t("Đã thêm")}
+                    <Check size={18} className="size-[1.125rem]" /> {t("Đã thêm")}
                   </motion.span>
                 ) : (
                   <motion.span key="idle" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>

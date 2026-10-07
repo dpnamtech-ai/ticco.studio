@@ -804,6 +804,38 @@ await test("BUG-048", "Bấm chuột (desktop) / chạm (mobile) bắn ra Đần
   const d = out.desktop, m = out.mobile;
   return expect(d.n >= 3 && d.ok === d.n && m.n >= 3 && m.ok === m.n, JSON.stringify(out));
 });
+await test("BUG-049", "Hero MOBILE VN: chữ trong ngoặc là 3 hàng giãn như Figma (CHÚNG TÔI … CÓ BÁN SẢN PHẨM / ĐỂ BẠN … / TRONG MỌI …), không dồn thành 1 đoạn", async () => {
+  await mobile();
+  await go("/");
+  await sleep(2500);
+  const r = await page.evaluate(() => {
+    const p = [...document.querySelectorAll("main p")].find((e) => e.offsetParent && /^CHÚNG TÔI\s{3,}/.test(e.textContent));
+    if (!p) return { found: false };
+    const words = [...p.querySelectorAll(".sw-word")];
+    const top = (t) => Math.round(words.find((w) => w.textContent === t)?.getBoundingClientRect().top ?? -1);
+    const rows = new Set(words.map((w) => Math.round(w.getBoundingClientRect().top))).size;
+    return { found: true, rows, sameRow: top("TÔI") === top("PHẨM"), nextRow: top("BẠN") > top("TÔI") };
+  });
+  await desktop();
+  return expect(r.found && r.rows === 3 && r.sameRow && r.nextRow, JSON.stringify(r));
+});
+await test("UI-11", "Trang Tailwind (chính sách, giỏ hàng trượt) to theo màn hình: 2560 gấp ~2 lần 1280", async () => {
+  const m = async (w) => {
+    await page.setViewport({ width: w, height: 1000 });
+    await go("/chinh-sach/thanh-toan");
+    await page.evaluate(() => [...document.querySelectorAll("nav button")].find((x) => /giỏ/i.test(x.getAttribute("aria-label") || ""))?.click());
+    await sleep(1200);
+    return page.evaluate(() => ({
+      body: parseFloat(getComputedStyle(document.querySelector("main section p, main section li")).fontSize),
+      drawer: document.querySelector('[role="dialog"], aside')?.getBoundingClientRect().width ?? 0,
+      close: document.querySelector('[role="dialog"] svg, aside svg')?.getBoundingClientRect().width ?? 0,
+    }));
+  };
+  const a = await m(1280), b = await m(2560);
+  await desktop();
+  const bad = Object.keys(a).filter((k) => !(a[k] > 0 && b[k] >= a[k] * 1.8)).map((k) => `${k}: ${a[k]} -> ${b[k]}`);
+  return expect(bad.length === 0, bad.join(", ") || JSON.stringify(b));
+});
 await test("BUG-043", "Chính sách thanh toán: có COD, mã đơn mẫu đúng dạng TC00001", async () => {
   await go("/chinh-sach/thanh-toan");
   const t = await page.evaluate(() => document.querySelector("main").innerText);

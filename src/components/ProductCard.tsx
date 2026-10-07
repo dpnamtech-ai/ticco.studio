@@ -84,7 +84,7 @@ export default function ProductCard({ id, name, priceFrom, image, index = 0, sol
           </motion.div>
         )}
         {bundleItems?.length ? (
-          <span className="absolute top-2 right-2 bg-[var(--color-purple)] text-white text-[10px] font-bold uppercase tracking-wide px-2 py-1 rounded">
+          <span className="absolute top-2 right-2 bg-[var(--color-purple)] text-white text-[0.625rem] font-bold uppercase tracking-wide px-2 py-1 rounded">
             Combo
           </span>
         ) : null}
@@ -94,7 +94,7 @@ export default function ProductCard({ id, name, priceFrom, image, index = 0, sol
           </span>
         )}
         {soldOut && compact && (
-          <span className="absolute top-2 left-2 bg-[var(--color-ink)] text-white text-[10px] font-bold uppercase tracking-wide px-2 py-1 rounded">
+          <span className="absolute top-2 left-2 bg-[var(--color-ink)] text-white text-[0.625rem] font-bold uppercase tracking-wide px-2 py-1 rounded">
             {t("Hết hàng")}
           </span>
         )}
