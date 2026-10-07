@@ -1,7 +1,7 @@
-# Regression — 2026-10-07 14:45 UTC
+# Regression — 2026-10-07 17:42 UTC
 
 Target: http://localhost:3100 (local, full incl. orders on a mock Sheet)
-Result: **104/104 pass**
+Result: **106/106 pass**
 
 | | ID | Case | Chi tiết |
 |---|---|---|---|
@@ -30,7 +30,7 @@ Result: **104/104 pass**
 | ✅ | MOB-01 | Không tràn ngang trên điện thoại (390) /tim-kiem?q=dan |  |
 | ✅ | MOB-02 | Menu mobile mở được, đủ 4 mục + có nút tìm kiếm |  |
 | ✅ | MOB-03 | Menu đang mở, bấm kính lúp -> menu đóng, thanh tìm kiếm trượt ra, con trỏ ở ô nhập (BUG-011) |  |
-| ✅ | FX-01 | Mobile: chạm màn hình -> Đần rơi rồi tự biến mất, không chặn thao tác; PC không có |  |
+| ✅ | FX-01 | Mobile: chạm màn hình -> Đần rơi rồi tự biến mất, không chặn thao tác (PC bấm chuột cũng có từ 08/10, xem BUG-048) |  |
 | ✅ | MOB-04 | Menu mobile có danh mục sản phẩm (Tất cả, Văn phòng phẩm, In ấn…) bấm vào đúng tab |  |
 | ✅ | MOB-05 | Thanh trên điện thoại có icon giỏ + số; menu không còn nút 'Giỏ hàng' to |  |
 | ✅ | CART-03 | Giỏ hàng trên điện thoại: có ảnh, tên không bị bẻ từng chữ, không tràn ngang (BUG-013) |  |
@@ -93,6 +93,8 @@ Result: **104/104 pass**
 | ✅ | BUG-044 | Thẻ sản phẩm trên trang chủ/Mascot (VN+EN, 390+1280): tên không đè giá |  |
 | ✅ | BUG-045 | Hero desktop VN (1024-1920): mọi chữ trong ngoặc ( ) nằm giữa 2 dấu ngoặc |  |
 | ✅ | BUG-046 | Con trỏ Đần to theo màn hình (1920: >= 4% bề ngang), không cố định 56px |  |
+| ✅ | UI-10 | Màn lớn (2560 vs 1280): thanh tiến trình, thanh chạy chữ, navbar, footer, link chính sách, con trỏ Đần to gấp ~2 (không kẹt px cố định) |  |
+| ✅ | BUG-048 | Bấm chuột (desktop) / chạm (mobile) bắn ra Đần, ảnh Đần tải được (q=100 từng trả 400) |  |
 | ✅ | BUG-043 | Chính sách thanh toán: có COD, mã đơn mẫu đúng dạng TC00001 |  |
 | ✅ | BUG-037 | BST Đần Sinh Tồn: chữ nút lựa chọn nằm trọn trong nút, nút không ra ngoài màn (1024/1280/390) |  |
 | ✅ | UI-08 | Logo navbar nét trên màn lớn retina (file >= 2x khung hiển thị) |  |

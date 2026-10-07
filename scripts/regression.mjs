@@ -254,7 +254,7 @@ await test("MOB-03", "Menu đang mở, bấm kính lúp -> menu đóng, thanh t�
   await sleep(500);
   return expect(!s.menuOpen && s.inputOnTop && s.focused, JSON.stringify(s));
 });
-await test("FX-01", "Mobile: chạm màn hình -> Đần rơi rồi tự biến mất, không chặn thao tác; PC không có", async () => {
+await test("FX-01", "Mobile: chạm màn hình -> Đần rơi rồi tự biến mất, không chặn thao tác (PC bấm chuột cũng có từ 08/10, xem BUG-048)", async () => {
   // tap plain text (a policy page paragraph), not a link — a link would navigate away mid-animation
   await go("/chinh-sach/doi-tra");
   const pt = await page.evaluate(() => { const r = document.querySelector("section li").getBoundingClientRect(); return { x: r.left + 40, y: r.top + 10 }; });
@@ -759,6 +759,50 @@ await test("BUG-046", "Con trỏ Đần to theo màn hình (1920: >= 4% bề nga
   const w = await page.evaluate(() => { const d = document.querySelector("div.fixed.pointer-events-none.z-\\[9999\\]"); return d ? d.getBoundingClientRect().width : 0; });
   await desktop();
   return expect(w >= 1920 * 0.04, `cursor ${w}px`);
+});
+await test("UI-10", "Màn lớn (2560 vs 1280): thanh tiến trình, thanh chạy chữ, navbar, footer, link chính sách, con trỏ Đần to gấp ~2 (không kẹt px cố định)", async () => {
+  const measure = async (w) => {
+    await page.setViewport({ width: w, height: 1000 });
+    await go("/san-pham/so-can-ban");
+    await page.mouse.move(w / 2, 500);
+    await page.evaluate(() => window.scrollTo(0, 400));
+    await sleep(600);
+    return page.evaluate(() => {
+      const h = (el) => (el ? el.getBoundingClientRect().height : 0);
+      const fs = (el) => (el ? parseFloat(getComputedStyle(el).fontSize) : 0);
+      const policy = [...document.querySelectorAll("footer a")].find((a) => a.getAttribute("href")?.includes("/chinh-sach/"));
+      return {
+        progress: h(document.querySelector("div.fixed.inset-x-0.top-0.origin-left")),
+        promo: h(document.querySelector(".marquee-ltr")?.parentElement),
+        nav: h(document.querySelector("nav")),
+        policyText: fs(policy),
+        cursor: document.querySelector("div.fixed.pointer-events-none.z-\\[9999\\]")?.getBoundingClientRect().width ?? 0,
+      };
+    });
+  };
+  const a = await measure(1280), b = await measure(2560);
+  await desktop();
+  const bad = Object.keys(a).filter((k) => !(b[k] >= a[k] * 1.8)).map((k) => `${k}: ${a[k].toFixed(1)} -> ${b[k].toFixed(1)}`);
+  return expect(bad.length === 0, bad.join(", ") || JSON.stringify(b));
+});
+await test("BUG-048", "Bấm chuột (desktop) / chạm (mobile) bắn ra Đần, ảnh Đần tải được (q=100 từng trả 400)", async () => {
+  const out = {};
+  for (const vp of ["desktop", "mobile"]) {
+    if (vp === "mobile") await mobile(); else await page.setViewport({ width: 1920, height: 1000 });
+    // plain policy text, not a link: a click on a product card would navigate away before the count
+    await go("/chinh-sach/doi-tra");
+    const pt = await page.evaluate(() => { const r = document.querySelector("section li").getBoundingClientRect(); return { x: r.left + 40, y: r.top + 10 }; });
+    if (vp === "mobile") await page.touchscreen.tap(pt.x, pt.y);
+    else { await page.mouse.move(pt.x, pt.y); await page.mouse.down(); await sleep(500); await page.mouse.up(); }
+    await sleep(700);
+    out[vp] = await page.evaluate(() => {
+      const imgs = [...document.querySelectorAll('div[class~="z-[9998]"] > img')];
+      return { n: imgs.length, ok: imgs.filter((i) => i.complete && i.naturalWidth > 0).length, w: Math.round(imgs[0]?.getBoundingClientRect().width ?? 0) };
+    });
+  }
+  await desktop();
+  const d = out.desktop, m = out.mobile;
+  return expect(d.n >= 3 && d.ok === d.n && m.n >= 3 && m.ok === m.n, JSON.stringify(out));
 });
 await test("BUG-043", "Chính sách thanh toán: có COD, mã đơn mẫu đúng dạng TC00001", async () => {
   await go("/chinh-sach/thanh-toan");
