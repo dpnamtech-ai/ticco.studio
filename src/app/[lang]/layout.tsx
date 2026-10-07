@@ -123,7 +123,10 @@ export default async function RootLayout({ children, params }: LayoutProps<"/[la
   };
 
   return (
-    <html lang={lang} className={`${beVietnam.variable} ${beVietnamPro.variable}`} suppressHydrationWarning>
+    // rem = 16px up to a 1280 viewport, then grows with the page, so the Tailwind-built pages (policies, cart, checkout,
+    // search, the drawers) scale on big screens like the Figma pages (client 08/10). Set here, not in globals.css: a
+    // Vercel build reused its cached CSS and shipped without it.
+    <html lang={lang} className={`${beVietnam.variable} ${beVietnamPro.variable}`} style={{ fontSize: "max(16px, calc(100vw / 80))" }} suppressHydrationWarning>
       <body className="grain">
         <script
           type="application/ld+json"
