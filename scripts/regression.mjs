@@ -836,10 +836,58 @@ await test("UI-11", "Trang Tailwind (chính sách, giỏ hàng trượt) to theo
   const bad = Object.keys(a).filter((k) => !(a[k] > 0 && b[k] >= a[k] * 1.8)).map((k) => `${k}: ${a[k]} -> ${b[k]}`);
   return expect(bad.length === 0, bad.join(", ") || JSON.stringify(b));
 });
-await test("BUG-043", "Chính sách thanh toán: có COD, mã đơn mẫu đúng dạng TC00001", async () => {
+await test("BUG-050", "Người Việt Vận Động: 3 thẻ 'Đọc thêm về người Việt U80/U30/U10' mở đúng bài Instagram (desktop + mobile)", async () => {
+  const want = ["DN0agR_5iSs", "DNx5RdH4vru", "DNspmnm5rtd"];
+  const got = {};
+  for (const vp of ["desktop", "mobile"]) {
+    if (vp === "mobile") await mobile(); else await desktop();
+    await go("/kham-pha/nguoi-viet-van-dong");
+    got[vp] = await page.evaluate((w) => w.filter((id) => [...document.querySelectorAll(`a[href*="${id}"]`)].some((a) => a.target === "_blank" && [...a.querySelectorAll("*")].some((e) => e.getClientRects().length && /Đọc thêm về/.test(e.textContent)))).length, want);
+  }
+  await desktop();
+  return expect(got.desktop === 3 && got.mobile === 3, JSON.stringify(got));
+});
+await test("BUG-051", "Menu mobile: mục con của Sản phẩm cùng 1 cỡ chữ, không dính gạch chân mục cha", async () => {
+  await mobile();
+  await go("/san-pham");
+  await page.click('nav button[aria-label*="enu"], nav button[aria-label*="Menu"], nav button[aria-label*="menu"]').catch(() => {});
+  await sleep(600);
+  // on /san-pham the group opens by itself; click only if it is closed (a click would close it)
+  await page.evaluate(() => { const b = [...document.querySelectorAll("button[aria-expanded]")].find((x) => /Sản phẩm/.test(x.getAttribute("aria-label") || "")); if (b?.getAttribute("aria-expanded") === "false") b.click(); });
+  await sleep(500);
+  const r = await page.evaluate(() => {
+    const btn = [...document.querySelectorAll("button[aria-expanded]")].find((b) => /Sản phẩm/.test(b.getAttribute("aria-label") || ""));
+    const li = btn?.closest("li"); if (!li) return { found: false };
+    const parent = li.querySelector("a"), subs = [...li.querySelectorAll(":scope ul a")];
+    const sizes = [...new Set(subs.map((a) => getComputedStyle(a).fontSize))];
+    const gap = subs[0].getBoundingClientRect().top - parent.getBoundingClientRect().bottom;
+    const langRow = [...document.querySelectorAll("a, button")].find((e) => e.textContent.trim() === "English" && e.getClientRects().length);
+    return { found: true, n: subs.length, sizes, lang: langRow && getComputedStyle(langRow).fontSize, gap: Math.round(gap) };
+  });
+  await desktop();
+  return expect(r.found && r.n >= 5 && r.sizes.length === 1 && r.sizes[0] === r.lang && r.gap >= 12, JSON.stringify(r));
+});
+await test("BUG-052", "Phí ship theo số món (sheet khách): 1-5 món 23k, 6-10 món 30k, >10 món 45k, đơn >= 500k miễn phí", async () => {
+  if (PROD) return expect(true, "skip on prod (places orders)");
+  const fee = async (qty) => (await (await order({ ...customer, items: [item({ qty })] })).json()).shipping;
+  // postcard 30.000đ: 16 món = 480.000đ (still paid, 45k), 17 món = 510.000đ (free)
+  const r = { q1: await fee(1), q5: await fee(5), q6: await fee(6), q10: await fee(10), q11: await fee(11), q16: await fee(16), q17: await fee(17) };
+  return expect(r.q1 === 23000 && r.q5 === 23000 && r.q6 === 30000 && r.q10 === 30000 && r.q11 === 45000 && r.q16 === 45000 && r.q17 === 0, JSON.stringify(r));
+});
+await test("BUG-053", "Trang chủ desktop bản EN: không còn ảnh chữ tiếng Việt (link, nhãn vàng, chú thích), có chữ tiếng Anh thật", async () => {
+  await page.setViewport({ width: 1920, height: 1000 });
+  await go("/en");
+  const r = await page.evaluate(() => ({
+    viImgs: [...document.querySelectorAll('main img[src*="/images/brand/"]')].length,
+    text: ["FREE-SPIRITED", "MINDFUL OF LIFE", "SIMPLE JOYS", "GET TO KNOW", "MEET ĐẦN", "living life with Đần"].filter((s) => document.querySelector("main").innerText.toUpperCase().includes(s.toUpperCase())).length,
+  }));
+  await desktop();
+  return expect(r.viImgs === 0 && r.text === 6, JSON.stringify(r));
+});
+await test("BUG-043", "Chính sách thanh toán: nội dung theo sheet khách (COD, mã đơn mẫu TICCO1234)", async () => {
   await go("/chinh-sach/thanh-toan");
   const t = await page.evaluate(() => document.querySelector("main").innerText);
-  return expect(/COD/.test(t) && t.includes("TC00001") && !t.includes("TC1AB23CD4"), t.slice(0, 120));
+  return expect(/COD/.test(t) && t.includes("TICCO1234") && !t.includes("TC00001"), t.slice(0, 120));
 });
 await test("BUG-037", "BST Đần Sinh Tồn: chữ nút lựa chọn nằm trọn trong nút, nút không ra ngoài màn (1024/1280/390)", async () => {
   const bad = [];
@@ -892,7 +940,7 @@ if (LOCAL) {
     const t = await page.evaluate(() => document.querySelector("main").innerText);
     const row = sheet.rows.at(-1);
     const left = (await cartLines()).length;
-    return expect(/Đặt hàng thành công/.test(t) && /TC[0-9A-Z]{8}/.test(t) && /210\.000/.test(t) && row?.total === 210000 && row.items[0].price === 30000 && left === 0,
+    return expect(/Đặt hàng thành công/.test(t) && /TICCO\d{8}/.test(t) && /203\.000/.test(t) && row?.total === 203000 && row.items[0].price === 30000 && left === 0,
       `sheet total=${row?.total} cartLeft=${left} text=${t.slice(0, 200).replace(/\n/g, " ")}`);
   });
   await test("ORD-02", "Tải lại trang sau khi đặt vẫn thấy thông tin chuyển khoản", async () => {
@@ -926,7 +974,7 @@ if (LOCAL) {
   });
   await test("SEC-05", "Giá giả gửi từ client bị bỏ qua (server tự tính)", async () => {
     const r = await (await order({ ...customer, items: [{ ...item(), price: 1, priceFrom: 1 }], subtotal: 1, total: 1 })).json();
-    return expect(r.subtotal === 30000 && r.total === 60000, JSON.stringify(r));
+    return expect(r.subtotal === 30000 && r.total === 53000, JSON.stringify(r)); // + 23.000đ ship for 1 item
   });
   await test("SEC-06", "Chèn công thức vào Sheet bị vô hiệu (= + - @ -> chữ thường)", async () => {
     sheet.rows.length = 0;

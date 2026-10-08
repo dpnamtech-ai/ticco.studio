@@ -1,0 +1,51 @@
+{
+ "thanh-toan": [
+  "Tíc Cơ hiện hỗ trợ hai hình thức thanh toán: chuyển khoản ngân hàng và COD – thanh toán khi nhận hàng.",
+  "Với đơn hàng thanh toán bằng chuyển khoản, sau khi đặt hàng thành công, bạn sẽ nhận được mã đơn hàng (ví dụ: TICCO1234), thông tin tài khoản và mã QR thanh toán. Khi chuyển khoản, vui lòng:",
+  "- Thanh toán đúng số tiền của đơn hàng.\n- Ghi mã đơn hàng tại phần nội dung chuyển khoản để Tíc Cơ thuận tiện đối chiếu.\n- Tíc Cơ sẽ kiểm tra giao dịch và xác nhận đơn hàng sau khi nhận được thanh toán.",
+  "Lưu ý bảo mật:",
+  "Tíc Cơ không yêu cầu khách hàng cung cấp mật khẩu, mã OTP hoặc thông tin thẻ. Vui lòng không chia sẻ các thông tin bảo mật này với bất kỳ cá nhân hoặc bên thứ ba nào."
+ ],
+ "van-chuyen": [
+  "Tíc Cơ hỗ trợ giao hàng toàn quốc thông qua các đối tác vận chuyển bên thứ ba. Đơn vị giao hàng sẽ được sắp xếp phù hợp theo từng thời điểm và khu vực nhận hàng.",
+  "Phí vận chuyển:",
+  "- Phí vận chuyển được tự động tính và hiển thị sau khi khách hàng nhập địa chỉ giao hàng.",
+  "Thời gian giao hàng dự kiến:",
+  "- Hà Nội: 1–3 ngày làm việc.\n- Các tỉnh/thành khác: 3–6 ngày làm việc.",
+  "(Thời gian giao hàng được tính từ khi đơn hàng được xác nhận thanh toán. Trong một số thời điểm cao điểm hoặc do điều kiện vận chuyển khách quan, thời gian giao hàng có thể thay đổi)"
+ ],
+ "doi-tra": [
+  "Điều kiện đổi trả sản phẩm:",
+  "- Sản phẩm có lỗi từ quá trình sản xuất, sản phẩm giao không đúng mẫu hoặc số lượng theo đơn hàng, sản phẩm bị hư hỏng trong quá trình vận chuyển.\n- Sản phẩm còn nguyên tem, bao bì và chưa qua sử dụng. Khách hàng vui lòng cung cấp hình ảnh thể hiện tình trạng sản phẩm (Video mở hộp được khuyến khích để hỗ trợ quá trình kiểm tra và đối chiếu)",
+  "Quy trình đổi/trả:",
+  "- Gửi mã đơn hàng, hình ảnh sản phẩm, lý do đổi/trả và thông tin liên hệ qua Instagram Tíc Cơ Studios hoặc Facebook Tíc Cơ Studios\n- Tíc Cơ sẽ tiếp nhận, kiểm tra thông tin và hướng dẫn phương án xử lý phù hợp. Khách hàng vui lòng không tự gửi sản phẩm về trước khi nhận được hướng dẫn từ Tíc Cơ.\n- Sau khi tiếp nhận và kiểm tra sản phẩm hoàn trả, Tíc Cơ sẽ xác nhận phương án xử lý, bao gồm đổi sản phẩm, hoàn tiền hoặc từ chối yêu cầu kèm lý do cụ thể.",
+  "Chi phí đổi/trả và hoàn tiền:",
+  "- Nếu việc đổi/trả phát sinh do lỗi từ phía Tíc Cơ, giao sai hoặc thiếu sản phẩm, sản phẩm bị lỗi hoặc hư hỏng trong quá trình vận chuyển, Tíc Cơ sẽ hỗ trợ chi phí hoàn trả hợp lý và thực hiện đổi sản phẩm, sửa chữa hoặc hoàn tiền tùy từng trường hợp.\n- Với các yêu cầu đổi/trả phát sinh từ nhu cầu cá nhân của khách hàng và được Tíc Cơ chấp nhận trên tinh thần hỗ trợ, khách hàng có thể cần thanh toán chi phí vận chuyển hoàn trả và các khoản phí trung gian thanh toán phát sinh, nếu có.\n- Khoản hoàn tiền được chấp thuận sẽ được thực hiện qua phương thức thanh toán ban đầu nếu có thể, hoặc chuyển khoản ngân hàng theo thông tin do khách hàng xác nhận."
+ ],
+ "bao-mat": [
+  "Thông tin được thu thập:",
+  "- Thông tin liên hệ: họ tên, số điện thoại, email và thông tin liên hệ qua các kênh chăm sóc khách hàng nếu khách hàng sử dụng các kênh này.\n- Thông tin đơn hàng và giao nhận: địa chỉ giao hàng, sản phẩm đặt mua, ghi chú đơn hàng, mã ưu đãi, phương thức thanh toán và trạng thái đơn hàng.\n- Thông tin kỹ thuật: một số dữ liệu như thiết bị, trình duyệt, địa chỉ IP, cookie hoặc dữ liệu phân tích có thể được ghi nhận khi khách hàng sử dụng website.",
+  "Mục đích thu thập và sử dụng:",
+  "- Tạo, xác nhận, xử lý, giao hàng, điều chỉnh, huỷ hoặc hoàn tiền cho đơn hàng.\n- Liên hệ xác nhận và cập nhật tình trạng đơn hàng.\n- Hỗ trợ đổi trả, khiếu nại và chăm sóc khách hàng sau mua.\n- Đối soát thanh toán, lưu giữ thông tin giao dịch và hạn chế các giao dịch có dấu hiệu bất thường.\n- Cải thiện hoạt động của website, danh mục sản phẩm và trải nghiệm mua sắm.\n- Gửi thông tin ưu đãi hoặc nội dung tiếp thị khi khách hàng đồng ý nhận thông tin.",
+  "Bên có thể tiếp cận thông tin:",
+  "- Nhân sự của Tíc Cơ được phân quyền để xử lý đơn hàng và chăm sóc khách hàng.\n- Đối tác vận chuyển bên thứ ba để giao hàng, cập nhật trạng thái giao hàng và hỗ trợ hoàn trả.\n- Đơn vị trung gian thanh toán hoặc ngân hàng trong trường hợp cần xử lý, đối soát hoặc hoàn tiền.\n- Các đơn vị cung cấp dịch vụ hỗ trợ vận hành website, kế toán hoặc phân tích dữ liệu khi cần thiết.\n- Cơ quan nhà nước có thẩm quyền khi việc cung cấp thông tin được yêu cầu theo quy định pháp luật.",
+  "Thời gian lưu trữ:",
+  "- Thông tin liên quan đến đơn hàng, thanh toán, chăm sóc khách hàng và khiếu nại được lưu trữ trong khoảng thời gian cần thiết để hoàn tất giao dịch, thực hiện nghĩa vụ sau bán hàng và đáp ứng các yêu cầu liên quan đến kế toán, thuế hoặc pháp luật hiện hành.\n- Thông tin sử dụng cho mục đích tiếp thị được lưu trữ cho đến khi khách hàng rút lại sự đồng ý hoặc khi thông tin không còn cần thiết cho mục đích đã nêu.",
+  "Quyền của khách hàng:",
+  "- Yêu cầu truy cập, chỉnh sửa, cập nhật, hạn chế xử lý, rút lại sự đồng ý hoặc xoá thông tin cá nhân trong phạm vi pháp luật cho phép.\n- Để gửi yêu cầu, khách hàng có thể liên hệ với Tíc Cơ qua email ticcoo.studio@gmail.com. Tíc Cơ có thể cần xác minh thông tin trước khi xử lý yêu cầu để đảm bảo an toàn dữ liệu.",
+  "Bảo mật:",
+  "Tíc Cơ áp dụng các biện pháp quản lý và kỹ thuật phù hợp nhằm hạn chế việc truy cập, tiết lộ, chỉnh sửa, mất mát hoặc sử dụng thông tin cá nhân sai mục đích. Thông tin xác thực thanh toán trực tuyến được xử lý thông qua đơn vị thanh toán hoặc ngân hàng tương ứng. Website của Tíc Cơ không chủ động lưu trữ thông tin thẻ ngân hàng, mật khẩu, mã OTP hoặc thông tin đăng nhập tài khoản ngân hàng của khách hàng."
+ ],
+ "dieu-khoan": [
+  "Thông tin sản phẩm và giá:",
+  "- Website giới thiệu và cung cấp các sản phẩm tiêu dùng. Thông tin tại từng trang sản phẩm có thể bao gồm tên sản phẩm, hình ảnh, mô tả, phân loại, kích thước, chất liệu, tình trạng sản phẩm, giá bán và các thông tin liên quan khác.\n- Khách hàng vui lòng kiểm tra kỹ thông tin sản phẩm, phân loại, kích thước, chất liệu, số lượng và giá bán trước khi thêm sản phẩm vào giỏ hàng và xác nhận đặt hàng.\n- Giá và thông tin sản phẩm được áp dụng theo nội dung hiển thị trên website tại thời điểm khách hàng thực hiện giao dịch.",
+  "Quy trình đặt hàng:",
+  "- Khách hàng lựa chọn sản phẩm, cung cấp thông tin nhận hàng và thực hiện đặt hàng theo hướng dẫn trên website.\n- Sau khi tiếp nhận đơn, Tíc Cơ sẽ gửi thông tin xác nhận đơn hàng và hướng dẫn thanh toán tương ứng với phương thức khách hàng lựa chọn.\n- Đơn hàng được xử lý sau khi các thông tin cần thiết đã được xác nhận và, với đơn chuyển khoản, Tíc Cơ đã ghi nhận thanh toán.\n- Trong trường hợp sản phẩm hết hàng hoặc không thể cung cấp sau khi khách hàng đã thanh toán, Tíc Cơ sẽ liên hệ để khách hàng lựa chọn đổi sang sản phẩm khác hoặc nhận hoàn lại khoản tiền tương ứng.\n- Việc thanh toán, giao nhận và đổi trả được thực hiện theo các chính sách tương ứng được công bố trên website của Tíc Cơ.",
+  "Tiếp nhận và giải quyết khiếu nại:",
+  "- Tíc Cơ tiếp nhận các phản hồi và khiếu nại liên quan đến sản phẩm, đơn hàng, thanh toán, giao nhận và dịch vụ sau bán hàng.\n- Khi cần hỗ trợ, khách hàng vui lòng gửi mã đơn hàng, nội dung cần phản ánh, hình ảnh hoặc tài liệu liên quan nếu có và thông tin liên hệ qua Instagram Tíc Cơ Studios hoặc Facebook Tíc Cơ Studios.\n- Tíc Cơ sẽ kiểm tra thông tin và trao đổi với khách hàng để xác định phương án xử lý phù hợp. Trong trường hợp cần đối soát với đối tác vận chuyển, thanh toán hoặc bên thứ ba, quá trình xử lý có thể phụ thuộc vào thời gian phản hồi của các bên liên quan.\n- Tíc Cơ ưu tiên giải quyết các vấn đề phát sinh thông qua trao đổi và thương lượng trực tiếp với khách hàng. Trường hợp hai bên không thể đạt được thỏa thuận, vụ việc sẽ được xử lý theo quy định của pháp luật Việt Nam.",
+  "Nghĩa vụ của khách hàng:",
+  "- Cung cấp đầy đủ và chính xác thông tin đặt hàng, bao gồm họ tên, số điện thoại, địa chỉ nhận hàng và các thông tin cần thiết khác.\n- Kiểm tra kỹ thông tin sản phẩm, số lượng, giá bán và thông tin đơn hàng trước khi xác nhận đặt hàng.\n- Thực hiện thanh toán đúng theo phương thức và hướng dẫn của Tíc Cơ.\n- Chủ động cập nhật cho Tíc Cơ nếu có thay đổi về thông tin nhận hàng hoặc các thông tin có thể ảnh hưởng đến quá trình xử lý đơn.\n- Phối hợp cung cấp thông tin, hình ảnh hoặc tài liệu cần thiết khi phát sinh yêu cầu hỗ trợ, đổi trả hoặc khiếu nại.\n- Không sử dụng website, chương trình ưu đãi hoặc các chính sách của Tíc Cơ cho mục đích gian lận, gây ảnh hưởng đến quyền lợi của Tíc Cơ hoặc khách hàng khác.",
+  "Chính sách liên quan:",
+  "Các chính sách về thanh toán, vận chuyển, đổi trả, khiếu nại và bảo mật thông tin được công bố trên website này và là một phần của điều khoản mua hàng tại Tíc Cơ."
+ ]
+}

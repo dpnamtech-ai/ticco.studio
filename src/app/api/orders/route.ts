@@ -110,8 +110,9 @@ async function sendToSheetOnce(code: string, o: OrderInput, lines: PricedLine[],
     });
     const out = (await res.json().catch(() => null)) as { ok?: boolean; code?: string } | null;
     if (!out?.ok) console.error("[orders] sheet rejected", res.status, out);
-    // The sheet numbers orders TC00001, TC00002… and returns the code it wrote; an older script returns none.
-    return out?.ok ? (out.code && /^TC\d+$/.test(out.code) ? out.code : code) : null;
+    // The sheet draws the code (TICCO + digits; an older script numbered TC00001…) and returns what it wrote; the
+    // oldest script returns none. Keep the sheet's code either way so the row and the customer see the same one.
+    return out?.ok ? (out.code && /^(TICCO|TC)\d+$/.test(out.code) ? out.code : code) : null;
   } catch (e) {
     console.error("[orders] sheet error", e);
     return null;
@@ -176,10 +177,10 @@ export async function POST(req: Request) {
   }
 
   const subtotal = lines.reduce((s, l) => s + l.price * l.qty, 0);
-  const shipping = shippingFor(subtotal);
+  const shipping = shippingFor(subtotal, lines.reduce((n, l) => n + l.qty, 0));
   const total = subtotal + shipping;
   // Sheet first: it hands out the sequential code. Sheet down → random fallback code, DB/email still record it.
-  // ponytail: a sheet timeout AFTER writing leaves the row with TC000NN but the customer/email with the fallback code.
+  // ponytail: a sheet timeout AFTER writing leaves the row with its own code but the customer/email with the fallback code.
   const sheetCode = await sendToSheet(makeOrderCode(), order, lines, subtotal, shipping, total);
   const sheeted = sheetCode !== null;
   const code = sheetCode ?? makeOrderCode();

@@ -39,13 +39,12 @@ function doPost(e) {
   const lock = LockService.getScriptLock();
   lock.waitLock(20000);
   try {
-    // Sequential order code TC00001, TC00002…, counted here (under the lock) so two orders never share a number.
-    // Restart/jump the counter: Cài đặt dự án → Thuộc tính tập lệnh → ORDER_SEQ = last number used.
-    const props = PropertiesService.getScriptProperties();
-    const seq = Number(props.getProperty("ORDER_SEQ") || 0) + 1;
-    props.setProperty("ORDER_SEQ", String(seq));
-    o.code = "TC" + String(seq).padStart(5, "0");
+    // Order code = "TICCO" + 6 random digits (client rule 08/10). Drawn here, under the lock, and re-drawn while the
+    // sheet already has it, so two orders never share a code.
     const sh = sheet_();
+    do {
+      o.code = "TICCO" + String(Math.floor(Math.random() * 1e6)).padStart(6, "0");
+    } while (sh.createTextFinder(o.code).matchEntireCell(true).findNext());
     const c = o.customer;
     const items = o.items.map((l) => `${l.qty} × ${l.name}${l.variant ? ` (${l.variant})` : ""} — ${fmt_(l.price * l.qty)}`).join("\n");
     const row = [

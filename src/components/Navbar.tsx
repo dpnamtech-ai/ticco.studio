@@ -180,10 +180,12 @@ export default function Navbar() {
                       )}
                     </div>
                     {kids && open && (
-                      <ul className="mt-2 ml-1 flex flex-col gap-2.5 pb-1 text-base font-semibold text-white/90">
+                      // one size for every sub item, the same as the language row (18px), aligned with the parent's text and clear of
+                      // its underline (client 08/10: sub-menu sizes looked uneven, "Tất cả sản phẩm" touched the underline)
+                      <ul className="mt-4 flex flex-col gap-3 pb-1 text-lg leading-6 font-semibold text-white/90">
                         {kids.map((c) => (
                           <li key={c.href}>
-                            <Link href={localize(c.href, lang)} onClick={() => setMenuOpen(false)}>
+                            <Link href={localize(c.href, lang)} onClick={() => setMenuOpen(false)} className="block">
                               {t(c.label)}
                             </Link>
                           </li>

@@ -1407,7 +1407,8 @@ export const figmaPages: Record<string, FigPage> = {
         "pro": true,
         "nowrap": true
        }
-      ]
+      ],
+      "href": "https://www.instagram.com/p/DN0agR_5iSs/?img_index=1"
      },
      {
       "k": "card",
@@ -1441,7 +1442,8 @@ export const figmaPages: Record<string, FigPage> = {
         "pro": true,
         "nowrap": true
        }
-      ]
+      ],
+      "href": "https://www.instagram.com/p/DNx5RdH4vru/?img_index=1"
      },
      {
       "k": "card",
@@ -1475,7 +1477,8 @@ export const figmaPages: Record<string, FigPage> = {
         "pro": true,
         "nowrap": true
        }
-      ]
+      ],
+      "href": "https://www.instagram.com/p/DNspmnm5rtd/?img_index=1"
      }
     ],
     "bg": "#b51515"
@@ -1873,7 +1876,8 @@ export const figmaPages: Record<string, FigPage> = {
          "pro": true,
          "nowrap": true
         }
-       ]
+       ],
+       "href": "https://www.instagram.com/p/DN0agR_5iSs/?img_index=1"
       },
       {
        "k": "card",
@@ -1907,7 +1911,8 @@ export const figmaPages: Record<string, FigPage> = {
          "pro": true,
          "nowrap": true
         }
-       ]
+       ],
+       "href": "https://www.instagram.com/p/DNx5RdH4vru/?img_index=1"
       },
       {
        "k": "card",
@@ -1941,7 +1946,8 @@ export const figmaPages: Record<string, FigPage> = {
          "pro": true,
          "nowrap": true
         }
-       ]
+       ],
+       "href": "https://www.instagram.com/p/DNspmnm5rtd/?img_index=1"
       }
      ],
      "bg": "#b51515"

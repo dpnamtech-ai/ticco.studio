@@ -36,12 +36,37 @@ function MissionText({ className, style }: { className?: string; style?: React.C
   );
 }
 
+
+// The desktop art is the designer's PNG export with the Vietnamese baked in. In English those images would stay
+// Vietnamese (client 08/10), so English draws the same pieces as live text in the art's colours and sizes:
+// link = yellow caps "> …", badge = purple caps on a yellow bar (right-aligned, bleeding off the edge), caption = white.
+// The font size is in cqw of the 1283-wide section on desktop; the phone block passes its own size.
+type ArtKind = "link" | "badge" | "caption";
+function BrandArt({ name, alt, kind, size }: { name: string; alt: string; kind: ArtKind; size?: string }) {
+  const lang = useLang();
+  const t = useT();
+  if (lang === "vi")
+    // eslint-disable-next-line @next/next/no-img-element
+    return <img src={`/images/brand/${name}.png`} alt={alt} className="w-full h-auto" loading="lazy" decoding="async" />;
+  const text = t(alt);
+  if (kind === "link")
+    return <span className="block whitespace-nowrap text-center font-medium uppercase leading-none tracking-[-0.03em] text-[var(--color-yellow)]" style={{ fontSize: size ?? "1.56cqw" }}>{`> ${text}`}</span>;
+  if (kind === "badge")
+    // flex-end: a translation longer than the Vietnamese art grows to the left, the bar stays flush with the right edge
+    return (
+      <span className="flex justify-end">
+        <span className="w-max min-w-full whitespace-nowrap bg-[var(--color-yellow)] px-[0.4em] text-right font-semibold uppercase leading-[1.25] tracking-[-0.03em] text-[var(--color-purple)]" style={{ fontSize: size ?? "2.2cqw" }}>{text}</span>
+      </span>
+    );
+  return <span className="block font-medium leading-[1.05] tracking-[-0.04em] text-white" style={{ fontSize: size ?? "1.95cqw" }}>{text}</span>;
+}
+
 export default function BrandSection() {
   const lang = useLang();
   const t = useT();
   return (
     <>
-    <section className="max-md:hidden relative w-full bg-[var(--color-orange)] text-white">
+    <section className="relative w-full bg-[var(--color-orange)] text-white">
     <div className="relative aspect-[1283/820] overflow-hidden [container-type:inline-size]">
       {/* Figma 671:66: Be Vietnam Medium 30/33, ls -1.2, centred, 831 wide; units = cqw of the 1283-wide section */}
       <MissionText
@@ -55,8 +80,7 @@ export default function BrandSection() {
         style={{ left: "42.56%", top: "46.34%", width: "14.89%", height: "2.8%" }}
       >
         <Reveal variant="up" delay={0.2} className="w-full">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/images/brand/link-hieu-hon.png" alt={t("Hiểu hơn về Tíc Cơ!")} className="w-full h-auto" loading="lazy" decoding="async" />
+          <BrandArt name="link-hieu-hon" alt={t("Hiểu hơn về Tíc Cơ!")} kind="link" />
         </Reveal>
       </a>
 
@@ -66,16 +90,13 @@ export default function BrandSection() {
           includes extra invisible geometry ~15-19% wider than what's actually painted, which was
           pushing badge-phong-khoang past the section's right edge and clipping the final "G"). */}
       <Reveal variant="right" delay={0} duration={0.9} className="absolute" style={{ left: "74.77%", top: "63.14%", width: "25.23%" }}>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/images/brand/badge-niem-vui-gian-don.png" alt={t("Niềm vui giản đơn")} className="w-full h-auto" loading="lazy" decoding="async" />
+        <BrandArt name="badge-niem-vui-gian-don" alt={t("Niềm vui giản đơn")} kind="badge" />
       </Reveal>
       <Reveal variant="right" delay={0.15} duration={0.9} className="absolute" style={{ left: "78.59%", top: "58.29%", width: "21.41%" }}>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/images/brand/badge-cham-chu-voi-doi.png" alt={t("Chăm chú với đời")} className="w-full h-auto" loading="lazy" decoding="async" />
+        <BrandArt name="badge-cham-chu-voi-doi" alt={t("Chăm chú với đời")} kind="badge" />
       </Reveal>
       <Reveal variant="right" delay={0.3} duration={0.9} className="absolute" style={{ left: "82.27%", top: "53.41%", width: "17.73%" }}>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/images/brand/badge-phong-khoang.png" alt={t("Phóng khoáng")} className="w-full h-auto" loading="lazy" decoding="async" />
+        <BrandArt name="badge-phong-khoang" alt={t("Phóng khoáng")} kind="badge" />
       </Reveal>
 
       {/* Meet-Đần block: static yellow ellipse (Figma "Ellipse 1"), only the Đần-with-basket art
@@ -93,12 +114,10 @@ export default function BrandSection() {
         transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
       />
       <Reveal variant="left" delay={0.1} duration={0.9} className="absolute" style={{ left: "30.16%", top: "60.49%", width: "8.18%" }}>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/images/brand/caption-dan.png" alt={t("sống đời sống cùng Đần")} className="w-full h-auto" loading="lazy" decoding="async" />
+        <BrandArt name="caption-dan" alt={t("sống đời sống cùng Đần")} kind="caption" />
       </Reveal>
       <Reveal variant="left" delay={0.3} duration={0.9} className="absolute" style={{ left: "30.16%", top: "72.56%", width: "8.03%" }}>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/images/brand/caption-tic-co.png" alt={t("chủ nhà tiếp quản Tíc Cơ")} className="w-full h-auto" loading="lazy" decoding="async" />
+        <BrandArt name="caption-tic-co" alt={t("chủ nhà tiếp quản Tíc Cơ")} kind="caption" />
       </Reveal>
       <a
         href={localize("/mascot-dan", lang)}
@@ -106,56 +125,12 @@ export default function BrandSection() {
         style={{ left: "42.78%", top: "91.22%", width: "14.42%", height: "2.8%" }}
       >
         <Reveal variant="up" delay={0.2} className="w-full">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/images/brand/link-lam-quen.png" alt={t("Làm quen với Đần!")} className="w-full h-auto" loading="lazy" decoding="async" />
+          <BrandArt name="link-lam-quen" alt={t("Làm quen với Đần!")} kind="link" />
         </Reveal>
       </a>
     </div>
     </section>
 
-    {/* Phones: the same content stacked, at readable sizes (the absolute composition above is desktop only) */}
-    <section className="md:hidden bg-[var(--color-orange)] text-white px-5 py-12 flex flex-col items-center gap-9 overflow-hidden">
-      <MissionText className="w-full text-center text-[17px] font-medium leading-snug tracking-[-0.03em] [text-wrap:balance]" />
-      <a href={localize("/ve-tic-co", lang)} className="w-[62%]">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/images/brand/link-hieu-hon.png" alt={t("Hiểu hơn về Tíc Cơ!")} className="w-full h-auto" loading="lazy" decoding="async" />
-      </a>
-
-      <div className="w-full flex flex-col items-end gap-2 -mr-5">
-        {[
-          ["badge-phong-khoang", "Phóng khoáng", "w-[72%]"],
-          ["badge-cham-chu-voi-doi", "Chăm chú với đời", "w-[84%]"],
-          ["badge-niem-vui-gian-don", "Niềm vui giản đơn", "w-[98%]"],
-        ].map(([n, alt, w], i) => (
-          <Reveal key={n} variant="right" delay={i * 0.1} className={w}>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={`/images/brand/${n}.png`} alt={t(alt)} className="w-full h-auto" loading="lazy" decoding="async" />
-          </Reveal>
-        ))}
-      </div>
-
-      <div className="w-full flex items-center justify-center gap-4">
-        <div className="w-[34%] flex flex-col gap-3">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/images/brand/caption-dan.png" alt={t("sống đời sống cùng Đần")} className="w-full h-auto" loading="lazy" decoding="async" />
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/images/brand/caption-tic-co.png" alt={t("chủ nhà tiếp quản Tíc Cơ")} className="w-full h-auto" loading="lazy" decoding="async" />
-        </div>
-        <div className="relative w-[52%] aspect-[247/275] rounded-[50%] bg-[var(--color-yellow)]">
-          <motion.img
-            src="/images/meet-dan-photo.webp"
-            alt="Mascot Đần"
-            className="absolute inset-[4%] w-[92%] h-[92%] object-contain"
-            animate={{ rotate: 360 }}
-            transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-          />
-        </div>
-      </div>
-      <a href={localize("/mascot-dan", lang)} className="w-[58%]">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/images/brand/link-lam-quen.png" alt={t("Làm quen với Đần!")} className="w-full h-auto" loading="lazy" decoding="async" />
-      </a>
-    </section>
     </>
   );
 }

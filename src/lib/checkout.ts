@@ -2,8 +2,10 @@
 // Prices are ALWAYS recomputed on the server from the catalog; the client only sends product ids.
 
 export const FREE_SHIP_MIN = 500_000;
-// Placeholder flat fee until the Giao Hàng Nhanh fee API is wired in (see /api/orders).
-export const SHIP_FEE = 30_000;
+// Client's shipping rule (policy sheet, 08/10), nationwide, by number of items in the order:
+// 1-5 items 23.000đ, 6-10 items 30.000đ, more 45.000đ; free from 500.000đ.
+// ponytail: the sheet stops at 15 items; bigger orders keep 45.000đ until the client says otherwise.
+const SHIP_TIERS: [maxItems: number, fee: number][] = [[5, 23_000], [10, 30_000], [Infinity, 45_000]];
 
 export type OrderItemInput = { id: string; variant: string; qty: number };
 
@@ -21,15 +23,17 @@ export type OrderInput = {
   items: OrderItemInput[];
 };
 
-export function shippingFor(subtotal: number) {
-  return subtotal <= 0 || subtotal >= FREE_SHIP_MIN ? 0 : SHIP_FEE;
+export function shippingFor(subtotal: number, items: number) {
+  if (subtotal <= 0 || items <= 0 || subtotal >= FREE_SHIP_MIN) return 0;
+  return SHIP_TIERS.find(([max]) => items <= max)![1];
 }
 
-// Order code doubles as the bank-transfer note: 10 chars, letters/digits only (banks strip other characters).
+// Order code doubles as the bank-transfer note, letters/digits only (banks strip other characters).
+// Client rule (08/10): "TICCO" + random digits. 6 digits from the clock (changes every second, repeats every ~11 days)
+// + 2 random digits, so two orders would need the same second and the same 1-in-100 draw to collide.
 export function makeOrderCode() {
-  const t = Date.now().toString(36).toUpperCase().slice(-5).padStart(5, "0");
-  const r = Math.random().toString(36).toUpperCase().replace(/[^A-Z0-9]/g, "").padEnd(3, "X").slice(0, 3);
-  return `TC${t}${r}`;
+  const clock = String(Math.floor(Date.now() / 1000) % 1_000_000).padStart(6, "0");
+  return `TICCO${clock}${String(Math.floor(Math.random() * 100)).padStart(2, "0")}`;
 }
 
 // Per-line quantity cap, shared by the cart (clamps) and the server (rejects) so a cart can never hold an unorderable line.

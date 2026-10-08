@@ -1,7 +1,7 @@
-# Regression — 2026-10-07 18:57 UTC
+# Regression — 2026-10-08 15:45 UTC
 
 Target: http://localhost:3100 (local, full incl. orders on a mock Sheet)
-Result: **108/108 pass**
+Result: **112/112 pass**
 
 | | ID | Case | Chi tiết |
 |---|---|---|---|
@@ -97,7 +97,11 @@ Result: **108/108 pass**
 | ✅ | BUG-048 | Bấm chuột (desktop) / chạm (mobile) bắn ra Đần, ảnh Đần tải được (q=100 từng trả 400) |  |
 | ✅ | BUG-049 | Hero MOBILE VN: chữ trong ngoặc là 3 hàng giãn như Figma (CHÚNG TÔI … CÓ BÁN SẢN PHẨM / ĐỂ BẠN … / TRONG MỌI …), không dồn thành 1 đoạn |  |
 | ✅ | UI-11 | Trang Tailwind (chính sách, giỏ hàng trượt) to theo màn hình: 2560 gấp ~2 lần 1280 |  |
-| ✅ | BUG-043 | Chính sách thanh toán: có COD, mã đơn mẫu đúng dạng TC00001 |  |
+| ✅ | BUG-050 | Người Việt Vận Động: 3 thẻ 'Đọc thêm về người Việt U80/U30/U10' mở đúng bài Instagram (desktop + mobile) |  |
+| ✅ | BUG-051 | Menu mobile: mục con của Sản phẩm cùng 1 cỡ chữ, không dính gạch chân mục cha |  |
+| ✅ | BUG-052 | Phí ship theo số món (sheet khách): 1-5 món 23k, 6-10 món 30k, >10 món 45k, đơn >= 500k miễn phí |  |
+| ✅ | BUG-053 | Trang chủ desktop bản EN: không còn ảnh chữ tiếng Việt (link, nhãn vàng, chú thích), có chữ tiếng Anh thật |  |
+| ✅ | BUG-043 | Chính sách thanh toán: nội dung theo sheet khách (COD, mã đơn mẫu TICCO1234) |  |
 | ✅ | BUG-037 | BST Đần Sinh Tồn: chữ nút lựa chọn nằm trọn trong nút, nút không ra ngoài màn (1024/1280/390) |  |
 | ✅ | UI-08 | Logo navbar nét trên màn lớn retina (file >= 2x khung hiển thị) |  |
 | ✅ | UI-09 | Tiêu đề trang chủ 'Tíc Cơ Studios'; 'TẤT CẢ SẢN PHẨM >' nằm dưới thanh tím |  |

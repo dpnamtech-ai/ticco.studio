@@ -18,7 +18,14 @@ const PAGES = [
     },
   },
   // anchors may name a section or a single text layer (the event heading sits mid-section)
-  { slug: "nguoi-viet-van-dong", file: "du-an-Nguoi-Viet-Van-Dong", mobile: "du-an-Nguoi-Viet-Van-Dong-mobile", alt: "Người Việt Vận Động — Tíc Cơ", anchors: { "671:560": "le-hoi-doc-lap" } },
+  { slug: "nguoi-viet-van-dong", file: "du-an-Nguoi-Viet-Van-Dong", mobile: "du-an-Nguoi-Viet-Van-Dong-mobile", alt: "Người Việt Vận Động — Tíc Cơ", anchors: { "671:560": "le-hoi-doc-lap" },
+    // "Đọc thêm về người Việt U80/U30/U10 vươn lên" cards -> the client's Instagram posts (08/10)
+    links: {
+      "671:543": "https://www.instagram.com/p/DN0agR_5iSs/?img_index=1",
+      "671:546": "https://www.instagram.com/p/DNx5RdH4vru/?img_index=1",
+      "671:549": "https://www.instagram.com/p/DNspmnm5rtd/?img_index=1",
+    },
+  },
   {
     slug: "chuc-tet-nhau-that-su", file: "du-an-Chuc-Tet-Nhau-That-Su", mobile: "du-an-Chuc-Tet-Nhau-That-Su-mobile", alt: "Chúc Tết Nhau Thật Sự — Tíc Cơ",
     links: {

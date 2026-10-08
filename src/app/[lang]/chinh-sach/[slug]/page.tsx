@@ -56,8 +56,13 @@ export default async function PolicyPage({ params }: { params: Promise<{ slug: s
                 </li>
               ))}
             </ul>
+          ) : /:$/.test(source) ? (
+            // a section heading ("Phí vận chuyển:", "Quyền của khách hàng:" … in the client's policy sheet)
+            <h2 key={i} className="pt-3 font-semibold">
+              {b}
+            </h2>
           ) : (
-            <p key={i}>
+            <p key={i} className="whitespace-pre-line">
               <Fill>{b}</Fill>
             </p>
           );

@@ -94,7 +94,7 @@ export default function CheckoutClient() {
     }
   }, []);
 
-  const shipping = shippingFor(subtotal);
+  const shipping = shippingFor(subtotal, items.reduce((n, i) => n + i.qty, 0));
   const total = subtotal + shipping;
   const set = (k: keyof typeof empty) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setForm((f) => ({ ...f, [k]: e.target.value }));
@@ -168,7 +168,7 @@ export default function CheckoutClient() {
 
         {/* Shop's own static poster QR (client's file, shown uncropped): it carries no amount/note, so those two
             sit in a highlighted box the customer copies from. Phones can't scan their own screen -> save button. */}
-        <div className="grid items-start gap-8 md:grid-cols-[minmax(0,360px)_1fr]">
+        <div className="grid items-start gap-8 md:grid-cols-[minmax(0,22.5rem)_1fr]">
           <div className="mx-auto w-full max-w-[22.5rem]">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={QR_SRC} alt={t("Mã QR chuyển khoản Tíc Cơ (Techcombank)")} width={1878} height={2560} className="h-auto w-full rounded-lg bg-white shadow-sm" />
@@ -215,7 +215,7 @@ export default function CheckoutClient() {
 
   // ---- Step 1: customer details ----
   return (
-    <section className="mx-auto grid max-w-5xl gap-10 px-6 py-12 md:grid-cols-[1fr_340px]">
+    <section className="mx-auto grid max-w-5xl gap-10 px-6 py-12 md:grid-cols-[1fr_21.25rem]">
       <form onSubmit={submit} noValidate className="space-y-5">
         <h1 className="font-[family-name:var(--font-heading)] text-3xl font-bold text-[var(--color-purple)]">{t("Thông tin nhận hàng")}</h1>
 
