@@ -96,12 +96,12 @@ export default async function Footer() {
           </Reveal>
         </div>
       </div>
-      {/* Policy links (seller-info page stays reachable by URL but isn't listed, per client). */}
+      {/* Policy links */}
       {/* 12.5px at 1280 and scaled with the page above it: a fixed 12.5px read as tiny on big screens (client 08/10) */}
       <div className="bg-[#3a0c70] text-[12.5px] md:text-[max(12.5px,0.977vw)] text-white/80">
         <div className="flex flex-col gap-3 px-6 py-5 md:flex-row md:items-center md:justify-between md:px-[6.5%] md:py-[max(20px,1.5625vw)]">
           <ul className="flex flex-wrap gap-x-4 md:gap-x-[1.25em] gap-y-1.5">
-            {policies.filter((p) => p.slug !== "thong-tin-nguoi-ban").map((p) => (
+            {policies.map((p) => (
               <li key={p.slug}>
                 <Link href={localize(`/chinh-sach/${p.slug}`, lang)} className="text-white underline-offset-2 hover:underline">{T(p.title)}</Link>
               </li>

@@ -20,8 +20,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   return p ? { title: `${title} — Tíc Cơ`, description: `${title} Tíc Cơ: ${lead}`.slice(0, 157).replace(/\s+\S*$/, "") + "…", alternates: alternatesFor(`/chinh-sach/${p.slug}`, lang) } : {};
 }
 
-// A policy block in the page language. Whole blocks are in the dictionary; the seller-info block is built from
-// fields, so it goes line by line, translating each "[placeholder]" and the text around it separately.
+// A policy block in the page language. Whole blocks are in the dictionary; otherwise it goes line by line,
+// translating each "[placeholder]" and the text around it separately.
 function block(b: string, lang: Lang) {
   const whole = t(b, lang);
   if (whole !== b) return whole;

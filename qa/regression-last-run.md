@@ -1,7 +1,7 @@
-# Regression — 2026-10-08 15:45 UTC
+# Regression — 2026-10-09 14:07 UTC
 
 Target: http://localhost:3100 (local, full incl. orders on a mock Sheet)
-Result: **112/112 pass**
+Result: **113/113 pass**
 
 | | ID | Case | Chi tiết |
 |---|---|---|---|
@@ -10,6 +10,7 @@ Result: **112/112 pass**
 | ✅ | SEC-10 | Admin chưa đăng nhập: chuyển về /admin/login (hoặc 404 khi chưa bật Supabase), không bao giờ 200/500 (BUG-010) |  |
 | ✅ | ADM-30 | Gọi thẳng 6 server action admin (tạo/sửa/xoá SP, đổi đơn, upload, đăng xuất) khi chưa đăng nhập -> bị chặn |  |
 | ✅ | LEG-01 | Footer chỉ có 5 link chính sách (mở được), không có link/thông tin người bán (khách yêu cầu bỏ) |  |
+| ✅ | BUG-054 | Trang 'Thông tin người bán' đã gỡ hẳn: URL 404, không link nào trỏ tới (footer, Chính sách khác, sitemap) |  |
 | ✅ | SEC-11 | Security headers (chống nhúng iframe, sniff, HSTS) |  |
 | ✅ | IMG-01 | Ảnh load đủ + không tràn ngang (1280) / |  |
 | ✅ | IMG-01 | Ảnh load đủ + không tràn ngang (1280) /san-pham |  |

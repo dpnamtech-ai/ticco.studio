@@ -188,6 +188,13 @@ await test("LEG-01", "Footer chỉ có 5 link chính sách (mở được), khô
   const footer = html.slice(html.lastIndexOf("<footer"));
   return expect(!/MST|Người đại diện|Địa chỉ:/.test(footer) && links.length === 5 && !links.includes("/chinh-sach/thong-tin-nguoi-ban") && !bad.length, `links=${links.length} bad=${bad}`);
 });
+await test("BUG-054", "Trang 'Thông tin người bán' đã gỡ hẳn: URL 404, không link nào trỏ tới (footer, Chính sách khác, sitemap)", async () => {
+  const gone = (await fetch(BASE + "/chinh-sach/thong-tin-nguoi-ban")).status;
+  const policyHtml = await (await fetch(BASE + "/chinh-sach/thanh-toan")).text();
+  const sitemap = await (await fetch(BASE + "/sitemap.xml")).text();
+  const r = { gone, inPolicyPage: policyHtml.includes("thong-tin-nguoi-ban"), inSitemap: sitemap.includes("thong-tin-nguoi-ban") };
+  return expect(r.gone === 404 && !r.inPolicyPage && !r.inSitemap, JSON.stringify(r));
+});
 await test("SEC-11", "Security headers (chống nhúng iframe, sniff, HSTS)", async () => {
   const h = (await fetch(BASE)).headers;
   const miss = ["x-frame-options", "x-content-type-options", "referrer-policy", "strict-transport-security"].filter((k) => !h.get(k));
