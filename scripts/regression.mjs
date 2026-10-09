@@ -261,7 +261,7 @@ await test("MOB-03", "Menu đang mở, bấm kính lúp -> menu đóng, thanh t�
   await sleep(500);
   return expect(!s.menuOpen && s.inputOnTop && s.focused, JSON.stringify(s));
 });
-await test("FX-01", "Mobile: chạm màn hình -> Đần rơi rồi tự biến mất, không chặn thao tác (PC bấm chuột cũng có từ 08/10, xem BUG-048)", async () => {
+await test("FX-01", "Mobile: chạm màn hình -> Đần rơi rồi tự biến mất, không chặn thao tác (PC không có, xem BUG-048)", async () => {
   // tap plain text (a policy page paragraph), not a link — a link would navigate away mid-animation
   await go("/chinh-sach/doi-tra");
   const pt = await page.evaluate(() => { const r = document.querySelector("section li").getBoundingClientRect(); return { x: r.left + 40, y: r.top + 10 }; });
@@ -792,7 +792,7 @@ await test("UI-10", "Màn lớn (2560 vs 1280): thanh tiến trình, thanh chạ
   const bad = Object.keys(a).filter((k) => !(b[k] >= a[k] * 1.8)).map((k) => `${k}: ${a[k].toFixed(1)} -> ${b[k].toFixed(1)}`);
   return expect(bad.length === 0, bad.join(", ") || JSON.stringify(b));
 });
-await test("BUG-048", "Bấm chuột (desktop) / chạm (mobile) bắn ra Đần, ảnh Đần tải được (q=100 từng trả 400)", async () => {
+await test("BUG-048", "Mưa Đần chỉ trên mobile (khách 09/10): chạm bắn ra Đần + ảnh tải được (q=100 từng trả 400); bấm chuột desktop KHÔNG ra", async () => {
   const out = {};
   for (const vp of ["desktop", "mobile"]) {
     if (vp === "mobile") await mobile(); else await page.setViewport({ width: 1920, height: 1000 });
@@ -809,7 +809,7 @@ await test("BUG-048", "Bấm chuột (desktop) / chạm (mobile) bắn ra Đần
   }
   await desktop();
   const d = out.desktop, m = out.mobile;
-  return expect(d.n >= 3 && d.ok === d.n && m.n >= 3 && m.ok === m.n, JSON.stringify(out));
+  return expect(d.n === 0 && m.n >= 3 && m.ok === m.n, JSON.stringify(out));
 });
 await test("BUG-049", "Hero MOBILE VN: chữ trong ngoặc là 3 hàng giãn như Figma (CHÚNG TÔI … CÓ BÁN SẢN PHẨM / ĐỂ BẠN … / TRONG MỌI …), không dồn thành 1 đoạn", async () => {
   await mobile();
