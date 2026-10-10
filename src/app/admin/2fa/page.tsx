@@ -56,7 +56,8 @@ export default function AdminTwoFactor() {
     refresh();
   }
 
-  const button = "bg-[var(--color-purple)] text-white font-semibold px-6 py-3 rounded-lg disabled:opacity-50";
+  const button = "inline-flex items-center gap-2 bg-[var(--color-purple)] text-white font-semibold px-6 py-3 rounded-lg disabled:opacity-50 disabled:cursor-wait";
+  const spinner = busy && <span className="size-[1em] animate-spin rounded-full border-2 border-current border-t-transparent" aria-hidden />;
 
   return (
     <div className="min-h-screen bg-[var(--color-cream)] px-6 py-10">
@@ -94,6 +95,7 @@ export default function AdminTwoFactor() {
               />
               <div>
                 <button type="submit" disabled={busy} className={button}>
+                  {spinner}
                   {busy ? "Đang kiểm tra…" : "Xác nhận và bật"}
                 </button>
               </div>
@@ -102,6 +104,7 @@ export default function AdminTwoFactor() {
             <>
               <p>Chưa bật. Khi bật, đăng nhập admin cần mật khẩu + mã 6 số đổi mỗi 30 giây trên điện thoại, nên lộ mật khẩu cũng không vào được.</p>
               <button onClick={start} disabled={busy} className={button}>
+                {spinner}
                 Bật bảo mật 2 lớp
               </button>
             </>

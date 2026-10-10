@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { supabaseBrowser } from "@/lib/supabase/client";
+import { isAdmin } from "@/lib/supabase/admin-check";
 
 // Signed in with the password but 2FA is set up and the code isn't entered yet (aal1 → aal2 pending)?
 async function needsCode() {
@@ -33,10 +34,17 @@ export default function AdminLoginPage() {
     e.preventDefault();
     setLoading(true);
     setError(null);
-    const { error } = await supabaseBrowser().auth.signInWithPassword({ email, password });
+    const { data, error } = await supabaseBrowser().auth.signInWithPassword({ email, password });
     if (error) {
       setLoading(false);
       setError(error.message);
+      return;
+    }
+    // Right password but no admin role: the proxy would bounce /admin back here and the button would spin forever.
+    if (!isAdmin(data.user)) {
+      await supabaseBrowser().auth.signOut();
+      setLoading(false);
+      setError("Tài khoản này chưa được cấp quyền quản trị.");
       return;
     }
     if (await needsCode()) {
@@ -107,8 +115,10 @@ export default function AdminLoginPage() {
         <button
           type="submit"
           disabled={loading}
-          className="w-full bg-[var(--color-purple)] text-white font-semibold py-3 rounded-lg disabled:opacity-50"
+          aria-busy={loading}
+          className="w-full inline-flex items-center justify-center gap-2 bg-[var(--color-purple)] text-white font-semibold py-3 rounded-lg disabled:opacity-50 disabled:cursor-wait"
         >
+          {loading && <span className="size-[1em] animate-spin rounded-full border-2 border-current border-t-transparent" aria-hidden />}
           {loading ? "Đang kiểm tra..." : step === "password" ? "Đăng nhập" : "Xác nhận"}
         </button>
         {step === "code" && (
