@@ -33,9 +33,6 @@ export default async function AdminOrders({ searchParams }: { searchParams: Prom
           <h1 className="font-[family-name:var(--font-heading)] text-3xl font-bold text-[var(--color-purple)]">
             Quản lý đơn hàng
           </h1>
-          <Link href="/admin" className="border border-black/20 px-5 py-2.5 rounded-lg font-semibold">
-            ← Sản phẩm
-          </Link>
         </div>
 
         <div className="flex flex-wrap gap-2 mb-6 text-sm">

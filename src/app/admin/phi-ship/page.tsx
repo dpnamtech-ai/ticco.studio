@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { redirect } from "next/navigation";
 import { supabaseServer } from "@/lib/supabase/server";
 import { isAdmin } from "@/lib/supabase/admin-check";
@@ -28,9 +27,6 @@ export default async function AdminShipping({ searchParams }: { searchParams: Pr
       <div className="max-w-3xl mx-auto">
         <div className="flex items-center justify-between mb-8">
           <h1 className="font-[family-name:var(--font-heading)] text-3xl font-bold text-[var(--color-purple)]">Phí ship</h1>
-          <Link href="/admin" className="border border-black/20 px-5 py-2.5 rounded-lg font-semibold">
-            ← Sản phẩm
-          </Link>
         </div>
 
         <p className="mb-6 rounded-xl bg-white p-4 text-sm">

@@ -242,3 +242,13 @@ export async function saveShipRule(formData: FormData) {
   revalidatePath("/", "layout"); // checkout pages and llms.txt read the rule
   redirect("/admin/phi-ship?saved=1");
 }
+
+// "Ẩn/Hiện" in the product list: one product, or every product of a category at once.
+export async function setProductsHidden(ids: string[], hidden: boolean) {
+  await requireAdmin();
+  if (!ids.length) return;
+  const { error } = await supabaseAdmin().from("products").update({ hidden }).in("id", ids);
+  if (error) throw new Error(error.message);
+  revalidatePath("/", "layout"); // shop, detail pages, search, sitemap all read the catalog
+  revalidatePath("/admin");
+}

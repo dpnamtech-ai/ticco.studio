@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "../globals.css";
+import AdminNav from "./AdminNav";
 
 export const metadata: Metadata = {
   title: "Quản trị — Tíc Cơ",
@@ -11,7 +12,12 @@ export const metadata: Metadata = {
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="vi">
-      <body>{children}</body>
+      <body className="bg-[var(--color-cream)]">
+        <div className="md:flex">
+          <AdminNav />
+          <main className="flex-1 min-w-0">{children}</main>
+        </div>
+      </body>
     </html>
   );
 }

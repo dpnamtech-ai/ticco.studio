@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { imageUrl } from "@/lib/image-loader";
 
 // Phones only: a tap drops a few little Đần that tumble down and fade; holding the finger keeps them pouring out
 // (following it) until it lifts. Finger only (pointerType "touch"): the client tried it on desktop clicks (08/10) and
@@ -11,7 +12,7 @@ const ART = [
   "/images/mascot-dan/bio/dan-2.png",
   "/images/mascot-dan/bio/dan-3.png",
   "/images/figma/d589ad7c701656373d6884e2905ee9267b4d2665.webp",
-].map((src) => `/_next/image?url=${encodeURIComponent(src)}&w=256&q=90`); // q must be one of next.config images.qualities, or the optimizer answers 400
+].map((src) => imageUrl(src, 256)); // pre-rendered 256w copy (src/lib/image-loader.ts), no optimizer call
 const PER_TAP = 3;
 const HOLD_EVERY = 140; // ms between Đần while the finger stays down
 const MAX = 40;

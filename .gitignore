@@ -62,3 +62,6 @@ design/demo-ref/
 
 # regression screenshots (regenerated every run, reviewed locally)
 qa/visual/
+
+# pre-rendered image sizes (scripts/gen-image-sizes.mjs, runs as prebuild)
+/public/_img/

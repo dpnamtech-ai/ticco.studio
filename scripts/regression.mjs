@@ -912,7 +912,7 @@ await test("BUG-037", "BST Đần Sinh Tồn: chữ nút lựa chọn nằm tr�
 await test("UI-08", "Logo navbar nét trên màn lớn retina (file >= 2x khung hiển thị)", async () => {
   await page.setViewport({ width: 1920, height: 900, deviceScaleFactor: 2 });
   await go("/");
-  const r = await page.evaluate(() => { const i = document.querySelector("nav img"); return { css: i.getBoundingClientRect().width, w: +(i.currentSrc.match(/w=(\d+)/)?.[1] ?? 0) }; });
+  const r = await page.evaluate(() => { const i = document.querySelector("nav img"); return { css: i.getBoundingClientRect().width, w: i.naturalWidth, src: i.currentSrc.replace(location.origin, "") }; }); // real pixels of the file the browser picked
   await desktop();
   return expect(r.w >= r.css * 2, JSON.stringify(r));
 });

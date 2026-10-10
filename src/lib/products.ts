@@ -36,6 +36,7 @@ export async function getProducts(): Promise<Product[]> {
     const { data, error } = await supabase
       .from("products")
       .select("*")
+      .eq("hidden", false) // hidden in /admin: off the storefront and not orderable, but kept
       .order("sort_order", { ascending: true })
       .order("name", { ascending: true });
     if (error || !data || data.length === 0) return fromStatic();
