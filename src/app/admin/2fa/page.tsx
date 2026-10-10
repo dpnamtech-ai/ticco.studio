@@ -5,9 +5,10 @@ import { supabaseBrowser } from "@/lib/supabase/client";
 
 type Setup = { factorId: string; qr: string; secret: string };
 
-// /admin/2fa — turn on an authenticator app (TOTP) for this admin account. Once on, signing in asks for the
-// 6-digit code too (enforced in proxy.ts + requireAdmin via adminSession). Lost phone: delete the factor in
-// Supabase Dashboard → Authentication → Users → the user → MFA, then sign in with the password and set it up again.
+// /admin/2fa — set up the authenticator app (TOTP). Mandatory: an admin without one is held on this page by the proxy
+// until it's done (adminSession step "setup"); afterwards every sign-in asks for the 6-digit code. No "turn off" —
+// lost phone: delete the factor in Supabase Dashboard → Authentication → Users → the user → MFA, then sign in with
+// the password and this page sets up the new phone.
 export default function AdminTwoFactor() {
   const [enabled, setEnabled] = useState<string | null | undefined>(undefined); // verified factor id, null = off
   const [setup, setSetup] = useState<Setup | null>(null);
@@ -15,10 +16,10 @@ export default function AdminTwoFactor() {
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
 
-  const verifiedFactor = () => supabaseBrowser().auth.mfa.listFactors().then(({ data }) => data?.totp[0]?.id ?? null);
-  const refresh = () => verifiedFactor().then(setEnabled);
   useEffect(() => {
-    verifiedFactor().then(setEnabled);
+    supabaseBrowser()
+      .auth.mfa.listFactors()
+      .then(({ data }) => setEnabled(data?.totp[0]?.id ?? null));
   }, []);
 
   async function start() {
@@ -40,20 +41,14 @@ export default function AdminTwoFactor() {
     setBusy(true);
     setError(null);
     const { error } = await supabaseBrowser().auth.mfa.challengeAndVerify({ factorId: setup.factorId, code: code.trim() });
-    setBusy(false);
-    if (error) return setError("Mã không đúng, thử lại mã mới nhất trong app.");
-    setSetup(null);
-    setCode("");
-    refresh();
-  }
-
-  async function turnOff() {
-    if (!enabled) return;
-    setBusy(true);
-    const { error } = await supabaseBrowser().auth.mfa.unenroll({ factorId: enabled });
-    setBusy(false);
-    if (error) return setError(error.message);
-    refresh();
+    if (error) {
+      setBusy(false);
+      return setError("Mã không đúng, thử lại mã mới nhất trong app.");
+    }
+    // Session is aal2 now: the rest of admin opens (a first-time admin was held on this page until here). Full page load,
+    // not router.push: the menu links prefetched /admin while it still redirected here, and the router reuses that.
+    // eslint-disable-next-line @next/next/no-location-assign-relative-destination -- full load on purpose, see above
+    window.location.assign("/admin");
   }
 
   const button = "inline-flex items-center gap-2 bg-[var(--color-purple)] text-white font-semibold px-6 py-3 rounded-lg disabled:opacity-50 disabled:cursor-wait";
@@ -69,9 +64,7 @@ export default function AdminTwoFactor() {
           ) : enabled ? (
             <>
               <p className="rounded-xl bg-green-100 p-4 font-semibold text-green-800">Đang bật. Mỗi lần đăng nhập cần thêm mã 6 số từ app xác thực.</p>
-              <button onClick={turnOff} disabled={busy} className="text-red-600 underline disabled:opacity-50">
-                Tắt bảo mật 2 lớp
-              </button>
+              <p className="text-black/50">Đổi hoặc mất điện thoại: nhờ người quản lý Supabase xoá app xác thực cũ của tài khoản này, rồi đăng nhập lại để cài máy mới.</p>
             </>
           ) : setup ? (
             <form onSubmit={confirm} className="space-y-4">
@@ -102,7 +95,10 @@ export default function AdminTwoFactor() {
             </form>
           ) : (
             <>
-              <p>Chưa bật. Khi bật, đăng nhập admin cần mật khẩu + mã 6 số đổi mỗi 30 giây trên điện thoại, nên lộ mật khẩu cũng không vào được.</p>
+              <p className="rounded-xl bg-amber-100 p-4 font-semibold text-amber-900">
+                Tài khoản quản trị bắt buộc bật bảo mật 2 lớp trước khi dùng. Bật xong là vào được trang quản trị ngay.
+              </p>
+              <p>Đăng nhập sẽ cần mật khẩu + mã 6 số đổi mỗi 30 giây trên điện thoại, nên lộ mật khẩu cũng không vào được.</p>
               <button onClick={start} disabled={busy} className={button}>
                 {spinner}
                 Bật bảo mật 2 lớp

@@ -45,21 +45,21 @@ async function adminGate(request: NextRequest) {
   );
 
   // Password-only session of an admin with 2FA set up = not in yet; the login page asks for the code.
-  const { ok } = await adminSession(supabase);
+  const { ok, step } = await adminSession(supabase);
 
-  const isLoginPage = request.nextUrl.pathname === "/admin/login";
-  if (!ok && !isLoginPage) {
-    const url = request.nextUrl.clone();
-    url.pathname = "/admin/login";
-    return NextResponse.redirect(url);
-  }
-  if (ok && isLoginPage) {
-    const url = request.nextUrl.clone();
-    url.pathname = "/admin";
-    return NextResponse.redirect(url);
-  }
+  // Where this session belongs: anywhere (ok), only the 2FA setup page (admin without an app yet), or the login page.
+  const path = request.nextUrl.pathname;
+  const home = ok ? null : step === "setup" ? "/admin/2fa" : "/admin/login";
+  if (home && path !== home) return redirectTo(request, home);
+  if (ok && path === "/admin/login") return redirectTo(request, "/admin");
 
   return response;
+}
+
+function redirectTo(request: NextRequest, pathname: string) {
+  const url = request.nextUrl.clone();
+  url.pathname = pathname;
+  return NextResponse.redirect(url);
 }
 
 export const config = {

@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
 import { supabaseBrowser } from "@/lib/supabase/client";
 import { isAdmin } from "@/lib/supabase/admin-check";
 
@@ -12,7 +11,6 @@ async function needsCode() {
 }
 
 export default function AdminLoginPage() {
-  const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [code, setCode] = useState("");
@@ -25,10 +23,9 @@ export default function AdminLoginPage() {
     needsCode().then((yes) => yes && setStep("code"));
   }, []);
 
-  function enter() {
-    router.push("/admin");
-    router.refresh();
-  }
+  // Full page load, not router.push: the client router may still hold an /admin → login redirect from before sign-in.
+  // eslint-disable-next-line @next/next/no-location-assign-relative-destination -- full load on purpose, see above
+  const enter = () => window.location.assign("/admin");
 
   async function handlePassword(e: React.FormEvent) {
     e.preventDefault();
