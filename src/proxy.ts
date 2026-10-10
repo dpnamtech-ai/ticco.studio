@@ -1,6 +1,6 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
-import { isAdmin } from "@/lib/supabase/admin-check";
+import { adminSession } from "@/lib/supabase/admin-check";
 import { stripLang } from "@/lib/i18n";
 
 // Language routing: Vietnamese keeps unprefixed URLs and is rewritten to the app/[lang] tree as /vi/...; /en/... is
@@ -44,17 +44,16 @@ async function adminGate(request: NextRequest) {
     }
   );
 
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  // Password-only session of an admin with 2FA set up = not in yet; the login page asks for the code.
+  const { ok } = await adminSession(supabase);
 
   const isLoginPage = request.nextUrl.pathname === "/admin/login";
-  if (!isAdmin(user) && !isLoginPage) {
+  if (!ok && !isLoginPage) {
     const url = request.nextUrl.clone();
     url.pathname = "/admin/login";
     return NextResponse.redirect(url);
   }
-  if (isAdmin(user) && isLoginPage) {
+  if (ok && isLoginPage) {
     const url = request.nextUrl.clone();
     url.pathname = "/admin";
     return NextResponse.redirect(url);

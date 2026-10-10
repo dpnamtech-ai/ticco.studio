@@ -9,6 +9,7 @@ const LINKS = [
   { href: "/admin", label: "Sản phẩm", match: (p: string) => p === "/admin" || p.startsWith("/admin/products") },
   { href: "/admin/orders", label: "Đơn hàng", match: (p: string) => p.startsWith("/admin/orders") },
   { href: "/admin/phi-ship", label: "Phí ship", match: (p: string) => p.startsWith("/admin/phi-ship") },
+  { href: "/admin/2fa", label: "Bảo mật 2 lớp", match: (p: string) => p.startsWith("/admin/2fa") },
 ];
 
 // Left menu on every admin page (a top bar on phones); none on the login page.

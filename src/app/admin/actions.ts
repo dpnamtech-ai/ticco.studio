@@ -3,7 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { supabaseAdmin, supabaseServer } from "@/lib/supabase/server";
-import { isAdmin } from "@/lib/supabase/admin-check";
+import { adminSession } from "@/lib/supabase/admin-check";
 import { MAX_PRICE, THUMB_SLOTS, parseVariantLines } from "@/lib/variants";
 import { sanitizeDescription } from "@/lib/sanitize";
 import type { ShipRule } from "@/lib/checkout";
@@ -12,11 +12,7 @@ import type { ShipRule } from "@/lib/checkout";
 // route, so the /admin middleware matcher does not protect them. Every action
 // that touches the service-role client must check the session itself.
 async function requireAdmin() {
-  const supabase = await supabaseServer();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-  if (!isAdmin(user)) throw new Error("Unauthorized");
+  if (!(await adminSession(await supabaseServer())).ok) throw new Error("Unauthorized");
 }
 
 function parseProductForm(formData: FormData) {
