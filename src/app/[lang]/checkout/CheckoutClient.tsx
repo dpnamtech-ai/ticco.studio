@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useEffect, useId, useState } from "react";
 import { useCart } from "@/context/CartContext";
 import AddressMap from "@/components/AddressMap";
-import { FREE_SHIP_MIN, shippingFor } from "@/lib/checkout";
+import { shippingFor, type ShipRule } from "@/lib/checkout";
 import { useLang, useT } from "@/components/LangSwitch";
 import { localize } from "@/lib/i18n";
 import { vnd as vndOf } from "@/lib/shopFigma";
@@ -58,7 +58,7 @@ function CopyRow({ label, value, shown = value }: { label: string; value: string
   );
 }
 
-export default function CheckoutClient() {
+export default function CheckoutClient({ shipRule }: { shipRule: ShipRule }) {
   const { items, subtotal, clearCart } = useCart();
   const lang = useLang();
   const t = useT();
@@ -94,7 +94,7 @@ export default function CheckoutClient() {
     }
   }, []);
 
-  const shipping = shippingFor(subtotal, items.reduce((n, i) => n + i.qty, 0));
+  const shipping = shippingFor(subtotal, items.reduce((n, i) => n + i.qty, 0), shipRule);
   const total = subtotal + shipping;
   const set = (k: keyof typeof empty) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setForm((f) => ({ ...f, [k]: e.target.value }));
@@ -353,8 +353,8 @@ export default function CheckoutClient() {
         <dl className="mt-4 space-y-1 border-t border-[var(--color-ink)]/15 pt-3 text-sm">
           <div className="flex justify-between"><dt>{t("Tạm tính")}</dt><dd>{vnd(subtotal)}</dd></div>
           <div className="flex justify-between"><dt>{t("Phí ship")}</dt><dd>{shipping ? vnd(shipping) : t("Miễn phí")}</dd></div>
-          {shipping > 0 && (
-            <p className="text-xs text-[var(--color-ink)]/55">{t("Mua thêm")} {vnd(FREE_SHIP_MIN - subtotal)} {t("để được miễn phí ship.")}</p>
+          {shipping > 0 && shipRule.freeFrom != null && (
+            <p className="text-xs text-[var(--color-ink)]/55">{t("Mua thêm")} {vnd(shipRule.freeFrom - subtotal)} {t("để được miễn phí ship.")}</p>
           )}
           <div className="flex justify-between pt-2 text-base font-bold text-[var(--color-purple)]"><dt>{t("Tổng")}</dt><dd>{vnd(total)}</dd></div>
         </dl>

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import CheckoutClient from "./CheckoutClient";
+import { getShipRule } from "@/lib/ship-rule";
 import { getLang } from "@/lib/lang";
 import { t } from "@/lib/t";
 
@@ -12,6 +13,6 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export default function CheckoutPage() {
-  return <CheckoutClient />;
+export default async function CheckoutPage() {
+  return <CheckoutClient shipRule={await getShipRule()} />;
 }

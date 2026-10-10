@@ -3,6 +3,8 @@ import { SHOP_CATEGORIES } from "@/lib/shop";
 import { projects, brand, aboutPage } from "@/data/content";
 import { policies } from "@/data/legal";
 import { SITE_URL, plainText } from "@/lib/site";
+import { describeShipRule } from "@/lib/checkout";
+import { getShipRule } from "@/lib/ship-rule";
 
 // /llms.txt (llmstxt.org): a plain-markdown map of the site for AI assistants — who Tíc Cơ is, what it sells
 // (with prices and links), its projects and policies — so answers about the brand quote correct facts.
@@ -46,7 +48,7 @@ ${projects
   .join("\n")}
 
 ## Mua hàng & chính sách
-- Giao toàn quốc; phí ship 30.000đ, miễn phí cho đơn từ 500.000đ
+- Giao toàn quốc; phí ship theo số sản phẩm: ${describeShipRule(await getShipRule())}
 - Thanh toán: chuyển khoản ngân hàng (mã QR sau khi đặt)
 ${policies.map((p) => `- [${p.title}](${SITE_URL}/chinh-sach/${p.slug})`).join("\n")}
 

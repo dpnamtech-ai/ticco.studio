@@ -14,7 +14,11 @@ import { useLang, useT } from "@/components/LangSwitch";
 */
 const SUB = "Chúng tôi có bán sản phẩm để bạn tìm thấy niềm vui trong mọi điều đời thường!";
 // the Figma art's rows and word groups (each group pinned left / centre / right of its row)
-const SUB_ROWS = [["Chúng tôi", "có bán sản phẩm"], ["để bạn", "tìm thấy", "niềm vui"], ["trong mọi", "điều đời thường!"]];
+const SUB_ROWS = {
+  vi: [["Chúng tôi", "có bán sản phẩm"], ["để bạn", "tìm thấy", "niềm vui"], ["trong mọi", "điều đời thường!"]],
+  // same 3 spaced rows as the VN art (client 10/10: EN ran as one plain paragraph)
+  en: [["We sell", "things so"], ["you can", "find", "joy"], ["in all things", "ordinary!"]],
+};
 const PAREN = "font-[family-name:Georgia,serif] text-[46px] lg:text-[7.6cqw] font-thin leading-none opacity-90";
 
 export default function HeroSection() {
@@ -57,29 +61,28 @@ export default function HeroSection() {
           </h1>
 
           {/* Figma "Frame 6": bracketed subtext, Big Caslon ( ). Rebuilt as live text (was a baked PNG) so its words can
-              scatter too: desktop VN keeps the art's spaced 3-row layout; phones and English run as one line. */}
+              scatter too: desktop keeps the art's spaced 3-row layout (VN and EN); phones run as one line. */}
           <div
             className="absolute max-lg:!w-[39%] max-lg:!top-[50%] flex items-center gap-1 lg:gap-[0.6cqw] font-medium uppercase"
             // VN rows: Figma's width is a minimum, the ")" follows the longest row — a browser that sets these words wider
             // (bigger font, minimum font size) pushed "có bán sản phẩm" out past the bracket (client 08/10)
-            style={{ left: "4.365%", top: "60.98%", [lang === "vi" ? "minWidth" : "width"]: "25.25%" }}
+            // EN: no minimum, its shorter rows would spread far apart in the VN-sized box
+            style={{ left: "4.365%", top: "60.98%", minWidth: lang === "vi" ? "25.25%" : undefined }}
           >
             <p className="sr-only">{t(SUB)}</p>
             <span aria-hidden className={PAREN}>(</span>
-            {lang === "vi" && (
-              <span aria-hidden className="max-lg:hidden flex-1 text-[1.17cqw] leading-[1.6] tracking-[-0.02em]">
-                {SUB_ROWS.map((row, r) => (
-                  <span key={r} className="flex justify-between gap-x-[1em] whitespace-nowrap">
-                    {row.map((w, i) => (
-                      <span key={i}>
-                        <ScatterWords text={w} seed={70 + r * 5 + i} />
-                      </span>
-                    ))}
-                  </span>
-                ))}
-              </span>
-            )}
-            <span aria-hidden className={`${lang === "vi" ? "lg:hidden" : "lg:text-[1.25cqw]"} flex-1 text-[11px] leading-[1.3]`}>
+            <span aria-hidden className="max-lg:hidden flex-1 text-[1.17cqw] leading-[1.6] tracking-[-0.02em]">
+              {SUB_ROWS[lang].map((row, r) => (
+                <span key={r} className="flex justify-between gap-x-[1em] whitespace-nowrap">
+                  {row.map((w, i) => (
+                    <span key={i}>
+                      <ScatterWords text={w} seed={70 + r * 5 + i} />
+                    </span>
+                  ))}
+                </span>
+              ))}
+            </span>
+            <span aria-hidden className="lg:hidden flex-1 text-[11px] leading-[1.3]">
               <ScatterWords text={t(SUB)} seed={90} />
             </span>
             <span aria-hidden className={PAREN}>)</span>

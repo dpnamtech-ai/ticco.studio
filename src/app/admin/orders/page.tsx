@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import { supabaseAdmin, supabaseServer } from "@/lib/supabase/server";
 import { isAdmin } from "@/lib/supabase/admin-check";
 import { updateOrderStatus } from "../actions";
+import SubmitButton from "../SubmitButton";
 
 const STATUS_LABEL: Record<string, string> = {
   pending_payment: "Chờ thanh toán",
@@ -75,7 +76,7 @@ export default async function AdminOrders({ searchParams }: { searchParams: Prom
                       placeholder="Mã vận đơn"
                       className="border border-black/20 rounded-lg px-3 py-1.5 w-40"
                     />
-                    <button className="bg-[var(--color-purple)] text-white font-semibold px-4 py-1.5 rounded-lg">Lưu</button>
+                    <SubmitButton className="bg-[var(--color-purple)] text-white font-semibold px-4 py-1.5 rounded-lg">Lưu</SubmitButton>
                   </form>
                 </div>
                 <p className="mt-3">

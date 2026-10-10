@@ -6,6 +6,7 @@ import { supabaseAdmin, supabaseServer } from "@/lib/supabase/server";
 import { isAdmin } from "@/lib/supabase/admin-check";
 import { MAX_PRICE, THUMB_SLOTS, parseVariantLines } from "@/lib/variants";
 import { sanitizeDescription } from "@/lib/sanitize";
+import type { ShipRule } from "@/lib/checkout";
 
 // Server Actions are public HTTP endpoints — Next can invoke them from ANY
 // route, so the /admin middleware matcher does not protect them. Every action
@@ -207,4 +208,37 @@ export async function updateOrderStatus(code: string, formData: FormData) {
   const { error } = await db.from("orders").update({ status, ghn_order_code: tracking, stock_deducted: shouldHold }).eq("code", code);
   if (error) throw new Error(error.message);
   revalidatePath("/admin/orders");
+}
+
+// /admin/phi-ship form: rows "đến [maxItems] sản phẩm → [fee]đ" (blank maxItems = "trở lên", last row only)
+// and "miễn phí từ [freeFrom]đ" (blank = never free). Errors come back as ?error=… so the client sees why.
+export async function saveShipRule(formData: FormData) {
+  await requireAdmin();
+  const int = (v: FormDataEntryValue | null) => (String(v ?? "").replace(/[.\s,đ]/g, "") === "" ? null : Number(String(v).replace(/[.\s,đ]/g, "")));
+  const maxes = formData.getAll("maxItems").map(int);
+  const fees = formData.getAll("fee").map(int);
+  const tiers: ShipRule["tiers"] = [];
+  let error = "";
+  maxes.forEach((maxItems, i) => {
+    const fee = fees[i];
+    if (fee == null && maxItems == null) return; // empty row
+    if (fee == null || !Number.isInteger(fee) || fee < 0 || fee > MAX_PRICE) error ||= `Dòng ${i + 1}: phí ship không hợp lệ`;
+    else if (maxItems != null && (!Number.isInteger(maxItems) || maxItems < 1)) error ||= `Dòng ${i + 1}: số sản phẩm không hợp lệ`;
+    else tiers.push({ maxItems, fee });
+  });
+  if (!error && tiers.length === 0) error = "Cần ít nhất 1 mức phí";
+  tiers.forEach((t, i) => {
+    const prev = tiers[i - 1]?.maxItems;
+    if (i > 0 && (prev == null || (t.maxItems != null && t.maxItems <= prev))) error ||= "Các mức phải tăng dần; dòng để trống số sản phẩm (\"trở lên\") phải là dòng cuối";
+  });
+  const freeFrom = int(formData.get("freeFrom"));
+  if (freeFrom != null && (!Number.isInteger(freeFrom) || freeFrom < 0 || freeFrom > MAX_PRICE * 100)) error ||= "Mức miễn phí ship không hợp lệ";
+  if (error) redirect(`/admin/phi-ship?error=${encodeURIComponent(error)}`);
+
+  const { error: dbErr } = await supabaseAdmin()
+    .from("settings")
+    .upsert({ key: "shipping", value: { tiers, freeFrom } satisfies ShipRule, updated_at: new Date().toISOString() });
+  if (dbErr) redirect(`/admin/phi-ship?error=${encodeURIComponent(dbErr.message)}`);
+  revalidatePath("/", "layout"); // checkout pages and llms.txt read the rule
+  redirect("/admin/phi-ship?saved=1");
 }

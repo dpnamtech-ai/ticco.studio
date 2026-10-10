@@ -5,6 +5,7 @@ import Image from "next/image";
 import { productCategories } from "@/data/content";
 import DescriptionEditor from "./DescriptionEditor";
 import { THUMB_SLOTS, formatVariantLines, type VariantOptions } from "@/lib/variants";
+import SubmitButton from "./SubmitButton";
 
 type Product = {
   id: string;
@@ -184,9 +185,9 @@ export default function ProductForm({
         <input type="checkbox" name="sold_out" defaultChecked={product?.sold_out} />
         <span className="text-sm font-medium">Hết hàng</span>
       </label>
-      <button type="submit" className="bg-[var(--color-purple)] text-white font-semibold px-6 py-3 rounded-lg">
+      <SubmitButton pendingText={product ? "Đang lưu…" : "Đang tạo…"} className="bg-[var(--color-purple)] text-white font-semibold px-6 py-3 rounded-lg">
         {product ? "Lưu thay đổi" : "Tạo sản phẩm"}
-      </button>
+      </SubmitButton>
     </form>
   );
 }

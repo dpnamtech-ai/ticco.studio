@@ -1,11 +1,27 @@
 // Shared checkout rules: used by the /checkout form (client) and POST /api/orders (server).
 // Prices are ALWAYS recomputed on the server from the catalog; the client only sends product ids.
 
-export const FREE_SHIP_MIN = 500_000;
-// Client's shipping rule (policy sheet, 08/10), nationwide, by number of items in the order:
-// 1-5 items 23.000đ, 6-10 items 30.000đ, more 45.000đ; free from 500.000đ.
-// ponytail: the sheet stops at 15 items; bigger orders keep 45.000đ until the client says otherwise.
-const SHIP_TIERS: [maxItems: number, fee: number][] = [[5, 23_000], [10, 30_000], [Infinity, 45_000]];
+// Shipping rule, nationwide, by number of items in the order. Edited by the client in /admin/phi-ship
+// (Supabase `settings` row "shipping", read by src/lib/ship-rule.ts); this default is the policy sheet of 08/10.
+// tiers: ascending by maxItems; maxItems null = "and up". Orders past the last capped tier pay the last fee.
+// freeFrom: subtotal from which shipping is free; null = never free.
+export type ShipRule = { tiers: { maxItems: number | null; fee: number }[]; freeFrom: number | null };
+export const DEFAULT_SHIP_RULE: ShipRule = {
+  tiers: [{ maxItems: 5, fee: 23_000 }, { maxItems: 10, fee: 30_000 }, { maxItems: null, fee: 45_000 }],
+  freeFrom: 500_000,
+};
+
+const vndText = (n: number) => `${n.toLocaleString("vi-VN")}đ`;
+// "1-5 sản phẩm 23.000đ, 6-10 sản phẩm 30.000đ, từ 11 sản phẩm 45.000đ; miễn phí cho đơn từ 500.000đ"
+export function describeShipRule({ tiers, freeFrom }: ShipRule) {
+  let from = 1;
+  const parts = tiers.map(({ maxItems, fee }) => {
+    const s = maxItems == null ? `từ ${from} sản phẩm ${vndText(fee)}` : `${from}-${maxItems} sản phẩm ${vndText(fee)}`;
+    from = (maxItems ?? from) + 1;
+    return s;
+  });
+  return parts.join(", ") + (freeFrom != null ? `; miễn phí cho đơn từ ${vndText(freeFrom)}` : "");
+}
 
 export type OrderItemInput = { id: string; variant: string; qty: number };
 
@@ -23,9 +39,10 @@ export type OrderInput = {
   items: OrderItemInput[];
 };
 
-export function shippingFor(subtotal: number, items: number) {
-  if (subtotal <= 0 || items <= 0 || subtotal >= FREE_SHIP_MIN) return 0;
-  return SHIP_TIERS.find(([max]) => items <= max)![1];
+export function shippingFor(subtotal: number, items: number, rule: ShipRule = DEFAULT_SHIP_RULE) {
+  if (subtotal <= 0 || items <= 0 || (rule.freeFrom != null && subtotal >= rule.freeFrom)) return 0;
+  const tier = rule.tiers.find((t) => t.maxItems == null || items <= t.maxItems) ?? rule.tiers.at(-1);
+  return tier?.fee ?? 0;
 }
 
 // Order code doubles as the bank-transfer note, letters/digits only (banks strip other characters).

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { supabaseServer } from "@/lib/supabase/server";
 import { deleteProduct, signOut } from "./actions";
+import SubmitButton from "./SubmitButton";
 
 export default async function AdminDashboard() {
   const supabase = await supabaseServer();
@@ -21,6 +22,9 @@ export default async function AdminDashboard() {
             <Link href="/admin/orders" className="border border-black/20 px-5 py-2.5 rounded-lg font-semibold">
               Đơn hàng
             </Link>
+            <Link href="/admin/phi-ship" className="border border-black/20 px-5 py-2.5 rounded-lg font-semibold">
+              Phí ship
+            </Link>
             <Link
               href="/admin/products/new"
               className="bg-[var(--color-purple)] text-white font-semibold px-5 py-2.5 rounded-lg"
@@ -28,7 +32,7 @@ export default async function AdminDashboard() {
               + Thêm sản phẩm
             </Link>
             <form action={signOut}>
-              <button className="border border-black/20 px-5 py-2.5 rounded-lg font-semibold">Đăng xuất</button>
+              <SubmitButton pendingText="Đang thoát…" className="border border-black/20 px-5 py-2.5 rounded-lg font-semibold">Đăng xuất</SubmitButton>
             </form>
           </div>
         </div>
@@ -64,7 +68,7 @@ export default async function AdminDashboard() {
                       Sửa
                     </Link>
                     <form action={deleteProduct.bind(null, p.id)} className="inline">
-                      <button className="text-red-600 font-semibold">Xoá</button>
+                      <SubmitButton pendingText="Đang xoá…" className="text-red-600 font-semibold">Xoá</SubmitButton>
                     </form>
                   </td>
                 </tr>

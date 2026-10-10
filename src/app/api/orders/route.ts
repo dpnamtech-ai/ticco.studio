@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { getProducts } from "@/lib/products";
 import { priceFor } from "@/lib/shop";
 import { supabaseAdmin } from "@/lib/supabase/server";
+import { getShipRule } from "@/lib/ship-rule";
 import { makeOrderCode, shippingFor, validateOrder, type OrderInput } from "@/lib/checkout";
 import { t } from "@/lib/t";
 
@@ -177,7 +178,7 @@ export async function POST(req: Request) {
   }
 
   const subtotal = lines.reduce((s, l) => s + l.price * l.qty, 0);
-  const shipping = shippingFor(subtotal, lines.reduce((n, l) => n + l.qty, 0));
+  const shipping = shippingFor(subtotal, lines.reduce((n, l) => n + l.qty, 0), await getShipRule());
   const total = subtotal + shipping;
   // Sheet first: it hands out the sequential code. Sheet down → random fallback code, DB/email still record it.
   // ponytail: a sheet timeout AFTER writing leaves the row with its own code but the customer/email with the fallback code.
