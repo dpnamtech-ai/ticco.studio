@@ -74,7 +74,8 @@ export async function generateMetadata({ params }: LayoutProps<"/[lang]">): Prom
     title: "Tíc Cơ Studios",
     description: T("Thương hiệu Việt với các sản phẩm tiêu dùng sáng tạo lấy cảm hứng từ chất liệu đời thường, do người trẻ Việt thiết kế."),
     type: "website",
-    images: ["/images/hero-basket.png"],
+    // link-preview card: the client's round logo on brand orange, 1200x630 (2026-10-11)
+    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "Tíc Cơ" }],
   },
   };
 }

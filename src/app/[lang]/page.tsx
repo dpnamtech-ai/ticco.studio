@@ -20,7 +20,7 @@ export async function generateMetadata(): Promise<Metadata> {
     // tab + link preview, client's wording (2026-10-05)
     title: "Tíc Cơ Studios",
     description: t("Thương hiệu Việt với các sản phẩm tiêu dùng sáng tạo lấy cảm hứng từ chất liệu đời thường, do người trẻ Việt thiết kế.", lang),
-    openGraph: { title: "Tíc Cơ Studios", description: t("Thương hiệu Việt với các sản phẩm tiêu dùng sáng tạo lấy cảm hứng từ chất liệu đời thường, do người trẻ Việt thiết kế.", lang), url: lang === "en" ? "/en" : "/", images: ["/images/hero-basket.png"] },
+    openGraph: { title: "Tíc Cơ Studios", description: t("Thương hiệu Việt với các sản phẩm tiêu dùng sáng tạo lấy cảm hứng từ chất liệu đời thường, do người trẻ Việt thiết kế.", lang), url: lang === "en" ? "/en" : "/", images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "Tíc Cơ" }] },
     alternates: alternatesFor("/", lang),
   };
 }
